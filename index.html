@@ -70,6 +70,9 @@
     .about .about-grid .about-card { max-width: none; margin: 0; }
     .about .pills { margin-top: 26px; display: flex; justify-content: center; flex-wrap: wrap; gap: 9px; }
     .about .pill { font-size: 13px; font-weight: 600; color: #6a3fbe; background: rgba(122,77,209,.1); border: 1px solid rgba(122,77,209,.3); border-radius: 999px; padding: 9px 16px; }
+    .about .goals { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 13px; text-align: left; }
+    .about .goals li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; line-height: 1.5; color: #4f495e; }
+    .goal-count { flex-shrink: 0; min-width: 44px; text-align: center; font-size: 12px; font-weight: 700; color: #6a3fbe; background: rgba(122,77,209,.1); border: 1px solid rgba(122,77,209,.3); border-radius: 999px; padding: 4px 10px; margin-top: 1px; }
     .about h2 { margin-top: 14px; }
     .about .bio { color: #4f495e; font-size: 17px; line-height: 1.55; max-width: 620px; margin: 24px auto 0; }
     .about .discount { margin-top: 26px; display: inline-flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; color: #6a3fbe; background: rgba(122,77,209,.1); border: 1px solid rgba(122,77,209,.3); border-radius: 999px; padding: 11px 20px; }
@@ -182,10 +185,14 @@
             <div class="discount"><span style="color:#7a4dd1;">🏪</span> Discounts available for local businesses looking to expand their services with me.</div>
           </div>
           <div class="about-card">
-            <div class="kicker">Who I am</div>
-            <h2>24, based in the<br />UK Midlands.</h2>
-            <p class="bio">I’m 24 and based in the United Kingdom’s Midlands. I’m focused on getting myself established within AI development — building real tools, learning fast, and growing Pallett Ai into something bigger.</p>
-            <div class="pills"><span class="pill">📍 Midlands, UK</span><span class="pill">🎂 24 years old</span><span class="pill">🤖 AI development</span></div>
+            <div class="kicker">Company goals</div>
+            <h2>Where we’re<br />heading.</h2>
+            <ul class="goals">
+              <li><span class="goal-count">0/5</span><span>Sustain our initial customer base and grow our list of retaining clients</span></li>
+              <li><span class="goal-count">—</span><span>Produce 10 demo build apps and tools to strengthen the portfolio</span></li>
+              <li><span class="goal-count">0/1</span><span>Achieve our first paying client</span></li>
+              <li><span class="goal-count">—</span><span>Successfully establish the Pallett Ai name in the industry</span></li>
+            </ul>
           </div>
         </div>
       </section>
