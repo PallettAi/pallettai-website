@@ -11,12 +11,12 @@
     </linearGradient>
   </defs>
   <!-- Signal mark -->
-  <path d="M54 152c14-38 27-38 41 0s27 38 41 0 27-38 41 0" stroke="url(#signal-purple)" stroke-width="6.5" stroke-linecap="round"/>
-  <path d="M92 181V74h40c32 0 52 18 52 46s-20 46-52 46h-16" stroke="#17121f" stroke-width="10" stroke-linejoin="round"/>
-  <path d="M70 198h133" stroke="url(#signal-purple)" stroke-width="2.5"/>
-  <circle cx="70" cy="198" r="4" fill="#8b50e8"/>
-  <circle cx="203" cy="198" r="4" fill="#c296ff"/>
+  <path d="M52 150c14-38 27-38 41 0s27 38 41 0 27-38 41 0" stroke="url(#signal-purple)" stroke-width="6.5" stroke-linecap="round"/>
+  <path d="M90 179V72h40c32 0 52 18 52 46s-20 46-52 46h-16" stroke="#17121f" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M68 196h133" stroke="url(#signal-purple)" stroke-width="2.5"/>
+  <circle cx="68" cy="196" r="4" fill="#8b50e8"/>
+  <circle cx="201" cy="196" r="4" fill="#c296ff"/>
   <!-- Wordmark -->
-  <text x="245" y="122" fill="#17121f" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="800" letter-spacing="-3">PALLETT</text>
-  <text x="462" y="122" fill="url(#ai-grad)" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="300" letter-spacing="-2">AI</text>
+  <text x="256" y="124" fill="#17121f" font-family="Inter, Arial, sans-serif" font-size="64" font-weight="800" letter-spacing="-3.2">PALLETT</text>
+  <text x="476" y="124" fill="url(#ai-grad)" font-family="Inter, Arial, sans-serif" font-size="64" font-weight="300" letter-spacing="-2.2">AI</text>
 </svg>
