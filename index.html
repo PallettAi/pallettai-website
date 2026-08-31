@@ -65,8 +65,8 @@
     .scroll { margin: 46px auto 0; display: block; width: fit-content; color: #847b98; font-size: 11px; letter-spacing: .13em; text-transform: uppercase; }
     .scroll::after { content: ""; display: block; width: 1px; height: 34px; margin: 13px auto 0; background: linear-gradient(#a48ecd, transparent); }
     .about { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 95px 0 120px; border-top: 1px solid var(--line); text-align: center; }
-    .about .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 900px; margin: 0 auto; }
-    .about .about-card { max-width: 780px; margin: 0 auto; padding: 58px 40px; border: 1px solid rgba(122,77,209,.2); border-radius: 22px; background: radial-gradient(ellipse at 50% 0%, rgba(122,77,209,.12), rgba(255,255,255,.6) 60%); }
+    .about .about-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 1080px; margin: 0 auto; }
+    .about .about-card { max-width: 780px; margin: 0 auto; padding: 44px 28px; border: 1px solid rgba(122,77,209,.2); border-radius: 22px; background: radial-gradient(ellipse at 50% 0%, rgba(122,77,209,.12), rgba(255,255,255,.6) 60%); }
     .about .about-grid .about-card { max-width: none; margin: 0; }
     .about .pills { margin-top: 26px; display: flex; justify-content: center; flex-wrap: wrap; gap: 9px; }
     .about .pill { font-size: 13px; font-weight: 600; color: #6a3fbe; background: rgba(122,77,209,.1); border: 1px solid rgba(122,77,209,.3); border-radius: 999px; padding: 9px 16px; }
@@ -156,6 +156,7 @@
       80% { opacity: .4; }
       100% { left: 112%; opacity: 0; transform: translateY(-50%) scale(1.15); }
     }
+    @media (max-width: 1020px) { .about .about-grid { grid-template-columns: 1fr 1fr; } .about .about-grid .about-card:last-child { grid-column: 1 / -1; } }
     @media (max-width: 700px) { .nav { width: calc(100% - 32px); } .nav-links a:not(.nav-cta) { display: none; } .hero { padding-top: 60px; padding-left: 16px; padding-right: 16px; } .hero-logo img { max-width: 100%; } .actions { flex-direction: column; } .button { width: 180px; justify-content: center; } .section-head { display: block; } .section-note { margin-top: 20px; } .cards { grid-template-columns: 1fr; } .card { min-height: 280px; } .card h3 { margin-top: 35px; } .pricing-grid { grid-template-columns: 1fr; } .results-grid { grid-template-columns: 1fr; } .about { padding-top: 60px; padding-bottom: 80px; } .about .about-grid { grid-template-columns: 1fr; } .about .about-card { padding: 42px 22px; } .work, .contact, footer { width: calc(100% - 32px); } footer { gap: 15px; flex-direction: column; } .form-row { grid-template-columns: 1fr; } .contact-box { padding: 52px 20px 50px; } }
   </style>
 </head>
@@ -195,6 +196,19 @@
               <li><span class="goal-count">—</span><span>Grow our following to 1,000+ across GitHub and X</span></li>
               <li><span class="goal-count">0/2</span><span>Partner with two local businesses on their first launches</span></li>
               <li><span class="goal-count">2/10</span><span>Deploy 10 successful Telegram bots or alike</span></li>
+            </ul>
+          </div>
+          <div class="about-card">
+            <div class="kicker">Why choose us</div>
+            <h2>Why you should<br />choose us.</h2>
+            <p class="bio">We run a strict, layered checking system that catches errors before they even happen — so every launch stays smooth. Give us one chance, and the only question you'll be asking is why you didn't use us sooner.</p>
+            <ul class="goals">
+              <li><span class="goal-count">✓</span><span>Strict error-catching system that stops bugs before they happen</span></li>
+              <li><span class="goal-count">✓</span><span>Every build vigorously tested for errors and security before rollout</span></li>
+              <li><span class="goal-count">✓</span><span>AI-assisted speed with careful, hand-finished craftsmanship</span></li>
+              <li><span class="goal-count">✓</span><span>Clear, all-in pricing — no surprises, ever</span></li>
+              <li><span class="goal-count">✓</span><span>Friendly, fast support — every query answered within 48 hours</span></li>
+              <li><span class="goal-count">✓</span><span>Local Midlands studio, with discounts for local businesses</span></li>
             </ul>
           </div>
         </div>
