@@ -16,7 +16,14 @@
   <path d="M68 196h133" stroke="url(#signal-purple)" stroke-width="2.5"/>
   <circle cx="68" cy="196" r="4" fill="#8b50e8"/>
   <circle cx="201" cy="196" r="4" fill="#c296ff"/>
-  <!-- Wordmark: PALLETT and AI separated by a wide, safe gap -->
-  <text x="232" y="124" fill="#17121f" font-family="Inter, Arial, sans-serif" font-size="66" font-weight="800" letter-spacing="-2.6">PALLETT</text>
-  <text x="530" y="124" fill="url(#ai-grad)" font-family="Inter, Arial, sans-serif" font-size="66" font-weight="300" letter-spacing="-1.4">AI</text>
+  <!-- Wordmark (outlined paths, upright) -->
+  <path d="M149 0V1466H624Q894 1466 976 1444Q1102 1411 1187.0 1300.5Q1272 1190 1272 1015Q1272 880 1223.0 788.0Q1174 696 1098.5 643.5Q1023 591 945 574Q839 553 638 553H445V0ZM445 1218V802H607Q782 802 841.0 825.0Q900 848 933.5 897.0Q967 946 967 1011Q967 1091 920.0 1143.0Q873 1195 801 1208Q748 1218 588 1218Z" transform="translate(232.00 124.00) scale(0.06600 -0.06600)" fill="#17121f"/>
+  <path d="M1471 0H1149L1021 333H435L314 0H0L571 1466H884ZM926 580 724 1124 526 580Z" transform="translate(273.42 124.00) scale(0.06600 -0.06600)" fill="#17121f"/>
+  <path d="M157 0V1454H453V247H1189V0Z" transform="translate(318.48 124.00) scale(0.06600 -0.06600)" fill="#17121f"/>
+  <path d="M157 0V1454H453V247H1189V0Z" transform="translate(356.20 124.00) scale(0.06600 -0.06600)" fill="#17121f"/>
+  <path d="M149 0V1466H1236V1218H445V893H1181V646H445V247H1264V0Z" transform="translate(393.92 124.00) scale(0.06600 -0.06600)" fill="#17121f"/>
+  <path d="M479 0V1218H44V1466H1209V1218H775V0Z" transform="translate(435.34 124.00) scale(0.06600 -0.06600)" fill="#17121f"/>
+  <path d="M479 0V1218H44V1466H1209V1218H775V0Z" transform="translate(473.05 124.00) scale(0.06600 -0.06600)" fill="#17121f"/>
+  <path d="M-3 0 560 1466H769L1369 0H1148L977 444H364L203 0ZM420 602H917L764 1008Q694 1193 660 1312Q632 1171 581 1032Z" transform="translate(532.00 124.00) scale(0.06600 -0.06600)" fill="url(#ai-grad)"/>
+  <path d="M191 0V1466H385V0Z" transform="translate(574.62 124.00) scale(0.06600 -0.06600)" fill="url(#ai-grad)"/>
 </svg>
