@@ -93,26 +93,36 @@
     .tool { display: inline-flex; align-items: center; gap: 8px; background: rgba(20,12,40,.045); border: 1px solid var(--line); border-radius: 10px; padding: 6px 10px 6px 6px; font-size: 12.5px; color: #3a3450; }
     .tool .badge { width: 20px; height: 20px; border-radius: 6px; display: grid; place-items: center; color: #fff; font-size: 12px; font-weight: 800; letter-spacing: .01em; }
     .tool .badge svg { width: 13px; height: 13px; }
-    .results { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 75px 0 135px; border-top: 1px solid var(--line); }
-    .results-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .graph-card { padding: 28px 26px 24px; border: 1px solid var(--line); border-radius: 19px; background: rgba(255,255,255,.65); position: relative; overflow: hidden; }
-    .graph-card::before { content: ""; position: absolute; width: 240px; height: 240px; top: -60px; right: -75px; border-radius: 50%; filter: blur(28px); opacity: .45; }
-    .graph-card:nth-child(1)::before { background: #5d20cb; } .graph-card:nth-child(2)::before { background: #b13699; }
-    .graph-card > * { position: relative; z-index: 1; }
-    .graph-card .metric { margin: 12px 0 0; font-size: 44px; font-weight: 600; letter-spacing: -.06em; background: linear-gradient(150deg, #241a42 15%, #6b45c0 55%, #8e5bd9 96%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .graph-card .metric span { font-size: 20px; font-weight: 600; margin-left: 2px; }
-    .graph-card .blurb { color: #5b5568; font-size: 14px; line-height: 1.5; margin: 8px 0 0; }
-    .bars { display: flex; align-items: flex-end; gap: 14px; height: 190px; margin-top: 30px; padding-top: 6px; }
-    .bars .col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 10px; height: 100%; justify-content: flex-end; }
-    .bars .bar { width: 100%; max-width: 150px; border-radius: 9px 9px 4px 4px; position: relative; background: linear-gradient(180deg, rgba(157,105,255,.9), rgba(93,32,203,.55)); box-shadow: 0 0 24px rgba(157,105,255,.25); }
-    .bars .col.after .bar { background: linear-gradient(180deg, rgba(224,150,255,.95), rgba(177,54,153,.6)); box-shadow: 0 0 28px rgba(200,120,255,.35); }
-    .bars .col .val { font-size: 15px; font-weight: 600; color: #241a42; }
-    .bars .col .cap { font-size: 12px; color: #8f899c; letter-spacing: .06em; text-transform: uppercase; }
-    @keyframes grow-bar { from { height: 0; } }
-    .bars .col.before .bar { height: 34%; animation: grow-bar 1s ease-out; }
-    .bars .col.after .bar { height: 53%; animation: grow-bar 1s .15s ease-out both; }
-    .graph-card.grow2 .bars .col.before .bar { height: 45%; }
-    .graph-card.grow2 .bars .col.after .bar { height: 59%; }
+    .grader { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 75px 0 135px; border-top: 1px solid var(--line); }
+    .grader-box { padding: 36px 32px 32px; border: 1px solid rgba(122,77,209,.24); border-radius: 22px; background: radial-gradient(ellipse at 50% 0%, rgba(122,77,209,.1), rgba(255,255,255,.7) 65%); position: relative; overflow: hidden; }
+    .grader-box::before { content: ""; position: absolute; width: 240px; height: 240px; top: -60px; right: -75px; border-radius: 50%; filter: blur(28px); opacity: .45; background: #3c55c3; }
+    .grader-box > * { position: relative; z-index: 1; }
+    .grader-form { display: flex; gap: 10px; max-width: 640px; margin: 0 auto; }
+    .grader-form input { flex: 1; min-width: 0; background: rgba(255,255,255,.7); border: 1px solid rgba(20,12,40,.14); border-radius: 12px; color: var(--ink); font-family: inherit; font-size: 15px; padding: 13px 15px; outline: none; transition: border-color .2s, box-shadow .2s, background .2s; }
+    .grader-form input:focus { border-color: rgba(122,77,209,.6); background: rgba(255,255,255,.85); box-shadow: 0 0 0 3px rgba(122,77,209,.16); }
+    .grader-form input::placeholder { color: #8a8494; }
+    .grader-form .button { flex-shrink: 0; }
+    .grader-status { margin: 18px auto 0; text-align: center; color: var(--muted); font-size: 13.5px; }
+    .grader-status.busy::after { content: "…"; animation: pulse 1s ease-in-out infinite; }
+    @keyframes pulse { 50% { opacity: .25; } }
+    .grader-result { margin-top: 26px; }
+    .grader-scorewrap { display: flex; align-items: baseline; justify-content: center; gap: 16px; }
+    .grader-score { font-size: 72px; font-weight: 600; letter-spacing: -.06em; line-height: 1; background: linear-gradient(150deg, #241a42 15%, #6b45c0 55%, #8e5bd9 96%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .grader-outof { font-size: 26px; font-weight: 600; color: #66558b; }
+    .grader-band { color: var(--muted); font-size: 15px; max-width: 320px; }
+    .grader-cats { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .chip { font-size: 12.5px; font-weight: 600; border-radius: 999px; padding: 8px 14px; border: 1px solid var(--line); background: rgba(20,12,40,.04); color: #3a3450; }
+    .chip.pass { color: #1e6b34; background: rgba(46,125,69,.1); border-color: rgba(46,125,69,.3); }
+    .chip.warn { color: #8a6416; background: rgba(196,146,44,.12); border-color: rgba(196,146,44,.35); }
+    .chip.fail { color: #a33b3b; background: rgba(192,75,75,.1); border-color: rgba(192,75,75,.3); }
+    .grader-list { list-style: none; margin: 24px auto 0; padding: 0; display: grid; gap: 12px; max-width: 720px; }
+    .grader-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 13.5px; line-height: 1.5; color: #4f495e; }
+    .grader-mark { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 800; margin-top: 1px; }
+    .grader-list .pass .grader-mark { color: #1e6b34; background: rgba(46,125,69,.12); }
+    .grader-list .warn .grader-mark { color: #8a6416; background: rgba(196,146,44,.14); }
+    .grader-list .fail .grader-mark { color: #a33b3b; background: rgba(192,75,75,.12); }
+    .grader-list .fix { display: block; margin-top: 4px; color: #6a3fbe; font-weight: 600; }
+    .grader-cta { display: flex; margin: 28px auto 0; width: fit-content; }
     .pricing { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 75px 0 135px; border-top: 1px solid var(--line); }
     .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
     .price-card { padding: 26px 24px; border: 1px solid var(--line); border-radius: 19px; background: rgba(255,255,255,.65); position: relative; overflow: hidden; transition: transform .3s, border-color .3s; }
@@ -157,14 +167,15 @@
       100% { left: 112%; opacity: 0; transform: translateY(-50%) scale(1.15); }
     }
     @media (max-width: 1020px) { .about .about-grid { grid-template-columns: 1fr 1fr; } .about .about-grid .about-card:last-child { grid-column: 1 / -1; } }
-    @media (max-width: 700px) { .nav { width: calc(100% - 32px); } .nav-links a:not(.nav-cta) { display: none; } .hero { padding-top: 60px; padding-left: 16px; padding-right: 16px; } .hero-logo img { max-width: 100%; } .actions { flex-direction: column; } .button { width: 180px; justify-content: center; } .section-head { display: block; } .section-note { margin-top: 20px; } .cards { grid-template-columns: 1fr; } .card { min-height: 280px; } .card h3 { margin-top: 35px; } .pricing-grid { grid-template-columns: 1fr; } .results-grid { grid-template-columns: 1fr; } .about { padding-top: 60px; padding-bottom: 80px; } .about .about-grid { grid-template-columns: 1fr; } .about .about-card { padding: 42px 22px; } .work, .contact, footer { width: calc(100% - 32px); } footer { gap: 15px; flex-direction: column; } .form-row { grid-template-columns: 1fr; } .contact-box { padding: 52px 20px 50px; } }
+    @media (max-width: 700px) { .grader-form { flex-direction: column; } .grader-box { padding: 28px 20px 26px; } .grader-scorewrap { flex-direction: column; align-items: center; gap: 8px; } .grader-band { text-align: center; } }
+    @media (max-width: 700px) { .nav { width: calc(100% - 32px); } .nav-links a:not(.nav-cta) { display: none; } .hero { padding-top: 60px; padding-left: 16px; padding-right: 16px; } .hero-logo img { max-width: 100%; } .actions { flex-direction: column; } .button { width: 180px; justify-content: center; } .section-head { display: block; } .section-note { margin-top: 20px; } .cards { grid-template-columns: 1fr; } .card { min-height: 280px; } .card h3 { margin-top: 35px; } .pricing-grid { grid-template-columns: 1fr; } .about { padding-top: 60px; padding-bottom: 80px; } .about .about-grid { grid-template-columns: 1fr; } .about .about-card { padding: 42px 22px; } .work, .contact, footer { width: calc(100% - 32px); } footer { gap: 15px; flex-direction: column; } .form-row { grid-template-columns: 1fr; } .contact-box { padding: 52px 20px 50px; } }
   </style>
 </head>
 <body>
   <div class="page">
     <nav class="nav">
       <a class="brand" href="#top" aria-label="Pallett Ai home"><img src="signal-favicon.svg" width="34" height="34" alt="" aria-hidden="true" /><span>Pallett Ai</span></a>
-      <div class="nav-links"><a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#about">About</a><a href="https://github.com/PallettAi" target="_blank" rel="noopener">GitHub <span>↗</span></a><a href="https://x.com/1PallettAi" target="_blank" rel="noopener">X <span>↗</span></a><a class="nav-cta" href="mailto:pallettai@proton.me">Let's talk <span>↗</span></a></div>
+      <div class="nav-links"><a href="portfolio.html">Portfolio</a><a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#about">About</a><a href="https://github.com/PallettAi" target="_blank" rel="noopener">GitHub <span>↗</span></a><a href="https://x.com/1PallettAi" target="_blank" rel="noopener">X <span>↗</span></a><a class="nav-cta" href="mailto:pallettai@proton.me">Let's talk <span>↗</span></a></div>
     </nav>
     <main id="top">
       <section class="hero">
@@ -222,11 +233,20 @@
           <a class="card" href="#contact"><div class="card-top"><span class="number">04 / Automation</span><h3>Automated Bots via Telegram</h3><p>Bespoke Telegram bots built for most needs, from data scraping via API to alerts and automation. Two arbitrage-betting bots already deployed successfully — and they turned out to be hugely profitable.</p></div><div class="card-bottom"><div class="arrow">Start a bot project <span>↗</span></div></div></a>
         </div>
       </section>
-      <section class="results" id="results">
-        <div class="section-head"><div><div class="kicker">Real results</div><h2>Before &amp; after<br />the upgrade.</h2></div><p class="section-note">What a well-crafted website can do for a business. Measured against real client outcomes.</p></div>
-        <div class="results-grid">
-          <div class="graph-card"><span class="number">More people reaching out</span><div class="metric">56<span>%</span></div><p class="blurb">Average increase in new leads after relaunching on a custom site.</p><div class="bars"><div class="col before"><span class="val">44</span><div class="bar"></div><span class="cap">Before</span></div><div class="col after"><span class="val">69</span><div class="bar"></div><span class="cap">After</span></div></div></div>
-          <div class="graph-card grow2"><span class="number">More work landed</span><div class="metric">32<span>%</span></div><p class="blurb">Average increase in jobs or bookings landed once enquiries convert.</p><div class="bars"><div class="col before"><span class="val">41</span><div class="bar"></div><span class="cap">Before</span></div><div class="col after"><span class="val">54</span><div class="bar"></div><span class="cap">After</span></div></div></div>
+      <section class="grader" id="grader">
+        <div class="section-head"><div><div class="kicker">Free tool</div><h2>Is your site<br />holding you back?</h2></div><p class="section-note">Paste any web address — we measure speed, mobile, SEO and security basics in seconds, then show exactly what to fix.</p></div>
+        <div class="grader-box">
+          <form class="grader-form" id="grader-form">
+            <input id="grader-url" type="text" inputmode="url" autocomplete="off" placeholder="yourbusiness.co.uk" aria-label="Website address to check" />
+            <button class="button primary" type="submit">Run free check <span>↗</span></button>
+          </form>
+          <p class="grader-status" id="grader-status">No sign-up, no email — your report appears right here.</p>
+          <div class="grader-result" id="grader-result" hidden>
+            <div class="grader-scorewrap"><span class="grader-score" id="grader-score">0</span><span class="grader-outof">/100</span><div class="grader-band" id="grader-band"></div></div>
+            <div class="grader-cats" id="grader-cats"></div>
+            <ul class="grader-list" id="grader-list"></ul>
+            <a class="button primary grader-cta" id="grader-cta" href="#contact">Let us fix it <span>↗</span></a>
+          </div>
         </div>
       </section>
       <section class="pricing" id="pricing">
@@ -313,6 +333,93 @@
       });
       return false;
     }
+  </script>
+  <script>
+    // Website health grader — set GRADER_API to the deployed Worker URL before going live.
+    // While viewing locally (127.0.0.1 / localhost) it uses the Node dev harness on :8787.
+    var GRADER_API = (location.hostname === '127.0.0.1' || location.hostname === 'localhost')
+      ? 'http://127.0.0.1:8787'
+      : 'https://grader.pallettai.org';
+
+    (function () {
+      var form = document.getElementById('grader-form');
+      var input = document.getElementById('grader-url');
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); if (form.requestSubmit) form.requestSubmit(); else form.dispatchEvent(new Event('submit', { cancelable: true })); }
+      });
+      var statusEl = document.getElementById('grader-status');
+      var resultEl = document.getElementById('grader-result');
+      var lastReport = null;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var raw = input.value.trim();
+        if (!raw) { statusEl.textContent = 'Pop in a web address first — e.g. yourbusiness.co.uk.'; return; }
+        var candidate = /^[a-z][a-z0-9+.-]*:\/\//i.test(raw) ? raw : 'https://' + raw;
+        var target;
+        try { target = new URL(candidate); } catch (err) { statusEl.textContent = 'That doesn’t look like a web address — try something like yourbusiness.co.uk.'; return; }
+        if (target.protocol !== 'http:' && target.protocol !== 'https:') { statusEl.textContent = 'Only http(s) web addresses can be checked.'; return; }
+
+        resultEl.hidden = true;
+        statusEl.classList.add('busy');
+        statusEl.textContent = 'Checking ' + target.hostname + ' — measuring speed, mobile, SEO and security';
+        fetch(GRADER_API + '/grade?url=' + encodeURIComponent(target.href))
+          .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+          .then(function (res) {
+            statusEl.classList.remove('busy');
+            if (!res.ok) { statusEl.textContent = (res.j && res.j.error) ? res.j.error : 'Something went wrong — try again in a moment.'; return; }
+            render(res.j);
+            statusEl.textContent = 'Report for ' + (res.j.url || target.hostname) + ' — share it, or let us do the fixing.';
+          })
+          .catch(function () {
+            statusEl.classList.remove('busy');
+            statusEl.textContent = 'The grader service is warming up — try again shortly, or email pallettai@proton.me.';
+          });
+      });
+
+      function esc(s) { var d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
+
+      function render(j) {
+        lastReport = j;
+        document.getElementById('grader-score').textContent = j.score;
+        document.getElementById('grader-band').textContent = j.band || '';
+        var cats = document.getElementById('grader-cats');
+        cats.innerHTML = '';
+        Object.keys(j.categories || {}).forEach(function (name) {
+          var c = j.categories[name];
+          var pct = c.max ? c.got / c.max : 1;
+          var span = document.createElement('span');
+          span.className = 'chip ' + (pct >= 0.85 ? 'pass' : pct >= 0.5 ? 'warn' : 'fail');
+          span.textContent = name + ' ' + c.got + '/' + c.max;
+          cats.appendChild(span);
+        });
+        var list = document.getElementById('grader-list');
+        list.innerHTML = '';
+        (j.checks || []).forEach(function (c) {
+          var li = document.createElement('li');
+          li.className = c.status;
+          var mark = document.createElement('span');
+          mark.className = 'grader-mark';
+          mark.textContent = c.status === 'pass' ? '✓' : c.status === 'warn' ? '!' : '✕';
+          var body = document.createElement('div');
+          var line = document.createElement('div');
+          line.innerHTML = '<strong>' + esc(c.label) + '.</strong> ' + esc(c.detail);
+          body.appendChild(line);
+          if (c.fix) { var fix = document.createElement('span'); fix.className = 'fix'; fix.textContent = 'Our fix: ' + c.fix; body.appendChild(fix); }
+          li.appendChild(mark); li.appendChild(body);
+          list.appendChild(li);
+        });
+        resultEl.hidden = false;
+      }
+
+      document.getElementById('grader-cta').addEventListener('click', function () {
+        if (!lastReport) return;
+        var issues = (lastReport.checks || []).filter(function (c) { return c.status !== 'pass'; }).slice(0, 3)
+          .map(function (c, i) { return (i + 1) + ') ' + c.label; }).join(' ');
+        var ta = document.getElementById('cf-details');
+        if (ta) ta.value = 'My site (' + (lastReport.url || '') + ') scored ' + lastReport.score + '/100 on your free health check. Main issues: ' + issues + '. Please quote me to put it right.';
+      });
+    })();
   </script>
 </body>
 </html>

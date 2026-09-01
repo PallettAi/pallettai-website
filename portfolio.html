@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pallett Ai portfolio — selected builds and case studies: websites, intelligent tools, and Telegram automation for small businesses." />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#7a4dd1" />
+  <link rel="canonical" href="https://pallettai.org/portfolio" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Pallett Ai" />
+  <meta property="og:title" content="Pallett Ai — Portfolio" />
+  <meta property="og:description" content="Selected builds and case studies: websites, intelligent tools, and Telegram automation." />
+  <meta property="og:url" content="https://pallettai.org/portfolio" />
+  <meta property="og:image" content="https://pallettai.org/signal-logo.png" />
+  <title>Pallett Ai — Portfolio</title>
+  <link rel="icon" type="image/svg+xml" href="signal-favicon.svg" />
+  <link rel="apple-touch-icon" href="signal-favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root { color-scheme: light; --ink: #17121f; --muted: #5f596b; --line: rgba(20,12,40,.12); --violet: #7a4dd1; --deep: #e8e7ea; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--deep); color: var(--ink); font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    .page { min-height: 100vh; overflow: hidden; background: radial-gradient(ellipse at 50% -20%, #f3ecfd 0%, #eae8ee 42%, #dfdee3 70%); }
+    .nav { width: min(1120px, calc(100% - 48px)); margin: auto; height: 72px; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 5; }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand img { width: 34px; height: 34px; display: block; }
+    .brand span { color: #1c1330; font-size: 18px; font-weight: 700; letter-spacing: -.055em; }
+    .nav-links { display: flex; align-items: center; gap: 28px; color: #5a4f73; font-size: 13px; }
+    .nav-links a { transition: color .2s; } .nav-links a:hover { color: #160c24; }
+    .nav-cta { padding: 10px 16px; border: 1px solid rgba(20,12,40,.16); border-radius: 999px; color: #160c24; transition: all .25s; }
+    .nav-cta:hover { background: rgba(20,12,40,.06); border-color: rgba(20,12,40,.3); }
+    .orb { position: absolute; border-radius: 50%; pointer-events: none; animation: float 9s ease-in-out infinite; }
+    .orb.one { width: min(55vw, 760px); height: min(55vw, 760px); top: 1%; left: 18%; background: radial-gradient(circle at 42% 40%, rgba(154, 83, 255, .28), rgba(140, 70, 230, .14) 42%, transparent 70%); filter: blur(20px); }
+    .orb.two { width: 390px; height: 390px; top: 21%; right: -150px; background: radial-gradient(circle, rgba(129, 54, 255, .26), transparent 68%); animation-delay: -3s; }
+    .orb.three { width: 310px; height: 310px; bottom: 1%; left: -100px; background: radial-gradient(circle, rgba(122, 77, 209, .2), transparent 68%); animation-delay: -6s; }
+    @keyframes float { 50% { transform: translateY(-26px); } }
+    .portfolio-head { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 70px 0 40px; text-align: center; position: relative; z-index: 1; }
+    .kicker { color: #7a4dd1; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; }
+    h1 { margin: 11px 0 0; font-size: clamp(44px, 7vw, 96px); line-height: .98; letter-spacing: -.07em; font-weight: 600; padding-bottom: .14em; background: linear-gradient(150deg, #1c1330 18%, #5b3f9e 52%, #8e5bd9 96%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lede { color: #4f495e; font-size: clamp(16px, 1.8vw, 21px); line-height: 1.5; letter-spacing: -.02em; max-width: 640px; margin: 22px auto 0; }
+    .grid { width: min(1120px, calc(100% - 48px)); margin: 40px auto 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; position: relative; z-index: 1; }
+    .case-card { border: 1px solid var(--line); border-radius: 22px; background: rgba(255,255,255,.65); overflow: hidden; display: flex; flex-direction: column; position: relative; transition: transform .3s, border-color .3s, box-shadow .3s; }
+    .case-card:hover { transform: translateY(-6px); border-color: rgba(197,166,255,.5); box-shadow: 0 18px 50px rgba(93,32,203,.12); }
+    .case-card::before { content: ""; position: absolute; width: 260px; height: 260px; top: -70px; right: -80px; border-radius: 50%; filter: blur(28px); opacity: .38; }
+    .case-card:nth-child(1)::before { background: #5d20cb; } .case-card:nth-child(2)::before { background: #178a72; }
+    .case-card:nth-child(3)::before { background: #b13699; } .case-card:nth-child(4)::before { background: #3c55c3; }
+    .case-card:nth-child(5)::before { background: #c87a2a; } .case-card:nth-child(6)::before { background: #2a6bc8; }
+    .case-card > * { position: relative; z-index: 1; }
+    .case-shot { display: flex; align-items: center; justify-content: center; gap: 12px; height: 150px; background: linear-gradient(150deg, rgba(93,32,203,.14), rgba(177,54,153,.1) 60%, rgba(255,255,255,.2)); border-bottom: 1px solid var(--line); }
+    .case-shot .glyph { width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; font-size: 24px; font-weight: 800; color: #fff; background: linear-gradient(135deg, #5d20cb, #8e5bd9); box-shadow: 0 10px 30px rgba(93,32,203,.3); }
+    .case-shot .shot-note { color: #6a5f85; font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; }
+    .case-body { padding: 24px 24px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .case-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag { font-size: 11.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #6a3fbe; background: rgba(122,77,209,.1); border: 1px solid rgba(122,77,209,.3); border-radius: 999px; padding: 5px 11px; }
+    .case-body h2 { margin: 2px 0 0; font-size: 25px; letter-spacing: -.05em; font-weight: 700; }
+    .case-body .result { color: #6a3fbe; font-weight: 600; font-size: 14.5px; letter-spacing: -.01em; }
+    .case-body p { margin: 0; color: #5b5568; font-size: 13.5px; line-height: 1.55; }
+    .case-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 4px; }
+    .fact { border: 1px solid var(--line); border-radius: 12px; background: rgba(20,12,40,.03); padding: 9px 11px; }
+    .fact .k { display: block; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: #8f899c; font-weight: 700; }
+    .fact .v { display: block; font-size: 12.5px; font-weight: 600; color: #3a3450; margin-top: 3px; }
+    .case-bottom { padding: 0 24px 22px; }
+    .arrow { display: flex; justify-content: space-between; align-items: center; color: #6a5f85; font-size: 12.5px; font-weight: 600; }
+    .arrow span.arrow-dot { width: 29px; height: 29px; border: 1px solid rgba(20,12,40,.16); border-radius: 50%; display: grid; place-items: center; font-size: 16px; }
+    .note { width: min(1120px, calc(100% - 48px)); margin: 26px auto 0; color: #6f6780; font-size: 13px; line-height: 1.6; position: relative; z-index: 1; }
+    .cta-band { width: min(1120px, calc(100% - 48px)); margin: 55px auto 90px; border: 1px solid rgba(122,77,209,.24); border-radius: 24px; background: radial-gradient(ellipse at 50% 0%, rgba(122,77,209,.12), rgba(255,255,255,.6) 62%); padding: 52px 30px; text-align: center; position: relative; overflow: hidden; z-index: 1; }
+    .cta-band::before { content: ""; position: absolute; width: 260px; height: 260px; top: -70px; right: -80px; border-radius: 50%; filter: blur(28px); opacity: .45; background: #5d20cb; }
+    .cta-band > * { position: relative; z-index: 1; }
+    .cta-band h2 { margin: 0; font-size: clamp(28px, 4vw, 44px); letter-spacing: -.06em; font-weight: 600; }
+    .cta-band p { color: #4f495e; font-size: 15.5px; line-height: 1.5; max-width: 520px; margin: 14px auto 0; }
+    .cta-band .actions { margin-top: 26px; }
+    .button { display: inline-flex; align-items: center; gap: 8px; padding: 14px 21px; border-radius: 999px; font-size: 14px; font-weight: 600; transition: transform .25s, box-shadow .25s, background .25s; }
+    .button:hover { transform: translateY(-2px); }
+    .primary { background: #1c1330; color: #f4efff; box-shadow: 0 0 32px rgba(122,77,209,.25); } .primary:hover { box-shadow: 0 0 42px rgba(122,77,209,.4); }
+    .secondary { border: 1px solid rgba(20,12,40,.18); color: #160c24; } .secondary:hover { background: rgba(20,12,40,.06); }
+    footer { width: min(1120px, calc(100% - 48px)); margin: 0 auto 34px; display: flex; align-items: center; justify-content: space-between; color: #6f6780; font-size: 13px; position: relative; z-index: 1; }
+    footer .socials { display: flex; gap: 18px; align-items: center; }
+    footer .socials a { display: inline-flex; align-items: center; gap: 7px; }
+    footer .socials svg { width: 15px; height: 15px; }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+    @media (max-width: 700px) { .nav { width: calc(100% - 32px); } .nav-links a:not(.nav-cta) { display: none; } .portfolio-head { padding-top: 46px; } .case-facts { grid-template-columns: 1fr 1fr; } footer { flex-direction: column; gap: 12px; } }
+    @media (prefers-reduced-motion: reduce) { .orb { animation: none; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <a class="brand" href="index.html" aria-label="Pallett Ai home"><img src="signal-favicon.svg" width="34" height="34" alt="" aria-hidden="true" /><span>Pallett Ai</span></a>
+      <div class="nav-links"><a href="index.html#work">Work</a><a href="index.html#pricing">Pricing</a><a href="index.html#about">About</a><a href="https://github.com/PallettAi" target="_blank" rel="noopener">GitHub <span>↗</span></a><a href="https://x.com/1PallettAi" target="_blank" rel="noopener">X <span>↗</span></a><a class="nav-cta" href="mailto:pallettai@proton.me">Let's talk <span>↗</span></a></div>
+    </nav>
+    <main id="top">
+      <section class="portfolio-head">
+        <div class="orb one"></div><div class="orb two"></div><div class="orb three"></div>
+        <div class="kicker">Selected builds</div>
+        <h1>Work we're<br />proud of.</h1>
+        <p class="lede">A growing collection of builds — websites, intelligent tools, and automation — each one shipped, tested, and running for real.</p>
+      </section>
+      <section class="grid" aria-label="Case studies">
+        <article class="case-card">
+          <div class="case-shot"><span class="glyph">TG</span><span class="shot-note">Telegram automation</span></div>
+          <div class="case-body">
+            <div class="case-tags"><span class="tag">Automation</span><span class="tag">Bots</span><span class="tag">API scraping</span></div>
+            <h2>Arbitrage-betting Telegram bots</h2>
+            <p class="result">Two bots deployed — hugely profitable in live operation.</p>
+            <p>Bespoke Telegram bots for data scraping via API, alerting, and automated workflows. The arbitrage pair ran unattended and turned out to be hugely profitable — the proof of concept for the whole bot product line.</p>
+            <div class="case-facts">
+              <div class="fact"><span class="k">Shipped</span><span class="v">2 bots, live</span></div>
+              <div class="fact"><span class="k">Stack</span><span class="v">Python · TG API</span></div>
+              <div class="fact"><span class="k">Outcome</span><span class="v">Profitable</span></div>
+            </div>
+          </div>
+          <div class="case-bottom"><div class="arrow">Start a bot project <a href="mailto:pallettai@proton.me" aria-label="Start a bot project"><span class="arrow-dot">↗</span></a></div></div>
+        </article>
+        <article class="case-card">
+          <div class="case-shot"><span class="glyph">WG</span><span class="shot-note">Website health grader</span></div>
+          <div class="case-body">
+            <div class="case-tags"><span class="tag">Intelligent tools</span><span class="tag">Live on this site</span></div>
+            <h2>Website health grader</h2>
+            <p class="result">Free tool, live on pallettai.org — paste a URL, get a score.</p>
+            <p>A real working system, not a mockup: fetches any URL, scores speed, mobile, SEO and security basics out of 100, and reports each finding with a plain-English fix. The backend is a dependency-free Cloudflare Worker with SSRF guards, timeouts, and rate limits.</p>
+            <div class="case-facts">
+              <div class="fact"><span class="k">Shipped</span><span class="v">Live tool</span></div>
+              <div class="fact"><span class="k">Stack</span><span class="v">Cloudflare Worker</span></div>
+              <div class="fact"><span class="k">Outcome</span><span class="v">Lead magnet</span></div>
+            </div>
+          </div>
+          <div class="case-bottom"><div class="arrow">Try it on the homepage <a href="index.html#grader" aria-label="Try the website health grader"><span class="arrow-dot">↗</span></a></div></div>
+        </article>
+        <article class="case-card">
+          <div class="case-shot"><span class="glyph">01</span><span class="shot-note">Public release</span></div>
+          <div class="case-body">
+            <div class="case-tags"><span class="tag">Tooling</span><span class="tag">FTP integration</span><span class="tag">GUI</span></div>
+            <h2>Completed public release</h2>
+            <p class="result">First public release — complex integration, working GUI.</p>
+            <p>A real test of coding with AI at production quality: complex integration including file transfer via FTP with live status and real-time stats, wrapped in a unique graphical UI. Open source on GitHub.</p>
+            <div class="case-facts">
+              <div class="fact"><span class="k">Shipped</span><span class="v">Public release</span></div>
+              <div class="fact"><span class="k">Stack</span><span class="v">Open source</span></div>
+              <div class="fact"><span class="k">Outcome</span><span class="v">Proven pipeline</span></div>
+            </div>
+          </div>
+          <div class="case-bottom"><div class="arrow">View on GitHub <a href="https://github.com/PallettAi" target="_blank" rel="noopener" aria-label="View on GitHub"><span class="arrow-dot">↗</span></a></div></div>
+        </article>
+        <article class="case-card">
+          <div class="case-shot"><span class="glyph">PA</span><span class="shot-note">This very site</span></div>
+          <div class="case-body">
+            <div class="case-tags"><span class="tag">Web design</span><span class="tag">Live demo</span></div>
+            <h2>pallettai.org, built by us</h2>
+            <p class="result">Scores 98/100 on our own health grader.</p>
+            <p>The site you're on right now — designed, built, tested and shipped end-to-end by us. It's the live demo of how we work: custom design, fast load, mobile-first, and honest about every claim it makes.</p>
+            <div class="case-facts">
+              <div class="fact"><span class="k">Shipped</span><span class="v">Live</span></div>
+              <div class="fact"><span class="k">Stack</span><span class="v">Custom build</span></div>
+              <div class="fact"><span class="k">Outcome</span><span class="v">98/100 health</span></div>
+            </div>
+          </div>
+          <div class="case-bottom"><div class="arrow">Run the health check on it <a href="index.html#grader" aria-label="Run the health check on this site"><span class="arrow-dot">↗</span></a></div></div>
+        </article>
+        <article class="case-card">
+          <div class="case-shot"><span class="glyph">02</span><span class="shot-note">Tried and tested</span></div>
+          <div class="case-body">
+            <div class="case-tags"><span class="tag">Quality system</span><span class="tag">Security</span></div>
+            <h2>Vigorously tested, by system</h2>
+            <p class="result">Strict, layered error-catching before rollout.</p>
+            <p>Every build passes a strict, layered checking system that catches errors before they even happen — functional, security, and rollout checks — so launches stay smooth. This site's own grader is one of the layers.</p>
+            <div class="case-facts">
+              <div class="fact"><span class="k">Shipped</span><span class="v">Every build</span></div>
+              <div class="fact"><span class="k">Stack</span><span class="v">Layered checks</span></div>
+              <div class="fact"><span class="k">Outcome</span><span class="v">Smooth launches</span></div>
+            </div>
+          </div>
+          <div class="case-bottom"><div class="arrow">Read the approach <a href="index.html#about" aria-label="Read the approach"><span class="arrow-dot">↗</span></a></div></div>
+        </article>
+        <article class="case-card">
+          <div class="case-shot"><span class="glyph">→</span><span class="shot-note">Your project here</span></div>
+          <div class="case-body">
+            <div class="case-tags"><span class="tag">Next build</span><span class="tag">Your idea</span></div>
+            <h2>The next case study</h2>
+            <p class="result">One conversation away.</p>
+            <p>Every card on this page started as a conversation about an idea. If you have one — a site, a tool, a bot — the next case study slot is open, and local Midlands businesses get a discount.</p>
+            <div class="case-facts">
+              <div class="fact"><span class="k">Shipped</span><span class="v">In ~a week</span></div>
+              <div class="fact"><span class="k">Stack</span><span class="v">Your pick</span></div>
+              <div class="fact"><span class="k">Outcome</span><span class="v">Yours to name</span></div>
+            </div>
+          </div>
+          <div class="case-bottom"><div class="arrow">Start the conversation <a href="mailto:pallettai@proton.me" aria-label="Start the conversation"><span class="arrow-dot">↗</span></a></div></div>
+        </article>
+      </section>
+      <p class="note">Every project listed here is a real build — deployed, tested, and running. Details shared on request — every query answered within 48 hours.</p>
+      <section class="cta-band">
+        <div class="kicker">Have an idea?</div>
+        <h2>Let's bring it to life.</h2>
+        <p>Tell us roughly what you want to make, and we can discuss pricing and a deposit so we can build you a preview model.</p>
+        <div class="actions"><a class="button primary" href="index.html#contact">Start your project <span>↗</span></a><a class="button secondary" href="index.html#grader">Run the free site check <span>↗</span></a></div>
+      </section>
+    </main>
+    <footer>
+      <span class="copy"><span>© 2025 Pallett Ai</span><span>Made with curiosity <span style="color:#aa82ec">✦</span></span></span>
+      <span class="socials"><a href="https://github.com/PallettAi" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a><a href="https://x.com/1PallettAi" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X</a></span>
+    </footer>
+  </div>
+</body>
+</html>
