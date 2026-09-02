@@ -97,6 +97,8 @@
 
     .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
     .section-pad { padding: clamp(40px, 5.5vw, 64px) 0 0; }
+    .section-head { text-align: center; margin-top: 6px; }
+    .section-head h2 { margin: 8px 0 0; font-size: clamp(28px, 4.4vw, 40px); font-weight: 700; letter-spacing: -0.04em; line-height: 1.08; }
 
     /* subscription tiers */
     .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
@@ -236,8 +238,36 @@
     </header>
 
     <div class="wrap section-pad">
+      <!-- ============ ONE-TIME BUILDS — MAIN PACKAGES FIRST ============ -->
+      <div class="section-head fade-up" style="--d:.02s">
+        <div class="kicker">Start here</div>
+        <h2>One-time builds.<br /><span class="grad">Yours from day one.</span></h2>
+      </div>
+      <div class="builds fade-up" style="--d:.08s" aria-label="One-time build packages">
+        <div class="build-head"><span>Package</span><span>What's included</span><span>From</span></div>
+        <div class="build-row">
+          <div class="b-name">Create Website</div>
+          <div class="b-desc">Custom one-page site, mobile-first and fast, contact form wired up, local SEO basics, preview before launch, two revision rounds.</div>
+          <div class="b-price">£249</div>
+        </div>
+        <div class="build-row">
+          <div class="b-name">Refresh &amp; Upgrade</div>
+          <div class="b-desc">New life for an existing site — modern design, speed &amp; mobile fixes, sharper content, before/after health scores.</div>
+          <div class="b-price">£149</div>
+        </div>
+        <div class="build-row">
+          <div class="b-name">Custom Builds &amp; Bots</div>
+          <div class="b-desc">Multi-page sites, booking flows, interactive tools, Telegram bots, API integrations — scoped, quoted, milestone previews.</div>
+          <div class="b-price">£349</div>
+        </div>
+      </div>
+
       <!-- ============ AFTERCARE SUBSCRIPTION TIERS ============ -->
-      <div class="tiers" id="tiers" aria-label="Aftercare subscription tiers">
+      <div class="section-head fade-up" style="--d:.02s">
+        <div class="kicker">Then keep it running</div>
+        <h2 id="aftercare-heading">Aftercare that <span class="grad">never sleeps.</span></h2>
+      </div>
+      <div class="tiers" id="tiers" aria-label="Aftercare subscription tiers" style="margin-top: 28px;">
         <article class="tier fade-up" style="--d:.05s">
           <div class="cat">Stay online</div>
           <h2>Care Lite</h2>
@@ -288,26 +318,6 @@
           </ul>
           <a class="button ghost" href="index.html#contact">Choose Care Plus</a>
         </article>
-      </div>
-
-      <!-- ============ ONE-TIME BUILDS ============ -->
-      <div class="builds fade-up" style="--d:.05s" aria-label="One-time build packages">
-        <div class="build-head"><span>One-time builds</span><span>What's included</span><span>From</span></div>
-        <div class="build-row">
-          <div class="b-name">Create Website</div>
-          <div class="b-desc">Custom one-page site, mobile-first and fast, contact form wired up, local SEO basics, preview before launch, two revision rounds.</div>
-          <div class="b-price">£249</div>
-        </div>
-        <div class="build-row">
-          <div class="b-name">Refresh &amp; Upgrade</div>
-          <div class="b-desc">New life for an existing site — modern design, speed &amp; mobile fixes, sharper content, before/after health scores.</div>
-          <div class="b-price">£149</div>
-        </div>
-        <div class="build-row">
-          <div class="b-name">Custom Builds &amp; Bots</div>
-          <div class="b-desc">Multi-page sites, booking flows, interactive tools, Telegram bots, API integrations — scoped, quoted, milestone previews.</div>
-          <div class="b-price">£349</div>
-        </div>
       </div>
 
       <!-- ============ FEATURE MATRIX ============ -->
@@ -423,6 +433,13 @@
       var lblA = document.getElementById('lbl-annual');
       var annual = false;
 
+      function setBillingHeader(isAnnual) {
+        var h = document.getElementById('aftercare-heading');
+        if (h) h.innerHTML = isAnnual
+          ? 'Aftercare, <span class="grad">billed yearly.</span>'
+          : 'Aftercare that <span class="grad">never sleeps.</span>';
+      }
+
       toggle.addEventListener('click', function () {
         annual = !annual;
         toggle.setAttribute('aria-checked', String(annual));
@@ -439,6 +456,7 @@
           var note = line.querySelector('.annual-note');
           if (note) note.hidden = !annual;
         });
+        setBillingHeader(annual);
       });
     })();
   </script>
