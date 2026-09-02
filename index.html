@@ -13,11 +13,11 @@
   <meta property="og:title" content="PallettAi — Let's build something together" />
   <meta property="og:description" content="Websites, upgrades, and intelligent tools built with AI-assisted craft. UK Midlands." />
   <meta property="og:url" content="https://pallettai.org/" />
-  <meta property="og:image" content="https://pallettai.org/signal-logo.png" />
+  <meta property="og:image" content="https://pallettai.org/og-card.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="PallettAi — Let's build something together" />
   <meta name="twitter:description" content="Websites, upgrades, and intelligent tools built with AI-assisted craft. UK Midlands." />
-  <meta name="twitter:image" content="https://pallettai.org/signal-logo.png" />
+  <meta name="twitter:image" content="https://pallettai.org/og-card.png" />
   <title>PallettAi — Let's build something together</title>
   <link rel="icon" type="image/svg+xml" href="signal-favicon.svg" />
   <link rel="apple-touch-icon" href="signal-favicon.svg" />
@@ -344,9 +344,9 @@
 
     /* pricing teaser strip (text only — no cards on main page) */
     .price-strip { text-align: center; }
-    .price-strip .nums { margin-top: 18px; font-size: clamp(16px, 2vw, 19px); color: var(--muted); }
+    .price-strip .nums { margin-top: 18px; font-size: clamp(16px, 2vw, 19px); color: var(--muted); display: grid; gap: 8px; justify-items: center; }
     .price-strip .nums b { color: var(--ink); font-weight: 700; }
-    .price-strip .nums .sep { margin: 0 12px; color: var(--faint); }
+    .price-strip .nums .sep { display: none; }
 
     @media (max-width: 900px) {
       .cards { grid-template-columns: 1fr 1fr; }
@@ -499,7 +499,12 @@
         <div class="fade-up">
           <div class="kicker">Pricing</div>
           <h2>Simple pricing,<br /><span class="grad">no surprises.</span></h2>
-          <p class="nums">Websites from <b>£249</b><span class="sep">·</span>Refreshes from <b>£149</b><span class="sep">·</span>Bots &amp; builds from <b>£349</b><span class="sep">·</span>Aftercare from <b>£19/mo</b></p>
+          <p class="nums">
+            <span>Websites from <b>£249</b></span>
+            <span>Refreshes from <b>£149</b></span>
+            <span>Bots &amp; builds from <b>£349</b></span>
+            <span>Aftercare from <b>£19/mo</b></span>
+          </p>
           <div class="actions"><a class="button ghost pagelink" href="pricing.html">See full pricing <span class="arr" aria-hidden="true">→</span></a></div>
         </div>
       </section>
