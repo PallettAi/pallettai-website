@@ -272,7 +272,36 @@
     .grader-list .warn .grader-mark { color: #fcd34d; background: rgba(252, 211, 77, 0.12); }
     .grader-list .fail .grader-mark { color: #fda4af; background: rgba(253, 164, 175, 0.12); }
     .grader-list .fix { display: block; margin-top: 3px; color: var(--violet-soft); font-weight: 600; }
-    .grader-cta { display: flex; margin: 26px auto 0; width: fit-content; }
+    .grader-cta { display: flex; justify-content: center; gap: 14px; margin: 26px auto 0; width: fit-content; flex-wrap: wrap; }
+    .grader-report {
+      display: none; margin: 22px auto 0; max-width: 480px; text-align: center;
+      border: 1px solid var(--line); border-radius: 16px; padding: 18px 18px 16px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .grader-report.show { display: block; animation: fade-in 0.5s var(--ease) both; }
+    @keyframes fade-in { from { opacity: 0; transform: translateY(10px); } }
+    .grader-report .rp-title { font-size: 14px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; }
+    .grader-report .rp-sub { margin: 5px 0 0; font-size: 12.5px; line-height: 1.5; color: var(--muted); }
+    .grader-report form { display: flex; gap: 8px; margin-top: 13px; }
+    .grader-report input {
+      flex: 1; min-width: 0; padding: 11px 14px; font-size: 14px; font-family: inherit;
+      color: var(--ink); background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--line); border-radius: 12px; outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+    }
+    .grader-report input::placeholder { color: var(--faint); }
+    .grader-report input:focus { border-color: rgba(194, 150, 255, 0.6); background: rgba(255, 255, 255, 0.09); box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.18); }
+    .grader-report button {
+      padding: 11px 18px; border: none; border-radius: 12px; cursor: pointer;
+      font-size: 14px; font-weight: 600; font-family: inherit; color: #fff;
+      background: linear-gradient(135deg, #8b5cf6, #5b2bb3);
+      box-shadow: 0 4px 18px rgba(122, 77, 209, 0.35);
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+      white-space: nowrap;
+    }
+    .grader-report button:hover { transform: scale(1.03); box-shadow: 0 6px 24px rgba(139, 92, 246, 0.55); }
+    .grader-report .rp-status { display: none; margin: 11px 0 0; font-size: 12.5px; color: var(--violet-soft); }
+    @media (max-width: 560px) { .grader-report form { flex-direction: column; } .grader-report button { width: 100%; } }
 
     /* contact / cta */
     .contact-box {
@@ -448,7 +477,19 @@
             <div class="grader-scorewrap"><span class="grader-score" id="grader-score">0</span><span class="grader-outof">/100</span><div class="grader-band" id="grader-band"></div></div>
             <div class="grader-cats" id="grader-cats"></div>
             <ul class="grader-list" id="grader-list"></ul>
-            <a class="button primary grader-cta" id="grader-cta" href="#contact">Let us fix it <span aria-hidden="true">↗</span></a>
+            <div class="grader-cta">
+              <a class="button primary" id="grader-cta" href="#contact">Let us fix it <span aria-hidden="true">↗</span></a>
+              <button class="button ghost" type="button" id="grader-email-toggle">Email me this report <span class="arr" aria-hidden="true">→</span></button>
+            </div>
+            <div class="grader-report" id="grader-report" aria-live="polite">
+              <div class="rp-title">Send the full report to your inbox</div>
+              <p class="rp-sub">The complete findings list, plain-English fixes, and your score — no newsletter, no spam. We'll reply within 48 hours if you'd like us to put things right.</p>
+              <form id="grader-email-form">
+                <input type="email" id="grader-email" placeholder="you@yourbusiness.co.uk" aria-label="Email address" required />
+                <button type="submit">Send report</button>
+              </form>
+              <p class="rp-status" id="grader-email-status" role="status"></p>
+            </div>
           </div>
         </div>
       </section>
@@ -652,6 +693,61 @@
         var ta = document.getElementById('cf-details');
         if (ta) ta.value = 'My site (' + (lastReport.url || '') + ') scored ' + lastReport.score + '/100 on your free health check. Main issues: ' + issues + '. Please quote me to put it right.';
       });
+
+      // email-me-this-report lead capture
+      (function () {
+        var toggle = document.getElementById('grader-email-toggle');
+        var box = document.getElementById('grader-report');
+        var form = document.getElementById('grader-email-form');
+        var input = document.getElementById('grader-email');
+        var status = document.getElementById('grader-email-status');
+
+        toggle.addEventListener('click', function () {
+          box.classList.toggle('show');
+          if (box.classList.contains('show')) input.focus();
+        });
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (!lastReport) return;
+          var email = input.value.trim();
+          if (!email) { status.style.display = 'block'; status.style.color = '#fda4af'; status.textContent = 'Pop in your email first.'; return; }
+
+          var btn = form.querySelector('button');
+          var issues = (lastReport.checks || []).filter(function (c) { return c.status !== 'pass' && c.fix; })
+            .map(function (c) { return '- ' + c.label + ': ' + c.detail + (c.fix ? ' Fix: ' + c.fix : ''); }).join('\n');
+          var body = 'Health check report for ' + (lastReport.url || '(unknown URL)') + '\n' +
+            'Score: ' + lastReport.score + '/100' + (lastReport.band ? ' — ' + lastReport.band : '') + '\n\n' +
+            'Findings:\n' + (issues || 'No issues found — a clean bill of health.') + '\n\n' +
+            '(Requested by ' + email + ' via the free health check on pallettai.org)';
+
+          var fd = new FormData();
+          fd.append('email', email);
+          fd.append('name', 'Health check report request');
+          fd.append('company', lastReport.url || '');
+          fd.append('details', body);
+          fd.append('_subject', 'Health check report — ' + (lastReport.url || '') + ' (' + lastReport.score + '/100)');
+
+          btn.disabled = true; btn.textContent = 'Sending…';
+          status.style.display = 'none';
+          fetch('https://formspree.io/f/xgaeoapw', { method: 'POST', body: fd, headers: { 'Accept': 'application/json' }, mode: 'cors' })
+            .then(function (r) {
+              if (r.ok) {
+                status.style.display = 'block'; status.style.color = '#6ee7a0';
+                status.textContent = "On its way — check your inbox. We'll also reply within 48 hours in case you'd like us to fix anything.";
+                form.reset();
+              } else {
+                status.style.display = 'block'; status.style.color = '#fda4af';
+                status.textContent = 'Something went wrong — try again, or email pallettai@proton.me.';
+              }
+            })
+            .catch(function () {
+              status.style.display = 'block'; status.style.color = '#fda4af';
+              status.textContent = 'Network error — please email pallettai@proton.me.';
+            })
+            .finally(function () { btn.disabled = false; btn.textContent = 'Send report'; });
+        });
+      })();
     })();
   </script>
 </body>
