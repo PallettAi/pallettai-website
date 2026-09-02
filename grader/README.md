@@ -9,10 +9,18 @@ site's contact form.
 
 | Category | Weight | Checks |
 |---|---|---|
-| Speed | 40 | time-to-first-byte (20), gzip/brotli compression (10), HTML payload size (10) |
+| Speed | 36 | time-to-first-byte (18), compression (9), HTML payload size (9) |
 | Mobile | 20 | `<meta viewport>` (15), images with width/height (5) |
-| SEO | 30 | title (10), meta description (10), og:title + og:image (5), exactly one `<h1>` (5) |
-| Security | 10 | served over HTTPS (10) |
+| SEO | 30 | title (8), meta description (7), og:title + og:image (5), `<h1>` (4), canonical URL (3), JSON-LD structured data (3) |
+| Security | 14 | served over HTTPS (8), form actions over HTTPS (6) |
+
+**Compression note:** Cloudflare's Worker runtime auto-decompresses upstream
+responses and strips `Content-Encoding`, so reading that header alone falsely
+flags every compressed site as "uncompressed". The checker therefore falls back
+to comparing the origin's declared `Content-Length` against the bytes actually
+received: if the decompressed bytes are far larger than the declared length, it
+reports compressed. When the lengths match it flags a genuine warn; when it can't
+tell (no length header), it stays neutral instead of raising a false alarm.
 
 Each check reports `pass` / `warn` (half credit) / `fail` (0), with a plain-English
 detail and an "Our fix:" line for anything not passing. Finds are sorted worst-first.

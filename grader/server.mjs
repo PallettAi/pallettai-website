@@ -59,12 +59,17 @@ async function probe(target) {
     const facts = {
       finalUrl: res.url,
       https: new URL(res.url).protocol === 'https:',
-      ttfbMs, bytes, capped, compressed: false, encoding: '',
+      ttfbMs, bytes, contentLength: Number(res.headers.get('content-length')) || 0,
+      capped, compressed: false, encoding: '',
       title: '', description: '', viewport: '', ogTitle: '', ogImage: '',
       h1Count: 0, imgTotal: 0, imgWithDims: 0,
+      canonical: '', jsonld: false, formCount: 0, insecureForms: 0, htmlLang: '',
     };
     const enc = (res.headers.get('content-encoding') || '').toLowerCase();
-    if (enc && enc !== 'identity') { facts.compressed = true; facts.encoding = enc; }
+    facts.encoding = enc; // detectCompression() in scoreFacts also runs the Content-Length fallback
+
+    const langM = html.match(/<html\b[^>]*\blang\s*=\s*["']([^"']+)["']/i);
+    if (langM) facts.htmlLang = langM[1];
 
     const tm = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
     if (tm) facts.title = tm[1].replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
@@ -77,6 +82,16 @@ async function probe(target) {
       else if (/^og:title$/i.test(key)) facts.ogTitle = val;
       else if (/^og:image$/i.test(key)) facts.ogImage = val;
     }
+    for (const m of html.matchAll(/<link\b[^>]*>/gi)) {
+      const tag = m[0];
+      if (/\brel\s*=\s*["']canonical["']/i.test(tag)) {
+        const h = (tag.match(/\bhref\s*=\s*["']([^"']+)["']/i) || [])[1];
+        if (h) facts.canonical = h;
+      }
+    }
+    if (/application\/ld\+json/i.test(html)) facts.jsonld = true;
+    facts.formCount = (html.match(/<form\b/gi) || []).length;
+    facts.insecureForms = (html.match(/<form\b[^>]*\baction\s*=\s*["']http:\/\//gi) || []).length;
     facts.h1Count = (html.match(/<h1[\s>]/gi) || []).length;
     for (const m of html.matchAll(/<img\b[^>]*>/gi)) {
       facts.imgTotal++;
@@ -85,7 +100,7 @@ async function probe(target) {
     return facts;
   } catch (err) {
     clearTimeout(timer);
-    return { finalUrl: target.href, https: target.protocol === 'https:', ttfbMs: null, bytes: 0, capped: false, compressed: false, encoding: '', unreachable: true };
+    return { finalUrl: target.href, https: target.protocol === 'https:', ttfbMs: null, bytes: 0, contentLength: 0, capped: false, compressed: false, encoding: '', unreachable: true };
   }
 }
 
