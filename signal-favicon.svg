@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
   <defs>
     <linearGradient id="favicon-purple" x1="0" y1="1" x2="1" y2="0">
-      <stop stop-color="#5b2bb3"/>
-      <stop offset="1" stop-color="#b27bff"/>
+      <stop stop-color="#a06bff"/>
+      <stop offset="1" stop-color="#e0c7ff"/>
     </linearGradient>
   </defs>
   <path d="M14 40c5-14 9-14 14 0s9 14 14 0 9-14 14 0" stroke="url(#favicon-purple)" stroke-width="4" stroke-linecap="round"/>
-  <path d="M20 52V13h14c10 0 16 6 16 15s-6 15-16 15h-7" stroke="#17121f" stroke-width="5.5" stroke-linejoin="round"/>
-  <circle cx="14" cy="52" r="2.5" fill="#8b50e8"/>
-  <circle cx="56" cy="52" r="2.5" fill="#b27bff"/>
+  <path d="M20 52V13h14c10 0 16 6 16 15s-6 15-16 15h-7" stroke="#ffffff" stroke-width="5.5" stroke-linejoin="round"/>
+  <circle cx="14" cy="52" r="2.5" fill="#a06bff"/>
+  <circle cx="56" cy="52" r="2.5" fill="#e0c7ff"/>
 </svg>
