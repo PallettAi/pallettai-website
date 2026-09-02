@@ -15,12 +15,14 @@ site's contact form.
 | Security | 14 | served over HTTPS (8), form actions over HTTPS (6) |
 
 **Compression note:** Cloudflare's Worker runtime auto-decompresses upstream
-responses and strips `Content-Encoding`, so reading that header alone falsely
-flags every compressed site as "uncompressed". The checker therefore falls back
-to comparing the origin's declared `Content-Length` against the bytes actually
-received: if the decompressed bytes are far larger than the declared length, it
-reports compressed. When the lengths match it flags a genuine warn; when it can't
-tell (no length header), it stays neutral instead of raising a false alarm.
+responses and strips `Content-Encoding` on a plain request, so reading that header
+alone falsely flags every compressed site as "uncompressed". The checker therefore
+makes a second request with an explicit `Accept-Encoding: gzip, deflate, br`. Because
+it advertises support, Cloudflare passes the compressed response through without
+stripping the header — so a returned `Content-Encoding` positively confirms compression,
+and an absent one confirms the opposite. A `Content-Length`-vs-bytes fallback covers
+the case where the probe itself fails, and it stays neutral (never a false alarm) when
+truly impossible to tell.
 
 Each check reports `pass` / `warn` (half credit) / `fail` (0), with a plain-English
 detail and an "Our fix:" line for anything not passing. Finds are sorted worst-first.

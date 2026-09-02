@@ -52,16 +52,22 @@ export function bandFor(score) {
 // declared Content-Length (the compressed size) against the bytes we actually received
 // (the decompressed size): a big ratio means the host/CDN compressed it.
 function detectCompression(f) {
+  // Authoritative signal from the explicit-Accept-Encoding probe: when that request
+  // advertises gzip/br and the origin still returns a Content-Encoding, the host DID
+  // compress; when it returns none, the host did NOT compress. This survives Cloudflare's
+  // transparent decompression on the default request (which strips the header).
+  if (f.compressed === true) return { compressed: true, encoding: (f.encoding || 'gzip').toUpperCase() };
+  if (f.compressed === false) return { compressed: false, encoding: '' };
+  // Fallbacks for environments that keep the header (Node) or expose Content-Length.
   const enc = (f.encoding || '').toLowerCase();
-  if (enc && enc !== 'identity') return { compressed: true, encoding: enc };
+  if (enc && enc !== 'identity') return { compressed: true, encoding: enc.toUpperCase() };
   const cl = Number(f.contentLength) || 0;
   const bytes = Number(f.bytes) || 0;
   if (cl > 0 && bytes > 0) {
     const ratio = bytes / cl;
-    if (ratio > 1.30) return { compressed: true, encoding: 'CDN/host' }; // decompressed much larger than declared length
-    if (ratio >= 0.90 && ratio <= 1.10) return { compressed: false, encoding: '' }; // declared length matches what we got → truly uncompressed
+    if (ratio > 1.30) return { compressed: true, encoding: 'CDN/host' };
+    if (ratio >= 0.90 && ratio <= 1.10) return { compressed: false, encoding: '' };
   }
-  // Cannot tell (no length header, or in the grey zone). Don't raise a false alarm.
   return { compressed: null, encoding: '' };
 }
 
@@ -192,6 +198,32 @@ export function scoreFacts(f) {
 
 // --- Workers-specific probe (HTMLRewriter) ---
 
+// Ask the origin with an explicit Accept-Encoding gzip/br header. Because we advertise
+// support, Cloudflare passes the compressed response through WITHOUT stripping
+// Content-Encoding — so a returned content-encoding positively proves compression (and an
+// absent one proves the opposite). This is the signal that survives the default-request
+// auto-decompression, which is what caused the original false positive.
+async function probeCompression(href) {
+  try {
+    const res = await fetch(href, {
+      redirect: 'follow',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; PallettAiGrader/1.0; +https://pallettai.org)',
+        'Accept-Encoding': 'gzip, deflate, br',
+      },
+    });
+    const enc = (res.headers.get('content-encoding') || '').toLowerCase();
+    // Discard the body — we only needed the headers.
+    try { await res.body.cancel(); } catch {}
+    if (enc && enc !== 'identity') return { compressed: true, encoding: enc };
+    if (enc === 'identity') return { compressed: false, encoding: '' };
+    // No Content-Encoding header at all: the host did not compress this response.
+    return { compressed: false, encoding: '' };
+  } catch {
+    return { compressed: null, encoding: '' };
+  }
+}
+
 async function probe(target) {
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), FETCH_TIMEOUT_MS);
@@ -220,19 +252,19 @@ async function probe(target) {
     let off = 0;
     for (const c of chunks) { merged.set(c, off); off += c.length; }
 
+    // Authoritative compression verdict from the explicit-Accept-Encoding probe. This is the
+    // one that works under Cloudflare (the default request below strips Content-Encoding).
+    const comp = await probeCompression(target.href);
+
     const facts = {
       finalUrl: res.url,
       https: new URL(res.url).protocol === 'https:',
       ttfbMs, bytes, contentLength: Number(res.headers.get('content-length')) || 0,
-      capped, compressed: false, encoding: '',
+      capped, compressed: comp.compressed, encoding: comp.encoding || '',
       title: '', description: '', viewport: '', ogTitle: '', ogImage: '',
       h1Count: 0, imgTotal: 0, imgWithDims: 0,
       canonical: '', jsonld: false, formCount: 0, insecureForms: 0, htmlLang: '',
     };
-    // Keep the header if it survived (local harness / Node); scoreFacts also runs the
-    // Content-Length fallback so Cloudflare's stripped-header case is handled too.
-    const enc = (res.headers.get('content-encoding') || '').toLowerCase();
-    facts.encoding = enc;
 
     let titleSeen = false, titleDone = false;
     await new HTMLRewriter()
@@ -294,7 +326,7 @@ async function probe(target) {
     return facts;
   } catch (err) {
     clearTimeout(timer);
-    return { finalUrl: target.href, https: target.protocol === 'https:', ttfbMs: null, bytes: 0, contentLength: 0, capped: false, compressed: false, encoding: '', unreachable: true };
+    return { finalUrl: target.href, https: target.protocol === 'https:', ttfbMs: null, bytes: 0, contentLength: 0, capped: false, compressed: null, encoding: '', unreachable: true };
   }
 }
 

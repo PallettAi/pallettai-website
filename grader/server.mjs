@@ -31,6 +31,26 @@ function json(res, obj, status, origin) {
   res.end(JSON.stringify(obj));
 }
 
+async function probeCompression(href) {
+  // Explicit Accept-Encoding gzip/br so any transparent auto-decompression leaves the
+  // Content-Encoding header intact — a returned header positively proves compression.
+  try {
+    const res = await fetch(href, {
+      redirect: 'follow',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; PallettAiGrader/1.0; +https://pallettai.org)',
+        'Accept-Encoding': 'gzip, deflate, br',
+      },
+    });
+    const enc = (res.headers.get('content-encoding') || '').toLowerCase();
+    try { await res.body.cancel(); } catch {}
+    if (enc && enc !== 'identity') return { compressed: true, encoding: enc };
+    return { compressed: enc === 'identity' ? false : false, encoding: '' };
+  } catch {
+    return { compressed: null, encoding: '' };
+  }
+}
+
 async function probe(target) {
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), FETCH_TIMEOUT_MS);
@@ -65,8 +85,11 @@ async function probe(target) {
       h1Count: 0, imgTotal: 0, imgWithDims: 0,
       canonical: '', jsonld: false, formCount: 0, insecureForms: 0, htmlLang: '',
     };
-    const enc = (res.headers.get('content-encoding') || '').toLowerCase();
-    facts.encoding = enc; // detectCompression() in scoreFacts also runs the Content-Length fallback
+    // Authoritative verdict from the explicit-Accept-Encoding probe (survives Cloudflare).
+    const comp = await probeCompression(target.href);
+    facts.compressed = comp.compressed;
+    if (comp.encoding) facts.encoding = comp.encoding;
+    else if (!facts.encoding) facts.encoding = (res.headers.get('content-encoding') || '').toLowerCase();
 
     const langM = html.match(/<html\b[^>]*\blang\s*=\s*["']([^"']+)["']/i);
     if (langM) facts.htmlLang = langM[1];
@@ -100,7 +123,7 @@ async function probe(target) {
     return facts;
   } catch (err) {
     clearTimeout(timer);
-    return { finalUrl: target.href, https: target.protocol === 'https:', ttfbMs: null, bytes: 0, contentLength: 0, capped: false, compressed: false, encoding: '', unreachable: true };
+    return { finalUrl: target.href, https: target.protocol === 'https:', ttfbMs: null, bytes: 0, contentLength: 0, capped: false, compressed: null, encoding: '', unreachable: true };
   }
 }
 
