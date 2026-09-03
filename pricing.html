@@ -80,7 +80,13 @@ h1 .grad { background: var(--grad-title); -webkit-background-clip: text; backgro
 .build-row:hover { background: rgba(255, 255, 255, 0.04); }
 .build-row .b-name { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
 .build-row .b-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
-.build-row .b-price { font-size: 19px; font-weight: 700; letter-spacing: -0.03em; white-space: nowrap; background: var(--grad-title); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.build-row .b-price { font-size: 19px; font-weight: 700; letter-spacing: -0.03em; white-space: nowrap; display: flex; flex-direction: column; align-items: flex-end; gap: 7px; }
+.build-row .b-price > span { background: var(--grad-title); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.b-price .b-start { font-size: 12px; font-weight: 600; letter-spacing: -0.01em; white-space: nowrap; color: var(--violet-soft); border: 1px solid rgba(194, 150, 255, 0.3); background: rgba(139, 92, 246, 0.1); padding: 6px 12px; border-radius: 999px; transition: transform 0.3s var(--ease), border-color 0.25s, background 0.25s; }
+.b-price .b-start:hover { transform: scale(1.05); border-color: rgba(194, 150, 255, 0.6); background: rgba(139, 92, 246, 0.18); }
+.balance-note { margin: 16px 0 0; text-align: center; font-size: 12.5px; color: var(--faint); }
+.balance-note a { color: var(--violet-soft); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 700px) { .build-row .b-price { align-items: flex-start; } }
 .build-head { display: grid; grid-template-columns: 1.3fr 2fr auto; gap: 18px; padding: 0 20px 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
 .matrix-wrap { margin-top: 44px; overflow-x: auto; border: 1px solid var(--line); border-radius: 20px; background: var(--glass); }
 table.matrix { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 640px; }
@@ -154,19 +160,20 @@ table.matrix { width: 100%; border-collapse: collapse; font-size: 13.5px; min-wi
         <div class="build-row">
           <div class="b-name">Create Website</div>
           <div class="b-desc">Custom one-page site, mobile-first and fast, contact form wired up, local SEO basics, preview before launch, two revision rounds.</div>
-          <div class="b-price">£249</div>
+          <div class="b-price"><span>£249</span><a class="b-start" href="https://buy.stripe.com/6oU28k1lzbgpdUWcKz2B20g" target="_blank" rel="noopener">Start with £99 deposit ↗</a></div>
         </div>
         <div class="build-row">
           <div class="b-name">Refresh &amp; Upgrade</div>
           <div class="b-desc">New life for an existing site — modern design, speed &amp; mobile fixes, sharper content, before/after health scores.</div>
-          <div class="b-price">£149</div>
+          <div class="b-price"><span>£149</span><a class="b-start" href="https://buy.stripe.com/6oUdR2d4hcktdUW9yn2B20f" target="_blank" rel="noopener">Start with £49 deposit ↗</a></div>
         </div>
         <div class="build-row">
           <div class="b-name">Custom Builds &amp; Bots</div>
           <div class="b-desc">Multi-page sites, booking flows, interactive tools, Telegram bots, API integrations — scoped, quoted, milestone previews.</div>
-          <div class="b-price">£349</div>
+          <div class="b-price"><span>£349</span><a class="b-start" href="https://buy.stripe.com/00w9AM9S5709aIKh0P2B20h" target="_blank" rel="noopener">Start with £149 deposit ↗</a></div>
         </div>
       </div>
+      <p class="balance-note fade-up">Already approved your design &amp; plan? Pay your remaining balance — <a href="https://buy.stripe.com/8x2cMY8O184d8AC25V2B20i" target="_blank" rel="noopener">Create Website £150</a> · <a href="https://buy.stripe.com/5kQ6oAfcp5W52ce6mb2B20j" target="_blank" rel="noopener">Refresh £100</a> · <a href="https://buy.stripe.com/4gM14gfcp98h2cefWL2B20k" target="_blank" rel="noopener">Custom Builds £200</a></p>
 
       <!-- ============ AFTERCARE SUBSCRIPTION TIERS ============ -->
       <div class="section-head fade-up" style="--d:.02s">
@@ -187,7 +194,7 @@ table.matrix { width: 100%; border-collapse: collapse; font-size: 13.5px; min-wi
             <li>One content or image swap per month</li>
             <li>Email support — answered within 48 hours</li>
           </ul>
-          <a class="button ghost" href="index.html#contact">Choose Care Lite</a>
+          <a class="button ghost" href="https://buy.stripe.com/14A4gs0hvckteZ025V2B20a" target="_blank" rel="noopener" data-monthly="https://buy.stripe.com/14A4gs0hvckteZ025V2B20a" data-annual="https://buy.stripe.com/fZudR2aW984d7wyaCr2B20c">Subscribe — £19/mo</a>
         </article>
 
         <article class="tier featured fade-up" style="--d:.1s">
@@ -205,7 +212,7 @@ table.matrix { width: 100%; border-collapse: collapse; font-size: 13.5px; min-wi
             <li>Priority support when you need a hand</li>
             <li>Seasonal refresh — banners, offers, announcements</li>
           </ul>
-          <a class="button primary" href="index.html#contact">Choose Care</a>
+          <a class="button primary" href="https://buy.stripe.com/8x2dR25BPfwF4kmeSH2B209" target="_blank" rel="noopener" data-monthly="https://buy.stripe.com/8x2dR25BPfwF4kmeSH2B209" data-annual="https://buy.stripe.com/28E6oAd4hacl9EG6mb2B20d">Subscribe — £49/mo</a>
         </article>
 
         <article class="tier fade-up" style="--d:.15s">
@@ -222,7 +229,7 @@ table.matrix { width: 100%; border-collapse: collapse; font-size: 13.5px; min-wi
             <li>Same-day replies on weekdays</li>
             <li>Discounted rates on new one-off projects</li>
           </ul>
-          <a class="button ghost" href="index.html#contact">Choose Care Plus</a>
+          <a class="button ghost" href="https://buy.stripe.com/cNi7sE2pD5W5cQS7qf2B208" target="_blank" rel="noopener" data-monthly="https://buy.stripe.com/cNi7sE2pD5W5cQS7qf2B208" data-annual="https://buy.stripe.com/5kQdR2aW9bgpdUWcKz2B20e">Subscribe — £99/mo</a>
         </article>
       </div>
 
@@ -261,6 +268,10 @@ table.matrix { width: 100%; border-collapse: collapse; font-size: 13.5px; min-wi
         <details open>
           <summary>How does a project start?<span class="plus">+</span></summary>
           <div class="answer">Send the enquiry form or an email describing your idea. We reply within 48 hours, agree pricing and a small deposit, then build you a preview model before anything goes live. You approve the preview before we launch.</div>
+        </details>
+        <details>
+          <summary>Can I pay online by card?<span class="plus">+</span></summary>
+          <div class="answer">Yes — every payment runs through Stripe. New projects start with a deposit link (Refresh £49, Create Website £99, Custom Builds &amp; Bots £149); the remaining balance is paid by a second link or invoice before launch. Aftercare is a monthly or annual subscription you can manage any time in the <a href="https://billing.stripe.com/p/login/5kQ5kwaW94S15oqcKz2B200" target="_blank" rel="noopener">customer portal</a>.</div>
         </details>
         <details>
           <summary>What does aftercare actually cover?<span class="plus">+</span></summary>
@@ -324,6 +335,9 @@ table.matrix { width: 100%; border-collapse: collapse; font-size: 13.5px; min-wi
           line.classList.add('bump');
           var note = line.querySelector('.annual-note');
           if (note) note.hidden = !annual;
+        });
+        document.querySelectorAll('.tier .button[data-monthly]').forEach(function (btn) {
+          btn.href = annual ? btn.dataset.annual : btn.dataset.monthly;
         });
         setBillingHeader(annual);
       });
