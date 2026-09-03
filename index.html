@@ -276,6 +276,7 @@ h2 .grad { background: var(--grad-title); -webkit-background-clip: text; backgro
     /* ---- overrides of shared chrome ---- */
 footer { margin: 0 auto; }
   </style>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://formspree.io https://*.workers.dev http://127.0.0.1:8787; media-src 'self'; object-src 'none'; base-uri 'self'; form-action https://formspree.io; frame-src 'none'" />
 </head>
 <body>
   <div class="shell">
@@ -378,6 +379,7 @@ footer { margin: 0 auto; }
               <p class="rp-sub">The complete findings list, plain-English fixes, and your score — no newsletter, no spam. We'll reply within 48 hours if you'd like us to put things right.</p>
               <form id="grader-email-form">
                 <input type="email" id="grader-email" placeholder="you@yourbusiness.co.uk" aria-label="Email address" required />
+                <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
                 <button type="submit">Send report</button>
               </form>
               <p class="rp-status" id="grader-email-status" role="status"></p>
@@ -607,6 +609,7 @@ footer { margin: 0 auto; }
             '(Requested by ' + email + ' via the free health check on pallettai.org)';
 
           var fd = new FormData();
+          fd.append('_gotcha', ''); // Formspree honeypot — must stay empty
           fd.append('email', email);
           fd.append('name', 'Health check report request');
           fd.append('company', lastReport.url || '');
@@ -643,6 +646,9 @@ footer { margin: 0 auto; }
       var API = (location.hostname === '127.0.0.1' || location.hostname === 'localhost')
         ? 'http://127.0.0.1:8787' : 'https://pallettai-grader.coreypallett20.workers.dev';
       var from = parseInt(el.textContent, 10) || 100;
+      var HERO_KEY = 'pallettai-hero-score';
+      var stored = null;
+      try { stored = JSON.parse(sessionStorage.getItem(HERO_KEY) || 'null'); } catch (e) {}
       function settle(score, text) {
         if (!el) return;
         var start = null;
@@ -656,12 +662,21 @@ footer { margin: 0 auto; }
         }
         requestAnimationFrame(step);
       }
-      fetch(API + '/grade?url=' + encodeURIComponent('https://pallettai.org'))
-        .then(function (r) { return r.json(); })
-        .then(function (j) {
-          if (j && typeof j.score === 'number') settle(j.score, j.band || band.textContent);
-        })
-        .catch(function () { /* keep the static 100 — offline-safe */ });
+      // Cache the hero score for 10 minutes so every page load doesn't re-grade
+      // pallettai.org through the worker (cuts repeat upstream fetches and rate-limit pressure).
+      if (stored && typeof stored.score === 'number' && Date.now() - stored.t < 600000) {
+        settle(stored.score, stored.band || band.textContent);
+      } else {
+        fetch(API + '/grade?url=' + encodeURIComponent('https://pallettai.org'))
+          .then(function (r) { return r.json(); })
+          .then(function (j) {
+            if (j && typeof j.score === 'number') {
+              try { sessionStorage.setItem(HERO_KEY, JSON.stringify({ t: Date.now(), score: j.score, band: j.band || '' })); } catch (e) {}
+              settle(j.score, j.band || band.textContent);
+            }
+          })
+          .catch(function () { /* keep the static 100 — offline-safe */ });
+      }
     })();
 
     // ROI calculator

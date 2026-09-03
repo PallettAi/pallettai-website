@@ -5,12 +5,15 @@
 // Run:  node grader/server.mjs      → http://127.0.0.1:8787/grade?url=example.co.uk
 
 import http from 'node:http';
-import { normalizeUrl, scoreFacts } from './worker.js';
+import { normalizeUrl, isPublicHost, scoreFacts } from './worker.js';
 
 const PORT = 8787;
 const ALLOWED_ORIGINS = ['https://pallettai.org', 'http://127.0.0.1:8123', 'http://localhost:8123'];
 const MAX_HTML_BYTES = 1_500_000;
 const FETCH_TIMEOUT_MS = 12_000;
+const PROBE_TIMEOUT_MS = 8_000;
+const MAX_REDIRECTS = 5;
+const UA = 'Mozilla/5.0 (compatible; PallettAiGrader/1.0; +https://pallettai.org)';
 
 function corsHeaders(origin) {
   // dev harness: allow any localhost/127.0.0.1 origin (preview ports change per session),
@@ -23,6 +26,7 @@ function corsHeaders(origin) {
     'Access-Control-Allow-Methods': 'GET, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Cache-Control': 'no-store',
+    'X-Content-Type-Options': 'nosniff',
   };
 }
 
@@ -31,23 +35,45 @@ function json(res, obj, status, origin) {
   res.end(JSON.stringify(obj));
 }
 
+// Same public-host guarantees as the Worker: manual redirects, each hop validated.
+async function fetchPublic(start, opts = {}) {
+  let cur = start;
+  for (let hop = 0; hop <= MAX_REDIRECTS; hop++) {
+    const res = await fetch(cur.href, { ...opts, redirect: 'manual' });
+    const st = res.status;
+    const loc = res.headers.get('location');
+    if (st >= 300 && st < 400) {
+      try { await res.body.cancel(); } catch {}
+      if (!loc) throw new Error('redirect without a Location header');
+      let next;
+      try { next = new URL(loc, cur); } catch { throw new Error('unparseable redirect Location'); }
+      const clean = normalizeUrl(next.href);
+      if (!clean) throw new Error('redirect to a non-public address was blocked');
+      cur = clean;
+      continue;
+    }
+    return { res, url: cur };
+  }
+  throw new Error('too many redirects');
+}
+
 async function probeCompression(href) {
-  // Explicit Accept-Encoding gzip/br so any transparent auto-decompression leaves the
-  // Content-Encoding header intact — a returned header positively proves compression.
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), PROBE_TIMEOUT_MS);
   try {
-    const res = await fetch(href, {
-      redirect: 'follow',
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; PallettAiGrader/1.0; +https://pallettai.org)',
-        'Accept-Encoding': 'gzip, deflate, br',
-      },
+    const { res } = await fetchPublic(href, {
+      headers: { 'User-Agent': UA, 'Accept-Encoding': 'gzip, deflate, br' },
+      signal: ctl.signal,
     });
     const enc = (res.headers.get('content-encoding') || '').toLowerCase();
     try { await res.body.cancel(); } catch {}
     if (enc && enc !== 'identity') return { compressed: true, encoding: enc };
-    return { compressed: enc === 'identity' ? false : false, encoding: '' };
+    if (enc === 'identity') return { compressed: false, encoding: '' };
+    return { compressed: false, encoding: '' };
   } catch {
     return { compressed: null, encoding: '' };
+  } finally {
+    clearTimeout(timer);
   }
 }
 
@@ -56,10 +82,9 @@ async function probe(target) {
   const timer = setTimeout(() => ctl.abort(), FETCH_TIMEOUT_MS);
   const t0 = Date.now();
   try {
-    const res = await fetch(target.href, {
-      redirect: 'follow',
+    const { res, url: final } = await fetchPublic(target, {
       signal: ctl.signal,
-      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; PallettAiGrader/1.0; +https://pallettai.org)' },
+      headers: { 'User-Agent': UA },
     });
     const reader = res.body.getReader();
     let chunk = await reader.read();
@@ -77,16 +102,17 @@ async function probe(target) {
 
     const html = Buffer.concat(parts).toString('utf8');
     const facts = {
-      finalUrl: res.url,
-      https: new URL(res.url).protocol === 'https:',
+      finalUrl: final.href,
+      https: final.protocol === 'https:',
       ttfbMs, bytes, contentLength: Number(res.headers.get('content-length')) || 0,
       capped, compressed: false, encoding: '',
       title: '', description: '', viewport: '', ogTitle: '', ogImage: '',
       h1Count: 0, imgTotal: 0, imgWithDims: 0,
       canonical: '', jsonld: false, formCount: 0, insecureForms: 0, htmlLang: '',
     };
-    // Authoritative verdict from the explicit-Accept-Encoding probe (survives Cloudflare).
-    const comp = await probeCompression(target.href);
+    // Authoritative verdict from the explicit-Accept-Encoding probe (survives Cloudflare),
+    // against the post-redirect URL so we don't chase the same hops twice.
+    const comp = await probeCompression(final.href);
     facts.compressed = comp.compressed;
     if (comp.encoding) facts.encoding = comp.encoding;
     else if (!facts.encoding) facts.encoding = (res.headers.get('content-encoding') || '').toLowerCase();
@@ -143,6 +169,7 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'OPTIONS') { res.writeHead(204, corsHeaders(origin)); return res.end(); }
   const u = new URL(req.url, 'http://127.0.0.1');
   if (u.pathname !== '/grade') return json(res, { error: 'Use /grade?url=example.co.uk' }, 404, origin);
+  if (req.method !== 'GET') return json(res, { error: 'Only GET is supported.' }, 405, origin);
 
   const target = normalizeUrl(u.searchParams.get('url'));
   if (!target) return json(res, { error: 'That doesn’t look like a public website address — try something like yourbusiness.co.uk.' }, 400, origin);

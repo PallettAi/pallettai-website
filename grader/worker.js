@@ -8,8 +8,99 @@
 const ALLOWED_ORIGINS = ['https://pallettai.org', 'http://127.0.0.1:8123', 'http://localhost:8123'];
 const MAX_HTML_BYTES = 1_500_000; // stop reading HTML past this
 const FETCH_TIMEOUT_MS = 12_000;
+const PROBE_TIMEOUT_MS = 8_000;   // compression probe is header-only; shorter budget
+const MAX_REDIRECTS = 5;
+const ALLOWED_PORTS = ['', '80', '443', '8080', '8443'];
 
-const PRIVATE_HOST_RE = /^(localhost|0\.0\.0\.0|\[::1\]|\[::\])$|^127\.|^10\.|^192\.168\.|^169\.254\.|^172\.(1[6-9]|2\d|3[01])\.|.*\.local$|.*\.internal$/i;
+/* ------------------------------------------------------------------ */
+/* Host/IP validation — defence in depth against SSRF.                */
+/* Blocking on hostname alone is bypassable (DNS rebinding, redirects */
+/* to literals, IPv6 forms), so we validate numeric literals too and  */
+/* re-validate every redirect hop before following it.                */
+/* ------------------------------------------------------------------ */
+
+function ipv4ToInt(h) {
+  const m = /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/.exec(h);
+  if (!m) return null;
+  const p = m.slice(1).map(Number);
+  if (p.some((x) => x > 255)) return null;
+  return ((p[0] << 24) | (p[1] << 16) | (p[2] << 8) | p[3]) >>> 0;
+}
+
+function isPrivateIpv4(n) {
+  if ((n >>> 24) === 0) return true;                       // 0.0.0.0/8
+  if ((n >>> 24) === 10) return true;                      // 10.0.0.0/8
+  if ((n >>> 24) === 127) return true;                     // 127.0.0.0/8 loopback
+  if ((n >>> 24) === 169 && ((n >>> 16) & 0xff) === 254) return true;  // 169.254.0.0/16 link-local
+  if ((n >>> 24) === 172 && ((n >>> 16) & 0xff) >= 16 && ((n >>> 16) & 0xff) <= 31) return true; // 172.16/12
+  if ((n >>> 24) === 192 && ((n >>> 16) & 0xff) === 168) return true;  // 192.168.0.0/16
+  if (((n & 0xffc00000) >>> 0) === 0x64400000) return true; // 100.64.0.0/10 CGNAT
+  if (((n & 0xffffff00) >>> 0) === 0xc0000000) return true; // 192.0.0.0/24 IETF (+192.0.0.9/10 anycast)
+  if (((n & 0xffffff00) >>> 0) === 0xc0000200) return true; // 192.0.2.0/24 TEST-NET-1
+  if (((n & 0xfffe0000) >>> 0) === 0xc6120000) return true; // 198.18.0.0/15 benchmark
+  if (((n & 0xffffff00) >>> 0) === 0xc6336400) return true; // 198.51.100.0/24 TEST-NET-2
+  if (((n & 0xffffff00) >>> 0) === 0xcb007100) return true; // 203.0.113.0/24 TEST-NET-3
+  if ((n >>> 28) >= 14) return true;                       // 224.0.0.0/4 multicast + reserved
+  return false;
+}
+
+// Returns { value: BigInt, embeddedV4: number|null } or null when unparsable.
+function ipv6Parse(h) {
+  // Legacy embedded dotted-quad tails: [::ffff:127.0.0.1] → [::ffff:7f00:1]
+  const v4Tail = /(\d{1,3}(?:\.\d{1,3}){3})$/.exec(h);
+  if (v4Tail) {
+    const v4 = ipv4ToInt(v4Tail[1]);
+    if (v4 === null) return null;
+    h = h.slice(0, v4Tail.index) + ((v4 >>> 16) & 0xffff).toString(16) + ':' + (v4 & 0xffff).toString(16);
+  }
+  const halves = h.split('::');
+  if (halves.length > 2) return null;
+  const toHextets = (s) => (s ? s.split(':').map((x) => (x === '' ? 0 : parseInt(x, 16))) : []);
+  const left = toHextets(halves[0]);
+  const right = halves.length === 2 ? toHextets(halves[1]) : [];
+  const all = left.concat(right);
+  if (all.length === 0 || all.some((x) => Number.isNaN(x))) return null;
+  const total = left.length + right.length;
+  if (total > 8) return null;
+  const zeros = 8 - total;
+  const parts = left.concat(new Array(zeros).fill(0), right);
+  let n = 0n;
+  for (const p of parts) n = (n << 16n) | BigInt(p);
+  // IPv4-mapped ::ffff:0:0/96 → expose the embedded address for v4 checks.
+  const embeddedV4 = (n >> 48n) === 0n && (n >> 32n) === 0xffffn ? Number(n & 0xffffffffn) : null;
+  return { value: n, embeddedV4 };
+}
+
+function isPrivateIpv6(n) {
+  const b0 = (n >> 120n) & 0xffn;   // first byte
+  const b1 = (n >> 112n) & 0xffn;   // second byte
+  if (n < (1n << 32n)) return true; // ::/96 — unspecified, ::1 loopback, IPv4-compatible, ::ffff:0:0/96
+  if (b0 === 0xfcn || b0 === 0xfdn) return true;                       // fc00::/7 ULA
+  if (b0 === 0xffn) return true;                                       // ff00::/8 multicast
+  if (b0 === 0xfen && (b1 & 0xc0n) === 0x80n) return true;             // fe80::/10 link-local
+  if ((n >> 96n) === 0x20010db8n) return true;                         // 2001:db8::/32 documentation
+  if ((n >> 112n) === 0x2002n) return true;                            // 2002::/16 6to4 (may embed private v4)
+  if ((n >> 32n) === 0x64ff9b0000000000000000n) return true;           // 64:ff9b::/96 NAT64 well-known
+  return false;
+}
+
+export function isPublicHost(host) {
+  let h = String(host || '').trim().toLowerCase().replace(/\.$/, '');
+  if (!h) return false;
+  if (h.startsWith('[')) { h = h.slice(1); if (h.endsWith(']')) h = h.slice(0, -1); }
+  const v4 = ipv4ToInt(h);
+  if (v4 !== null) return !isPrivateIpv4(v4);
+  if (h.includes(':')) {
+    const v6 = ipv6Parse(h);
+    if (!v6) return false;
+    if (v6.embeddedV4 !== null) return !isPrivateIpv4(v6.embeddedV4);
+    return !isPrivateIpv6(v6.value);
+  }
+  // DNS hostname — block private/reserved suffixes and anything ending in
+  // reserved TLDs that a real public website can never legitimately use.
+  return !/\.(local|internal|localhost|home\.arpa|test|example|invalid|onion)$/i.test(h) &&
+         !/^(localhost|local|home)$/i.test(h);
+}
 
 export function normalizeUrl(input) {
   let raw = String(input || '').trim();
@@ -18,9 +109,13 @@ export function normalizeUrl(input) {
   let u;
   try { u = new URL(raw); } catch { return null; }
   if (u.protocol !== 'http:' && u.protocol !== 'https:') return null;
-  if (PRIVATE_HOST_RE.test(u.hostname)) return null;
+  if (u.username || u.password) return null;              // no credentials in the URL
+  if (!ALLOWED_PORTS.includes(u.port)) return null;       // only normal web ports
+  if (!isPublicHost(u.hostname)) return null;
   return u;
 }
+
+/* ------------------------------------------------------------------ */
 
 function corsHeaders(origin) {
   const allow = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
@@ -29,6 +124,7 @@ function corsHeaders(origin) {
     'Access-Control-Allow-Methods': 'GET, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Cache-Control': 'no-store',
+    'X-Content-Type-Options': 'nosniff',
   };
 }
 
@@ -196,24 +292,49 @@ export function scoreFacts(f) {
   return { score, band: bandFor(score), categories: cats, checks };
 }
 
-// --- Workers-specific probe (HTMLRewriter) ---
+/* ---------------- fetching with public-host guarantees ---------------- */
+
+const UA = 'Mozilla/5.0 (compatible; PallettAiGrader/1.0; +https://pallettai.org)';
+
+// fetch() with redirect: 'manual' so every hop is validated against the same
+// public-host rules before we follow it — a redirect straight to 127.0.0.1 or a
+// metadata IP can never be reached, no matter what the origin replies with.
+async function fetchPublic(start, opts = {}) {
+  let cur = start;
+  for (let hop = 0; hop <= MAX_REDIRECTS; hop++) {
+    const res = await fetch(cur.href, { ...opts, redirect: 'manual' });
+    const st = res.status;
+    const loc = res.headers.get('location');
+    if (st >= 300 && st < 400) {
+      try { if (res.body && res.body.cancel) await res.body.cancel(); } catch {}
+      if (!loc) throw new Error('redirect without a Location header');
+      let next;
+      try { next = new URL(loc, cur); } catch { throw new Error('unparseable redirect Location'); }
+      const clean = normalizeUrl(next.href);
+      if (!clean) throw new Error('redirect to a non-public address was blocked');
+      cur = clean;
+      continue;
+    }
+    return { res, url: cur };
+  }
+  throw new Error('too many redirects');
+}
 
 // Ask the origin with an explicit Accept-Encoding gzip/br header. Because we advertise
 // support, Cloudflare passes the compressed response through WITHOUT stripping
 // Content-Encoding — so a returned content-encoding positively proves compression (and an
 // absent one proves the opposite). This is the signal that survives the default-request
 // auto-decompression, which is what caused the original false positive.
+// Header-only: the body is discarded as soon as headers arrive.
 async function probeCompression(href) {
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), PROBE_TIMEOUT_MS);
   try {
-    const res = await fetch(href, {
-      redirect: 'follow',
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; PallettAiGrader/1.0; +https://pallettai.org)',
-        'Accept-Encoding': 'gzip, deflate, br',
-      },
+    const { res } = await fetchPublic(href, {
+      headers: { 'User-Agent': UA, 'Accept-Encoding': 'gzip, deflate, br' },
+      signal: ctl.signal,
     });
     const enc = (res.headers.get('content-encoding') || '').toLowerCase();
-    // Discard the body — we only needed the headers.
     try { await res.body.cancel(); } catch {}
     if (enc && enc !== 'identity') return { compressed: true, encoding: enc };
     if (enc === 'identity') return { compressed: false, encoding: '' };
@@ -221,6 +342,8 @@ async function probeCompression(href) {
     return { compressed: false, encoding: '' };
   } catch {
     return { compressed: null, encoding: '' };
+  } finally {
+    clearTimeout(timer);
   }
 }
 
@@ -229,10 +352,11 @@ async function probe(target) {
   const timer = setTimeout(() => ctl.abort(), FETCH_TIMEOUT_MS);
   const t0 = Date.now();
   try {
-    const res = await fetch(target.href, {
-      redirect: 'follow',
+    // Plain request (no explicit Accept-Encoding) so the runtime auto-decompresses
+    // the body for parsing, as before.
+    const { res, url: final } = await fetchPublic(target, {
       signal: ctl.signal,
-      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; PallettAiGrader/1.0; +https://pallettai.org)' },
+      headers: { 'User-Agent': UA },
     });
     const reader = res.body.getReader();
     let chunk = await reader.read();
@@ -252,13 +376,13 @@ async function probe(target) {
     let off = 0;
     for (const c of chunks) { merged.set(c, off); off += c.length; }
 
-    // Authoritative compression verdict from the explicit-Accept-Encoding probe. This is the
-    // one that works under Cloudflare (the default request below strips Content-Encoding).
-    const comp = await probeCompression(target.href);
+    // Authoritative compression verdict from the explicit-Accept-Encoding probe,
+    // against the post-redirect URL so we don't chase the same hops twice.
+    const comp = await probeCompression(final.href);
 
     const facts = {
-      finalUrl: res.url,
-      https: new URL(res.url).protocol === 'https:',
+      finalUrl: final.href,
+      https: final.protocol === 'https:',
       ttfbMs, bytes, contentLength: Number(res.headers.get('content-length')) || 0,
       capped, compressed: comp.compressed, encoding: comp.encoding || '',
       title: '', description: '', viewport: '', ogTitle: '', ogImage: '',
@@ -330,7 +454,7 @@ async function probe(target) {
   }
 }
 
-// --- Soft in-memory rate limit (per isolate; good-enough guard for a free tool) ---
+/* --- Soft in-memory rate limit (per isolate; good-enough guard for a free tool) --- */
 const hits = new Map();
 const WINDOW_MS = 60_000, MAX_PER_WINDOW = 20;
 function allow(ip) {
@@ -349,6 +473,7 @@ export default {
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: corsHeaders(origin) });
     const u = new URL(request.url);
     if (u.pathname !== '/grade') return json({ error: 'Use /grade?url=example.co.uk' }, 404, origin);
+    if (request.method !== 'GET') return json({ error: 'Only GET is supported.' }, 405, origin);
 
     const target = normalizeUrl(u.searchParams.get('url'));
     if (!target) return json({ error: 'That doesn’t look like a public website address — try something like yourbusiness.co.uk.' }, 400, origin);
