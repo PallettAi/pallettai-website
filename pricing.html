@@ -106,6 +106,9 @@ table.matrix { width: 100%; border-collapse: collapse; font-size: 13.5px; min-wi
 @keyframes answer-in { from { opacity: 0; transform: translateY(-6px); } }
 .fineprint { margin: 30px auto 0; max-width: 720px; text-align: center; color: var(--faint); font-size: 12.5px; line-height: 1.7; }
 .fineprint b { color: var(--violet-soft); font-weight: 600; }
+.portal-note { margin: 16px auto 0; text-align: center; font-size: 13.5px; color: var(--muted); }
+.portal-note a { color: var(--violet-soft); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; transition: text-decoration-thickness 0.2s; }
+.portal-note a:hover { text-decoration-thickness: 2px; }
 .cta-band h2 .grad { background: var(--grad-title); -webkit-background-clip: text; background-clip: text; color: transparent; }
 @media (max-width: 900px) { .tiers { grid-template-columns: 1fr; } .tier.featured { order: -1; } }
 @media (max-width: 700px) {
@@ -250,6 +253,8 @@ table.matrix { width: 100%; border-collapse: collapse; font-size: 13.5px; min-wi
 
       <p class="fineprint fade-up">No lock-in — cancel any aftercare tier with <b>30 days' notice</b>. Annual billing saves <b>two months</b> (prices shown are the effective monthly rate). Every build includes <b>30 days of free aftercare</b> so you're never launched and left. Local Midlands businesses get <b>10% off</b> their first three months of any tier.</p>
 
+      <p class="portal-note fade-up">Already on aftercare? <a href="https://billing.stripe.com/p/login/5kQ5kwaW94S15oqcKz2B200" target="_blank" rel="noopener">Manage your plan, billing &amp; invoices in the customer portal <span aria-hidden="true">↗</span></a></p>
+
       <!-- ============ FAQ ============ -->
       <div class="faq fade-up" aria-label="Frequently asked questions">
         <details open>
@@ -266,7 +271,7 @@ table.matrix { width: 100%; border-collapse: collapse; font-size: 13.5px; min-wi
         </details>
         <details>
           <summary>Can I switch tiers or cancel later?<span class="plus">+</span></summary>
-          <div class="answer">Any time. Upgrade, downgrade, or cancel with 30 days' notice — no exit fees, no awkward conversations. If you cancel a build's aftercare within the free 30 days, you pay nothing at all.</div>
+          <div class="answer">Any time. Upgrade, downgrade, or cancel with 30 days' notice — no exit fees, no awkward conversations. If you cancel a build's aftercare within the free 30 days, you pay nothing at all. Once subscribed, you can <a href="https://billing.stripe.com/p/login/5kQ5kwaW94S15oqcKz2B200" target="_blank" rel="noopener">manage everything in the customer portal</a> — view invoices, update payment details, or cancel in a couple of clicks.</div>
         </details>
         <details>
           <summary>Why "from £149" / "from £349"?<span class="plus">+</span></summary>
