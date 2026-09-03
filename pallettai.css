@@ -185,8 +185,9 @@ footer {
   flex-wrap: wrap;
 }
 footer .socials { display: flex; gap: 20px; }
-footer .socials a { display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s; }
-footer .socials a:hover { color: var(--ink); }
+footer .socials a, footer .legal a { display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s; }
+footer .socials a:hover, footer .legal a:hover { color: var(--ink); }
+footer .legal a { text-decoration: underline; text-underline-offset: 3px; }
 footer .socials svg { width: 15px; height: 15px; }
 
 /* ---------- scroll reveal ---------- */
