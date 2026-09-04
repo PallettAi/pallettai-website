@@ -2,6 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <!--
+    GitHub Pages cannot rewrite URLs, so it serves this file for ANY unknown
+    path — including pallettai.org/ref/CODE. This script detects that shape and
+    hands the code to ref.html (which understands the ?code= form).
+  -->
+  <script>
+    (function () {
+      var m = location.pathname.match(/\/ref\/([A-Za-z0-9-]+)/);
+      if (m) {
+        var base = location.pathname.split('/ref/')[0].replace(/\/+$/, '');
+        var code = m[1].toUpperCase().replace(/[^A-Z0-9]/g, '');
+        location.replace(base + '/ref.html?code=' + code);
+      }
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <meta name="theme-color" content="#0a0612" />
