@@ -5,7 +5,8 @@
 // Run:  node grader/server.mjs      → http://127.0.0.1:8787/grade?url=example.co.uk
 
 import http from 'node:http';
-import { normalizeUrl, isPublicHost, scoreFacts } from './worker.js';
+import dns from 'node:dns/promises';
+import { normalizeUrl, scoreFacts, hostnameResolvesPublic } from './worker.js';
 
 const PORT = 8787;
 const ALLOWED_ORIGINS = ['https://pallettai.org', 'http://127.0.0.1:8123', 'http://localhost:8123'];
@@ -35,6 +36,11 @@ function json(res, obj, status, origin) {
   res.end(JSON.stringify(obj));
 }
 
+async function nodeLookup(host) {
+  const recs = await dns.lookup(host, { all: true, verbatim: true });
+  return recs.map((r) => r.address);
+}
+
 // Same public-host guarantees as the Worker: manual redirects, each hop validated.
 async function fetchPublic(start, opts = {}) {
   let cur = start;
@@ -49,6 +55,7 @@ async function fetchPublic(start, opts = {}) {
       try { next = new URL(loc, cur); } catch { throw new Error('unparseable redirect Location'); }
       const clean = normalizeUrl(next.href);
       if (!clean) throw new Error('redirect to a non-public address was blocked');
+      if (!(await hostnameResolvesPublic(clean.hostname, nodeLookup))) throw new Error('redirect to a non-public address was blocked');
       cur = clean;
       continue;
     }
@@ -157,6 +164,12 @@ const hits = new Map();
 const WINDOW_MS = 60_000, MAX_PER_WINDOW = 20;
 function allow(ip) {
   const now = Date.now();
+  if (hits.size > 4000) {
+    for (const [k, rec] of hits) {
+      if (now - rec.t > WINDOW_MS) hits.delete(k);
+    }
+  }
+  if (hits.size > 8000 && !hits.has(ip)) return false;
   const rec = hits.get(ip) || { n: 0, t: now };
   if (now - rec.t > WINDOW_MS) { rec.n = 0; rec.t = now; }
   rec.n++;
@@ -173,6 +186,9 @@ const server = http.createServer(async (req, res) => {
 
   const target = normalizeUrl(u.searchParams.get('url'));
   if (!target) return json(res, { error: 'That doesn’t look like a public website address — try something like yourbusiness.co.uk.' }, 400, origin);
+  if (!(await hostnameResolvesPublic(target.hostname, nodeLookup))) {
+    return json(res, { error: 'That doesn’t look like a public website address — try something like yourbusiness.co.uk.' }, 400, origin);
+  }
 
   const ip = (req.socket.remoteAddress || 'anon').replace(/^::ffff:/, '');
   if (!allow(ip)) return json(res, { error: 'Too many checks — try again in a minute.' }, 429, origin);

@@ -62,8 +62,9 @@ Logs: `.freebuff/grader-dev.log` / `.freebuff/grader-dev.log.err` when started d
 
 ## Built-in guards
 
-- SSRF: private/loopback hostnames (`localhost`, `127.*`, `10.*`, `192.168.*`,
-  `172.16–31.*`, `169.254.*`, `.local`, `.internal`) are rejected.
+- SSRF: private/loopback literals are rejected, then the hostname is resolved
+  (DoH on the Worker, system DNS on the local harness) and any private A/AAAA
+  answer is blocked. Redirect hops are re-checked the same way.
 - 12-second fetch timeout; HTML parsing capped at ~1.5 MB.
 - Soft rate limit: 20 checks per IP per minute.
 - CORS restricted to the origins in `ALLOWED_ORIGINS`; GET only.

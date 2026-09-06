@@ -102,6 +102,30 @@ export function isPublicHost(host) {
          !/^(localhost|local|home)$/i.test(h);
 }
 
+export async function lookupHost(host) {
+  const query = async (type) => {
+    const r = await fetch('https://cloudflare-dns.com/dns-query?name=' + encodeURIComponent(host) + '&type=' + type, {
+      headers: { Accept: 'application/dns-json' },
+    });
+    if (!r.ok) return [];
+    const j = await r.json();
+    const want = type === 'A' ? 1 : 28;
+    return (j.Answer || []).filter((a) => a.type === want).map((a) => String(a.data || ''));
+  };
+  const [a, aaaa] = await Promise.all([query('A'), query('AAAA')]);
+  return a.concat(aaaa).filter(Boolean);
+}
+
+export async function hostnameResolvesPublic(host, lookupFn) {
+  if (!isPublicHost(host)) return false;
+  if (ipv4ToInt(host) !== null) return true;
+  if (String(host).includes(':')) return isPublicHost(host);
+  let addrs;
+  try { addrs = await (lookupFn || lookupHost)(host); } catch { return false; }
+  if (!Array.isArray(addrs) || !addrs.length) return false;
+  return addrs.every((addr) => isPublicHost(String(addr).replace(/^\[|\]$/g, '')));
+}
+
 export function normalizeUrl(input) {
   let raw = String(input || '').trim();
   if (!raw) return null;
@@ -312,6 +336,7 @@ async function fetchPublic(start, opts = {}) {
       try { next = new URL(loc, cur); } catch { throw new Error('unparseable redirect Location'); }
       const clean = normalizeUrl(next.href);
       if (!clean) throw new Error('redirect to a non-public address was blocked');
+      if (!(await hostnameResolvesPublic(clean.hostname))) throw new Error('redirect to a non-public address was blocked');
       cur = clean;
       continue;
     }
@@ -459,11 +484,16 @@ const hits = new Map();
 const WINDOW_MS = 60_000, MAX_PER_WINDOW = 20;
 function allow(ip) {
   const now = Date.now();
+  if (hits.size > 4000) {
+    for (const [k, rec] of hits) {
+      if (now - rec.t > WINDOW_MS) hits.delete(k);
+    }
+  }
+  if (hits.size > 8000 && !hits.has(ip)) return false;
   const rec = hits.get(ip) || { n: 0, t: now };
   if (now - rec.t > WINDOW_MS) { rec.n = 0; rec.t = now; }
   rec.n++;
   hits.set(ip, rec);
-  if (hits.size > 5000) hits.clear();
   return rec.n <= MAX_PER_WINDOW;
 }
 
@@ -477,6 +507,9 @@ export default {
 
     const target = normalizeUrl(u.searchParams.get('url'));
     if (!target) return json({ error: 'That doesn’t look like a public website address — try something like yourbusiness.co.uk.' }, 400, origin);
+    if (!(await hostnameResolvesPublic(target.hostname))) {
+      return json({ error: 'That doesn’t look like a public website address — try something like yourbusiness.co.uk.' }, 400, origin);
+    }
 
     const ip = request.headers.get('CF-Connecting-IP') || 'anon';
     if (!allow(ip)) return json({ error: 'Blimey, that’s a lot of checks — take a breath and try again in a minute.' }, 429, origin);
