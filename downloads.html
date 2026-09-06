@@ -346,6 +346,67 @@
     .dl-cta { width: 100%; margin: clamp(52px, 7vw, 80px) auto 0; }
     .dl-cta .cta-band { margin: 0; }
 
+    /* Downloads uses open bands and offset accents instead of stacked cards. */
+    .dl-release {
+      padding: clamp(22px, 4vw, 42px) 0 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+    .dl-release::before,
+    .dl-release::after { display: none; }
+    .dl-release-copy { padding: 0 clamp(4px, 1vw, 12px) 0 0; }
+    .dl-download {
+      border: 0;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.055);
+      box-shadow: inset 3px 0 0 rgba(194, 150, 255, 0.3);
+    }
+    .dl-download.primary {
+      background: linear-gradient(105deg, rgba(139, 92, 246, 0.88), rgba(91, 43, 179, 0.72));
+      box-shadow: inset 3px 0 0 #e0c7ff, 0 12px 32px rgba(91, 43, 179, 0.22);
+    }
+    .dl-download:hover { border: 0; box-shadow: inset 5px 0 0 var(--violet-soft), 0 12px 30px rgba(0, 0, 0, 0.22); }
+    .dl-download.primary:hover { box-shadow: inset 5px 0 0 #fff, 0 14px 36px rgba(91, 43, 179, 0.42); }
+    .dl-chip { border: 0; border-radius: 4px; background: rgba(255, 255, 255, 0.055); }
+    .dl-product-card {
+      min-height: 340px;
+      border: 0;
+      border-radius: 0;
+      border-left: 1px solid rgba(194, 150, 255, 0.42);
+      background: linear-gradient(145deg, rgba(9, 6, 19, 0.3), rgba(255, 255, 255, 0.045));
+      box-shadow: none;
+    }
+    .dl-product-card::before { opacity: 0.28; }
+    .dl-flow-step { border: 0; border-top: 1px solid rgba(255, 255, 255, 0.14); border-radius: 0; background: transparent; }
+    .dl-flow-step:nth-child(2) { border-color: rgba(194, 150, 255, 0.55); background: rgba(139, 92, 246, 0.1); }
+    .dl-product-foot { border-top: 1px solid rgba(255, 255, 255, 0.14); }
+    .dl-notice { border: 0; border-left: 3px solid rgba(252, 211, 77, 0.75); border-radius: 0; background: rgba(252, 211, 77, 0.07); }
+    .dl-req { gap: 26px; }
+    .dl-req-card {
+      min-height: 156px;
+      padding: 24px 4px 20px 20px;
+      border: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+    .dl-req-card::before { width: 120px; height: 120px; top: -74px; right: -36px; opacity: 0.2; }
+    .dl-req-card:nth-child(2) { transform: translateY(16px); }
+    .dl-req-card:nth-child(3) { transform: translateY(32px); }
+    .dl-req-card:hover { transform: translateY(-3px); border-color: rgba(255, 255, 255, 0.16); background: rgba(255, 255, 255, 0.035); box-shadow: none; }
+    .dl-req-card:nth-child(2):hover { transform: translateY(13px); }
+    .dl-req-card:nth-child(3):hover { transform: translateY(29px); }
+    .dl-req-card .ic { color: var(--violet-soft); }
+    .dl-win-card { border: 0; border-top: 1px solid rgba(110, 231, 160, 0.4); border-radius: 0; background: rgba(255, 255, 255, 0.035); }
+    .dl-win-form input[type="email"] { border: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.2); border-radius: 0; background: transparent; }
+    .dl-faq details { border: 0; border-top: 1px solid var(--line); border-radius: 0; background: transparent; }
+    .dl-faq details:last-child { border-bottom: 1px solid var(--line); }
+    .dl-faq details:hover,
+    .dl-faq details[open] { border-color: rgba(194, 150, 255, 0.45); background: rgba(255, 255, 255, 0.035); }
+
     @media (max-width: 900px) {
       .dl-release { grid-template-columns: 1fr; }
       .dl-product-card { min-height: 300px; }
@@ -363,7 +424,7 @@
       .dl-notice,
       .dl-details,
       .dl-cta { width: 100%; }
-      .dl-release { padding: 24px; gap: 28px; border-radius: 24px; }
+      .dl-release { padding: 24px 0 0; gap: 28px; }
       .dl-release-copy h2 { font-size: clamp(31px, 9vw, 43px); }
       .dl-product-card { min-height: 286px; padding: 21px; }
       .dl-product-title { margin-top: 42px; font-size: 31px; }
@@ -372,7 +433,9 @@
       .dl-flow-step b { margin-top: 10px; font-size: 12px; }
       .dl-flow-step small { font-size: 9.5px; }
       .dl-req { grid-template-columns: 1fr; margin-top: 30px; }
-      .dl-req-card { min-height: 0; }
+      .dl-req-card,
+      .dl-req-card:nth-child(2),
+      .dl-req-card:nth-child(3) { min-height: 0; transform: none; }
       .dl-details { margin-top: 54px; }
       .dl-info-grid { margin-top: 24px; }
       .dl-cta { margin-top: 54px; }
