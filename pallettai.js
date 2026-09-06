@@ -233,6 +233,22 @@
     });
   }
 
+  /* ---------------- conversion events (GoatCounter) ---------------- */
+  function gcEvent(name) {
+    if (!window.goatcounter || !window.goatcounter.count) return;
+    window.goatcounter.count({ path: name, event: true, title: name });
+  }
+  function initConversionEvents() {
+    // Download buttons on downloads.html (delegated — works regardless of layout)
+    document.addEventListener('click', function (e) {
+      var dl = e.target.closest('.dl-download');
+      if (dl) gcEvent(dl.classList.contains('primary') ? 'download-apple-silicon' : 'download-intel');
+    });
+    // Health-grader submissions on index.html
+    var gf = document.getElementById('grader-form');
+    if (gf) gf.addEventListener('submit', function () { gcEvent('grader-submit'); });
+  }
+
   injectNav();
   injectFooter();
   initReveal();
@@ -240,4 +256,5 @@
   initPageTransitions();
   initShimmer();
   initFaqA11y();
+  initConversionEvents();
 })();
