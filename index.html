@@ -21,8 +21,8 @@
   <title>Website Design & Development UK | PallettAi</title>
   <link rel="icon" type="image/svg+xml" href="signal-favicon.svg" />
   <link rel="apple-touch-icon" href="signal-favicon.svg" />
-  <link rel="stylesheet" href="pallettai.css?v=2" />
-  <script src="pallettai.js?v=3" defer></script>
+  <link rel="stylesheet" href="pallettai.css?v=3" />
+  <script src="pallettai.js?v=4" defer></script>
   <script data-goatcounter="https://pallettai.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   <noscript><img src="https://pallettai.goatcounter.com/count?p=/noscript" style="display:none" alt=""></noscript>
   <style>
@@ -194,6 +194,67 @@ h2 .grad { background: var(--grad-title); -webkit-background-clip: text; backgro
 .grader-report button:hover { transform: scale(1.03); box-shadow: 0 6px 24px rgba(139, 92, 246, 0.55); }
 .grader-report .rp-status { display: none; margin: 11px 0 0; font-size: 12.5px; color: var(--violet-soft); }
 @media (max-width: 560px) { .grader-report form { flex-direction: column; } .grader-report button { width: 100%; } }
+
+    /* ---------- competitor comparison ---------- */
+    .grader-vs { max-width: 620px; margin: 13px auto 0; }
+    .vs-toggle {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 0; border: 0; background: none; cursor: pointer;
+      font-family: inherit; font-size: 13px; font-weight: 600; color: var(--violet-soft);
+    }
+    .vs-toggle:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .vs-plus {
+      display: inline-grid; place-content: center;
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 1px solid rgba(194, 150, 255, 0.4);
+      font-size: 13px; line-height: 1;
+      transition: transform 0.35s var(--ease);
+    }
+    .vs-toggle[aria-expanded="true"] .vs-plus { transform: rotate(45deg); }
+    .vs-field { margin-top: 11px; animation: fade-in 0.4s var(--ease) both; }
+    .vs-field input {
+      width: 100%; padding: 13px 16px; font-size: 14.5px; font-family: inherit;
+      color: var(--ink); background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--line); border-radius: 13px; outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+    }
+    .vs-field input::placeholder { color: var(--faint); }
+    .vs-field input:focus { border-color: rgba(194, 150, 255, 0.6); background: rgba(255, 255, 255, 0.09); box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.18); }
+
+    .grader-compare { margin-top: 26px; }
+    .vs-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: clamp(12px, 2vw, 24px); align-items: stretch; }
+    .vs-col {
+      text-align: center; border-radius: 20px; padding: 20px 16px;
+      border: 1px solid var(--line); background: rgba(255, 255, 255, 0.04);
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .vs-col.win { border-color: rgba(110, 231, 160, 0.35); background: rgba(110, 231, 160, 0.06); }
+    .vs-col.lose { border-color: rgba(253, 164, 175, 0.3); }
+    .vs-tagline { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+    .vs-host { margin-top: 6px; font-size: 13px; font-weight: 600; color: var(--muted); overflow-wrap: anywhere; }
+    .vs-score { margin-top: 10px; font-size: clamp(38px, 6vw, 62px); font-weight: 800; letter-spacing: -0.05em; line-height: 1; background: var(--grad-ai); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .vs-of { font-size: 12px; color: var(--faint); }
+    .vs-col .grader-cats { margin-top: 14px; }
+    .vs-mid { align-self: center; font-size: 12px; font-weight: 800; letter-spacing: 0.12em; color: var(--faint); }
+    .vs-verdict { margin: 24px auto 0; max-width: 580px; text-align: center; font-size: 16px; line-height: 1.5; color: var(--muted); }
+    .vs-verdict b { color: var(--ink); }
+    .vs-gaps { margin-top: 24px; }
+    .vs-gaps h4, .grader-own-head { margin: 0; font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); text-align: center; }
+    .vs-gaps .grader-list { margin-top: 14px; }
+    @media (max-width: 620px) { .vs-grid { grid-template-columns: 1fr; } .vs-mid { justify-self: center; } }
+
+    /* In comparison mode the big single score is redundant — keep only the findings. */
+    .grader-own-head { display: none; }
+    .grader-result.compact { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); }
+    .grader-result.compact .grader-own-head { display: block; }
+    .grader-result.compact .grader-scorewrap,
+    .grader-result.compact > .grader-cats { display: none; }
+
+    /* ---------- report tools ---------- */
+    .grader-tools { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; margin: 16px auto 0; color: var(--faint); font-size: 12.5px; }
+    .grader-tools .tool { padding: 0; border: 0; background: none; cursor: pointer; font-family: inherit; font-size: 12.5px; font-weight: 600; color: var(--violet-soft); }
+    .grader-tools .tool:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .print-head { display: none; }
 .contact-box {
       border-radius: 26px; padding: clamp(38px, 5vw, 58px) clamp(20px, 4vw, 40px);
       text-align: center; position: relative; overflow: hidden;
@@ -230,8 +291,6 @@ h2 .grad { background: var(--grad-title); -webkit-background-clip: text; backgro
       .stats { grid-template-columns: repeat(2, 1fr); }
     }
 @media (max-width: 700px) {
-      .nav { margin-top: 10px; height: auto; flex-wrap: wrap; padding: 10px 12px; border-radius: 22px; gap: 8px; }
-      .nav-links { order: 3; width: 100%; justify-content: center; flex-wrap: wrap; }
       .hero h1 { font-size: clamp(56px, 16vw, 84px); }
       .actions { flex-direction: column; }
       .button { width: min(280px, 100%); justify-content: center; }
@@ -278,8 +337,38 @@ h2 .grad { background: var(--grad-title); -webkit-background-clip: text; backgro
     @media (max-width: 820px) { .roi-card { grid-template-columns: 1fr; } }
     /* ---- overrides of shared chrome ---- */
 footer { margin: 0 auto; }
+
+    /* ---------- print: the health report becomes a clean one-page PDF ---------- */
+    @media print {
+      @page { margin: 14mm; }
+      html, body { background: #fff !important; color: #191324 !important; }
+      .shell { background: none !important; }
+      .nav, footer, .orb, .hero, #stats, #features, #pricing, #roi, #contact,
+      #grader .section-head, .grader-form, .grader-vs, .grader-status, .grader-actions { display: none !important; }
+      .section { width: 100%; padding: 0; border-top: 0; }
+      .print-head {
+        display: flex !important; align-items: baseline; justify-content: space-between; gap: 14px;
+        padding-bottom: 10px; margin-bottom: 20px; border-bottom: 1px solid #d9d3e4;
+      }
+      .print-head .ph-brand { font-size: 19px; font-weight: 700; letter-spacing: -0.03em; }
+      .print-head .ph-brand .ai { color: #6d28d9; }
+      .print-head .ph-meta { font-size: 10.5px; color: #6b6478; }
+      .grader-box { padding: 0; border: 0; border-radius: 0; background: none !important; box-shadow: none; }
+      .grader-box::before { display: none !important; }
+      /* --faint is near-white: readable on the dark site, invisible on paper */
+      .vs-gaps h4, .grader-own-head, .vs-tagline { color: #6b6478 !important; }
+      /* gradient-filled text is invisible on paper — repaint it as solid ink */
+      .grader-score, .vs-score { background: none !important; color: #5b21b6 !important; -webkit-text-fill-color: #5b21b6; }
+      .grader-band, .grader-outof, .grader-list li, .vs-verdict, .vs-host, .vs-of { color: #3b3548 !important; }
+      .grader-list li strong, .vs-verdict b { color: #191324 !important; }
+      .grader-list .fix { color: #5b21b6 !important; }
+      .chip, .vs-col { color: #3b3548 !important; border-color: #cfc8db !important; background: #fff !important; }
+      .grader-list .pass .grader-mark, .grader-list .warn .grader-mark, .grader-list .fail .grader-mark { background: #f1eef7; color: #191324; }
+      .fade-up { opacity: 1 !important; transform: none !important; }
+      .grader-result, .grader-compare, .grader-list li { break-inside: avoid; }
+    }
   </style>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://formspree.io https://*.workers.dev https://pallettai.goatcounter.com http://127.0.0.1:8787; media-src 'self'; object-src 'none'; base-uri 'self'; form-action https://formspree.io; frame-src 'none'" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://formspree.io https://pallettai-grader.coreypallett20.workers.dev https://pallettai.goatcounter.com http://127.0.0.1:8787; media-src 'self'; object-src 'none'; base-uri 'self'; form-action https://formspree.io; frame-src 'none'" />
 </head>
 <body>
   <div class="shell">
@@ -361,21 +450,65 @@ footer { margin: 0 auto; }
       <section class="section hairline" id="grader" aria-label="Free website health check">
         <div class="section-head fade-up">
           <div><div class="kicker">Try it live</div><h2>Is your site<br /><span class="grad">holding you back?</span></h2></div>
-          <p class="section-note">Paste any web address — we measure speed, mobile, SEO and security basics in seconds, then show exactly what to fix.</p>
+          <p class="section-note">Paste any web address — we measure speed, mobile, SEO and security basics in seconds, then show exactly what to fix. Add a competitor to see how you compare.</p>
         </div>
         <div class="grader-box fade-up" style="--d:.08s">
+          <!-- print-only letterhead so a saved PDF still says who wrote it -->
+          <div class="print-head" aria-hidden="true">
+            <div class="ph-brand"><span class="pallett">Pallett</span><span class="ai">Ai</span></div>
+            <div class="ph-meta">Free website health report · pallettai.org · pallettai@proton.me</div>
+          </div>
           <form class="grader-form" id="grader-form">
             <input id="grader-url" type="text" inputmode="url" autocomplete="off" placeholder="yourbusiness.co.uk" aria-label="Website address to check" />
             <button class="button primary" type="submit">Run free check</button>
           </form>
-          <p class="grader-status" id="grader-status">No sign-up, no email — your report appears right here.</p>
+          <div class="grader-vs">
+            <button class="vs-toggle" type="button" id="vs-toggle" aria-expanded="false" aria-controls="vs-field"><span class="vs-plus" aria-hidden="true">+</span> Compare with a competitor</button>
+            <div class="vs-field" id="vs-field" hidden>
+              <input id="grader-rival" type="text" inputmode="url" autocomplete="off" placeholder="theircompany.co.uk" aria-label="Competitor website address to compare against" />
+            </div>
+          </div>
+          <p class="grader-status" id="grader-status" role="status" aria-live="polite">No sign-up, no email — your report appears right here.</p>
+
+          <div class="grader-compare" id="grader-compare" hidden>
+            <div class="vs-grid">
+              <div class="vs-col" id="vs-col-a">
+                <div class="vs-tagline">Your site</div>
+                <div class="vs-host" id="vs-host-a"></div>
+                <div class="vs-score" id="vs-score-a">0</div>
+                <div class="vs-of">out of 100</div>
+                <div class="grader-cats" id="vs-cats-a"></div>
+              </div>
+              <div class="vs-mid" aria-hidden="true"><span>VS</span></div>
+              <div class="vs-col" id="vs-col-b">
+                <div class="vs-tagline">Their site</div>
+                <div class="vs-host" id="vs-host-b"></div>
+                <div class="vs-score" id="vs-score-b">0</div>
+                <div class="vs-of">out of 100</div>
+                <div class="grader-cats" id="vs-cats-b"></div>
+              </div>
+            </div>
+            <p class="vs-verdict" id="vs-verdict"></p>
+            <div class="vs-gaps" id="vs-gaps"></div>
+          </div>
+
           <div class="grader-result" id="grader-result" hidden>
+            <h4 class="grader-own-head">Your full findings</h4>
             <div class="grader-scorewrap"><span class="grader-score" id="grader-score">0</span><span class="grader-outof">/100</span><div class="grader-band" id="grader-band"></div></div>
             <div class="grader-cats" id="grader-cats"></div>
             <ul class="grader-list" id="grader-list"></ul>
+          </div>
+
+          <div class="grader-actions" id="grader-actions" hidden>
             <div class="grader-cta">
               <a class="button primary" id="grader-cta" href="#contact">Let us fix it <span aria-hidden="true">↗</span></a>
-              <button class="button ghost" type="button" id="grader-email-toggle">Email me this report <span class="arr" aria-hidden="true">→</span></button>
+            </div>
+            <div class="grader-tools">
+              <button class="tool" type="button" id="grader-copy">Copy report link</button>
+              <span aria-hidden="true">·</span>
+              <button class="tool" type="button" id="grader-print">Save as PDF</button>
+              <span aria-hidden="true">·</span>
+              <button class="tool" type="button" id="grader-email-toggle">Email me this report</button>
             </div>
             <div class="grader-report" id="grader-report" aria-live="polite">
               <div class="rp-title">Send the full report to your inbox</div>
@@ -508,81 +641,265 @@ footer { margin: 0 auto; }
 
       var form = document.getElementById('grader-form');
       var input = document.getElementById('grader-url');
+      var rival = document.getElementById('grader-rival');
+      var vsToggle = document.getElementById('vs-toggle');
+      var vsField = document.getElementById('vs-field');
       var statusEl = document.getElementById('grader-status');
       var resultEl = document.getElementById('grader-result');
-      var lastReport = null;
+      var compareEl = document.getElementById('grader-compare');
+      var actionsEl = document.getElementById('grader-actions');
+      var ctaEl = document.getElementById('grader-cta');
+      var lastReport = null;  // the visitor's own site
+      var lastRival = null;   // the competitor, when comparing
 
-      input.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') { e.preventDefault(); if (form.requestSubmit) form.requestSubmit(); else form.dispatchEvent(new Event('submit', { cancelable: true })); }
-      });
-
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var raw = input.value.trim();
-        if (!raw) { statusEl.textContent = 'Pop in a web address first — e.g. yourbusiness.co.uk.'; return; }
-        var candidate = /^[a-z][a-z0-9+.-]*:\/\//i.test(raw) ? raw : 'https://' + raw;
-        var target;
-        try { target = new URL(candidate); } catch (err) { statusEl.textContent = "That doesn't look like a web address — try something like yourbusiness.co.uk."; return; }
-        if (target.protocol !== 'http:' && target.protocol !== 'https:') { statusEl.textContent = 'Only http(s) web addresses can be checked.'; return; }
-
-        resultEl.hidden = true;
-        statusEl.classList.add('busy');
-        statusEl.textContent = 'Checking ' + target.hostname + ' — measuring speed, mobile, SEO and security';
-        fetch(GRADER_API + '/grade?url=' + encodeURIComponent(target.href))
-          .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
-          .then(function (res) {
-            statusEl.classList.remove('busy');
-            if (!res.ok) { statusEl.textContent = (res.j && res.j.error) ? res.j.error : 'Something went wrong — try again in a moment.'; return; }
-            render(res.j);
-            statusEl.textContent = 'Report for ' + (res.j.url || target.hostname) + ' — share it, or let us do the fixing.';
-          })
-          .catch(function () {
-            statusEl.classList.remove('busy');
-            statusEl.textContent = 'The grader service is warming up — try again shortly, or email pallettai@proton.me.';
-          });
-      });
+      var RANK = { fail: 0, warn: 1, pass: 2 };
 
       function esc(s) { var d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
 
-      function render(j) {
-        lastReport = j;
-        document.getElementById('grader-score').textContent = j.score;
-        document.getElementById('grader-band').textContent = j.band || '';
-        var cats = document.getElementById('grader-cats');
-        cats.innerHTML = '';
-        Object.keys(j.categories || {}).forEach(function (name) {
-          var c = j.categories[name];
+      // "yourbusiness.co.uk", "https://x.com/path" → URL, or null if unusable.
+      function normalize(raw) {
+        var v = (raw || '').trim();
+        if (!v) return null;
+        var candidate = /^[a-z][a-z0-9+.-]*:\/\//i.test(v) ? v : 'https://' + v;
+        var u;
+        try { u = new URL(candidate); } catch (err) { return null; }
+        if (u.protocol !== 'http:' && u.protocol !== 'https:') return null;
+        if (!u.hostname || u.hostname.indexOf('.') === -1) return null;
+        return u;
+      }
+
+      function shortForm(u) { return u.hostname + (u.pathname && u.pathname !== '/' ? u.pathname : ''); }
+      function hostOf(report, fallback) {
+        var u = normalize(report && report.url);
+        return u ? u.hostname : fallback.hostname;
+      }
+
+      function setVsOpen(open) {
+        vsField.hidden = !open;
+        vsToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      function vsIsOpen() { return vsToggle.getAttribute('aria-expanded') === 'true'; }
+
+      vsToggle.addEventListener('click', function () {
+        var open = !vsIsOpen();
+        setVsOpen(open);
+        if (open) rival.focus();
+      });
+
+      [input, rival].forEach(function (el) {
+        el.addEventListener('keydown', function (e) {
+          if (e.key !== 'Enter') return;
+          e.preventDefault();
+          if (form.requestSubmit) form.requestSubmit();
+          else form.dispatchEvent(new Event('submit', { cancelable: true }));
+        });
+      });
+
+      function grade(href) {
+        return fetch(GRADER_API + '/grade?url=' + encodeURIComponent(href)).then(function (r) {
+          return r.text().then(function (body) {
+            var j = null;
+            try { j = JSON.parse(body); } catch (err) { /* non-JSON — treat as failure below */ }
+            if (!r.ok || !j) throw new Error((j && j.error) || 'The grader could not read that site — check the address and try again.');
+            return j;
+          });
+        });
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!input.value.trim()) { statusEl.textContent = 'Pop in a web address first — e.g. yourbusiness.co.uk.'; return; }
+        var mine = normalize(input.value);
+        if (!mine) { statusEl.textContent = "That doesn't look like a web address — try something like yourbusiness.co.uk."; return; }
+        var theirs = null;
+        if (vsIsOpen() && rival.value.trim()) {
+          theirs = normalize(rival.value);
+          if (!theirs) { statusEl.textContent = "The competitor's address doesn't look right — try something like theircompany.co.uk."; return; }
+        }
+        run(mine, theirs);
+      });
+
+      function run(mine, theirs) {
+        resultEl.hidden = true;
+        compareEl.hidden = true;
+        actionsEl.hidden = true;
+        statusEl.classList.add('busy');
+        statusEl.textContent = theirs
+          ? 'Checking ' + mine.hostname + ' against ' + theirs.hostname
+          : 'Checking ' + mine.hostname + ' — measuring speed, mobile, SEO and security';
+
+        var jobs = [grade(mine.href)];
+        if (theirs) jobs.push(grade(theirs.href));
+
+        Promise.all(jobs).then(function (reports) {
+          statusEl.classList.remove('busy');
+          lastReport = reports[0];
+          lastRival = reports[1] || null;
+          renderFindings(lastReport);
+          if (lastRival) {
+            renderCompare(lastReport, lastRival, mine, theirs);
+            resultEl.classList.add('compact');
+            statusEl.textContent = hostOf(lastReport, mine) + ' vs ' + hostOf(lastRival, theirs) + ' — share this report, or let us close the gap.';
+          } else {
+            compareEl.hidden = true;
+            resultEl.classList.remove('compact');
+            statusEl.textContent = 'Report for ' + hostOf(lastReport, mine) + ' — share it, or let us do the fixing.';
+          }
+          resultEl.hidden = false;
+          actionsEl.hidden = false;
+          ctaEl.innerHTML = (lastRival ? 'Let us close the gap ' : 'Let us fix it ') + '<span aria-hidden="true">↗</span>';
+          syncLink(mine, theirs);
+        }).catch(function (err) {
+          statusEl.classList.remove('busy');
+          statusEl.textContent = (err && err.message)
+            ? err.message
+            : 'The grader service is warming up — try again shortly, or email pallettai@proton.me.';
+        });
+      }
+
+      function renderChips(target, report) {
+        target.innerHTML = '';
+        Object.keys(report.categories || {}).forEach(function (name) {
+          var c = report.categories[name];
           var pct = c.max ? c.got / c.max : 1;
           var span = document.createElement('span');
           span.className = 'chip ' + (pct >= 0.85 ? 'pass' : pct >= 0.5 ? 'warn' : 'fail');
           span.textContent = name + ' ' + c.got + '/' + c.max;
-          cats.appendChild(span);
+          target.appendChild(span);
         });
-        var list = document.getElementById('grader-list');
-        list.innerHTML = '';
-        (j.checks || []).forEach(function (c) {
-          var li = document.createElement('li');
-          li.className = c.status;
-          var mark = document.createElement('span');
-          mark.className = 'grader-mark';
-          mark.textContent = c.status === 'pass' ? '✓' : c.status === 'warn' ? '!' : '✕';
-          var body = document.createElement('div');
-          var line = document.createElement('div');
-          line.innerHTML = '<strong>' + esc(c.label) + '.</strong> ' + esc(c.detail);
-          body.appendChild(line);
-          if (c.fix) { var fix = document.createElement('span'); fix.className = 'fix'; fix.textContent = 'Our fix: ' + c.fix; body.appendChild(fix); }
-          li.appendChild(mark); li.appendChild(body);
-          list.appendChild(li);
-        });
-        resultEl.hidden = false;
       }
 
-      document.getElementById('grader-cta').addEventListener('click', function () {
+      function checkItem(check, fixPrefix) {
+        var li = document.createElement('li');
+        li.className = check.status;
+        var mark = document.createElement('span');
+        mark.className = 'grader-mark';
+        mark.textContent = check.status === 'pass' ? '✓' : check.status === 'warn' ? '!' : '✕';
+        var body = document.createElement('div');
+        var line = document.createElement('div');
+        line.innerHTML = '<strong>' + esc(check.label) + '.</strong> ' + esc(check.detail);
+        body.appendChild(line);
+        if (check.fix) {
+          var fix = document.createElement('span');
+          fix.className = 'fix';
+          fix.textContent = (fixPrefix || 'Our fix: ') + check.fix;
+          body.appendChild(fix);
+        }
+        li.appendChild(mark);
+        li.appendChild(body);
+        return li;
+      }
+
+      function renderFindings(report) {
+        document.getElementById('grader-score').textContent = report.score;
+        document.getElementById('grader-band').textContent = report.band || '';
+        renderChips(document.getElementById('grader-cats'), report);
+        var list = document.getElementById('grader-list');
+        list.innerHTML = '';
+        (report.checks || []).forEach(function (c) { list.appendChild(checkItem(c)); });
+      }
+
+      function renderCompare(a, b, mineUrl, theirsUrl) {
+        var hostA = hostOf(a, mineUrl);
+        var hostB = hostOf(b, theirsUrl);
+        document.getElementById('vs-host-a').textContent = hostA;
+        document.getElementById('vs-host-b').textContent = hostB;
+        document.getElementById('vs-score-a').textContent = a.score;
+        document.getElementById('vs-score-b').textContent = b.score;
+        renderChips(document.getElementById('vs-cats-a'), a);
+        renderChips(document.getElementById('vs-cats-b'), b);
+
+        var colA = document.getElementById('vs-col-a');
+        var colB = document.getElementById('vs-col-b');
+        colA.className = 'vs-col' + (a.score > b.score ? ' win' : a.score < b.score ? ' lose' : '');
+        colB.className = 'vs-col' + (b.score > a.score ? ' win' : b.score < a.score ? ' lose' : '');
+
+        var diff = a.score - b.score;
+        var verdict = document.getElementById('vs-verdict');
+        if (diff > 0) {
+          verdict.innerHTML = 'You are <b>' + diff + ' point' + (diff === 1 ? '' : 's') + ' ahead</b> of ' + esc(hostB) + '. Here is where they still have the edge.';
+        } else if (diff < 0) {
+          verdict.innerHTML = esc(hostB) + ' is <b>' + (-diff) + ' point' + (diff === -1 ? '' : 's') + ' ahead</b> of you. Here is exactly what they get right that you do not.';
+        } else {
+          verdict.innerHTML = 'Dead heat — <b>' + a.score + ' each</b>. These are the checks where you differ.';
+        }
+
+        // Only the checks where they genuinely score better than you.
+        var theirsByLabel = {};
+        (b.checks || []).forEach(function (c) { theirsByLabel[c.label] = c; });
+        var behind = (a.checks || []).filter(function (c) {
+          var t = theirsByLabel[c.label];
+          return t && RANK[t.status] > RANK[c.status];
+        });
+
+        var gaps = document.getElementById('vs-gaps');
+        gaps.innerHTML = '';
+        var head = document.createElement('h4');
+        if (!behind.length) {
+          head.textContent = 'Nothing they do better than you';
+          gaps.appendChild(head);
+        } else {
+          head.textContent = 'What ' + hostB + ' gets right that you do not';
+          gaps.appendChild(head);
+          var ul = document.createElement('ul');
+          ul.className = 'grader-list';
+          behind.forEach(function (c) { ul.appendChild(checkItem(c, 'They pass this. Our fix: ')); });
+          gaps.appendChild(ul);
+        }
+        compareEl.hidden = false;
+      }
+
+      /* ---- shareable link ---- */
+      function syncLink(mine, theirs) {
+        if (!history.replaceState) return;
+        var q = '?check=' + encodeURIComponent(shortForm(mine));
+        if (theirs) q += '&vs=' + encodeURIComponent(shortForm(theirs));
+        history.replaceState(null, '', location.pathname + q + '#grader');
+      }
+
+      function legacyCopy(text) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '-1000px';
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+        document.body.removeChild(ta);
+        return ok;
+      }
+
+      document.getElementById('grader-copy').addEventListener('click', function () {
+        var btn = this;
+        var original = 'Copy report link';
+        var say = function (msg) {
+          btn.textContent = msg;
+          setTimeout(function () { btn.textContent = original; }, 2200);
+        };
+        var url = location.href;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(
+            function () { say('Link copied'); },
+            function () { say(legacyCopy(url) ? 'Link copied' : 'Copy from the address bar'); }
+          );
+        } else {
+          say(legacyCopy(url) ? 'Link copied' : 'Copy from the address bar');
+        }
+      });
+
+      document.getElementById('grader-print').addEventListener('click', function () { window.print(); });
+
+      ctaEl.addEventListener('click', function () {
         if (!lastReport) return;
+        var ta = document.getElementById('cf-details');
+        if (!ta) return;
         var issues = (lastReport.checks || []).filter(function (c) { return c.status !== 'pass'; }).slice(0, 3)
           .map(function (c, i) { return (i + 1) + ') ' + c.label; }).join(' ');
-        var ta = document.getElementById('cf-details');
-        if (ta) ta.value = 'My site (' + (lastReport.url || '') + ') scored ' + lastReport.score + '/100 on your free health check. Main issues: ' + issues + '. Please quote me to put it right.';
+        var msg = 'My site (' + (lastReport.url || '') + ') scored ' + lastReport.score + '/100 on your free health check.';
+        if (lastRival) msg += ' My competitor (' + (lastRival.url || '') + ') scored ' + lastRival.score + '/100.';
+        ta.value = msg + ' Main issues: ' + issues + '. Please quote me to put it right.';
       });
 
       // email-me-this-report lead capture
@@ -608,8 +925,12 @@ footer { margin: 0 auto; }
           var issues = (lastReport.checks || []).filter(function (c) { return c.status !== 'pass' && c.fix; })
             .map(function (c) { return '- ' + c.label + ': ' + c.detail + (c.fix ? ' Fix: ' + c.fix : ''); }).join('\n');
           var body = 'Health check report for ' + (lastReport.url || '(unknown URL)') + '\n' +
-            'Score: ' + lastReport.score + '/100' + (lastReport.band ? ' — ' + lastReport.band : '') + '\n\n' +
-            'Findings:\n' + (issues || 'No issues found — a clean bill of health.') + '\n\n' +
+            'Score: ' + lastReport.score + '/100' + (lastReport.band ? ' — ' + lastReport.band : '') + '\n';
+          if (lastRival) {
+            body += 'Compared against: ' + (lastRival.url || '') + ' — ' + lastRival.score + '/100\n';
+          }
+          body += '\nFindings:\n' + (issues || 'No issues found — a clean bill of health.') + '\n\n' +
+            'Report link: ' + location.href + '\n\n' +
             '(Requested by ' + email + ' via the free health check on pallettai.org)';
 
           var fd = new FormData();
@@ -639,6 +960,26 @@ footer { margin: 0 auto; }
             })
             .finally(function () { btn.disabled = false; btn.textContent = 'Send report'; });
         });
+      })();
+
+      /* ---- arriving on a shared report link: ?check=site.co.uk[&vs=rival.co.uk] ---- */
+      (function () {
+        if (!('URLSearchParams' in window)) return;
+        var params = new URLSearchParams(location.search);
+        var check = params.get('check');
+        if (!check) return;
+        var mine = normalize(check);
+        if (!mine) return;
+        input.value = check;
+        var vs = params.get('vs');
+        var theirs = vs ? normalize(vs) : null;
+        if (theirs) { setVsOpen(true); rival.value = vs; }
+        run(mine, theirs);
+        // Land the visitor on the report itself, not the top of the page.
+        setTimeout(function () {
+          var section = document.getElementById('grader');
+          if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 80);
       })();
     })();
 
@@ -671,7 +1012,8 @@ footer { margin: 0 auto; }
       if (stored && typeof stored.score === 'number' && Date.now() - stored.t < 600000) {
         settle(stored.score, stored.band || band.textContent);
       } else {
-        fetch(API + '/grade?url=' + encodeURIComponent('https://pallettai.org'))
+        // Let the initial page render settle before refreshing the non-critical live score.
+        var refresh = function () { return fetch(API + '/grade?url=' + encodeURIComponent('https://pallettai.org'))
           .then(function (r) { return r.json(); })
           .then(function (j) {
             if (j && typeof j.score === 'number') {
@@ -679,7 +1021,9 @@ footer { margin: 0 auto; }
               settle(j.score, j.band || band.textContent);
             }
           })
-          .catch(function () { /* keep the static 100 — offline-safe */ });
+          .catch(function () { /* keep the static 100 — offline-safe */ }); };
+        if ('requestIdleCallback' in window) requestIdleCallback(refresh, { timeout: 1500 });
+        else setTimeout(refresh, 1000);
       }
     })();
 

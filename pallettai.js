@@ -18,6 +18,7 @@
         ['portfolio.html', 'Showcase', 'page'],
         ['live.html', 'Live', 'page'],
         ['downloads.html', 'Download', 'page'],
+        ['changelog.html', 'Changelog', 'page'],
         ['pricing.html', 'Pricing', 'page']
       ]
     },
@@ -31,6 +32,7 @@
         ['portfolio.html', 'Showcase', 'page'],
         ['live.html', 'Live', 'page'],
         ['downloads.html', 'Download', 'page'],
+        ['changelog.html', 'Changelog', 'page'],
         ['pricing.html', 'Pricing', 'page']
       ]
     },
@@ -44,6 +46,7 @@
         ['portfolio.html', 'Showcase', 'page'],
         ['live.html', 'Live', 'page'],
         ['downloads.html', 'Download', 'page'],
+        ['changelog.html', 'Changelog', 'page'],
         ['pricing.html', 'Pricing', 'page']
       ]
     },
@@ -57,6 +60,7 @@
         ['portfolio.html', 'Showcase', 'page'],
         ['live.html', 'Live', 'page'],
         ['downloads.html', 'Download', 'page'],
+        ['changelog.html', 'Changelog', 'page'],
         ['pricing.html', 'Pricing', 'page']
       ]
     },
@@ -70,6 +74,7 @@
         ['portfolio.html', 'Showcase', 'page'],
         ['live.html', 'Live', 'page'],
         ['downloads.html', 'Download', 'page'],
+        ['changelog.html', 'Changelog', 'page'],
         ['pricing.html', 'Pricing', 'page']
       ]
     },
@@ -83,6 +88,7 @@
         ['portfolio.html', 'Showcase', 'page'],
         ['live.html', 'Live', 'page'],
         ['downloads.html', 'Download', 'page'],
+        ['changelog.html', 'Changelog', 'page'],
         ['pricing.html', 'Pricing', 'page']
       ]
     },
@@ -96,6 +102,21 @@
         ['portfolio.html', 'Showcase', 'page'],
         ['live.html', 'Live', 'page'],
         ['downloads.html', 'Download', 'page'],
+        ['changelog.html', 'Changelog', 'page'],
+        ['pricing.html', 'Pricing', 'page']
+      ]
+    },
+    changelog: {
+      brand: 'index.html',
+      here: 'changelog.html',
+      cta: ['index.html#contact', 'Let\'s talk', 'page'],
+      links: [
+        ['index.html#features', 'Product', 'page'],
+        ['index.html#grader', 'Features', 'page'],
+        ['portfolio.html', 'Showcase', 'page'],
+        ['live.html', 'Live', 'page'],
+        ['downloads.html', 'Download', 'page'],
+        ['changelog.html', 'Changelog', 'page'],
         ['pricing.html', 'Pricing', 'page']
       ]
     }
@@ -119,6 +140,7 @@
 
     var links = document.createElement('div');
     links.className = 'nav-links';
+    links.id = 'nav-links';
     cfg.links.forEach(function (l) {
       var a = document.createElement('a');
       a.href = l[0];
@@ -132,11 +154,53 @@
     });
     nav.appendChild(links);
 
+    var end = document.createElement('div');
+    end.className = 'nav-end';
+
     var cta = document.createElement('a');
     cta.href = cfg.cta[0];
     cta.textContent = cfg.cta[1];
     cta.className = 'nav-cta' + (cfg.cta[2] === 'page' ? ' pagelink' : '');
-    nav.appendChild(cta);
+    end.appendChild(cta);
+
+    var toggle = document.createElement('button');
+    toggle.className = 'nav-toggle';
+    toggle.type = 'button';
+    toggle.setAttribute('aria-label', 'Menu');
+    toggle.setAttribute('aria-controls', 'nav-links');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.innerHTML = '<span></span><span></span><span></span>';
+    end.appendChild(toggle);
+
+    nav.appendChild(end);
+    initNavMenu(nav, toggle);
+  }
+
+  /* ---------------- collapsible nav on small screens ---------------- */
+  function initNavMenu(nav, toggle) {
+    function setOpen(open) {
+      nav.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    toggle.addEventListener('click', function () {
+      setOpen(!nav.classList.contains('open'));
+    });
+    // Any nav link closes the panel — including same-page anchors, which don't
+    // trigger a page load and would otherwise leave the menu hanging open.
+    nav.querySelectorAll('.nav-links a, .nav-cta').forEach(function (a) {
+      a.addEventListener('click', function () { setOpen(false); });
+    });
+    document.addEventListener('click', function (e) {
+      if (nav.classList.contains('open') && !nav.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('open')) { setOpen(false); toggle.focus(); }
+    });
+    // Rotating a phone to landscape can cross the breakpoint while the panel is
+    // open, which would leave `.open` styling on a nav that is no longer collapsed.
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 700) setOpen(false);
+    });
   }
 
   /* ---------------- shared footer (injected) ---------------- */
