@@ -306,6 +306,43 @@
     .dl-faq li::before { content: "◆"; flex-shrink: 0; margin-top: 6px; color: var(--violet-soft); font-size: 8px; }
     .dl-faq .install-copy { margin: 0; padding: 0 0 21px; color: var(--muted); font-size: 13.5px; line-height: 1.65; }
 
+    .dl-win { width: 100%; margin: clamp(34px, 5vw, 54px) auto 0; }
+    .dl-win-card {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 34px;
+      align-items: center;
+      padding: clamp(26px, 4vw, 44px);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--glass);
+    }
+    .dl-win-card::before { content: ""; position: absolute; width: 220px; height: 220px; top: -110px; left: -60px; border-radius: 50%; filter: blur(46px); opacity: 0.35; background: #178a72; pointer-events: none; }
+    .dl-win-card > * { position: relative; z-index: 1; }
+    .dl-win-copy h2 { margin: 10px 0 0; font-size: clamp(26px, 3.6vw, 38px); line-height: 1.06; letter-spacing: -0.035em; }
+    .dl-win-copy p { margin: 14px 0 0; max-width: 420px; color: var(--muted); font-size: 13.5px; line-height: 1.6; }
+    .dl-win-form { display: flex; flex-direction: column; gap: 11px; }
+    .dl-win-form input[type="email"] {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .dl-win-form input[type="email"]:focus { border-color: rgba(194, 150, 255, 0.5); background: rgba(255, 255, 255, 0.08); }
+    .dl-win-form .button { justify-content: center; }
+    .dl-win-status { display: none; margin: 0; font-size: 13px; }
+    .dl-win-status.ok { display: block; color: #6ee7a0; }
+    .dl-win-status.err { display: block; color: #fda4af; }
+    .dl-win-note { margin: 0; color: var(--faint); font-size: 11.5px; }
+
     .dl-cta { width: 100%; margin: clamp(52px, 7vw, 80px) auto 0; }
     .dl-cta .cta-band { margin: 0; }
 
@@ -313,6 +350,7 @@
       .dl-release { grid-template-columns: 1fr; }
       .dl-product-card { min-height: 300px; }
       .dl-info-grid { grid-template-columns: 1fr; max-width: 700px; }
+      .dl-win-card { grid-template-columns: 1fr; gap: 24px; }
     }
     @media (max-width: 700px) {
       .shell { width: calc(100% - 40px); }
@@ -360,17 +398,17 @@
 
       <section class="dl-release fade-up" style="--d:.22s" aria-label="Download PallettAi Studio">
         <div class="dl-release-copy">
-          <div class="dl-release-label"><span class="live-dot"></span> Latest release <strong>v0.3.6</strong></div>
+          <div class="dl-release-label"><span class="live-dot"></span> Latest release <strong>v0.3.7</strong></div>
           <h2>From first brief<br /><span class="grad">to live site.</span></h2>
           <p>Studio turns a rough idea into a polished, functioning website — with real content, deliberate design, and the tools to take it all the way to launch.</p>
 
           <div class="dl-download-list">
-            <a class="dl-download primary" href="https://github.com/PallettAi/pallettai-website/releases/latest/download/PallettAI-Studio-mac-arm64.dmg">
+            <a class="dl-download primary" href="https://github.com/PallettAi/PallettAI-Studio/releases/latest/download/PallettAI-Studio-mac-arm64.dmg">
               <span class="dl-download-icon" aria-hidden="true"></span>
               <span class="dl-download-copy"><b>Apple Silicon</b><small>Download for M1, M2, M3 &amp; M4 Macs</small></span>
               <span class="dl-download-arrow" aria-hidden="true">↗</span>
             </a>
-            <a class="dl-download" href="https://github.com/PallettAi/pallettai-website/releases/latest/download/PallettAI-Studio-mac-x64.dmg">
+            <a class="dl-download" href="https://github.com/PallettAi/PallettAI-Studio/releases/latest/download/PallettAI-Studio-mac-x64.dmg">
               <span class="dl-download-icon" aria-hidden="true">⌘</span>
               <span class="dl-download-copy"><b>Intel Mac</b><small>Download for Intel-based Macs</small></span>
               <span class="dl-download-arrow" aria-hidden="true">↗</span>
@@ -392,7 +430,7 @@
             <div class="dl-flow-step"><span>02</span><b>Build</b><small>Make it real</small></div>
             <div class="dl-flow-step"><span>03</span><b>Launch</b><small>Ship with confidence</small></div>
           </div>
-          <div class="dl-product-foot"><span>Current build <b>0.3.6</b></span><span>Made for Mac <b></b></span></div>
+          <div class="dl-product-foot"><span>Current build <b>0.3.7</b></span><span>Made for Mac <b></b></span></div>
         </div>
       </section>
 
@@ -404,6 +442,24 @@
         <div class="dl-req-card fade-up" style="--d:.16s"><span class="ic">↻</span><b>Auto-updates included</b><span>New versions download and install automatically</span></div>
       </section>
 
+      <section class="dl-win" aria-label="Windows version waitlist">
+        <div class="dl-win-card fade-up">
+          <div class="dl-win-copy">
+            <div class="eyebrow"><span class="dot"></span> Coming soon</div>
+            <h2>On Windows?<br /><span class="grad">Get told first.</span></h2>
+            <p>Studio is Mac-only today, but a Windows build is on the roadmap. Join the waitlist and you'll be first in line the day it ships.</p>
+          </div>
+          <form id="win-waitlist" class="dl-win-form" action="https://formspree.io/f/xgaeoapw" method="POST" onsubmit="return submitWaitlist(event)">
+            <input type="email" name="email" required placeholder="you@studio.com" aria-label="Your email address" autocomplete="email" />
+            <input type="hidden" name="_subject" value="Windows waitlist — new signup" />
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" aria-hidden="true" />
+            <button type="submit" class="button primary">Join the waitlist <span aria-hidden="true">↗</span></button>
+            <p class="dl-win-status" role="status" aria-live="polite"></p>
+            <p class="dl-win-note">No spam — one email when the Windows build is ready, nothing else.</p>
+          </form>
+        </div>
+      </section>
+
       <section class="dl-details" aria-label="Release notes and install guide">
         <div class="dl-details-head fade-up">
           <div class="kicker">Everything in the box</div>
@@ -412,7 +468,7 @@
         </div>
         <div class="dl-info-grid dl-faq fade-up" style="--d:.08s">
           <details open>
-            <summary><span><span class="ver">v0.3.6</span> — What's new in Studio</span><span class="plus" aria-hidden="true">+</span></summary>
+            <summary><span><span class="ver">v0.3.7</span> — What's new in Studio</span><span class="plus" aria-hidden="true">+</span></summary>
             <ul>
               <li>Collection &amp; table sections — filterable galleries and comparison tables in one click</li>
               <li>Deep SEO engine on every export — schema.org JSON-LD, FAQ rich results, sitemap.xml</li>
@@ -420,6 +476,7 @@
               <li>Referral program — 30 days of Pro free for friends, 7 days for you</li>
               <li>Cloud registry — sign in once, your plan and rewards follow you across devices</li>
             </ul>
+            <p class="install-copy"><a href="https://github.com/PallettAi/PallettAI-Studio/blob/v0.3.7/README.md" target="_blank" rel="noopener">Read the v0.3.7 README</a> · <a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.3.7" target="_blank" rel="noopener">View the v0.3.7 changenotes</a></p>
           </details>
           <details>
             <summary><span>Install notes — Mac</span><span class="plus" aria-hidden="true">+</span></summary>
@@ -443,5 +500,47 @@
 
     <footer id="site-footer"></footer>
   </div>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PallettAi Studio",
+    "operatingSystem": "macOS",
+    "applicationCategory": "DesignApplication",
+    "description": "Design and build fully functioning, animated websites with AI — from first brief to live export. Free to start on Mac.",
+    "url": "https://pallettai.org/downloads",
+    "downloadUrl": "https://github.com/PallettAi/PallettAI-Studio/releases/latest/download/PallettAI-Studio-mac-arm64.dmg",
+    "softwareVersion": "0.3.7",
+    "author": { "@type": "Organization", "name": "PallettAi", "url": "https://pallettai.org/" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" },
+    "featureList": [
+      "AI website builder — brief to full site",
+      "Live visual editor with animated sections",
+      "SEO engine on every export (JSON-LD, FAQ rich results, sitemap.xml)",
+      "Launch-grade audit with plain-English fix hints",
+      "Cloud sync — plan and projects follow you across devices"
+    ]
+  }
+  </script>
+  <script>
+    // Windows waitlist form (reuses the contact form's Formspree endpoint; _subject distinguishes the two)
+    function submitWaitlist(e) {
+      e.preventDefault();
+      var form = document.getElementById('win-waitlist');
+      var btn = form.querySelector('button[type=submit]');
+      var status = form.querySelector('.dl-win-status');
+      btn.disabled = true; btn.textContent = 'Joining…';
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' }, mode: 'cors' })
+        .then(function (r) {
+          if (r.ok) { status.classList.add('ok'); status.textContent = "You're on the list — we'll email you the moment the Windows build is ready."; form.reset(); }
+          else { status.classList.add('err'); status.textContent = 'Something went wrong — please email pallettai@proton.me instead.'; }
+        })
+        .catch(function () { status.classList.add('err'); status.textContent = 'Network error — please email pallettai@proton.me instead.'; })
+        .finally(function () { btn.disabled = false; btn.textContent = 'Join the waitlist ↗'; });
+      if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: 'windows-waitlist', event: true, title: 'windows-waitlist' });
+      return false;
+    }
+  </script>
 </body>
 </html>
