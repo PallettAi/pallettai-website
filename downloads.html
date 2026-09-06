@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Download PallettAi Studio for macOS (Apple Silicon & Intel). Free to start — design and build fully functioning, animated websites with AI." />
+  <meta name="author" content="PallettAi" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0a0612" />
+  <link rel="canonical" href="https://pallettai.org/downloads" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="PallettAi" />
+  <meta property="og:title" content="Downloads — PallettAi Studio | PallettAi" />
+  <meta property="og:description" content="Download PallettAi Studio for macOS (Apple Silicon & Intel). Free to start." />
+  <meta property="og:url" content="https://pallettai.org/downloads" />
+  <meta property="og:image" content="https://pallettai.org/og-card.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Downloads — PallettAi Studio | PallettAi" />
+  <meta name="twitter:description" content="Download PallettAi Studio for macOS (Apple Silicon & Intel). Free to start." />
+  <meta name="twitter:image" content="https://pallettai.org/og-card.png" />
+  <title>Downloads — PallettAi Studio | PallettAi</title>
+  <link rel="icon" type="image/svg+xml" href="signal-favicon.svg" />
+  <link rel="apple-touch-icon" href="signal-favicon.svg" />
+  <link rel="stylesheet" href="pallettai.css?v=2" />
+  <script src="pallettai.js?v=2" defer></script>
+  <style>
+.dl-shell { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+.dl-hero { position: relative; text-align: center; padding: clamp(64px, 10vw, 110px) 0 clamp(40px, 5vw, 60px); overflow: hidden; }
+.orb { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(60px); animation: drift 11s ease-in-out infinite; }
+.orb.one { width: 460px; height: 460px; top: -140px; left: 8%; background: rgba(139, 92, 246, 0.20); }
+.orb.two { width: 360px; height: 360px; top: 10%; right: -120px; background: rgba(91, 43, 179, 0.16); animation-delay: -4s; }
+.orb.three { width: 300px; height: 300px; bottom: -140px; left: -90px; background: rgba(122, 77, 209, 0.14); animation-delay: -7s; }
+@keyframes drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-24px); } }
+.dl-hero h1 {
+  position: relative; z-index: 1; margin: 22px 0 0;
+  font-size: clamp(44px, 8vw, 92px); font-weight: 700; letter-spacing: -0.055em; line-height: 0.98;
+  background: var(--grad-title); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.dl-lede { position: relative; z-index: 1; margin: 20px auto 0; max-width: 560px; color: var(--muted); font-size: clamp(15px, 2vw, 18px); line-height: 1.55; letter-spacing: -0.01em; }
+.dl-actions { position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
+.dl-actions .button { min-width: 220px; }
+.dl-meta { position: relative; z-index: 1; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 26px; }
+.dl-chip { font-size: 12.5px; font-weight: 600; color: var(--faint); border: 1px solid var(--line); background: rgba(255, 255, 255, 0.04); padding: 6px 13px; border-radius: 999px; }
+.dl-chip b { color: var(--violet-soft); font-weight: 700; }
+.dl-notice { position: relative; z-index: 1; max-width: 700px; margin: 22px auto 0; padding: 12px 16px; border: 1px solid rgba(252, 211, 77, 0.3); border-radius: 14px; background: rgba(252, 211, 77, 0.08); color: #fcd34d; font-size: 12.5px; line-height: 1.55; }
+.dl-notice strong { color: #fde68a; }
+.dl-req { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: clamp(40px, 6vw, 64px); }
+.dl-req-card { border: 1px solid var(--line); background: var(--glass); border-radius: 20px; padding: 22px 20px; text-align: center; transition: transform 0.4s var(--ease), border-color 0.3s, background 0.3s; }
+.dl-req-card:hover { transform: translateY(-3px); border-color: rgba(194, 150, 255, 0.35); background: var(--glass-strong); }
+.dl-req-card .ic { font-size: 22px; display: block; margin-bottom: 10px; }
+.dl-req-card b { display: block; font-size: 14.5px; letter-spacing: -0.01em; margin-bottom: 4px; }
+.dl-req-card span { font-size: 12.5px; color: var(--muted); line-height: 1.5; display: block; }
+.dl-faq { max-width: 760px; margin: clamp(40px, 6vw, 64px) auto 0; text-align: left; }
+.dl-faq details { border: 1px solid var(--line); background: var(--glass); border-radius: 16px; padding: 0 22px; margin-top: 12px; }
+.dl-faq summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 17px 0; font-size: 14.5px; font-weight: 600; }
+.dl-faq summary::-webkit-details-marker { display: none; }
+.dl-faq summary::after { content: "+"; color: var(--violet-soft); font-size: 18px; transition: transform 0.3s var(--ease); }
+.dl-faq details[open] summary::after { transform: rotate(45deg); }
+.dl-faq .ver { color: var(--violet-soft); font-weight: 700; }
+.dl-faq ul { list-style: none; padding: 0 0 18px; display: grid; gap: 9px; }
+.dl-faq li { display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+.dl-faq li::before { content: "◆"; color: var(--violet-soft); font-size: 8px; margin-top: 6px; flex-shrink: 0; }
+.dl-faq p { padding: 0 0 18px; color: var(--muted); font-size: 13.5px; line-height: 1.65; }
+.dl-cta { padding: clamp(48px, 7vw, 80px) 0 0; }
+@media (max-width: 900px) { .dl-req { grid-template-columns: 1fr; } }
+@media (max-width: 700px) {
+  .dl-actions { flex-direction: column; }
+  .dl-actions .button { width: min(280px, 100%); }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .fade-up { opacity: 1; transform: none; } }
+
+/* ---- overrides of shared chrome ---- */
+body { overflow-x: hidden; }
+  </style>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://formspree.io https://*.workers.dev http://127.0.0.1:8787; media-src 'self'; object-src 'none'; base-uri 'self'; form-action https://formspree.io; frame-src 'none'" />
+</head>
+<body>
+  <div class="dl-shell">
+    <nav class="nav" id="nav" data-page="downloads" aria-label="Main"></nav>
+
+    <main id="top">
+      <!-- ============ HERO ============ -->
+      <header class="dl-hero">
+        <div class="orb one"></div><div class="orb two"></div><div class="orb three"></div>
+        <div class="eyebrow fade-up"><span class="dot"></span> PallettAi Studio 0.3.6</div>
+        <h1 class="fade-up" style="--d:.08s">Get Studio.</h1>
+        <p class="dl-lede fade-up" style="--d:.16s">Design and build fully functioning, animated websites for clients — with AI, from brief to export. Free to start on Mac.</p>
+
+        <div class="dl-actions fade-up" style="--d:.24s">
+          <!-- GitHub Releases 'latest' URLs — always point at the newest release, no page edits needed on update -->
+          <a class="button primary" href="https://github.com/PallettAi/pallettai-website/releases/latest/download/PallettAI-Studio-mac-arm64.dmg">⬇ Download for Mac</a>
+          <a class="button ghost" href="https://github.com/PallettAi/pallettai-website/releases/latest/download/PallettAI-Studio-mac-x64.dmg">Intel Macs <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="dl-meta fade-up" style="--d:.32s">
+          <span class="dl-chip">Version <b>0.3.6</b></span>
+          <span class="dl-chip">Platforms <b>macOS · arm64 + x64</b></span>
+          <span class="dl-chip">Size <b>~120 MB</b></span>
+          <span class="dl-chip">Updated <b>Sept 4, 2026</b></span>
+          <span class="dl-chip">Free · <b>Pro from £19/mo</b></span>
+        </div>
+        <p class="dl-notice fade-up" style="--d:.38s"><strong>First public build:</strong> this release is unsigned, so macOS may show a security warning on first launch. Right-click the app in Applications and choose <strong>Open</strong> to continue. Automatic updates are enabled for future releases.</p>
+      </header>
+
+      <!-- ============ REQUIREMENTS ============ -->
+      <section class="dl-req" aria-label="Requirements">
+        <div class="dl-req-card fade-up"><span class="ic">🖥️</span><b>macOS Sequoia 15+</b><span>Runs on Apple Silicon and Intel Macs</span></div>
+        <div class="dl-req-card fade-up" style="--d:.08s"><span class="ic">◐</span><b>Two native Mac builds</b><span>Apple Silicon arm64 and Intel x64 downloads</span></div>
+        <div class="dl-req-card fade-up" style="--d:.16s"><span class="ic">↻</span><b>Auto-updates included</b><span>New versions download and install automatically</span></div>
+      </section>
+
+      <!-- ============ WHAT'S NEW / INSTALL NOTES ============ -->
+      <section class="dl-faq fade-up" aria-label="Release notes and install guide">
+        <details open>
+          <summary><span><span class="ver">v0.3.6</span> — What's new in Studio 0.3.6</span></summary>
+          <ul>
+            <li>Collection &amp; table sections — filterable galleries and comparison tables in one click</li>
+            <li>Deep SEO engine on every export — schema.org JSON-LD, FAQ rich results, sitemap.xml</li>
+            <li>Launch-grade audit — every export gets an A+ → F grade with plain-English fix hints</li>
+            <li>Referral program — 30 days of Pro free for friends, 7 days for you</li>
+            <li>Cloud registry — sign in once, your plan and rewards follow you across devices</li>
+          </ul>
+        </details>
+        <details>
+          <summary><span>Install notes — Mac</span></summary>
+          <ul>
+            <li><b>macOS:</b> open the DMG, drag <b>PallettAi Studio</b> into Applications, then open it. As this first build is unsigned, right-click the app in Applications → <b>Open</b> if macOS shows a security warning.</li>
+            <li>Your projects live in the app's local storage — sign in to sync your plan &amp; license across devices.</li>
+          </ul>
+        </details>
+      </section>
+
+      <!-- ============ CTA BAND ============ -->
+      <section class="dl-cta">
+        <div class="cta-band fade-up">
+          <div class="eyebrow"><span class="dot"></span> Free to start</div>
+          <h2>Build your first site<br /><span class="grad">in minutes.</span></h2>
+          <p>Studio is free to use — 2 projects, all core features. Upgrade to Pro when you need unlimited everything.</p>
+          <div class="actions">
+            <a class="button primary pagelink" href="pricing.html">See plans &amp; pricing <span aria-hidden="true">↗</span></a>
+            <a class="button ghost" href="#top">Back to download <span class="arr" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="site-footer"></footer>
+  </div>
+  <!-- shared behaviour lives in pallettai.js (head) -->
+</body>
+</html>

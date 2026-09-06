@@ -17,6 +17,7 @@
         ['#grader', 'Features'],
         ['portfolio.html', 'Showcase', 'page'],
         ['live.html', 'Live', 'page'],
+        ['downloads.html', 'Download', 'page'],
         ['pricing.html', 'Pricing', 'page']
       ]
     },
@@ -29,6 +30,7 @@
         ['index.html#grader', 'Features', 'page'],
         ['portfolio.html', 'Showcase', 'page'],
         ['live.html', 'Live', 'page'],
+        ['downloads.html', 'Download', 'page'],
         ['pricing.html', 'Pricing', 'page']
       ]
     },
@@ -41,6 +43,7 @@
         ['index.html#grader', 'Features', 'page'],
         ['portfolio.html', 'Showcase', 'page'],
         ['live.html', 'Live', 'page'],
+        ['downloads.html', 'Download', 'page'],
         ['pricing.html', 'Pricing', 'page']
       ]
     },
@@ -53,6 +56,20 @@
         ['index.html#grader', 'Features', 'page'],
         ['portfolio.html', 'Showcase', 'page'],
         ['live.html', 'Live', 'page'],
+        ['downloads.html', 'Download', 'page'],
+        ['pricing.html', 'Pricing', 'page']
+      ]
+    },
+    downloads: {
+      brand: 'index.html',
+      here: 'downloads.html',
+      cta: ['index.html#contact', 'Let\'s talk', 'page'],
+      links: [
+        ['index.html#features', 'Product', 'page'],
+        ['index.html#grader', 'Features', 'page'],
+        ['portfolio.html', 'Showcase', 'page'],
+        ['live.html', 'Live', 'page'],
+        ['downloads.html', 'Download', 'page'],
         ['pricing.html', 'Pricing', 'page']
       ]
     },
@@ -65,6 +82,7 @@
         ['index.html#grader', 'Features', 'page'],
         ['portfolio.html', 'Showcase', 'page'],
         ['live.html', 'Live', 'page'],
+        ['downloads.html', 'Download', 'page'],
         ['pricing.html', 'Pricing', 'page']
       ]
     },
@@ -77,6 +95,7 @@
         ['index.html#grader', 'Features', 'page'],
         ['portfolio.html', 'Showcase', 'page'],
         ['live.html', 'Live', 'page'],
+        ['downloads.html', 'Download', 'page'],
         ['pricing.html', 'Pricing', 'page']
       ]
     }
