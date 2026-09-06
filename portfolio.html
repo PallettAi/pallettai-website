@@ -30,7 +30,7 @@
       var(--bg);
     }
 .showcase-head { position: relative; text-align: center; padding: clamp(64px, 9vw, 108px) 20px clamp(40px, 5vw, 56px); }
-.orb { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(60px); opacity: 0.55; animation: drift 12s ease-in-out infinite; }
+.orb { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(60px); opacity: 0.55; will-change: transform; animation: drift 12s ease-in-out infinite; }
 .orb.one { width: 520px; height: 520px; top: -14%; left: 12%; background: radial-gradient(circle, rgba(139, 92, 246, 0.35), transparent 65%); }
 .orb.two { width: 380px; height: 380px; top: 24%; right: -6%; background: radial-gradient(circle, rgba(194, 150, 255, 0.22), transparent 65%); animation-delay: -4s; }
 .orb.three { width: 300px; height: 300px; bottom: -6%; left: -4%; background: radial-gradient(circle, rgba(91, 43, 179, 0.3), transparent 65%); animation-delay: -8s; }

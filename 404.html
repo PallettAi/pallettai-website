@@ -151,7 +151,7 @@
       overflow-x: hidden;
       overflow-y: auto;
     }
-    .orb { position: fixed; border-radius: 50%; pointer-events: none; filter: blur(70px); animation: drift 11s ease-in-out infinite; }
+    .orb { position: fixed; border-radius: 50%; pointer-events: none; filter: blur(70px); will-change: transform; animation: drift 11s ease-in-out infinite; }
     .orb.one { width: 420px; height: 420px; top: -120px; right: -80px; background: rgba(139, 92, 246, 0.22); }
     .orb.two { width: 340px; height: 340px; bottom: -120px; left: -90px; background: rgba(91, 43, 179, 0.18); animation-delay: -5s; }
     @keyframes drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-26px); } }

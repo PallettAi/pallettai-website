@@ -178,7 +178,15 @@
   function initNavGlass() {
     var nav = document.getElementById('nav');
     if (!nav) return;
-    var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 24); };
+    var ticking = false;
+    var onScroll = function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        nav.classList.toggle('scrolled', window.scrollY > 24);
+        ticking = false;
+      });
+    };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
   }
@@ -203,11 +211,14 @@
   /* ---------------- primary button shimmer ---------------- */
   function initShimmer() {
     document.querySelectorAll('.button.primary').forEach(function (b) {
+      var r = null;
+      b.addEventListener('pointerenter', function () { r = b.getBoundingClientRect(); });
       b.addEventListener('pointermove', function (e) {
-        var r = b.getBoundingClientRect();
+        if (!r) r = b.getBoundingClientRect();
         b.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
         b.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
       });
+      b.addEventListener('pointerleave', function () { r = null; });
     });
   }
 
