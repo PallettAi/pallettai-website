@@ -28,8 +28,12 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
   <link rel="icon" type="image/svg+xml" href="signal-favicon.svg?v=2" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-  <link rel="stylesheet" href="terminal.css?v=1" />
-  <script src="terminal.js?v=1" defer></script>
+  <link rel="preconnect" href="https://gc.zgo.at" crossorigin />
+  <link rel="preconnect" href="https://formspree.io" />
+  <link rel="preconnect" href="https://pallettai-grader.coreypallett20.workers.dev" />
+  <link rel="preload" href="fonts/inter-tight-latin-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="terminal.css?v=2" />
+  <script src="terminal.js?v=2" defer></script>
   <script data-goatcounter="https://pallettai.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   <noscript><img src="https://pallettai.goatcounter.com/count?p=/noscript" style="display:none" alt="" /></noscript>
 </head>
@@ -85,8 +89,8 @@
       </div>
       <div class="stats">
         <div class="stat up" style="--d:.05s">
-          <b>2</b>
-          <p>Telegram bots already running for real — they scrape, they alert, and they made money in the wild</p>
+          <b>3</b>
+          <p>Telegram bots already running for real — a watching pair plus a sub-bot, and they made money in the wild</p>
         </div>
         <div class="stat up" style="--d:.1s">
           <b>100<small>/100</small></b>
@@ -128,7 +132,7 @@
         <a class="card up" style="--d:.15s" href="telegram.html">
           <span class="k">03 / Automation</span>
           <h3>Telegram bots</h3>
-          <p>Scraping, alerts, and the boring jobs you shouldn't still be doing by hand. Two arbitrage bots of ours are already live — and they pay for themselves.</p>
+          <p>Scraping, alerts, and the boring jobs you shouldn't still be doing by hand. A pair plus a sub-bot of ours are already live — and they pay for themselves.</p>
           <span class="go">See Ghost Arb Bot ↗</span>
         </a>
       </div>
@@ -147,7 +151,7 @@
       <div class="console up" id="check" style="--d:.08s">
         <header class="print-sheet" id="print-sheet">
           <div class="ps-mark">PallettAi · Website health report</div>
-          <h1>How this site holds up</h1>
+          <p class="ps-title">How this site holds up</p>
           <dl class="ps-meta">
             <div><dt>Site</dt><dd id="ps-host">—</dd></div>
             <div><dt>Score</dt><dd id="ps-score">—</dd></div>
@@ -299,7 +303,7 @@
         <div class="console-in">
           <form id="contact-form" action="https://formspree.io/f/xgaeoapw" method="POST">
             <input type="hidden" name="_subject" value="New project enquiry from pallettai.org" />
-            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
             <input type="hidden" name="roi_note" id="cf-roi" value="" />
             <div class="two">
               <div class="f">
@@ -322,7 +326,7 @@
             <div class="btns" style="margin-top:18px">
               <button class="btn go" type="submit">Send enquiry ↗</button>
             </div>
-            <p class="status" role="status"></p>
+            <p class="status" role="status" aria-live="polite"></p>
           </form>
         </div>
       </div>
@@ -342,7 +346,7 @@
     "description": "A new startup with years of experience, building websites, intelligent tools, and Telegram automation.",
     "email": "pallettai@proton.me",
     "url": "https://pallettai.org/",
-    "logo": "https://pallettai.org/signal-logo.png",
+    "logo": "https://pallettai.org/apple-touch-icon.png",
     "priceRange": "££",
     "areaServed": "United Kingdom",
     "sameAs": ["https://github.com/PallettAi", "https://x.com/1PallettAi"]

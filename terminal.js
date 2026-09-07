@@ -14,7 +14,7 @@
      point at in-page anchors; everywhere else they reach back to index.html. */
   var LINKS = [
     ['#features', 'index.html#features', 'Product'],
-    ['#grader', 'index.html#grader', 'Features'],
+    ['#grader', 'index.html#grader', 'Check'],
     ['portfolio.html', 'portfolio.html', 'Showcase'],
     ['telegram.html', 'telegram.html', 'Telegram'],
     ['live.html', 'live.html', 'Live'],
@@ -152,6 +152,14 @@
     if (u.protocol !== 'http:' && u.protocol !== 'https:') return null;
     if (!u.hostname || u.hostname.indexOf('.') === -1) return null;
     return u;
+  }
+
+  function ping(name) {
+    try {
+      if (window.goatcounter && typeof window.goatcounter.count === 'function') {
+        window.goatcounter.count({ path: name, title: name, event: true });
+      }
+    } catch (e) {}
   }
 
   function rank(got, max) { var p = max ? got / max : 1; return p >= 0.85 ? '' : p >= 0.5 ? 'warn' : 'fail'; }
@@ -296,6 +304,7 @@
       var jobs = other ? [grade(target.href), grade(other.href)] : [grade(target.href)];
       Promise.all(jobs).then(function (res) {
         last.a = { host: target.hostname, data: res[0] };
+        last.b = null;
         showOwn(target.hostname, res[0]);
         if (other && res[1]) {
           last.b = { host: other.hostname, data: res[1] };
@@ -304,6 +313,7 @@
         } else {
           status.textContent = '> ' + target.hostname + ' rated ' + res[0].score + '/100';
         }
+        ping(other ? '/event/grader-compare' : '/event/grader');
       }).catch(function (err) {
         status.className = 'status err';
         status.textContent = '> ' + (err.message || 'the checker is busy — try again shortly');
@@ -371,7 +381,8 @@
         vsField.hidden = false;
         if (vsToggle) vsToggle.setAttribute('aria-expanded', 'true');
       }
-      form.dispatchEvent(new Event('submit'));
+      if (typeof form.requestSubmit === 'function') form.requestSubmit();
+      else form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
     }
   }
 
@@ -427,8 +438,9 @@
       sw.setAttribute('aria-checked', String(annual));
       lblM.classList.toggle('active', !annual);
       lblA.classList.toggle('active', annual);
-      document.querySelectorAll('.tier .amount').forEach(function (el) {
-        el.textContent = annual ? el.getAttribute('data-annual') : el.getAttribute('data-monthly');
+      document.querySelectorAll('.tier .amount, thead .val[data-monthly]').forEach(function (el) {
+        var next = annual ? el.getAttribute('data-annual') : el.getAttribute('data-monthly');
+        if (next) el.textContent = next;
       });
       document.querySelectorAll('.tier .annual-note').forEach(function (el) {
         el.textContent = annual ? '· billed yearly' : '';
@@ -459,6 +471,7 @@
       if (!r.ok) throw new Error('bad');
       if (status) { status.className = 'status ok'; status.textContent = okMessage; }
       form.reset();
+      ping(form.id === 'win-waitlist' ? '/event/waitlist' : '/event/contact');
     }).catch(function () {
       if (status) {
         status.className = 'status err';
