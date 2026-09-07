@@ -1,266 +1,182 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A growing portfolio of custom websites, intelligent tools and Telegram automation built by PallettAi — each shipped, tested and running for real." />
+  <meta name="description" content="Real work we've shipped — websites, tools and Telegram bots that are already out in the world, not sitting in a pitch deck." />
   <meta name="author" content="PallettAi" />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#0a0612" />
+  <meta name="theme-color" content="#070B14" />
   <link rel="canonical" href="https://pallettai.org/portfolio" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="PallettAi" />
-  <meta property="og:title" content="Website Design Portfolio UK | PallettAi" />
-  <meta property="og:description" content="Custom websites, intelligent tools and Telegram automation — built and shipped by PallettAi." />
+  <meta property="og:title" content="Website Design Portfolio UK | PallettAi Showcase" />
+  <meta property="og:description" content="Real work we've shipped — websites, tools and Telegram bots that are already out in the world, not sitting in a pitch deck." />
   <meta property="og:url" content="https://pallettai.org/portfolio" />
   <meta property="og:image" content="https://pallettai.org/og-card.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Website Design Portfolio UK | PallettAi" />
-  <meta name="twitter:description" content="Custom websites, intelligent tools and Telegram automation — built and shipped by PallettAi." />
+  <meta name="twitter:title" content="Website Design Portfolio UK | PallettAi Showcase" />
+  <meta name="twitter:description" content="Real work we've shipped — websites, tools and Telegram bots that are already out in the world, not sitting in a pitch deck." />
   <meta name="twitter:image" content="https://pallettai.org/og-card.png" />
   <title>Website Design Portfolio UK | PallettAi Showcase</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://pallettai.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'" />
   <link rel="icon" type="image/svg+xml" href="signal-favicon.svg" />
   <link rel="apple-touch-icon" href="signal-favicon.svg" />
-  <link rel="stylesheet" href="pallettai.css?v=3" />
-  <script src="pallettai.js?v=4" defer></script>
+  <link rel="stylesheet" href="terminal.css?v=1" />
+  <script src="terminal.js?v=1" defer></script>
   <script data-goatcounter="https://pallettai.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-  <noscript><img src="https://pallettai.goatcounter.com/count?p=/noscript" style="display:none" alt=""></noscript>
-  <style>
-.shell { overflow: clip; min-height: 100vh; background:
-      radial-gradient(ellipse 90% 55% at 50% -8%, rgba(122, 77, 209, 0.22), transparent 62%),
-      radial-gradient(ellipse 60% 40% at 88% 10%, rgba(93, 32, 203, 0.12), transparent 65%),
-      var(--bg);
-    }
-.showcase-head { position: relative; text-align: center; padding: clamp(64px, 9vw, 108px) 20px clamp(40px, 5vw, 56px); }
-.orb { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(60px); opacity: 0.55; will-change: transform; animation: drift 12s ease-in-out infinite; }
-.orb.one { width: 520px; height: 520px; top: -14%; left: 12%; background: radial-gradient(circle, rgba(139, 92, 246, 0.35), transparent 65%); }
-.orb.two { width: 380px; height: 380px; top: 24%; right: -6%; background: radial-gradient(circle, rgba(194, 150, 255, 0.22), transparent 65%); animation-delay: -4s; }
-.orb.three { width: 300px; height: 300px; bottom: -6%; left: -4%; background: radial-gradient(circle, rgba(91, 43, 179, 0.3), transparent 65%); animation-delay: -8s; }
-@keyframes drift { 50% { transform: translateY(-30px) scale(1.05); } }
-@keyframes pulse { 50% { opacity: 0.35; } }
-.showcase-head h1 {
-      margin: 24px 0 0;
-      font-size: clamp(52px, 9vw, 118px);
-      line-height: 0.96; letter-spacing: -0.045em; font-weight: 700;
-      padding-bottom: 0.12em;
-      background: var(--grad-title);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-    }
-.showcase-head .lede {
-      margin: 20px auto 0; max-width: 560px;
-      font-size: clamp(16px, 1.9vw, 20px); line-height: 1.5; letter-spacing: -0.015em;
-      color: var(--muted);
-    }
-.grid {
-      width: min(1120px, calc(100% - 40px));
-      margin: 0 auto;
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
-      padding: clamp(20px, 3vw, 32px) 0 clamp(44px, 5vw, 64px);
-      position: relative; z-index: 1;
-    }
-.case-card {
-      position: relative; overflow: hidden;
-      display: flex; flex-direction: column;
-      border-radius: 20px; border: 1px solid var(--line); background: var(--glass);
-      transition: transform 0.35s var(--ease), border-color 0.3s, background 0.3s, box-shadow 0.35s var(--ease);
-    }
-.case-card::before {
-      content: ""; position: absolute; width: 220px; height: 220px; top: -80px; right: -70px;
-      border-radius: 50%; filter: blur(46px); opacity: 0.35; transition: opacity 0.3s;
-    }
-.case-card:nth-child(1)::before { background: #5d20cb; }
-.case-card:nth-child(2)::before { background: #178a72; }
-.case-card:nth-child(3)::before { background: #b13699; }
-.case-card:nth-child(4)::before { background: #3c55c3; }
-.case-card:nth-child(5)::before { background: #c87a2a; }
-.case-card:nth-child(6)::before { background: #2a6bc8; }
-.case-card:hover { transform: scale(1.02) translateY(-3px); border-color: rgba(194, 150, 255, 0.35); background: var(--glass-strong); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4); }
-.case-card:hover::before { opacity: 0.55; }
-.case-card > * { position: relative; z-index: 1; }
-.case-shot { display: flex; align-items: center; gap: 12px; padding: 22px 24px 0; }
-.case-shot .glyph {
-      width: 50px; height: 50px; border-radius: 15px; display: grid; place-items: center;
-      font-size: 19px; font-weight: 800; color: #fff; letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #8b5cf6, #5b2bb3);
-      box-shadow: 0 10px 30px rgba(122, 77, 209, 0.4);
-      flex-shrink: 0;
-    }
-.case-shot .shot-note { color: var(--faint); font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
-.case-body { padding: 16px 24px 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-.case-tags { display: flex; flex-wrap: wrap; gap: 7px; }
-.tag {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
-      color: var(--violet-soft); background: rgba(139, 92, 246, 0.1);
-      border: 1px solid rgba(194, 150, 255, 0.3); border-radius: 999px; padding: 5px 11px;
-    }
-.case-body h2 { margin: 2px 0 0; font-size: 23px; letter-spacing: -0.03em; font-weight: 700; }
-.case-body .result { color: var(--violet-soft); font-weight: 600; font-size: 14px; letter-spacing: -0.01em; }
-.case-body p.desc { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.55; }
-.case-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 4px; }
-.fact { border: 1px solid var(--line); border-radius: 12px; background: rgba(255, 255, 255, 0.04); padding: 9px 11px; }
-.fact .k { display: block; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); font-weight: 700; }
-.fact .v { display: block; font-size: 12.5px; font-weight: 600; color: var(--ink); margin-top: 3px; }
-.case-bottom { padding: 0 24px 20px; margin-top: auto; }
-.arrow { display: flex; justify-content: space-between; align-items: center; color: var(--violet-soft); font-size: 12.5px; font-weight: 600; }
-.arrow .arrow-dot {
-      width: 28px; height: 28px; border: 1px solid var(--line); border-radius: 50%;
-      display: grid; place-items: center; font-size: 15px; color: var(--muted);
-      transition: transform 0.35s var(--ease), background 0.3s, color 0.3s;
-    }
-.case-card:hover .arrow .arrow-dot { transform: translateX(3px); background: rgba(194, 150, 255, 0.15); color: var(--ink); }
-.note { width: min(1120px, calc(100% - 40px)); margin: 0 auto; padding-bottom: clamp(44px, 5vw, 60px); color: var(--faint); font-size: 13px; line-height: 1.6; position: relative; z-index: 1; }
-.note a { color: var(--violet-soft); text-decoration: underline; text-underline-offset: 3px; }
-.cta-wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; padding-bottom: clamp(52px, 6vw, 76px); position: relative; z-index: 1; }
-.cta-band h2 .grad { background: var(--grad-title); -webkit-background-clip: text; background-clip: text; color: transparent; }
-@media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
-@media (max-width: 700px) {
-      .showcase-head h1 { font-size: clamp(44px, 12vw, 72px); }
-      .case-facts { grid-template-columns: 1fr 1fr; }
-      .actions { flex-direction: column; }
-      .button { width: min(280px, 100%); justify-content: center; }
-      footer { flex-direction: column; gap: 12px; }
-    }
-@media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { animation: none !important; transition: none !important; }
-      .fade-up { opacity: 1; transform: none; }
-    }
-
-/* ---- overrides of shared chrome ---- */
-footer { margin: 0 auto; }
-  </style>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://formspree.io https://pallettai-grader.coreypallett20.workers.dev https://pallettai.goatcounter.com http://127.0.0.1:8787; media-src 'self'; object-src 'none'; base-uri 'self'; form-action https://formspree.io; frame-src 'none'" />
+  <noscript><img src="https://pallettai.goatcounter.com/count?p=/noscript" style="display:none" alt="" /></noscript>
 </head>
 <body>
-  <div class="shell">
-    <nav class="nav" id="nav" data-page="showcase" aria-label="Main"></nav>
+  <a class="skip" href="#top">Skip to content</a>
+  <div id="nav" data-page="showcase"></div>
 
-    <main id="top">
-      <!-- ============ HERO ============ -->
-      <section class="showcase-head">
-        <div class="orb one"></div><div class="orb two"></div><div class="orb three"></div>
-        <div class="eyebrow fade-up"><span class="dot"></span> Selected builds</div>
-        <h1 class="fade-up" style="--d:.08s">Work we're<br />proud of.</h1>
-        <p class="lede fade-up" style="--d:.16s">A growing collection of builds — websites, intelligent tools, and automation — each one shipped, tested, and running for real.</p>
-      </section>
+  <main class="wrap" id="top">
+    <header class="page-hero">
+      <span class="pill"><span class="dot" aria-hidden="true"></span> Selected builds</span>
+      <h1>Work we're<br /><span class="g">proud of.</span></h1>
+      <p class="lede lede-bar">Real work, already out in the world — sites, tools and bots we've shipped and still stand behind. Not mockups. Not concepts.</p>
+    </header>
 
-      <!-- ============ CASE GRID ============ -->
-      <section class="grid" aria-label="Case studies">
-        <article class="case-card fade-up" style="--d:.05s">
-          <div class="case-shot"><span class="glyph">TG</span><span class="shot-note">Telegram automation</span></div>
-          <div class="case-body">
-            <div class="case-tags"><span class="tag">Automation</span><span class="tag">Bots</span><span class="tag">API scraping</span></div>
-            <h2>Arbitrage-betting Telegram bots</h2>
-            <p class="result">Two bots deployed — hugely profitable in live operation.</p>
-            <p class="desc">Bespoke Telegram bots for data scraping via API, alerting, and automated workflows. The arbitrage pair ran unattended and turned out to be hugely profitable — the proof of concept for the whole bot product line.</p>
-            <div class="case-facts">
-              <div class="fact"><span class="k">Shipped</span><span class="v">2 bots, live</span></div>
-              <div class="fact"><span class="k">Stack</span><span class="v">Python · TG API</span></div>
-              <div class="fact"><span class="k">Outcome</span><span class="v">Profitable</span></div>
-            </div>
+    <section class="sec" aria-label="Case studies">
+      <div class="cases">
+        <!-- 1 -->
+        <article class="case up" style="--d:.05s">
+          <div class="case-top">
+            <span class="case-glyph" aria-hidden="true">TG</span>
+            <p class="note">Telegram automation</p>
           </div>
-          <div class="case-bottom"><div class="arrow">Start a bot project <a href="index.html#contact" class="pagelink" aria-label="Start a bot project"><span class="arrow-dot">↗</span></a></div></div>
+          <div class="tags">
+            <span class="tag">Automation</span><span class="tag">Bots</span><span class="tag">API scraping</span>
+          </div>
+          <h2>Arbitrage-betting Telegram bots</h2>
+          <p class="result">A pair of bots, plus a sub-bot in a paying members' group — hugely profitable in live operation.</p>
+          <p class="body">Custom Telegram bots that pull data through APIs, send alerts, and run the jobs nobody wants to sit and watch. The arbitrage pair ran on their own and turned out to be hugely profitable — that's what convinced us the bot work was worth offering.</p>
+          <div class="facts">
+            <div>Shipped <b>2 bots, live</b></div>
+            <div>Stack <b>Python · TG API</b></div>
+            <div>Outcome <b>Profitable</b></div>
+          </div>
+          <a class="go" href="telegram.html">See Ghost Arb Bot ↗</a>
         </article>
 
-        <article class="case-card fade-up" style="--d:.1s">
-          <div class="case-shot"><span class="glyph">WG</span><span class="shot-note">Website health grader</span></div>
-          <div class="case-body">
-            <div class="case-tags"><span class="tag">Intelligent tools</span><span class="tag">Live on this site</span></div>
-            <h2>Website health grader</h2>
-            <p class="result">Free tool, live on pallettai.org — paste a URL, get a score.</p>
-            <p class="desc">A real working system, not a mockup: fetches any URL, scores speed, mobile, SEO and security basics out of 100, and reports each finding with a plain-English fix. The backend is a dependency-free Cloudflare Worker with SSRF guards, timeouts, and rate limits.</p>
-            <div class="case-facts">
-              <div class="fact"><span class="k">Shipped</span><span class="v">Live tool</span></div>
-              <div class="fact"><span class="k">Stack</span><span class="v">Cloudflare Worker</span></div>
-              <div class="fact"><span class="k">Outcome</span><span class="v">Lead magnet</span></div>
-            </div>
+        <!-- 2 -->
+        <article class="case up" style="--d:.1s">
+          <div class="case-top">
+            <span class="case-glyph" aria-hidden="true">WG</span>
+            <p class="note">Website health grader</p>
           </div>
-          <div class="case-bottom"><div class="arrow">Try it on the homepage <a href="index.html#grader" class="pagelink" aria-label="Try the website health grader"><span class="arrow-dot">↗</span></a></div></div>
+          <div class="tags">
+            <span class="tag">Intelligent tools</span><span class="tag">Live on this site</span>
+          </div>
+          <h2>Website health grader</h2>
+          <p class="result">Free tool, live on pallettai.org — paste a URL, get a score.</p>
+          <p class="body">This one is live, not a mockup. Paste any address and it scores speed, mobile, search and the security basics out of 100, then tells you what to fix in plain English. The backend is a Cloudflare Worker with no extra dependencies, plus the usual guards so it can't be pointed at the wrong thing.</p>
+          <div class="facts">
+            <div>Shipped <b>Live tool</b></div>
+            <div>Stack <b>Cloudflare Worker</b></div>
+            <div>Outcome <b>Lead magnet</b></div>
+          </div>
+          <a class="go" href="index.html#grader">Try it on the homepage ↗</a>
         </article>
 
-        <article class="case-card fade-up" style="--d:.15s">
-          <div class="case-shot"><span class="glyph">01</span><span class="shot-note">Public release</span></div>
-          <div class="case-body">
-            <div class="case-tags"><span class="tag">Tooling</span><span class="tag">FTP integration</span><span class="tag">GUI</span></div>
-            <h2>Completed public release</h2>
-            <p class="result">First public release — complex integration, working GUI.</p>
-            <p class="desc">A real test of coding with AI at production quality: complex integration including file transfer via FTP with live status and real-time stats, wrapped in a unique graphical UI. Open source on GitHub.</p>
-            <div class="case-facts">
-              <div class="fact"><span class="k">Shipped</span><span class="v">Public release</span></div>
-              <div class="fact"><span class="k">Stack</span><span class="v">Open source</span></div>
-              <div class="fact"><span class="k">Outcome</span><span class="v">Proven pipeline</span></div>
-            </div>
+        <!-- 3 -->
+        <article class="case up" style="--d:.15s">
+          <div class="case-top">
+            <span class="case-glyph" aria-hidden="true">01</span>
+            <p class="note">Public release</p>
           </div>
-          <div class="case-bottom"><div class="arrow">View on GitHub <a href="https://github.com/PallettAi" target="_blank" rel="noopener" aria-label="View on GitHub"><span class="arrow-dot">↗</span></a></div></div>
+          <div class="tags">
+            <span class="tag">Tooling</span><span class="tag">FTP integration</span><span class="tag">GUI</span>
+          </div>
+          <h2>Completed public release</h2>
+          <p class="result">First public release — complex integration, working GUI.</p>
+          <p class="body">The first public test of whether we could ship production-quality work with AI in the mix: FTP file transfer, live status, real-time stats, and a graphical interface that isn't a clone. It's open source on GitHub if you want to look.</p>
+          <div class="facts">
+            <div>Shipped <b>Public release</b></div>
+            <div>Stack <b>Open source</b></div>
+            <div>Outcome <b>Proven pipeline</b></div>
+          </div>
+          <a class="go" href="https://github.com/PallettAi" target="_blank" rel="noopener">View on GitHub ↗</a>
         </article>
 
-        <article class="case-card fade-up" style="--d:.2s">
-          <div class="case-shot"><span class="glyph">PA</span><span class="shot-note">This very site</span></div>
-          <div class="case-body">
-            <div class="case-tags"><span class="tag">Web design</span><span class="tag">Live demo</span></div>
-            <h2>pallettai.org, built by us</h2>
-            <p class="result">Scores 100/100 on our own health grader — checked live by the free tool on the homepage.</p>
-            <p class="desc">The site you're on right now — designed, built, tested and shipped end-to-end by us. It's the live demo of how we work: custom design, fast load, mobile-first, and honest about every claim it makes.</p>
-            <div class="case-facts">
-              <div class="fact"><span class="k">Shipped</span><span class="v">Live</span></div>
-              <div class="fact"><span class="k">Stack</span><span class="v">Custom build</span></div>
-              <div class="fact"><span class="k">Outcome</span><span class="v">100/100 health</span></div>
-            </div>
+        <!-- 4 -->
+        <article class="case up" style="--d:.2s">
+          <div class="case-top">
+            <span class="case-glyph" aria-hidden="true">PA</span>
+            <p class="note">This very site</p>
           </div>
-          <div class="case-bottom"><div class="arrow">Run the health check on it <a href="index.html#grader" class="pagelink" aria-label="Run the health check on this site"><span class="arrow-dot">↗</span></a></div></div>
+          <div class="tags">
+            <span class="tag">Web design</span><span class="tag">Live demo</span>
+          </div>
+          <h2>pallettai.org, built by us</h2>
+          <p class="result">Scores 100/100 on our own health grader — checked live by the free tool on the homepage.</p>
+          <p class="body">The live site is ours, end to end. Fast, works on a phone, and we don't make claims we can't back up. Run the checker on it if you want to see the score yourself.</p>
+          <div class="facts">
+            <div>Shipped <b>Live</b></div>
+            <div>Stack <b>Custom build</b></div>
+            <div>Outcome <b>100/100 health</b></div>
+          </div>
+          <a class="go" href="index.html#grader">Run the health check on it ↗</a>
         </article>
 
-        <article class="case-card fade-up" style="--d:.25s">
-          <div class="case-shot"><span class="glyph">02</span><span class="shot-note">Tried and tested</span></div>
-          <div class="case-body">
-            <div class="case-tags"><span class="tag">Quality system</span><span class="tag">Security</span></div>
-            <h2>Vigorously tested, by system</h2>
-            <p class="result">Strict, layered error-catching before rollout.</p>
-            <p class="desc">Every build passes a strict, layered checking system that catches errors before they even happen — functional, security, and rollout checks — so launches stay smooth. This site's own grader is one of the layers.</p>
-            <div class="case-facts">
-              <div class="fact"><span class="k">Shipped</span><span class="v">Every build</span></div>
-              <div class="fact"><span class="k">Stack</span><span class="v">Layered checks</span></div>
-              <div class="fact"><span class="k">Outcome</span><span class="v">Smooth launches</span></div>
-            </div>
+        <!-- 5 -->
+        <article class="case up" style="--d:.25s">
+          <div class="case-top">
+            <span class="case-glyph" aria-hidden="true">02</span>
+            <p class="note">Tried and tested</p>
           </div>
-          <div class="case-bottom"><div class="arrow">Read the approach <a href="index.html#features" class="pagelink" aria-label="Read the approach"><span class="arrow-dot">↗</span></a></div></div>
+          <div class="tags">
+            <span class="tag">Quality system</span><span class="tag">Security</span>
+          </div>
+          <h2>Vigorously tested, by system</h2>
+          <p class="result">Strict, layered error-catching before rollout.</p>
+          <p class="body">Nothing ships until it has been through the same layered checks — function, security, and a final pass before rollout. The grader on the homepage is one of those layers, not a marketing extra.</p>
+          <div class="facts">
+            <div>Shipped <b>Every build</b></div>
+            <div>Stack <b>Layered checks</b></div>
+            <div>Outcome <b>Smooth launches</b></div>
+          </div>
+          <a class="go" href="index.html#features">Read the approach ↗</a>
         </article>
 
-        <article class="case-card fade-up" style="--d:.3s">
-          <div class="case-shot"><span class="glyph">→</span><span class="shot-note">Your project here</span></div>
-          <div class="case-body">
-            <div class="case-tags"><span class="tag">Next build</span><span class="tag">Your idea</span></div>
-            <h2>The next case study</h2>
-            <p class="result">One conversation away.</p>
-            <p class="desc">Every card on this page started as a conversation about an idea. If you have one — a site, a tool, a bot — the next case study slot is open, and local Midlands businesses get a discount.</p>
-            <div class="case-facts">
-              <div class="fact"><span class="k">Shipped</span><span class="v">In ~a week</span></div>
-              <div class="fact"><span class="k">Stack</span><span class="v">Your pick</span></div>
-              <div class="fact"><span class="k">Outcome</span><span class="v">Yours to name</span></div>
-            </div>
+        <!-- 6 -->
+        <article class="case up" style="--d:.3s">
+          <div class="case-top">
+            <span class="case-glyph" aria-hidden="true">→</span>
+            <p class="note">Your project here</p>
           </div>
-          <div class="case-bottom"><div class="arrow">Start the conversation <a href="index.html#contact" class="pagelink" aria-label="Start the conversation"><span class="arrow-dot">↗</span></a></div></div>
+          <div class="tags">
+            <span class="tag">Next build</span><span class="tag">Your idea</span>
+          </div>
+          <h2>The next case study</h2>
+          <p class="result">One conversation away.</p>
+          <p class="body">Every card here started as someone saying “I've got this idea.” If that's you — a site, a tool, a bot — there's a space. Local Midlands businesses get a discount.</p>
+          <div class="facts">
+            <div>Shipped <b>In ~a week</b></div>
+            <div>Stack <b>Your pick</b></div>
+            <div>Outcome <b>Yours to name</b></div>
+          </div>
+          <a class="go" href="index.html#contact">Start the conversation ↗</a>
         </article>
-      </section>
+      </div>
 
-      <p class="note fade-up">Every project listed here is a real build — deployed, tested, and running. Packages and aftercare tiers are on the <a href="pricing.html" class="pagelink">pricing page</a> — every query answered within 48 hours.</p>
+      <p class="after up">Everything on this page is live or was. Prices and aftercare are on the <a href="pricing.html">pricing page</a>, and we answer every message within 48 hours.</p>
+    </section>
 
-      <!-- ============ CTA BAND ============ -->
-      <section class="cta-wrap">
-        <div class="cta-band fade-up">
-          <div class="eyebrow"><span class="dot"></span> Have an idea?</div>
-          <h2>Let's bring it<br /><span class="grad">to life.</span></h2>
-          <p>Tell us roughly what you want to make, and we can discuss pricing and a deposit so we can build you a preview model.</p>
-          <div class="actions">
-            <a class="button primary pagelink" href="index.html#contact">Start your project <span aria-hidden="true">↗</span></a>
-            <a class="button ghost pagelink" href="index.html#grader">Run the free site check <span class="arr" aria-hidden="true">→</span></a>
-          </div>
+    <section class="sec" aria-label="Start a project">
+      <div class="band up">
+        <span class="pill"><span class="dot" aria-hidden="true"></span> Have an idea?</span>
+        <h2>Let's bring it<br /><span class="g">to life.</span></h2>
+        <p>A few sentences is enough. We'll come back with a price, a small deposit, and a preview before anything goes live.</p>
+        <div class="btns">
+          <a class="btn go" href="index.html#contact">Start your project ↗</a>
+          <a class="btn alt" href="index.html#grader">Run the free site check →</a>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
+  </main>
 
-    <footer id="site-footer"></footer>
-  </div>
-  <!-- shared behaviour lives in pallettai.js (head) -->
+  <footer id="site-footer"></footer>
 </body>
 </html>

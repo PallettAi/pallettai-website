@@ -1,535 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Download PallettAi Studio for macOS (Apple Silicon & Intel). Free to start — design and build fully functioning, animated websites with AI." />
+  <meta name="description" content="Download PallettAi Studio for Mac. Free to start — turn a brief into a working, animated website, then export it." />
   <meta name="author" content="PallettAi" />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#0a0612" />
+  <meta name="theme-color" content="#070B14" />
   <link rel="canonical" href="https://pallettai.org/downloads" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="PallettAi" />
   <meta property="og:title" content="Downloads — PallettAi Studio | PallettAi" />
-  <meta property="og:description" content="Download PallettAi Studio for macOS (Apple Silicon & Intel). Free to start." />
+  <meta property="og:description" content="Download PallettAi Studio for Mac. Free to start — turn a brief into a working, animated website, then export it." />
   <meta property="og:url" content="https://pallettai.org/downloads" />
   <meta property="og:image" content="https://pallettai.org/og-card.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Downloads — PallettAi Studio | PallettAi" />
-  <meta name="twitter:description" content="Download PallettAi Studio for macOS (Apple Silicon & Intel). Free to start." />
+  <meta name="twitter:description" content="Download PallettAi Studio for Mac. Free to start — turn a brief into a working, animated website, then export it." />
   <meta name="twitter:image" content="https://pallettai.org/og-card.png" />
   <title>Downloads — PallettAi Studio | PallettAi</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://pallettai.goatcounter.com; object-src 'none'; base-uri 'self'; form-action https://formspree.io; frame-src 'none'" />
   <link rel="icon" type="image/svg+xml" href="signal-favicon.svg" />
   <link rel="apple-touch-icon" href="signal-favicon.svg" />
-  <link rel="stylesheet" href="pallettai.css?v=3" />
-  <script src="pallettai.js?v=4" defer></script>
+  <link rel="stylesheet" href="terminal.css?v=1" />
+  <script src="terminal.js?v=1" defer></script>
   <script data-goatcounter="https://pallettai.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-  <noscript><img src="https://pallettai.goatcounter.com/count?p=/noscript" style="display:none" alt=""></noscript>
-  <style>
-    .shell {
-      width: min(1120px, calc(100% - 40px));
-      min-height: 100vh;
-      margin: 0 auto;
-      overflow: clip;
-      background:
-        radial-gradient(ellipse 90% 55% at 50% -8%, rgba(122, 77, 209, 0.22), transparent 62%),
-        radial-gradient(ellipse 60% 40% at 88% 10%, rgba(93, 32, 203, 0.12), transparent 65%),
-        var(--bg);
-    }
-
-    .dl-hero {
-      position: relative;
-      overflow: visible;
-      text-align: center;
-      padding: clamp(56px, 9vw, 96px) 20px clamp(30px, 4vw, 44px);
-    }
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-      filter: blur(60px);
-      will-change: transform;
-      animation: drift 11s ease-in-out infinite;
-    }
-    .orb.one { width: 460px; height: 460px; top: -140px; left: 8%; background: rgba(139, 92, 246, 0.2); }
-    .orb.two { width: 360px; height: 360px; top: 10%; right: -120px; background: rgba(91, 43, 179, 0.16); animation-delay: -4s; }
-    .orb.three { width: 300px; height: 300px; bottom: -140px; left: -90px; background: rgba(122, 77, 209, 0.14); animation-delay: -7s; }
-    @keyframes drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-24px); } }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
-
-    .dl-hero h1 {
-      position: relative;
-      z-index: 1;
-      margin: 20px 0 0;
-      font-size: clamp(42px, 7.5vw, 84px);
-      font-weight: 700;
-      letter-spacing: -0.05em;
-      line-height: 1.02;
-      padding-bottom: 0.08em;
-      background: var(--grad-title);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .dl-hero .lede {
-      position: relative;
-      z-index: 1;
-      max-width: 560px;
-      margin: 18px auto 0;
-      color: var(--muted);
-      font-size: clamp(15px, 2vw, 18px);
-      line-height: 1.55;
-      letter-spacing: -0.01em;
-    }
-
-    .dl-release {
-      position: relative;
-      display: grid;
-      grid-template-columns: minmax(0, 1.02fr) minmax(330px, 0.98fr);
-      align-items: stretch;
-      gap: clamp(26px, 4vw, 58px);
-      width: 100%;
-      margin: 0 auto;
-      padding: clamp(28px, 4vw, 46px);
-      overflow: hidden;
-      border: 1px solid rgba(194, 150, 255, 0.24);
-      border-radius: 28px;
-      background: linear-gradient(155deg, rgba(139, 92, 246, 0.15), rgba(255, 255, 255, 0.045) 48%, rgba(255, 255, 255, 0.02));
-      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(255, 255, 255, 0.025) inset;
-    }
-    .dl-release::before {
-      content: "";
-      position: absolute;
-      width: 440px;
-      height: 440px;
-      top: -220px;
-      right: -130px;
-      border-radius: 50%;
-      filter: blur(50px);
-      opacity: 0.38;
-      pointer-events: none;
-      background: #5d20cb;
-    }
-    .dl-release::after {
-      content: "";
-      position: absolute;
-      width: 260px;
-      height: 260px;
-      bottom: -170px;
-      left: 14%;
-      border-radius: 50%;
-      filter: blur(55px);
-      opacity: 0.24;
-      pointer-events: none;
-      background: #b13699;
-    }
-    .dl-release-copy,
-    .dl-product-card { position: relative; z-index: 1; }
-    .dl-release-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--faint);
-      font-size: 11.5px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    .dl-release-label .live-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #6ee7a0;
-      box-shadow: 0 0 11px rgba(110, 231, 160, 0.9);
-      animation: pulse 2s ease-in-out infinite;
-    }
-    .dl-release-label strong { color: var(--violet-soft); }
-    .dl-release-copy h2 {
-      margin: 15px 0 0;
-      font-size: clamp(30px, 4.2vw, 52px);
-      line-height: 1.02;
-      letter-spacing: -0.045em;
-      font-weight: 700;
-    }
-    .dl-release-copy h2 .grad,
-    .dl-cta h2 .grad { background: var(--grad-title); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .dl-release-copy > p {
-      max-width: 510px;
-      margin: 16px 0 0;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.6;
-    }
-    .dl-download-list { display: grid; gap: 10px; margin-top: 26px; }
-    .dl-download {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      min-height: 68px;
-      padding: 12px 15px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      color: var(--ink);
-      background: rgba(255, 255, 255, 0.055);
-      transition: transform 0.35s var(--ease), border-color 0.25s, background 0.25s, box-shadow 0.35s var(--ease);
-    }
-    .dl-download:hover { transform: translateY(-2px); border-color: rgba(194, 150, 255, 0.55); background: rgba(255, 255, 255, 0.09); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22); }
-    .dl-download.primary { border-color: rgba(194, 150, 255, 0.42); background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(91, 43, 179, 0.92)); box-shadow: 0 10px 28px rgba(91, 43, 179, 0.28); }
-    .dl-download.primary:hover { border-color: rgba(255, 255, 255, 0.55); background: linear-gradient(135deg, rgba(151, 105, 255, 0.96), rgba(103, 52, 194, 0.96)); box-shadow: 0 14px 36px rgba(91, 43, 179, 0.42); }
-    .dl-download-icon {
-      display: grid;
-      place-items: center;
-      width: 40px;
-      height: 40px;
-      flex: 0 0 40px;
-      border: 1px solid rgba(255, 255, 255, 0.17);
-      border-radius: 12px;
-      color: #fff;
-      background: rgba(255, 255, 255, 0.13);
-      font-size: 20px;
-      font-weight: 700;
-    }
-    .dl-download-copy { display: grid; gap: 2px; min-width: 0; }
-    .dl-download-copy b { font-size: 14.5px; font-weight: 700; }
-    .dl-download-copy small { color: rgba(244, 241, 250, 0.68); font-size: 12px; line-height: 1.35; }
-    .dl-download-arrow { margin-left: auto; color: var(--violet-soft); font-size: 22px; transition: transform 0.35s var(--ease); }
-    .dl-download.primary .dl-download-arrow { color: #fff; }
-    .dl-download:hover .dl-download-arrow { transform: translateX(4px); }
-    .dl-release-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-    .dl-chip {
-      padding: 6px 11px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: var(--faint);
-      background: rgba(255, 255, 255, 0.04);
-      font-size: 11.5px;
-      font-weight: 600;
-    }
-    .dl-chip b { color: var(--violet-soft); font-weight: 700; }
-
-    .dl-product-card {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 340px;
-      padding: clamp(22px, 3vw, 30px);
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.13);
-      border-radius: 22px;
-      background: linear-gradient(145deg, rgba(9, 6, 19, 0.64), rgba(255, 255, 255, 0.055));
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.025) inset;
-    }
-    .dl-product-card::before {
-      content: "";
-      position: absolute;
-      width: 250px;
-      height: 250px;
-      top: -100px;
-      right: -70px;
-      border-radius: 50%;
-      filter: blur(40px);
-      opacity: 0.5;
-      background: #7a4dd1;
-      pointer-events: none;
-    }
-    .dl-product-card > * { position: relative; z-index: 1; }
-    .dl-product-top { display: flex; justify-content: space-between; gap: 12px; color: var(--faint); font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
-    .dl-product-top .ready { color: #6ee7a0; }
-    .dl-product-title { margin-top: 58px; font-size: clamp(26px, 3.5vw, 42px); font-weight: 700; letter-spacing: -0.045em; line-height: 1.02; }
-    .dl-product-title span { color: var(--violet-soft); }
-    .dl-product-flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-top: 38px; }
-    .dl-flow-step { min-height: 91px; padding: 12px 11px; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 13px; background: rgba(255, 255, 255, 0.045); }
-    .dl-flow-step:nth-child(2) { border-color: rgba(194, 150, 255, 0.28); background: rgba(139, 92, 246, 0.12); }
-    .dl-flow-step span { display: block; color: var(--violet-soft); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; }
-    .dl-flow-step b { display: block; margin-top: 13px; font-size: 13px; }
-    .dl-flow-step small { display: block; margin-top: 3px; color: var(--faint); font-size: 10.5px; line-height: 1.35; }
-    .dl-product-foot { display: flex; justify-content: space-between; gap: 12px; margin-top: 27px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1); color: var(--faint); font-size: 11px; }
-    .dl-product-foot b { color: var(--ink); }
-
-    .dl-notice {
-      width: 100%;
-      margin: 18px auto 0;
-      padding: 13px 17px;
-      border: 1px solid rgba(252, 211, 77, 0.3);
-      border-radius: 14px;
-      color: #fcd34d;
-      background: rgba(252, 211, 77, 0.08);
-      font-size: 12.5px;
-      line-height: 1.55;
-    }
-    .dl-notice strong { color: #fde68a; }
-
-    .dl-req {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      width: 100%;
-      margin: clamp(34px, 5vw, 54px) auto 0;
-    }
-    .dl-req-card {
-      position: relative;
-      overflow: hidden;
-      min-height: 142px;
-      padding: 22px 20px;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      background: var(--glass);
-      transition: transform 0.4s var(--ease), border-color 0.3s, background 0.3s, box-shadow 0.35s var(--ease);
-    }
-    .dl-req-card::before { content: ""; position: absolute; width: 170px; height: 170px; top: -80px; right: -60px; border-radius: 50%; filter: blur(38px); opacity: 0.3; background: #5d20cb; }
-    .dl-req-card:nth-child(2)::before { background: #178a72; }
-    .dl-req-card:nth-child(3)::before { background: #b13699; }
-    .dl-req-card:hover { transform: translateY(-3px); border-color: rgba(194, 150, 255, 0.35); background: var(--glass-strong); box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28); }
-    .dl-req-card > * { position: relative; z-index: 1; }
-    .dl-req-card .ic { display: block; margin-bottom: 15px; color: var(--violet-soft); font-size: 22px; line-height: 1; }
-    .dl-req-card b { display: block; font-size: 14.5px; letter-spacing: -0.01em; }
-    .dl-req-card span:last-child { display: block; max-width: 250px; margin-top: 5px; color: var(--muted); font-size: 12.5px; line-height: 1.5; }
-
-    .dl-details {
-      width: 100%;
-      margin: clamp(52px, 7vw, 80px) auto 0;
-    }
-    .dl-details-head { text-align: center; }
-    .dl-details-head h2 { margin: 9px 0 0; font-size: clamp(28px, 4.4vw, 42px); line-height: 1.06; letter-spacing: -0.04em; }
-    .dl-details-head p { max-width: 530px; margin: 14px auto 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
-    .dl-info-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 14px; max-width: 900px; margin: 30px auto 0; }
-    .dl-faq details { border: 1px solid var(--line); border-radius: 18px; background: var(--glass); padding: 0 21px; margin: 0; transition: background 0.25s, border-color 0.25s; }
-    .dl-faq details:hover { background: var(--glass-strong); }
-    .dl-faq details[open] { border-color: rgba(194, 150, 255, 0.35); background: var(--glass-strong); }
-    .dl-faq summary { display: flex; align-items: center; justify-content: space-between; gap: 15px; min-height: 62px; cursor: pointer; list-style: none; color: var(--ink); font-size: 14.5px; font-weight: 600; letter-spacing: -0.01em; }
-    .dl-faq summary::-webkit-details-marker { display: none; }
-    .dl-faq summary .ver { color: var(--violet-soft); font-weight: 700; }
-    .dl-faq summary .plus { flex: 0 0 auto; color: var(--violet-soft); font-size: 20px; font-weight: 400; transition: transform 0.4s var(--ease); }
-    .dl-faq details[open] summary .plus { transform: rotate(45deg); }
-    .dl-faq ul { display: grid; gap: 10px; margin: 0; padding: 0 0 21px; list-style: none; }
-    .dl-faq li { display: flex; gap: 10px; align-items: flex-start; color: var(--muted); font-size: 13.5px; line-height: 1.55; }
-    .dl-faq li::before { content: "◆"; flex-shrink: 0; margin-top: 6px; color: var(--violet-soft); font-size: 8px; }
-    .dl-faq .install-copy { margin: 0; padding: 0 0 21px; color: var(--muted); font-size: 13.5px; line-height: 1.65; }
-
-    .dl-win { width: 100%; margin: clamp(34px, 5vw, 54px) auto 0; }
-    .dl-win-card {
-      position: relative;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 34px;
-      align-items: center;
-      padding: clamp(26px, 4vw, 44px);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      background: var(--glass);
-    }
-    .dl-win-card::before { content: ""; position: absolute; width: 220px; height: 220px; top: -110px; left: -60px; border-radius: 50%; filter: blur(46px); opacity: 0.35; background: #178a72; pointer-events: none; }
-    .dl-win-card > * { position: relative; z-index: 1; }
-    .dl-win-copy h2 { margin: 10px 0 0; font-size: clamp(26px, 3.6vw, 38px); line-height: 1.06; letter-spacing: -0.035em; }
-    .dl-win-copy p { margin: 14px 0 0; max-width: 420px; color: var(--muted); font-size: 13.5px; line-height: 1.6; }
-    .dl-win-form { display: flex; flex-direction: column; gap: 11px; }
-    .dl-win-form input[type="email"] {
-      width: 100%;
-      padding: 14px 16px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--ink);
-      font-family: inherit;
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.25s, background 0.25s;
-    }
-    .dl-win-form input[type="email"]:focus { border-color: rgba(194, 150, 255, 0.5); background: rgba(255, 255, 255, 0.08); }
-    .dl-win-form .button { justify-content: center; }
-    .dl-win-status { display: none; margin: 0; font-size: 13px; }
-    .dl-win-status.ok { display: block; color: #6ee7a0; }
-    .dl-win-status.err { display: block; color: #fda4af; }
-    .dl-win-note { margin: 0; color: var(--faint); font-size: 11.5px; }
-
-    .dl-cta { width: 100%; margin: clamp(52px, 7vw, 80px) auto 0; }
-    .dl-cta .cta-band { margin: 0; }
-
-    /* Downloads uses open bands and offset accents instead of stacked cards. */
-    .dl-release {
-      padding: clamp(22px, 4vw, 42px) 0 0;
-      border: 0;
-      border-radius: 0;
-      background: transparent;
-      box-shadow: none;
-    }
-    .dl-release::before,
-    .dl-release::after { display: none; }
-    .dl-release-copy { padding: 0 clamp(4px, 1vw, 12px) 0 0; }
-    .dl-download {
-      border: 0;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.055);
-      box-shadow: inset 3px 0 0 rgba(194, 150, 255, 0.3);
-    }
-    .dl-download.primary {
-      background: linear-gradient(105deg, rgba(139, 92, 246, 0.88), rgba(91, 43, 179, 0.72));
-      box-shadow: inset 3px 0 0 #e0c7ff, 0 12px 32px rgba(91, 43, 179, 0.22);
-    }
-    .dl-download:hover { border: 0; box-shadow: inset 5px 0 0 var(--violet-soft), 0 12px 30px rgba(0, 0, 0, 0.22); }
-    .dl-download.primary:hover { box-shadow: inset 5px 0 0 #fff, 0 14px 36px rgba(91, 43, 179, 0.42); }
-    .dl-chip { border: 0; border-radius: 4px; background: rgba(255, 255, 255, 0.055); }
-    .dl-product-card {
-      min-height: 340px;
-      border: 0;
-      border-radius: 0;
-      border-left: 1px solid rgba(194, 150, 255, 0.42);
-      background: linear-gradient(145deg, rgba(9, 6, 19, 0.3), rgba(255, 255, 255, 0.045));
-      box-shadow: none;
-    }
-    .dl-product-card::before { opacity: 0.28; }
-    .dl-flow-step { border: 0; border-top: 1px solid rgba(255, 255, 255, 0.14); border-radius: 0; background: transparent; }
-    .dl-flow-step:nth-child(2) { border-color: rgba(194, 150, 255, 0.55); background: rgba(139, 92, 246, 0.1); }
-    .dl-product-foot { border-top: 1px solid rgba(255, 255, 255, 0.14); }
-    .dl-notice { border: 0; border-left: 3px solid rgba(252, 211, 77, 0.75); border-radius: 0; background: rgba(252, 211, 77, 0.07); }
-    .dl-req { gap: 26px; }
-    .dl-req-card {
-      min-height: 156px;
-      padding: 24px 4px 20px 20px;
-      border: 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: 0;
-      background: transparent;
-      box-shadow: none;
-    }
-    .dl-req-card::before { width: 120px; height: 120px; top: -74px; right: -36px; opacity: 0.2; }
-    .dl-req-card:nth-child(2) { transform: translateY(16px); }
-    .dl-req-card:nth-child(3) { transform: translateY(32px); }
-    .dl-req-card:hover { transform: translateY(-3px); border-color: rgba(255, 255, 255, 0.16); background: rgba(255, 255, 255, 0.035); box-shadow: none; }
-    .dl-req-card:nth-child(2):hover { transform: translateY(13px); }
-    .dl-req-card:nth-child(3):hover { transform: translateY(29px); }
-    .dl-req-card .ic { color: var(--violet-soft); }
-    .dl-win-card { border: 0; border-top: 1px solid rgba(110, 231, 160, 0.4); border-radius: 0; background: rgba(255, 255, 255, 0.035); }
-    .dl-win-form input[type="email"] { border: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.2); border-radius: 0; background: transparent; }
-    .dl-faq details { border: 0; border-top: 1px solid var(--line); border-radius: 0; background: transparent; }
-    .dl-faq details:last-child { border-bottom: 1px solid var(--line); }
-    .dl-faq details:hover,
-    .dl-faq details[open] { border-color: rgba(194, 150, 255, 0.45); background: rgba(255, 255, 255, 0.035); }
-
-    @media (max-width: 900px) {
-      .dl-release { grid-template-columns: 1fr; }
-      .dl-product-card { min-height: 300px; }
-      .dl-info-grid { grid-template-columns: 1fr; max-width: 700px; }
-      .dl-win-card { grid-template-columns: 1fr; gap: 24px; }
-    }
-    @media (max-width: 700px) {
-      .shell { width: calc(100% - 40px); }
-      .dl-hero { padding-top: 58px; }
-      .dl-hero h1 { font-size: clamp(44px, 12vw, 72px); }
-      .dl-release,
-      .dl-req,
-      .dl-notice,
-      .dl-details,
-      .dl-cta { width: 100%; }
-      .dl-release { padding: 24px 0 0; gap: 28px; }
-      .dl-release-copy h2 { font-size: clamp(31px, 9vw, 43px); }
-      .dl-product-card { min-height: 286px; padding: 21px; }
-      .dl-product-title { margin-top: 42px; font-size: 31px; }
-      .dl-product-flow { margin-top: 29px; }
-      .dl-flow-step { min-height: 83px; padding: 10px 8px; }
-      .dl-flow-step b { margin-top: 10px; font-size: 12px; }
-      .dl-flow-step small { font-size: 9.5px; }
-      .dl-req { grid-template-columns: 1fr; margin-top: 30px; }
-      .dl-req-card,
-      .dl-req-card:nth-child(2),
-      .dl-req-card:nth-child(3) { min-height: 0; transform: none; }
-      .dl-details { margin-top: 54px; }
-      .dl-info-grid { margin-top: 24px; }
-      .dl-cta { margin-top: 54px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation: none !important; transition: none !important; }
-      .fade-up { opacity: 1; transform: none; }
-    }
-  </style>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://formspree.io https://pallettai-grader.coreypallett20.workers.dev https://pallettai.goatcounter.com http://127.0.0.1:8787; media-src 'self'; object-src 'none'; base-uri 'self'; form-action https://formspree.io; frame-src 'none'" />
+  <noscript><img src="https://pallettai.goatcounter.com/count?p=/noscript" style="display:none" alt="" /></noscript>
 </head>
 <body>
-  <div class="shell">
-    <nav class="nav" id="nav" data-page="downloads" aria-label="Main"></nav>
+  <a class="skip" href="#top">Skip to content</a>
+  <div id="nav" data-page="downloads"></div>
 
-    <main id="top">
-      <header class="dl-hero">
-        <div class="orb one"></div><div class="orb two"></div><div class="orb three"></div>
-        <div class="eyebrow fade-up"><span class="dot"></span> PallettAi Studio for Mac</div>
-        <h1 class="fade-up" style="--d:.08s">Get Studio.<br /><span class="grad">Build beautifully.</span></h1>
-        <p class="lede fade-up" style="--d:.16s">Design and build fully functioning, animated websites for clients — with AI, from brief to export. Free to start on Mac.</p>
-      </header>
+  <main class="wrap" id="top">
+    <header class="page-hero">
+      <span class="pill"><span class="dot" aria-hidden="true"></span> PallettAi Studio for Mac</span>
+      <h1>Get Studio.<br /><span class="g">Build beautifully.</span></h1>
+      <p class="lede lede-bar">Turn a rough brief into a working, animated website — then export it. Free to start on Mac, Apple Silicon or Intel.</p>
+    </header>
 
-      <section class="dl-release fade-up" style="--d:.22s" aria-label="Download PallettAi Studio">
-        <div class="dl-release-copy">
-          <div class="dl-release-label"><span class="live-dot"></span> Latest release <strong>v0.3.7</strong></div>
-          <h2>From first brief<br /><span class="grad">to live site.</span></h2>
-          <p>Studio turns a rough idea into a polished, functioning website — with real content, deliberate design, and the tools to take it all the way to launch.</p>
+    <section class="sec" aria-label="Download PallettAi Studio">
+      <div class="dl-split">
+        <div class="up">
+          <div class="kicker">Latest release <span style="color:var(--cyan)">v0.3.7</span></div>
+          <h2 style="margin-top:14px;font-size:clamp(26px,3.4vw,40px)">From first brief<br /><span class="g">to live site.</span></h2>
+          <p class="lede" style="margin-top:16px">Studio is the workspace we use to go from a messy idea to something you can put in front of a client — real content, a considered layout, and a path all the way to launch.</p>
 
-          <div class="dl-download-list">
-            <a class="dl-download primary" href="https://github.com/PallettAi/PallettAI-Studio/releases/latest/download/PallettAI-Studio-mac-arm64.dmg">
-              <span class="dl-download-icon" aria-hidden="true"></span>
-              <span class="dl-download-copy"><b>Apple Silicon</b><small>Download for M1, M2, M3 &amp; M4 Macs</small></span>
-              <span class="dl-download-arrow" aria-hidden="true">↗</span>
+          <div class="dl-list">
+            <a class="dl-row primary" href="https://github.com/PallettAi/PallettAI-Studio/releases/latest/download/PallettAI-Studio-mac-arm64.dmg" rel="noopener noreferrer">
+              <div>
+                <div class="arch">Apple Silicon</div>
+                <div class="for">Download for M1, M2, M3 &amp; M4 Macs</div>
+              </div>
+              <span class="arr" aria-hidden="true">↗</span>
             </a>
-            <a class="dl-download" href="https://github.com/PallettAi/PallettAI-Studio/releases/latest/download/PallettAI-Studio-mac-x64.dmg">
-              <span class="dl-download-icon" aria-hidden="true">⌘</span>
-              <span class="dl-download-copy"><b>Intel Mac</b><small>Download for Intel-based Macs</small></span>
-              <span class="dl-download-arrow" aria-hidden="true">↗</span>
+            <a class="dl-row" href="https://github.com/PallettAi/PallettAI-Studio/releases/latest/download/PallettAI-Studio-mac-x64.dmg" rel="noopener noreferrer">
+              <div>
+                <div class="arch">Intel Mac</div>
+                <div class="for">Download for Intel-based Macs</div>
+              </div>
+              <span class="arr" aria-hidden="true">↗</span>
             </a>
           </div>
 
-          <div class="dl-release-meta">
+          <div class="dl-meta">
             <span class="dl-chip">macOS <b>Sequoia 15+</b></span>
             <span class="dl-chip">Builds <b>arm64 + x64</b></span>
             <span class="dl-chip"><b>Auto-updates</b> included</span>
           </div>
         </div>
 
-        <div class="dl-product-card" aria-hidden="true">
-          <div class="dl-product-top"><span>PALLETTAI STUDIO</span><span class="ready">● READY TO SHIP</span></div>
-          <div class="dl-product-title">Brief <span>→</span> Build <span>→</span> Launch</div>
-          <div class="dl-product-flow">
-            <div class="dl-flow-step"><span>01</span><b>Brief</b><small>Shape the idea</small></div>
-            <div class="dl-flow-step"><span>02</span><b>Build</b><small>Make it real</small></div>
-            <div class="dl-flow-step"><span>03</span><b>Launch</b><small>Ship with confidence</small></div>
+        <div class="studio-card up" style="--d:.08s" aria-hidden="true">
+          <div class="top"><span>PallettAi Studio</span><span class="ready">● Ready to ship</span></div>
+          <h3>Brief <span>→</span> Build <span>→</span> Launch</h3>
+          <div class="flow" style="margin-top:28px">
+            <div><span class="n">01</span><div><b>Brief</b><span>Shape the idea</span></div></div>
+            <div><span class="n">02</span><div><b>Build</b><span>Make it real</span></div></div>
+            <div><span class="n">03</span><div><b>Launch</b><span>Ship with confidence</span></div></div>
           </div>
-          <div class="dl-product-foot"><span>Current build <b>0.3.7</b></span><span>Made for Mac <b></b></span></div>
+          <div class="foot"><span>Current build <b>0.3.7</b></span><span>Made for Mac</span></div>
         </div>
-      </section>
+      </div>
 
-      <p class="dl-notice fade-up" style="--d:.28s"><strong>First public build:</strong> this release is unsigned, so macOS may show a security warning on first launch. Right-click the app in Applications and choose <strong>Open</strong> to continue. Automatic updates are enabled for future releases.</p>
+      <p class="notice up" style="--d:.12s"><b>First public build:</b> this release is unsigned, so macOS may show a security warning on first launch. Right-click the app in Applications and choose <b>Open</b> to continue. Automatic updates are enabled for future releases.</p>
+    </section>
 
-      <section class="dl-req" aria-label="Requirements">
-        <div class="dl-req-card fade-up"><span class="ic">🖥️</span><b>macOS Sequoia 15+</b><span>Runs on Apple Silicon and Intel Macs</span></div>
-        <div class="dl-req-card fade-up" style="--d:.08s"><span class="ic">◐</span><b>Two native Mac builds</b><span>Choose the architecture made for your machine</span></div>
-        <div class="dl-req-card fade-up" style="--d:.16s"><span class="ic">↻</span><b>Auto-updates included</b><span>New versions download and install automatically</span></div>
-      </section>
+    <section class="sec" aria-label="Requirements">
+      <div class="req">
+        <div class="up"><h3>macOS Sequoia 15+</h3><p>Runs on Apple Silicon and Intel Macs</p></div>
+        <div class="up" style="--d:.08s"><h3>Two native Mac builds</h3><p>Choose the architecture made for your machine</p></div>
+        <div class="up" style="--d:.16s"><h3>Auto-updates included</h3><p>New versions download and install automatically</p></div>
+      </div>
+    </section>
 
-      <section class="dl-win" aria-label="Windows version waitlist">
-        <div class="dl-win-card fade-up">
-          <div class="dl-win-copy">
-            <div class="eyebrow"><span class="dot"></span> Coming soon</div>
-            <h2>On Windows?<br /><span class="grad">Get told first.</span></h2>
-            <p>Studio is Mac-only today, but a Windows build is on the roadmap. Join the waitlist and you'll be first in line the day it ships.</p>
-          </div>
-          <form id="win-waitlist" class="dl-win-form" action="https://formspree.io/f/xgaeoapw" method="POST" onsubmit="return submitWaitlist(event)">
-            <input type="email" name="email" required placeholder="you@studio.com" aria-label="Your email address" autocomplete="email" />
-            <input type="hidden" name="_subject" value="Windows waitlist — new signup" />
-            <input type="text" name="_gotcha" style="display:none" tabindex="-1" aria-hidden="true" />
-            <button type="submit" class="button primary">Join the waitlist <span aria-hidden="true">↗</span></button>
-            <p class="dl-win-status" role="status" aria-live="polite"></p>
-            <p class="dl-win-note">No spam — one email when the Windows build is ready, nothing else.</p>
-          </form>
+    <section class="sec" aria-label="Windows version waitlist">
+      <div class="win-wait up">
+        <div>
+          <span class="pill"><span class="dot" aria-hidden="true"></span> Coming soon</span>
+          <h2 style="margin-top:16px">On Windows?<br /><span class="g">Get told first.</span></h2>
+          <p>Studio is Mac-only today. A Windows build is on the way — leave your email and you'll hear from us the day it ships, and not before.</p>
         </div>
-      </section>
+        <form id="win-waitlist" action="https://formspree.io/f/xgaeoapw" method="POST">
+          <input type="hidden" name="_subject" value="Windows waitlist — new signup" />
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <div class="f"><label for="win-email">Your email</label><input id="win-email" name="email" type="email" placeholder="you@studio.com" required autocomplete="email" spellcheck="false" /></div>
+          <div class="btns" style="margin-top:16px"><button class="btn go" type="submit">Join the waitlist</button></div>
+          <p class="status" role="status" aria-live="polite"></p>
+          <p class="after" style="margin-top:10px">No spam — one email when the Windows build is ready, nothing else.</p>
+        </form>
+      </div>
+    </section>
 
-      <section class="dl-details" aria-label="Release notes and install guide">
-        <div class="dl-details-head fade-up">
+    <section class="sec" aria-label="Release notes and install guide">
+      <div class="sec-head solo up">
+        <div>
           <div class="kicker">Everything in the box</div>
-          <h2>Start fast.<br /><span class="grad">Stay in control.</span></h2>
-          <p>One focused workspace for turning a client brief into something you are proud to put live.</p>
+          <h2>Start fast.<br /><span class="g">Stay in control.</span></h2>
         </div>
-        <div class="dl-info-grid dl-faq fade-up" style="--d:.08s">
-          <details open>
-            <summary><span><span class="ver">v0.3.7</span> — What's new in Studio</span><span class="plus" aria-hidden="true">+</span></summary>
+        <p class="note">One place to take a client brief and turn it into something you'd be happy to put live.</p>
+      </div>
+      <div class="faq up" style="--d:.06s">
+        <details open>
+          <summary>v0.3.7 — What's new in Studio</summary>
+          <div class="a">
             <ul>
               <li>Collection &amp; table sections — filterable galleries and comparison tables in one click</li>
               <li>Deep SEO engine on every export — schema.org JSON-LD, FAQ rich results, sitemap.xml</li>
@@ -537,71 +129,29 @@
               <li>Referral program — 30 days of Pro free for friends, 7 days for you</li>
               <li>Cloud registry — sign in once, your plan and rewards follow you across devices</li>
             </ul>
-            <p class="install-copy"><a href="https://github.com/PallettAi/PallettAI-Studio/blob/v0.3.7/README.md" target="_blank" rel="noopener">Read the v0.3.7 README</a> · <a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.3.7" target="_blank" rel="noopener">View the v0.3.7 changenotes</a></p>
-          </details>
-          <details>
-            <summary><span>Install notes — Mac</span><span class="plus" aria-hidden="true">+</span></summary>
-            <p class="install-copy"><b>Open the DMG</b>, drag <b>PallettAi Studio</b> into Applications, then open it. As this first build is unsigned, right-click the app in Applications → <b>Open</b> if macOS shows a security warning. Your projects live in the app's local storage — sign in to sync your plan and license across devices.</p>
-          </details>
-        </div>
-      </section>
-
-      <section class="dl-cta">
-        <div class="cta-band fade-up">
-          <div class="eyebrow"><span class="dot"></span> Free to start</div>
-          <h2>Build your first site<br /><span class="grad">in minutes.</span></h2>
-          <p>Studio is free to use — 2 projects, all core features. Upgrade to Pro when you need unlimited everything.</p>
-          <div class="actions">
-            <a class="button primary pagelink" href="pricing.html">See plans &amp; pricing <span aria-hidden="true">↗</span></a>
-            <a class="button ghost" href="#top">Back to download <span class="arr" aria-hidden="true">→</span></a>
+            <p style="margin-top:12px"><a href="https://github.com/PallettAi/PallettAI-Studio/blob/v0.3.7/README.md" target="_blank" rel="noopener">Read the v0.3.7 README</a> · <a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.3.7" target="_blank" rel="noopener">View the v0.3.7 changenotes</a></p>
           </div>
+        </details>
+        <details>
+          <summary>Install notes — Mac</summary>
+          <div class="a"><b>Open the DMG</b>, drag <b>PallettAi Studio</b> into Applications, then open it. As this first build is unsigned, right-click the app in Applications → <b>Open</b> if macOS shows a security warning. Your projects live in the app's local storage — sign in to sync your plan and license across devices.</div>
+        </details>
+      </div>
+    </section>
+
+    <section class="sec" aria-label="Free to start">
+      <div class="band up">
+        <span class="pill"><span class="dot" aria-hidden="true"></span> Free to start</span>
+        <h2>Build your first site<br /><span class="g">in minutes.</span></h2>
+        <p>Studio is free to start — two projects, all the core features. Move to Pro when you need the limits taken off.</p>
+        <div class="btns">
+          <a class="btn go" href="pricing.html">See plans &amp; pricing ↗</a>
+          <a class="btn alt" href="#top">Back to download →</a>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
+  </main>
 
-    <footer id="site-footer"></footer>
-  </div>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "PallettAi Studio",
-    "operatingSystem": "macOS",
-    "applicationCategory": "DesignApplication",
-    "description": "Design and build fully functioning, animated websites with AI — from first brief to live export. Free to start on Mac.",
-    "url": "https://pallettai.org/downloads",
-    "downloadUrl": "https://github.com/PallettAi/PallettAI-Studio/releases/latest/download/PallettAI-Studio-mac-arm64.dmg",
-    "softwareVersion": "0.3.7",
-    "author": { "@type": "Organization", "name": "PallettAi", "url": "https://pallettai.org/" },
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" },
-    "featureList": [
-      "AI website builder — brief to full site",
-      "Live visual editor with animated sections",
-      "SEO engine on every export (JSON-LD, FAQ rich results, sitemap.xml)",
-      "Launch-grade audit with plain-English fix hints",
-      "Cloud sync — plan and projects follow you across devices"
-    ]
-  }
-  </script>
-  <script>
-    // Windows waitlist form (reuses the contact form's Formspree endpoint; _subject distinguishes the two)
-    function submitWaitlist(e) {
-      e.preventDefault();
-      var form = document.getElementById('win-waitlist');
-      var btn = form.querySelector('button[type=submit]');
-      var status = form.querySelector('.dl-win-status');
-      btn.disabled = true; btn.textContent = 'Joining…';
-      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' }, mode: 'cors' })
-        .then(function (r) {
-          if (r.ok) { status.classList.add('ok'); status.textContent = "You're on the list — we'll email you the moment the Windows build is ready."; form.reset(); }
-          else { status.classList.add('err'); status.textContent = 'Something went wrong — please email pallettai@proton.me instead.'; }
-        })
-        .catch(function () { status.classList.add('err'); status.textContent = 'Network error — please email pallettai@proton.me instead.'; })
-        .finally(function () { btn.disabled = false; btn.textContent = 'Join the waitlist ↗'; });
-      if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: 'windows-waitlist', event: true, title: 'windows-waitlist' });
-      return false;
-    }
-  </script>
+  <footer id="site-footer"></footer>
 </body>
 </html>

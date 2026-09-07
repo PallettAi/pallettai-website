@@ -1,171 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="What PallettAi is building right now: custom websites, lead-capture systems and automated notification tools, updated as each build moves." />
+  <meta name="description" content="What's on the bench right now — websites, lead capture and automation, updated as each job moves." />
   <meta name="author" content="PallettAi" />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#0a0612" />
+  <meta name="theme-color" content="#070B14" />
   <link rel="canonical" href="https://pallettai.org/live" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="PallettAi" />
   <meta property="og:title" content="Live Projects — Websites & Bots in Development | PallettAi" />
-  <meta property="og:description" content="Custom websites, lead-capture systems and automation tools in development at PallettAi." />
+  <meta property="og:description" content="What's on the bench right now — websites, lead capture and automation, updated as each job moves." />
   <meta property="og:url" content="https://pallettai.org/live" />
   <meta property="og:image" content="https://pallettai.org/og-card.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Live Projects — Websites & Bots in Development | PallettAi" />
-  <meta name="twitter:description" content="Custom websites, lead-capture systems and automation tools in development at PallettAi." />
+  <meta name="twitter:description" content="What's on the bench right now — websites, lead capture and automation, updated as each job moves." />
   <meta name="twitter:image" content="https://pallettai.org/og-card.png" />
   <title>Live Projects — Websites & Bots in Development | PallettAi</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://pallettai.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'" />
   <link rel="icon" type="image/svg+xml" href="signal-favicon.svg" />
   <link rel="apple-touch-icon" href="signal-favicon.svg" />
-  <link rel="stylesheet" href="pallettai.css?v=3" />
-  <script src="pallettai.js?v=4" defer></script>
+  <link rel="stylesheet" href="terminal.css?v=1" />
+  <script src="terminal.js?v=1" defer></script>
   <script data-goatcounter="https://pallettai.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-  <noscript><img src="https://pallettai.goatcounter.com/count?p=/noscript" style="display:none" alt=""></noscript>
-  <style>
-.shell { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
-.live-head { position: relative; text-align: center; padding: clamp(56px, 9vw, 96px) 0 clamp(30px, 4vw, 44px); overflow: visible; }
-.orb { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(60px); will-change: transform; animation: drift 11s ease-in-out infinite; }
-.orb.one { width: 460px; height: 460px; top: -140px; left: 8%; background: rgba(139, 92, 246, 0.20); }
-.orb.two { width: 360px; height: 360px; top: 10%; right: -120px; background: rgba(91, 43, 179, 0.16); animation-delay: -4s; }
-.orb.three { width: 300px; height: 300px; bottom: -140px; left: -90px; background: rgba(122, 77, 209, 0.14); animation-delay: -7s; }
-@keyframes drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-24px); } }
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
-h1 {
-      position: relative; z-index: 1; margin: 20px 0 0;
-      font-size: clamp(42px, 7.5vw, 84px); font-weight: 700; letter-spacing: -0.05em; line-height: 1.02;
-      background: var(--grad-title); -webkit-background-clip: text; background-clip: text; color: transparent;
-    }
-.lede { position: relative; z-index: 1; margin: 18px auto 0; max-width: 560px; color: var(--muted); font-size: clamp(15px, 2vw, 18px); line-height: 1.55; letter-spacing: -0.01em; }
-.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: clamp(10px, 2vw, 20px) 0 0; }
-.tile {
-      position: relative; overflow: hidden; display: flex; flex-direction: column;
-      border-radius: 24px; padding: 26px 24px 22px;
-      border: 1px solid var(--line); background: var(--glass);
-      transition: transform 0.4s var(--ease), border-color 0.3s, background 0.3s, box-shadow 0.4s var(--ease);
-    }
-.tile:hover { transform: scale(1.02) translateY(-3px); border-color: rgba(194, 150, 255, 0.35); background: var(--glass-strong); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45); }
-.tile::before { content: ""; position: absolute; width: 240px; height: 240px; top: -100px; right: -80px; border-radius: 50%; filter: blur(55px); opacity: 0.3; background: #5d20cb; }
-.tile > * { position: relative; z-index: 1; }
-.tile.wide { grid-column: 1 / -1; }
-.tile-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
-.status {
-      display: inline-flex; align-items: center; gap: 7px;
-      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-      color: #6ee7a0; border: 1px solid rgba(110, 231, 160, 0.3); background: rgba(110, 231, 160, 0.08);
-      padding: 5px 11px; border-radius: 999px;
-    }
-.status .dot { width: 6px; height: 6px; border-radius: 50%; background: #6ee7a0; box-shadow: 0 0 8px #6ee7a0; animation: pulse 2s infinite; }
-.glyph { font-size: 20px; font-weight: 800; letter-spacing: 0.02em; color: var(--violet-soft); opacity: 0.9; }
-.tile h2 { margin: 0; font-size: clamp(21px, 2.6vw, 27px); font-weight: 700; letter-spacing: -0.03em; }
-.tile .sub { margin: 8px 0 0; font-size: 14px; color: var(--muted); line-height: 1.55; max-width: 620px; }
-.specs { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 9px; }
-.specs li { display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.5; color: var(--muted); }
-.specs li b { flex: 0 0 190px; color: var(--ink); font-weight: 600; }
-@media (max-width: 560px) { .specs li b { flex-basis: auto; } }
-.specs li::before { content: "◆"; color: var(--violet-soft); font-size: 9px; margin-top: 5px; flex-shrink: 0; }
-.facts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-.fact-chip { font-size: 12px; font-weight: 600; color: var(--faint); border: 1px solid var(--line); background: rgba(255, 255, 255, 0.04); padding: 6px 12px; border-radius: 999px; }
-.fact-chip b { color: var(--violet-soft); font-weight: 700; }
-.progress-wrap { margin-top: 22px; }
-.progress-meta { display: flex; justify-content: space-between; font-size: 11.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
-.progress-meta b { color: var(--ink); }
-.progress { height: 7px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); overflow: hidden; }
-.progress .fill {
-      height: 100%; border-radius: 999px;
-      background: linear-gradient(90deg, #8b5cf6, #c296ff);
-      box-shadow: 0 0 14px rgba(139, 92, 246, 0.6);
-      animation: fillIn 1.4s var(--ease) 0.3s both;
-    }
-@keyframes fillIn { from { width: 0 !important; } }
-.tile.placeholder { border-style: dashed; align-items: center; text-align: center; justify-content: center; }
-.tile.placeholder::before { display: none; }
-.tile.placeholder .glyph-big { font-size: 34px; color: var(--violet-soft); margin-bottom: 10px; }
-.tile.placeholder h2 { font-size: 22px; }
-.tile.placeholder .sub { margin: 8px auto 0; }
-.note { text-align: center; color: var(--faint); font-size: 13px; margin: clamp(28px, 4vw, 40px) auto 0; max-width: 640px; line-height: 1.6; }
-.note a { color: var(--violet-soft); text-decoration: none; }
-.note a:hover { text-decoration: underline; }
-.cta-wrap { padding: clamp(40px, 6vw, 64px) 0 0; }
-.cta-band h2 .grad { background: var(--grad-title); -webkit-background-clip: text; background-clip: text; color: transparent; }
-@media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .fade-up { opacity: 1; transform: none; } }
-
-/* ---- overrides of shared chrome ---- */
-body { overflow-x: hidden; }
-  </style>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://formspree.io https://pallettai-grader.coreypallett20.workers.dev https://pallettai.goatcounter.com http://127.0.0.1:8787; media-src 'self'; object-src 'none'; base-uri 'self'; form-action https://formspree.io; frame-src 'none'" />
+  <noscript><img src="https://pallettai.goatcounter.com/count?p=/noscript" style="display:none" alt="" /></noscript>
 </head>
 <body>
-  <div class="shell">
-    <nav class="nav" id="nav" data-page="live" aria-label="Main"></nav>
+  <a class="skip" href="#top">Skip to content</a>
+  <div id="nav" data-page="live"></div>
 
-    <main id="top">
-      <!-- ============ HERO ============ -->
-      <section class="live-head">
-        <div class="orb one"></div><div class="orb two"></div><div class="orb three"></div>
-        <div class="eyebrow fade-up"><span class="dot"></span> On the bench right now</div>
-        <h1 class="fade-up" style="--d:.08s">Live projects.</h1>
-        <p class="lede fade-up" style="--d:.16s">What we're building at this very moment — specs, systems, and progress. Updated as each build moves.</p>
-      </section>
+  <main class="wrap" id="top">
+    <header class="page-hero">
+      <span class="pill"><span class="dot" aria-hidden="true"></span> On the bench right now</span>
+      <h1>Live <span class="g">projects.</span></h1>
+      <p class="lede lede-bar">What's on the bench this week. We'll update this as each job moves — no polished backlog, just the work in progress.</p>
+    </header>
 
-      <!-- ============ LIVE TILES ============ -->
-      <section class="grid" aria-label="Live projects">
-        <article class="tile wide fade-up" style="--d:.05s">
-          <div class="tile-top">
-            <span class="status"><span class="dot"></span> In build</span>
-            <span class="glyph">AR</span>
-          </div>
-          <h2>Architectural practice — custom website &amp; automation suite</h2>
-          <p class="sub">A complete digital front door for an architecture client: a bespoke website built around their portfolio, wired into the systems that turn visitors into booked enquiries — and keep their pipeline warm without them lifting a finger.</p>
-          <ul class="specs">
-            <li><b>Custom website</b> — designed around their project portfolio, mobile-first and fast</li>
-            <li><b>Lead-capture system</b> — enquiry forms routed and structured so no enquiry is ever lost</li>
-            <li><b>Scheduled automated notifications</b> — follow-ups and reminders delivered straight to their phone</li>
-            <li><b>Launch checks</b> — passes the same strict error-catching system every PallettAi build goes through</li>
-          </ul>
-          <div class="facts">
-            <span class="fact-chip">Industry <b>Architecture</b></span>
-            <span class="fact-chip">Systems <b>Website · Lead capture · Automation</b></span>
-            <span class="fact-chip">Phone delivery <b>Telegram</b></span>
-          </div>
-          <div class="progress-wrap" aria-label="Build progress">
-            <div class="progress-meta"><span>Build progress</span><b>Design &amp; build phase</b></div>
-            <div class="progress"><div class="fill" style="width: 45%;"></div></div>
-          </div>
-        </article>
-
-        <article class="tile placeholder fade-up" style="--d:.12s">
-          <div class="glyph-big">＋</div>
-          <h2>Your project on this board</h2>
-          <p class="sub">Every tile here started as a conversation. Websites, tools, bots — if it can be built, it can be built next. Local Midlands businesses get a discount.</p>
-          <div class="facts" style="justify-content: center;">
-            <span class="fact-chip">Status <b>Accepting new builds</b></span>
-          </div>
-        </article>
-      </section>
-
-      <p class="note fade-up">Shipped work lives on the <a href="portfolio.html" class="pagelink">showcase page</a> — this board is only what's actively being built. Packages and aftercare are on the <a href="pricing.html" class="pagelink">pricing page</a>.</p>
-
-      <!-- ============ CTA BAND ============ -->
-      <section class="cta-wrap">
-        <div class="cta-band fade-up">
-          <div class="eyebrow"><span class="dot"></span> Want the next tile?</div>
-          <h2>Let's put your project<br /><span class="grad">on the board.</span></h2>
-          <p>Tell us roughly what you want to make, and we can discuss pricing and a deposit so we can build you a preview model.</p>
-          <div class="actions">
-            <a class="button primary pagelink" href="index.html#contact">Start your project <span aria-hidden="true">↗</span></a>
-            <a class="button ghost pagelink" href="portfolio.html">See finished work <span class="arr" aria-hidden="true">→</span></a>
-          </div>
+    <section class="sec" aria-label="Live projects">
+      <article class="tile up" style="--d:.05s">
+        <div class="tile-top">
+          <span class="badge"><span class="dot" aria-hidden="true"></span> In build</span>
+          <span class="case-glyph" aria-hidden="true">AR</span>
         </div>
-      </section>
-    </main>
+        <h2>Architectural practice — custom website &amp; automation suite</h2>
+        <p class="sub">A proper front door for an architecture client: a site built around their portfolio, with the bits behind it that turn a visitor into a booked enquiry — and keep following up so they don't have to.</p>
+        <ul class="specs">
+          <li><b>Custom website</b> — designed around their project work, fast, and built for a phone first</li>
+          <li><b>Lead-capture system</b> — enquiry forms routed properly, so nothing disappears into a junk folder</li>
+          <li><b>Scheduled automated notifications</b> — follow-ups and reminders that land on their phone</li>
+          <li><b>Launch checks</b> — the same error and security pass every PallettAi build goes through</li>
+        </ul>
+        <div class="chips">
+          <span class="c">Industry <b>Architecture</b></span>
+          <span class="c">Systems <b>Website · Lead capture · Automation</b></span>
+          <span class="c">Phone delivery <b>Telegram</b></span>
+        </div>
+        <div class="prog" aria-label="Build progress">
+          <div class="prog-meta"><span>Build progress</span><b>Design &amp; build phase</b></div>
+          <div class="prog-track"><div class="prog-fill" style="width:45%"></div></div>
+        </div>
+      </article>
 
-    <footer id="site-footer"></footer>
-  </div>
-  <!-- shared behaviour lives in pallettai.js (head) -->
+      <article class="tile dashed up" style="--d:.12s">
+        <div class="glyph-big" aria-hidden="true">＋</div>
+        <h2>Your project on this board</h2>
+        <p class="sub">Every tile here started with a conversation. A site, a tool, a bot — if it can be built, it can be next. Local Midlands businesses get a discount.</p>
+        <div class="chips" style="justify-content:center">
+          <span class="c">Status <b>Accepting new builds</b></span>
+        </div>
+      </article>
+
+      <p class="after up">Finished work sits on the <a href="portfolio.html">showcase page</a>. This board is only what's in progress. Prices are on the <a href="pricing.html">pricing page</a>.</p>
+    </section>
+
+    <section class="sec" aria-label="Start a project">
+      <div class="band up">
+        <span class="pill"><span class="dot" aria-hidden="true"></span> Want the next tile?</span>
+        <h2>Let's put your project<br /><span class="g">on the board.</span></h2>
+        <p>A few sentences is enough. We'll come back with a price, a small deposit, and a preview before anything goes live.</p>
+        <div class="btns">
+          <a class="btn go" href="index.html#contact">Start your project ↗</a>
+          <a class="btn alt" href="portfolio.html">See finished work →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
 </body>
 </html>

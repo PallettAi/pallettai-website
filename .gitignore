@@ -1,2 +1,11 @@
-# Internal/local tooling
+# Local / internal
 .freebuff/
+.DS_Store
+.env
+.env.*
+*.local
+
+# Design previews that must never ship
+analytics-preview-*.html
+redesign-demo.html
+redesign/

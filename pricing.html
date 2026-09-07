@@ -1,214 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Clear all-in pricing: websites from £249, website refreshes from £149, custom builds & Telegram bots from £349, and aftercare from £19/mo. Pay online by card." />
+  <meta name="description" content="Websites from £249, refreshes from £149, custom builds and Telegram bots from £349, aftercare from £19 a month. Pay by card. Nothing hidden." />
   <meta name="author" content="PallettAi" />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#0a0612" />
+  <meta name="theme-color" content="#070B14" />
   <link rel="canonical" href="https://pallettai.org/pricing" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="PallettAi" />
-  <meta property="og:title" content="Website Packages & Aftercare Plans UK | PallettAi" />
-  <meta property="og:description" content="Websites from £249, refreshes from £149, custom builds & bots from £349, aftercare from £19/mo." />
+  <meta property="og:title" content="Website Packages &amp; Aftercare Plans UK | PallettAi Pricing" />
+  <meta property="og:description" content="Websites from £249, refreshes from £149, custom builds and Telegram bots from £349, aftercare from £19 a month. Pay by card. Nothing hidden." />
   <meta property="og:url" content="https://pallettai.org/pricing" />
   <meta property="og:image" content="https://pallettai.org/og-card.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Website Packages & Aftercare Plans UK | PallettAi" />
-  <meta name="twitter:description" content="Websites from £249, refreshes from £149, custom builds & bots from £349, aftercare from £19/mo." />
+  <meta name="twitter:title" content="Website Packages &amp; Aftercare Plans UK | PallettAi Pricing" />
+  <meta name="twitter:description" content="Websites from £249, refreshes from £149, custom builds and Telegram bots from £349, aftercare from £19 a month. Pay by card. Nothing hidden." />
   <meta name="twitter:image" content="https://pallettai.org/og-card.png" />
-  <title>Website Packages & Aftercare Plans UK | PallettAi Pricing</title>
+  <title>Website Packages &amp; Aftercare Plans UK | PallettAi Pricing</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://pallettai.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'" />
   <link rel="icon" type="image/svg+xml" href="signal-favicon.svg" />
   <link rel="apple-touch-icon" href="signal-favicon.svg" />
-  <link rel="stylesheet" href="pallettai.css?v=3" />
-  <script src="pallettai.js?v=4" defer></script>
+  <link rel="stylesheet" href="terminal.css?v=1" />
+  <script src="terminal.js?v=1" defer></script>
   <script data-goatcounter="https://pallettai.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-  <noscript><img src="https://pallettai.goatcounter.com/count?p=/noscript" style="display:none" alt=""></noscript>
-  <style>
-.head { width: min(1120px, calc(100% - 40px)); margin: 0 auto; padding: clamp(56px, 8vw, 88px) 0 10px; text-align: center; position: relative; }
-h1 { margin: 14px 0 0; font-size: clamp(44px, 7.5vw, 92px); line-height: 0.98; letter-spacing: -0.045em; font-weight: 700; padding-bottom: 0.1em; }
-h1 .grad { background: var(--grad-title); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.lede { margin: 20px auto 0; max-width: 560px; font-size: clamp(16px, 2vw, 20px); line-height: 1.5; color: var(--muted); }
-.toggle-wrap { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 30px; font-size: 14px; font-weight: 600; color: var(--faint); }
-.toggle-wrap .save { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; color: #6ee7a0; border: 1px solid rgba(74, 222, 128, 0.35); background: rgba(74, 222, 128, 0.08); padding: 3px 9px; border-radius: 999px; }
-.toggle {
-      position: relative; width: 58px; height: 32px; border-radius: 999px; cursor: pointer;
-      background: rgba(255, 255, 255, 0.08); border: 1px solid var(--line);
-      transition: background 0.3s;
-    }
-.toggle:hover { background: rgba(255, 255, 255, 0.12); }
-.toggle .knob {
-      position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%;
-      background: linear-gradient(135deg, #a06bff, #7a4dd1);
-      box-shadow: 0 2px 10px rgba(122, 77, 209, 0.6);
-      transition: transform 0.55s var(--spring);
-    }
-.toggle[aria-checked="true"] .knob { transform: translateX(26px); }
-.toggle-wrap .side.active { color: var(--ink); }
-.wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
-.section-pad { padding: clamp(40px, 5.5vw, 64px) 0 0; }
-.section-head { text-align: center; margin-top: 6px; }
-.section-head h2 { margin: 8px 0 0; font-size: clamp(28px, 4.4vw, 40px); font-weight: 700; letter-spacing: -0.04em; line-height: 1.08; }
-.tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
-.tier {
-      position: relative; overflow: hidden;
-      border-radius: 24px; padding: 30px 26px 26px;
-      border: 1px solid var(--line); background: var(--glass);
-      display: flex; flex-direction: column;
-      transition: transform 0.4s var(--ease), border-color 0.3s, background 0.3s, box-shadow 0.4s var(--ease);
-    }
-.tier::before { content: ""; position: absolute; width: 240px; height: 240px; top: -90px; right: -80px; border-radius: 50%; filter: blur(50px); opacity: 0.35; }
-.tier:nth-child(1)::before { background: #178a72; }
-.tier:nth-child(2)::before { background: #5d20cb; }
-.tier:nth-child(3)::before { background: #c87a2a; }
-.tier:hover { transform: scale(1.02) translateY(-4px); border-color: rgba(194, 150, 255, 0.35); background: var(--glass-strong); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45); }
-.tier:hover::before { opacity: 0.55; }
-.tier > * { position: relative; z-index: 1; }
-.tier.featured { border-color: rgba(194, 150, 255, 0.4); background: linear-gradient(170deg, rgba(139, 92, 246, 0.14), rgba(255, 255, 255, 0.04) 60%); box-shadow: 0 20px 60px rgba(91, 43, 179, 0.3); }
-.tier .flag { position: absolute; top: 18px; right: 18px; z-index: 2; font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--violet-soft); border: 1px solid rgba(194, 150, 255, 0.35); background: rgba(139, 92, 246, 0.12); padding: 4px 10px; border-radius: 999px; }
-.tier .cat { color: var(--faint); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
-.tier h2 { margin: 8px 0 0; font-size: 24px; letter-spacing: -0.03em; font-weight: 700; }
-.price-line { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-top: 14px; min-height: 64px; }
-.price-line .amount { font-size: 44px; font-weight: 700; letter-spacing: -0.05em; line-height: 1; background: var(--grad-title); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.price-line .per { font-size: 13.5px; color: var(--faint); font-weight: 500; }
-.price-line .was { font-size: 15px; color: var(--faint); text-decoration: line-through; }
-.price-line.bump .amount { animation: price-pop 0.55s var(--spring); }
-@keyframes price-pop { 0% { transform: scale(0.86); opacity: 0.4; filter: blur(3px); } 100% { transform: scale(1); opacity: 1; filter: blur(0); } }
-.tier ul { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 10px; flex: 1; }
-.tier li { display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.5; color: var(--muted); }
-.tier li::before { content: "✓"; color: var(--violet-soft); font-size: 12px; font-weight: 800; margin-top: 2px; flex-shrink: 0; }
-.tier li b { color: var(--ink); font-weight: 600; }
-.tier .button { margin-top: 24px; justify-content: center; }
-.builds { margin-top: 40px; border: 1px solid var(--line); border-radius: 20px; background: var(--glass); padding: 6px 6px; }
-.build-row { display: grid; grid-template-columns: 1.3fr 2fr auto; align-items: center; gap: 18px; padding: 18px 20px; border-radius: 15px; transition: background 0.25s; }
-.build-row + .build-row { border-top: 1px solid rgba(255, 255, 255, 0.06); }
-.build-row:hover { background: rgba(255, 255, 255, 0.04); }
-.build-row .b-name { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
-.build-row .b-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
-.build-row .b-price { font-size: 19px; font-weight: 700; letter-spacing: -0.03em; white-space: nowrap; display: flex; flex-direction: column; align-items: flex-end; gap: 7px; }
-.build-row .b-price > span { background: var(--grad-title); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.b-price .b-start { font-size: 12px; font-weight: 600; letter-spacing: -0.01em; white-space: nowrap; color: var(--violet-soft); border: 1px solid rgba(194, 150, 255, 0.3); background: rgba(139, 92, 246, 0.1); padding: 6px 12px; border-radius: 999px; transition: transform 0.3s var(--ease), border-color 0.25s, background 0.25s; }
-.b-price .b-start:hover { transform: scale(1.05); border-color: rgba(194, 150, 255, 0.6); background: rgba(139, 92, 246, 0.18); }
-.balance-note { margin: 16px 0 0; text-align: center; font-size: 12.5px; color: var(--faint); }
-.balance-note a { color: var(--violet-soft); text-decoration: underline; text-underline-offset: 3px; }
-@media (max-width: 700px) { .build-row .b-price { align-items: flex-start; } }
-.build-head { display: grid; grid-template-columns: 1.3fr 2fr auto; gap: 18px; padding: 0 20px 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
-.matrix-wrap { margin-top: 44px; overflow-x: auto; border: 1px solid var(--line); border-radius: 20px; background: var(--glass); }
-table.matrix { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 640px; }
-.matrix th, .matrix td { padding: 14px 18px; text-align: center; }
-.matrix th:first-child, .matrix td:first-child { text-align: left; color: var(--muted); font-weight: 500; }
-.matrix thead th { font-size: 13px; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); border-bottom: 1px solid var(--line); }
-.matrix thead th .th-sub { display: block; font-size: 11px; font-weight: 500; color: var(--faint); margin-top: 2px; }
-.matrix tbody tr { transition: background 0.2s; }
-.matrix tbody tr:hover { background: rgba(255, 255, 255, 0.035); }
-.matrix tbody tr + tr td { border-top: 1px solid rgba(255, 255, 255, 0.06); }
-.matrix .yes { color: #6ee7a0; font-weight: 800; }
-.matrix .no { color: var(--faint); }
-.matrix td .val { color: var(--ink); font-weight: 600; }
-.faq { max-width: 680px; margin: 36px auto 0; }
-.faq details { border: 1px solid var(--line); border-radius: 16px; background: var(--glass); padding: 0 20px; margin-bottom: 10px; transition: background 0.25s, border-color 0.25s; }
-.faq details:hover { background: var(--glass-strong); }
-.faq details[open] { border-color: rgba(194, 150, 255, 0.35); background: var(--glass-strong); }
-.faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 17px 0; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
-.faq summary::-webkit-details-marker { display: none; }
-.faq summary .plus { font-size: 19px; font-weight: 400; color: var(--violet-soft); transition: transform 0.4s var(--ease); flex-shrink: 0; }
-.faq details[open] summary .plus { transform: rotate(45deg); }
-.faq .answer { padding: 0 0 18px; font-size: 14px; line-height: 1.6; color: var(--muted); animation: answer-in 0.45s var(--ease); }
-@keyframes answer-in { from { opacity: 0; transform: translateY(-6px); } }
-.fineprint { margin: 30px auto 0; max-width: 720px; text-align: center; color: var(--faint); font-size: 12.5px; line-height: 1.7; }
-.fineprint b { color: var(--violet-soft); font-weight: 600; }
-.portal-note { margin: 16px auto 0; text-align: center; font-size: 13.5px; color: var(--muted); }
-.portal-note a { color: var(--violet-soft); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; transition: text-decoration-thickness 0.2s; }
-.portal-note a:hover { text-decoration-thickness: 2px; }
-.cta-band h2 .grad { background: var(--grad-title); -webkit-background-clip: text; background-clip: text; color: transparent; }
-@media (max-width: 900px) { .tiers { grid-template-columns: 1fr; } .tier.featured { order: -1; } }
-@media (max-width: 700px) {
-      .build-head { display: none; }
-      .build-row { grid-template-columns: 1fr; gap: 8px; }
-    }
-@media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { animation: none !important; transition: none !important; }
-      .fade-up { opacity: 1; transform: none; }
-    }
-  </style>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://formspree.io https://pallettai-grader.coreypallett20.workers.dev https://pallettai.goatcounter.com http://127.0.0.1:8787; media-src 'self'; object-src 'none'; base-uri 'self'; form-action https://formspree.io; frame-src 'none'" />
+  <noscript><img src="https://pallettai.goatcounter.com/count?p=/noscript" style="display:none" alt="" /></noscript>
 </head>
 <body>
-  <nav class="nav" id="nav" data-page="pricing" aria-label="Main"></nav>
+  <a class="skip" href="#top">Skip to content</a>
+  <div id="nav" data-page="pricing"></div>
 
-  <main>
-    <header class="head">
-      <div class="kicker fade-up">Pricing</div>
-      <h1 class="fade-up" style="--d:.08s">Simple pricing.<br /><span class="grad">No surprises.</span></h1>
-      <p class="lede fade-up" style="--d:.16s">One-time builds to get you online, and monthly aftercare tiers that keep you there. Every feature listed — nothing hidden, ever.</p>
-      <div class="toggle-wrap fade-up" style="--d:.24s">
-        <span class="side active" id="lbl-monthly">Monthly</span>
-        <button class="toggle" id="billing-toggle" role="switch" aria-checked="false" aria-label="Toggle annual billing">
-          <span class="knob"></span>
-        </button>
-        <span class="side" id="lbl-annual">Annual</span>
+  <main class="wrap" id="top">
+    <header class="page-hero">
+      <span class="pill"><span class="dot" aria-hidden="true"></span> Pricing</span>
+      <h1>Simple pricing.<br /><span class="g">No surprises.</span></h1>
+      <p class="lede lede-bar">A one-off build to get you online, then monthly aftercare if you want us to keep looking after it. Everything is written down here. Nothing gets added later as a surprise.</p>
+      <div class="switch-row">
+        <span class="lbl active" id="lbl-monthly">Monthly</span>
+        <button class="switch" id="billing-switch" type="button" role="switch" aria-checked="false" aria-label="Toggle annual billing"></button>
+        <span class="lbl" id="lbl-annual">Annual</span>
         <span class="save">2 months free</span>
       </div>
     </header>
 
-    <div class="wrap section-pad">
-      <!-- ============ ONE-TIME BUILDS — MAIN PACKAGES FIRST ============ -->
-      <div class="section-head fade-up" style="--d:.02s">
-        <div class="kicker">Start here</div>
-        <h2>One-time builds.<br /><span class="grad">Yours from day one.</span></h2>
+    <!-- ============ ONE-TIME BUILDS ============ -->
+    <section class="sec" aria-label="One-time builds">
+      <div class="sec-head up">
+        <div>
+          <div class="kicker">Start here</div>
+          <h2>One-time builds.<br /><span class="g">Yours from day one.</span></h2>
+        </div>
+        <p class="note">The first 30 days of aftercare come with the build. We don't launch you and disappear.</p>
       </div>
-      <div class="builds fade-up" style="--d:.08s" aria-label="One-time build packages">
-        <div class="build-head"><span>Package</span><span>What's included</span><span>From</span></div>
-        <div class="build-row">
-          <div class="b-name">Create Website</div>
-          <div class="b-desc">Custom one-page site, mobile-first and fast, contact form wired up, local SEO basics, preview before launch, two revision rounds.</div>
-          <div class="b-price"><span>£249</span><a class="b-start" href="https://buy.stripe.com/6oU28k1lzbgpdUWcKz2B20g" target="_blank" rel="noopener">Start with £99 deposit ↗</a></div>
-        </div>
-        <div class="build-row">
-          <div class="b-name">Refresh &amp; Upgrade</div>
-          <div class="b-desc">New life for an existing site — modern design, speed &amp; mobile fixes, sharper content, before/after health scores.</div>
-          <div class="b-price"><span>£149</span><a class="b-start" href="https://buy.stripe.com/6oUdR2d4hcktdUW9yn2B20f" target="_blank" rel="noopener">Start with £49 deposit ↗</a></div>
-        </div>
-        <div class="build-row">
-          <div class="b-name">Custom Builds &amp; Bots</div>
-          <div class="b-desc">Multi-page sites, booking flows, interactive tools, Telegram bots, API integrations — scoped, quoted, milestone previews.</div>
-          <div class="b-price"><span>£349</span><a class="b-start" href="https://buy.stripe.com/00w9AM9S5709aIKh0P2B20h" target="_blank" rel="noopener">Start with £149 deposit ↗</a></div>
-        </div>
-      </div>
-      <p class="balance-note fade-up">Already approved your design &amp; plan? Pay your remaining balance — <a href="https://buy.stripe.com/8x2cMY8O184d8AC25V2B20i" target="_blank" rel="noopener">Create Website £150</a> · <a href="https://buy.stripe.com/5kQ6oAfcp5W52ce6mb2B20j" target="_blank" rel="noopener">Refresh £100</a> · <a href="https://buy.stripe.com/4gM14gfcp98h2cefWL2B20k" target="_blank" rel="noopener">Custom Builds £200</a></p>
 
-      <!-- ============ AFTERCARE SUBSCRIPTION TIERS ============ -->
-      <div class="section-head fade-up" style="--d:.02s">
-        <div class="kicker">Then keep it running</div>
-        <h2 id="aftercare-heading">Aftercare that <span class="grad">never sleeps.</span></h2>
+      <div class="tbl-wrap up" style="--d:.06s">
+        <table class="t">
+          <thead>
+            <tr><th>Package</th><th>What's included</th><th>From</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="pkg">Create Website</td>
+              <td class="desc">A custom one-page site that works on a phone, loads quickly, and has a working contact form. Local SEO basics, a preview before launch, and two rounds of changes.
+                <div style="margin-top:12px"><a class="btn go sm" href="https://buy.stripe.com/6oU28k1lzbgpdUWcKz2B20g" target="_blank" rel="noopener">Start with £99 deposit ↗</a></div>
+              </td>
+              <td class="amt">£249</td>
+            </tr>
+            <tr>
+              <td class="pkg">Refresh &amp; Upgrade</td>
+              <td class="desc">A tired site, made useful again — cleaner design, faster load, better on mobile, sharper copy, and a before/after health score so you can see the difference.
+                <div style="margin-top:12px"><a class="btn go sm" href="https://buy.stripe.com/6oUdR2d4hcktdUW9yn2B20f" target="_blank" rel="noopener">Start with £49 deposit ↗</a></div>
+              </td>
+              <td class="amt">£149</td>
+            </tr>
+            <tr>
+              <td class="pkg">Custom Builds &amp; Bots</td>
+              <td class="desc">Multi-page sites, booking, tools, Telegram bots, API work. We agree the scope, quote a fixed price, and show you previews as we go.
+                <div style="margin-top:12px"><a class="btn go sm" href="https://buy.stripe.com/00w9AM9S5709aIKh0P2B20h" target="_blank" rel="noopener">Start with £149 deposit ↗</a></div>
+              </td>
+              <td class="amt">£349</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="tiers" id="tiers" aria-label="Aftercare subscription tiers" style="margin-top: 28px;">
-        <article class="tier fade-up" style="--d:.05s">
-          <div class="cat">Stay online</div>
-          <h2>Care Lite</h2>
-          <div class="price-line">
-            <span class="amount" data-monthly="£19" data-annual="£15">£19</span>
-            <span class="per">/mo<span class="annual-note" hidden> · billed yearly</span></span>
-          </div>
+
+      <p class="after up">Already approved your design &amp; plan? Pay your remaining balance —
+        <a href="https://buy.stripe.com/8x2cMY8O184d8AC25V2B20i" target="_blank" rel="noopener">Create Website £150</a> ·
+        <a href="https://buy.stripe.com/5kQ6oAfcp5W52ce6mb2B20j" target="_blank" rel="noopener">Refresh £100</a> ·
+        <a href="https://buy.stripe.com/4gM14gfcp98h2cefWL2B20k" target="_blank" rel="noopener">Custom Builds £200</a>
+      </p>
+    </section>
+
+    <!-- ============ AFTERCARE TIERS ============ -->
+    <section class="sec" aria-label="Aftercare plans">
+      <div class="sec-head up">
+        <div>
+          <div class="kicker">Then keep it running</div>
+          <h2 id="aftercare-heading">Aftercare that <span class="g">never sleeps.</span></h2>
+        </div>
+        <p class="note">No lock-in. Change tier or cancel with 30 days' notice — whenever you like, no awkward phone call.</p>
+      </div>
+
+      <div class="tiers">
+        <div class="tier up" style="--d:.05s">
+          <span class="cat">Stay online</span>
+          <h3>Care Lite</h3>
+          <div class="price"><span class="amount" data-monthly="£19" data-annual="£15">£19</span><span class="per">/mo</span></div>
+          <div class="annual-note"></div>
           <ul>
             <li>Monthly <b>backup &amp; uptime check</b></li>
             <li>Security and SSL monitoring</li>
             <li>One content or image swap per month</li>
             <li>Email support — answered within 48 hours</li>
           </ul>
-          <a class="button ghost" href="https://buy.stripe.com/14A4gs0hvckteZ025V2B20a" target="_blank" rel="noopener" data-monthly="https://buy.stripe.com/14A4gs0hvckteZ025V2B20a" data-annual="https://buy.stripe.com/fZudR2aW984d7wyaCr2B20c">Subscribe — £19/mo</a>
-        </article>
+          <a class="btn go" data-monthly="https://buy.stripe.com/14A4gs0hvckteZ025V2B20a" data-annual="https://buy.stripe.com/fZudR2aW984d7wyaCr2B20c" data-label-monthly="Subscribe — £19/mo" data-label-annual="Subscribe — £15/mo" href="https://buy.stripe.com/14A4gs0hvckteZ025V2B20a" target="_blank" rel="noopener noreferrer">Subscribe — £19/mo</a>
+        </div>
 
-        <article class="tier featured fade-up" style="--d:.1s">
+        <div class="tier feat up" style="--d:.1s">
           <span class="flag">Most popular</span>
-          <div class="cat">Hands-off upkeep</div>
-          <h2>Care</h2>
-          <div class="price-line">
-            <span class="amount" data-monthly="£49" data-annual="£39">£49</span>
-            <span class="per">/mo<span class="annual-note" hidden> · billed yearly</span></span>
-          </div>
+          <span class="cat">Hands-off upkeep</span>
+          <h3>Care</h3>
+          <div class="price"><span class="amount" data-monthly="£49" data-annual="£39">£49</span><span class="per">/mo</span></div>
+          <div class="annual-note"></div>
           <ul>
             <li>Everything in Care Lite</li>
             <li><b>Small changes handled for you</b> — no tech skills needed</li>
@@ -216,16 +130,14 @@ table.matrix { width: 100%; border-collapse: collapse; font-size: 13.5px; min-wi
             <li>Priority support when you need a hand</li>
             <li>Seasonal refresh — banners, offers, announcements</li>
           </ul>
-          <a class="button primary" href="https://buy.stripe.com/8x2dR25BPfwF4kmeSH2B209" target="_blank" rel="noopener" data-monthly="https://buy.stripe.com/8x2dR25BPfwF4kmeSH2B209" data-annual="https://buy.stripe.com/28E6oAd4hacl9EG6mb2B20d">Subscribe — £49/mo</a>
-        </article>
+          <a class="btn go" data-monthly="https://buy.stripe.com/8x2dR25BPfwF4kmeSH2B209" data-annual="https://buy.stripe.com/28E6oAd4hacl9EG6mb2B20d" data-label-monthly="Subscribe — £49/mo" data-label-annual="Subscribe — £39/mo" href="https://buy.stripe.com/8x2dR25BPfwF4kmeSH2B209" target="_blank" rel="noopener noreferrer">Subscribe — £49/mo</a>
+        </div>
 
-        <article class="tier fade-up" style="--d:.15s">
-          <div class="cat">Grow with it</div>
-          <h2>Care Plus</h2>
-          <div class="price-line">
-            <span class="amount" data-monthly="£99" data-annual="£79">£99</span>
-            <span class="per">/mo<span class="annual-note" hidden> · billed yearly</span></span>
-          </div>
+        <div class="tier up" style="--d:.15s">
+          <span class="cat">Grow with it</span>
+          <h3>Care Plus</h3>
+          <div class="price"><span class="amount" data-monthly="£99" data-annual="£79">£99</span><span class="per">/mo</span></div>
+          <div class="annual-note"></div>
           <ul>
             <li>Everything in Care</li>
             <li>Up to <b>2 hours of build time</b> every month — new pages, features, tweaks</li>
@@ -233,119 +145,98 @@ table.matrix { width: 100%; border-collapse: collapse; font-size: 13.5px; min-wi
             <li>Same-day replies on weekdays</li>
             <li>Discounted rates on new one-off projects</li>
           </ul>
-          <a class="button ghost" href="https://buy.stripe.com/cNi7sE2pD5W5cQS7qf2B208" target="_blank" rel="noopener" data-monthly="https://buy.stripe.com/cNi7sE2pD5W5cQS7qf2B208" data-annual="https://buy.stripe.com/5kQdR2aW9bgpdUWcKz2B20e">Subscribe — £99/mo</a>
-        </article>
+          <a class="btn go" data-monthly="https://buy.stripe.com/cNi7sE2pD5W5cQS7qf2B208" data-annual="https://buy.stripe.com/5kQdR2aW9bgpdUWcKz2B20e" data-label-monthly="Subscribe — £99/mo" data-label-annual="Subscribe — £79/mo" href="https://buy.stripe.com/cNi7sE2pD5W5cQS7qf2B208" target="_blank" rel="noopener noreferrer">Subscribe — £99/mo</a>
+        </div>
       </div>
+    </section>
 
-      <!-- ============ FEATURE MATRIX ============ -->
-      <div class="matrix-wrap fade-up" aria-label="Feature comparison">
-        <table class="matrix">
+    <!-- ============ COMPARISON MATRIX ============ -->
+    <section class="sec" aria-label="Feature comparison">
+      <div class="sec-head solo up">
+        <div>
+          <div class="kicker">Line by line</div>
+          <h2>Compare <span class="g">aftercare.</span></h2>
+        </div>
+      </div>
+      <div class="tbl-wrap up" style="--d:.06s">
+        <table class="t">
           <thead>
             <tr>
-              <th scope="col">Compare aftercare</th>
-              <th scope="col">Care Lite<span class="th-sub">£19/mo</span></th>
-              <th scope="col">Care<span class="th-sub">£49/mo</span></th>
-              <th scope="col">Care Plus<span class="th-sub">£99/mo</span></th>
+              <th>Compare aftercare</th>
+              <th>Care Lite <span class="val">£19/mo</span></th>
+              <th>Care <span class="val">£49/mo</span></th>
+              <th>Care Plus <span class="val">£99/mo</span></th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>Backup &amp; uptime monitoring</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-            <tr><td>Security &amp; SSL monitoring</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-            <tr><td>Content / image swaps</td><td><span class="val">1 / mo</span></td><td class="yes">✓</td><td class="yes">✓</td></tr>
-            <tr><td>Small changes done for you</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-            <tr><td>Monthly health-check report</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-            <tr><td>Seasonal refreshes</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-            <tr><td>Monthly build time</td><td class="no">—</td><td class="no">—</td><td><span class="val">2 hrs</span></td></tr>
-            <tr><td>Performance &amp; SEO tune-ups</td><td class="no">—</td><td class="no">—</td><td class="yes">Quarterly</td></tr>
-            <tr><td>Support response time</td><td><span class="val">48h</span></td><td><span class="val">Priority</span></td><td><span class="val">Same day</span></td></tr>
-            <tr><td>Discount on new projects</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
+            <tr><td class="feat">Backup &amp; uptime monitoring</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><td class="feat">Security &amp; SSL monitoring</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><td class="feat">Content / image swaps</td><td class="val">1 / mo</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><td class="feat">Small changes done for you</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><td class="feat">Monthly health-check report</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><td class="feat">Seasonal refreshes</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><td class="feat">Monthly build time</td><td class="no">—</td><td class="no">—</td><td class="val">2 hrs</td></tr>
+            <tr><td class="feat">Performance &amp; SEO tune-ups</td><td class="no">—</td><td class="no">—</td><td class="val">Quarterly</td></tr>
+            <tr><td class="feat">Support response time</td><td class="val">48h</td><td class="val">Priority</td><td class="val">Same day</td></tr>
+            <tr><td class="feat">Discount on new projects</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
           </tbody>
         </table>
       </div>
 
-      <p class="fineprint fade-up">No lock-in — cancel any aftercare tier with <b>30 days' notice</b>. Annual billing saves <b>two months</b> (prices shown are the effective monthly rate). Every build includes <b>30 days of free aftercare</b> so you're never launched and left. Local Midlands businesses get <b>10% off</b> their first three months of any tier.</p>
+      <p class="after up">No lock-in — cancel any aftercare tier with <b>30 days' notice</b>. Annual billing saves <b>two months</b> (prices shown are the effective monthly rate). Every build includes <b>30 days of free aftercare</b> so you're never launched and left. Local Midlands businesses get <b>10% off</b> their first three months of any tier.</p>
+      <p class="after up">Already on aftercare? <a href="https://billing.stripe.com/p/login/5kQ5kwaW94S15oqcKz2B200" target="_blank" rel="noopener">Manage your plan, billing &amp; invoices in the customer portal ↗</a></p>
+    </section>
 
-      <p class="portal-note fade-up">Already on aftercare? <a href="https://billing.stripe.com/p/login/5kQ5kwaW94S15oqcKz2B200" target="_blank" rel="noopener">Manage your plan, billing &amp; invoices in the customer portal <span aria-hidden="true">↗</span></a></p>
-
-      <!-- ============ FAQ ============ -->
-      <div class="faq fade-up" aria-label="Frequently asked questions">
-        <details open>
-          <summary>How does a project start?<span class="plus">+</span></summary>
-          <div class="answer">Send the enquiry form or an email describing your idea. We reply within 48 hours, agree pricing and a small deposit, then build you a preview model before anything goes live. You approve the preview before we launch.</div>
-        </details>
-        <details>
-          <summary>Can I pay online by card?<span class="plus">+</span></summary>
-          <div class="answer">Yes — every payment runs through Stripe. New projects start with a deposit link (Refresh £49, Create Website £99, Custom Builds &amp; Bots £149); the remaining balance is paid by a second link or invoice before launch. Aftercare is a monthly or annual subscription you can manage any time in the <a href="https://billing.stripe.com/p/login/5kQ5kwaW94S15oqcKz2B200" target="_blank" rel="noopener">customer portal</a>.</div>
-        </details>
-        <details>
-          <summary>What does aftercare actually cover?<span class="plus">+</span></summary>
-          <div class="answer">The routine work of keeping a site healthy: backups, security monitoring, small content changes, and fixes. Care and Care Plus add a monthly health-check report and hands-on changes; Care Plus adds monthly build time for new pages or features. It's optional — every site we build runs fine without it, but it's the easiest way to stay fresh and secure.</div>
-        </details>
-        <details>
-          <summary>Do I own everything you build?<span class="plus">+</span></summary>
-          <div class="answer">Yes — code, content, and domain are yours outright. If we ever part ways, you get a full handover walkthrough so nothing is locked behind us.</div>
-        </details>
-        <details>
-          <summary>Can I switch tiers or cancel later?<span class="plus">+</span></summary>
-          <div class="answer">Any time. Upgrade, downgrade, or cancel with 30 days' notice — no exit fees, no awkward conversations. If you cancel a build's aftercare within the free 30 days, you pay nothing at all. Once subscribed, you can <a href="https://billing.stripe.com/p/login/5kQ5kwaW94S15oqcKz2B200" target="_blank" rel="noopener">manage everything in the customer portal</a> — view invoices, update payment details, or cancel in a couple of clicks.</div>
-        </details>
-        <details>
-          <summary>Why "from £149" / "from £349"?<span class="plus">+</span></summary>
-          <div class="answer">Refreshes and custom builds vary with scope — a three-page refresh costs less than an e-commerce flow. We quote a fixed price up front after a short conversation, and that number doesn't move afterwards.</div>
-        </details>
-      </div>
-
-      <div class="cta-band fade-up">
-        <div class="kicker">Have an idea?</div>
-        <h2>Let's bring it<br /><span class="grad">to life.</span></h2>
-        <p>Tell us roughly what you want to make, and we can discuss pricing and a deposit so we can build you a preview model.</p>
-        <div class="actions">
-          <a class="button primary pagelink" href="index.html#contact">Start your project</a>
-          <a class="button ghost pagelink" href="index.html#grader">Run the free site check</a>
+    <!-- ============ FAQ ============ -->
+    <section class="sec" aria-label="Frequently asked questions">
+      <div class="sec-head solo up">
+        <div>
+          <div class="kicker">Questions</div>
+          <h2>Answered <span class="g">straight.</span></h2>
         </div>
       </div>
-    </div>
+      <div class="faq up" style="--d:.06s">
+        <details open>
+          <summary>How does a project start?</summary>
+          <div class="a">Send the form or an email describing the idea. We reply within 48 hours, agree a price and a small deposit, then build a preview you can look at. Nothing goes live until you're happy with it.</div>
+        </details>
+        <details>
+          <summary>Can I pay online by card?</summary>
+          <div class="a">Yes — every payment runs through Stripe. New projects start with a deposit link (Refresh £49, Create Website £99, Custom Builds &amp; Bots £149); the remaining balance is paid by a second link or invoice before launch. Aftercare is a monthly or annual subscription you can manage any time in the <a href="https://billing.stripe.com/p/login/5kQ5kwaW94S15oqcKz2B200" target="_blank" rel="noopener">customer portal</a>.</div>
+        </details>
+        <details>
+          <summary>What does aftercare actually cover?</summary>
+          <div class="a">The unglamorous work of keeping a site healthy: backups, security checks, small copy swaps, and the odd fix. Care and Care Plus add a monthly health report and we make the changes for you; Care Plus also includes monthly build time for new pages. It's optional — every site we build runs fine without it — but it's the easiest way to stay current and secure.</div>
+        </details>
+        <details>
+          <summary>Do I own everything you build?</summary>
+          <div class="a">Yes. The code, the content and the domain are yours. If we ever part ways, you get a proper handover so nothing is locked behind us.</div>
+        </details>
+        <details>
+          <summary>Can I switch tiers or cancel later?</summary>
+          <div class="a">Whenever you like. Upgrade, downgrade, or cancel with 30 days' notice — no exit fees. Cancel during the free first month and you pay nothing. Once you're subscribed, the <a href="https://billing.stripe.com/p/login/5kQ5kwaW94S15oqcKz2B200" target="_blank" rel="noopener">customer portal</a> is where you change cards, view invoices, or cancel in a couple of clicks.</div>
+        </details>
+        <details>
+          <summary>Why "from £149" / "from £349"?</summary>
+          <div class="a">Because the work isn't always the same size. A three-page refresh costs less than a booking flow. After a short conversation we quote a fixed price, and that number stays put.</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="sec" aria-label="Start a project">
+      <div class="band up">
+        <span class="pill"><span class="dot" aria-hidden="true"></span> Have an idea?</span>
+        <h2>Let's bring it<br /><span class="g">to life.</span></h2>
+        <p>A few sentences is enough. We'll come back with a price, a small deposit, and a preview before anything goes live.</p>
+        <div class="btns">
+          <a class="btn go" href="index.html#contact">Start your project ↗</a>
+          <a class="btn alt" href="index.html#grader">Run the free site check →</a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer id="site-footer"></footer>
-
-  <script>
-    // monthly / annual billing toggle with spring animation
-    (function () {
-      var toggle = document.getElementById('billing-toggle');
-      var lblM = document.getElementById('lbl-monthly');
-      var lblA = document.getElementById('lbl-annual');
-      var annual = false;
-
-      function setBillingHeader(isAnnual) {
-        var h = document.getElementById('aftercare-heading');
-        if (h) h.innerHTML = isAnnual
-          ? 'Aftercare, <span class="grad">billed yearly.</span>'
-          : 'Aftercare that <span class="grad">never sleeps.</span>';
-      }
-
-      toggle.addEventListener('click', function () {
-        annual = !annual;
-        toggle.setAttribute('aria-checked', String(annual));
-        lblM.classList.toggle('active', !annual);
-        lblA.classList.toggle('active', annual);
-
-        document.querySelectorAll('.price-line').forEach(function (line) {
-          var amount = line.querySelector('.amount');
-          amount.textContent = annual ? amount.dataset.annual : amount.dataset.monthly;
-          // retrigger the spring pop
-          line.classList.remove('bump');
-          void amount.offsetWidth;
-          line.classList.add('bump');
-          var note = line.querySelector('.annual-note');
-          if (note) note.hidden = !annual;
-        });
-        document.querySelectorAll('.tier .button[data-monthly]').forEach(function (btn) {
-          btn.href = annual ? btn.dataset.annual : btn.dataset.monthly;
-        });
-        setBillingHeader(annual);
-      });
-    })();
-  </script>
 </body>
 </html>
