@@ -29,7 +29,7 @@
   <link rel="icon" type="image/svg+xml" href="signal-favicon.svg?v=2" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="preconnect" href="https://formspree.io" />
-  <link rel="stylesheet" href="terminal.css?v=2" />
+  <link rel="stylesheet" href="terminal.css?v=3" />
   <script src="terminal.js?v=2" defer></script>
   <script data-goatcounter="https://pallettai.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   <noscript><img src="https://pallettai.goatcounter.com/count?p=/noscript" style="display:none" alt="" /></noscript>
@@ -48,19 +48,19 @@
     <section class="sec" aria-label="Download PallettAi Studio">
       <div class="dl-split">
         <div class="up">
-          <div class="kicker">Latest release <span style="color:var(--cyan)">v0.3.7</span></div>
+          <div class="kicker">Latest release <span style="color:var(--cyan)">v0.3.8</span></div>
           <h2 style="margin-top:14px;font-size:clamp(26px,3.4vw,40px)">From first brief<br /><span class="g">to live site.</span></h2>
           <p class="lede" style="margin-top:16px">Studio is the workspace we use to go from a messy idea to something you can put in front of a client — real content, a considered layout, and a path all the way to launch.</p>
 
           <div class="dl-list">
-            <a class="dl-row primary" href="https://github.com/PallettAi/PallettAI-Studio/releases/latest/download/PallettAI-Studio-mac-arm64.dmg" rel="noopener noreferrer">
+            <a class="dl-row primary" href="https://github.com/PallettAi/pallettai-website/releases/download/v0.3.8/PallettAI-Studio-0.3.8-mac-arm64.dmg" rel="noopener noreferrer">
               <div>
                 <div class="arch">Apple Silicon</div>
                 <div class="for">Download for M1, M2, M3 &amp; M4 Macs</div>
               </div>
               <span class="arr" aria-hidden="true">↗</span>
             </a>
-            <a class="dl-row" href="https://github.com/PallettAi/PallettAI-Studio/releases/latest/download/PallettAI-Studio-mac-x64.dmg" rel="noopener noreferrer">
+            <a class="dl-row" href="https://github.com/PallettAi/pallettai-website/releases/download/v0.3.8/PallettAI-Studio-0.3.8-mac-x64.dmg" rel="noopener noreferrer">
               <div>
                 <div class="arch">Intel Mac</div>
                 <div class="for">Download for Intel-based Macs</div>
@@ -84,11 +84,11 @@
             <div><span class="n">02</span><div><b>Build</b><span>Make it real</span></div></div>
             <div><span class="n">03</span><div><b>Launch</b><span>Ship with confidence</span></div></div>
           </div>
-          <div class="foot"><span>Current build <b>0.3.7</b></span><span>Made for Mac</span></div>
+          <div class="foot"><span>Current build <b>0.3.8</b></span><span>Made for Mac</span></div>
         </div>
       </div>
 
-      <p class="notice up" style="--d:.12s"><b>First public build:</b> this release is unsigned, so macOS may show a security warning on first launch. Right-click the app in Applications and choose <b>Open</b> to continue. Automatic updates are enabled for future releases.</p>
+      <p class="notice up" style="--d:.12s"><b>Unsigned build:</b> macOS may show a security warning on first launch. Right-click the app in Applications and choose <b>Open</b> to continue. Automatic updates are included for later releases.</p>
     </section>
 
     <section class="sec" aria-label="Requirements">
@@ -127,21 +127,52 @@
       </div>
       <div class="faq up" style="--d:.06s">
         <details open>
-          <summary>v0.3.7 — What's new in Studio</summary>
+          <summary>v0.3.8 — What's new in Studio</summary>
           <div class="a">
-            <ul>
-              <li>Collection &amp; table sections — filterable galleries and comparison tables in one click</li>
-              <li>Deep SEO engine on every export — schema.org JSON-LD, FAQ rich results, sitemap.xml</li>
-              <li>Launch-grade audit — every export gets an A+ → F grade with plain-English fix hints</li>
-              <li>Referral program — 30 days of Pro free for friends, 7 days for you</li>
-              <li>Cloud registry — sign in once, your plan and rewards follow you across devices</li>
-            </ul>
-            <p style="margin-top:12px"><a href="https://github.com/PallettAi/PallettAI-Studio/blob/v0.3.7/README.md" target="_blank" rel="noopener">Read the v0.3.7 README</a> · <a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.3.7" target="_blank" rel="noopener">View the v0.3.7 changenotes</a></p>
+            <div class="group">
+              <b>Billing &amp; plans</b>
+              <ul>
+                <li>Pay for Pro (£9/mo) or Pro+ (£19/mo) in Studio. Stripe unlocks the plan on the account you signed in with — not a local demo switch.</li>
+                <li>After checkout, Studio waits and unlocks the plan when Stripe confirms. Coming back with <code>?paid=1</code> does the same.</li>
+                <li>Failed, canceled, or past-due payments show an honest back-on-Free status. License keys are left alone.</li>
+                <li>Plan &amp; billing shows a real receipt: plan, source, renewal, and last billing event.</li>
+                <li>Local leftovers are gone — no simulate-a-friend redeem, no fake checkout unlock, no Switch to Free that fights Stripe.</li>
+              </ul>
+            </div>
+            <div class="group">
+              <b>Review gift</b>
+              <ul>
+                <li>Leave one testimonial in Settings and get 3 days of Pro+. One claim per account; a second submit does nothing.</li>
+                <li>If you are already on paid Pro or Pro+, the review still saves and the claim is used, but no extra days are added.</li>
+                <li>Plan &amp; billing now reads <b>Pro+ Review Trial · 3 day</b>, plus time left in hours and minutes (e.g. 71h 54m). The sidebar pill shows <b>Pro+ · 71h 54m</b>.</li>
+              </ul>
+            </div>
+            <div class="group">
+              <b>Account</b>
+              <ul>
+                <li>Connects only to the official PallettAI registry — no pasted project URL or key.</li>
+                <li>Forgot password on sign-in; change password when signed in.</li>
+                <li>The signed-in Settings card is clearly a subscription login, not something that appears on client sites.</li>
+              </ul>
+            </div>
+            <div class="group">
+              <b>Studio</b>
+              <ul>
+                <li>⌘K / Ctrl+K command palette for views, billing, export, and the tour.</li>
+                <li>System theme (follows the OS), plus Dark and Light.</li>
+                <li>Sidebar and Settings tabs use stroke SVG icons instead of emoji.</li>
+                <li>Modals trap focus and close with Esc.</li>
+                <li>Export copy says the site is files you own, not a tenant.</li>
+                <li>Daily streak lives on AI Studio, not the dashboard.</li>
+                <li>Templates have their own view.</li>
+              </ul>
+            </div>
+            <p style="margin-top:16px"><a href="https://github.com/PallettAi/PallettAI-Studio/blob/v0.3.8/README.md" target="_blank" rel="noopener">Read the v0.3.8 README</a> · <a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.3.8" target="_blank" rel="noopener">View the v0.3.8 changenotes</a></p>
           </div>
         </details>
         <details>
           <summary>Install notes — Mac</summary>
-          <div class="a"><b>Open the DMG</b>, drag <b>PallettAi Studio</b> into Applications, then open it. As this first build is unsigned, right-click the app in Applications → <b>Open</b> if macOS shows a security warning. Your projects live in the app's local storage — sign in to sync your plan and license across devices.</div>
+          <div class="a"><b>Open the DMG</b>, drag <b>PallettAi Studio</b> into Applications, then open it. This build is unsigned, so right-click the app in Applications → <b>Open</b> if macOS shows a security warning. Your projects live in the app's local storage — sign in to sync your plan and license across devices.</div>
         </details>
       </div>
     </section>
@@ -150,7 +181,7 @@
       <div class="band up">
         <span class="pill"><span class="dot" aria-hidden="true"></span> Free to start</span>
         <h2>Build your first site<br /><span class="g">in minutes.</span></h2>
-        <p>Studio is free to start — two projects, all the core features. Move to Pro when you need the limits taken off.</p>
+        <p>Studio is free to start — two projects, all the core features. Pro is £9/mo and Pro+ is £19/mo when you need the limits taken off.</p>
         <div class="btns">
           <a class="btn go" href="index.html#contact">Ask about Studio ↗</a>
           <a class="btn alt" href="#top">Back to download →</a>
