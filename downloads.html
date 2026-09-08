@@ -48,19 +48,19 @@
     <section class="sec" aria-label="Download PallettAi Studio">
       <div class="dl-split">
         <div class="up">
-          <div class="kicker">Latest release <span style="color:var(--cyan)">v0.3.9</span></div>
+          <div class="kicker">Latest release <span style="color:var(--cyan)">v0.3.11</span></div>
           <h2 style="margin-top:14px;font-size:clamp(26px,3.4vw,40px)">From first brief<br /><span class="g">to live site.</span></h2>
           <p class="lede" style="margin-top:16px">Studio is the workspace we use to go from a messy idea to something you can put in front of a client — real content, a considered layout, and a path all the way to launch.</p>
 
           <div class="dl-list">
-            <a class="dl-row primary" href="https://github.com/PallettAi/PallettAI-Studio/releases/download/v0.3.9/PallettAI-Studio-0.3.9-mac-arm64.dmg" rel="noopener noreferrer">
+            <a class="dl-row primary" href="https://github.com/PallettAi/pallettai-website/releases/download/v0.3.11/PallettAI-Studio-0.3.11-mac-arm64.dmg" rel="noopener noreferrer">
               <div>
                 <div class="arch">Apple Silicon</div>
                 <div class="for">Download for M1, M2, M3 &amp; M4 Macs</div>
               </div>
               <span class="arr" aria-hidden="true">↗</span>
             </a>
-            <a class="dl-row" href="https://github.com/PallettAi/PallettAI-Studio/releases/download/v0.3.9/PallettAI-Studio-0.3.9-mac-x64.dmg" rel="noopener noreferrer">
+            <a class="dl-row" href="https://github.com/PallettAi/pallettai-website/releases/download/v0.3.11/PallettAI-Studio-0.3.11-mac-x64.dmg" rel="noopener noreferrer">
               <div>
                 <div class="arch">Intel Mac</div>
                 <div class="for">Download for Intel-based Macs</div>
@@ -84,11 +84,11 @@
             <div><span class="n">02</span><div><b>Build</b><span>Make it real</span></div></div>
             <div><span class="n">03</span><div><b>Launch</b><span>Ship with confidence</span></div></div>
           </div>
-          <div class="foot"><span>Current build <b>0.3.9</b></span><span>Made for Mac</span></div>
+          <div class="foot"><span>Current build <b>0.3.11</b></span><span>Made for Mac</span></div>
         </div>
       </div>
 
-      <p class="notice up" style="--d:.12s"><b>Unsigned build:</b> macOS may show a security warning on first launch. Right-click the app in Applications and choose <b>Open</b> to continue. Automatic updates are included for later releases. Install steps and what's new in 0.3.9 are just below.</p>
+      <p class="notice up" style="--d:.12s"><b>Signed build:</b> the app is code-signed and auto-updates work, but it isn't notarized with Apple, so macOS may still show a security warning on first launch. If it does, right-click the app in Applications and choose <b>Open</b> to continue. Install steps and what's new in 0.3.11 are just below.</p>
     </section>
 
     <section class="sec" id="install" aria-label="Install notes and release notes">
@@ -102,56 +102,28 @@
       <div class="faq up" style="--d:.06s">
         <details open>
           <summary>Install notes — Mac</summary>
-          <div class="a"><b>Open the DMG</b>, drag <b>PallettAi Studio</b> into Applications, then open it. This build is unsigned, so right-click the app in Applications → <b>Open</b> if macOS shows a security warning. Your projects live in the app's local storage — sign in to sync your plan and license across devices.</div>
+          <div class="a"><b>Open the DMG</b>, drag <b>PallettAi Studio</b> into Applications, then open it. This build is code-signed but not notarized with Apple, so right-click the app in Applications → <b>Open</b> if macOS shows a security warning. Your projects live in the app's local storage — sign in to sync your plan and license across devices.</div>
         </details>
         <details>
-          <summary>v0.3.9 — What's new in Studio</summary>
+          <summary>v0.3.11 — What's new in Studio</summary>
           <div class="a">
             <div class="group">
-              <b>AI Studio that listens</b>
+              <b>Fixes that matter for every launch</b>
               <ul>
-                <li>A structured brief — name, area, offer, three proofs, primary CTA, and a voice (warm, premium, or punchy) — now drives generation end to end, instead of only the prompt.</li>
-                <li>Voice lock keeps every generated line on-tone and strips banned phrases, so “premium” never drifts into hype.</li>
-                <li>Generation is fingerprint-seeded: the same brief rebuilds the same site every time, and a one-click Shuffle look changes palette, fonts, and hero without touching your copy.</li>
+                <li>Fixes a launch crash that hit the hardened 0.3.10 build — packaged apps start cleanly again.</li>
+                <li>Fixes a blank window where the app could fail to load its own UI from the package.</li>
+                <li>Fixes the startup splash occasionally remaining pinned over the main window.</li>
+                <li>Restores deny-by-default permission handling (was registered on the wrong API).</li>
               </ul>
             </div>
             <div class="group">
-              <b>Multi-page sites</b>
+              <b>Signed builds &amp; working auto-updates</b>
               <ul>
-                <li>A filled brief splits the site into real pages — Home, Menu, About, and Contact — instead of one long scroll. One-pagers still work when you ask for one.</li>
-                <li>Contact gains a map when the brief sets an area; the nav CTA matches the brief's call to action.</li>
+                <li>Both Apple Silicon and Intel builds are now code-signed — no Apple Developer account required.</li>
+                <li>Auto-updates are back: older installs update on launch, and new downloads stay current.</li>
               </ul>
             </div>
-            <div class="group">
-              <b>Twenty new niche packs</b>
-              <ul>
-                <li>Plumber, electrician, solicitor, dentist, accountant, tutor, estate agent, landscaper, vet, physio, nursery, pub, wine bar, hotel, garage, tattoo studio, architect, locksmith, catering, and brewery — each with tailored sections, tables, and imagery cues.</li>
-                <li>Competitor study borrows structure only — service headings, never their copy. A filled brief always wins the words.</li>
-              </ul>
-            </div>
-            <div class="group">
-              <b>Copilot follow-ups</b>
-              <ul>
-                <li>“Make the hero punchier”, “say the area more”, or “less salesy” rewrites the section you last touched — it remembers the target.</li>
-                <li>“Make it more like https://…”, “add a menu for a wine bar”, and “add a services page” are now real one-click actions.</li>
-              </ul>
-            </div>
-            <div class="group">
-              <b>Translate a finished site</b>
-              <ul>
-                <li>French, Spanish, German, Italian, Portuguese, Dutch, or Polish — every line of copy at once, brand name translated only if you tick the box.</li>
-                <li>Signed-in translates run on DeepL through the official registry; without an account, a free MyMemory fallback still works.</li>
-                <li>Exports carry the translated <code>&lt;html lang&gt;</code> and a “Translations powered by DeepL / MyMemory” footer.</li>
-              </ul>
-            </div>
-            <div class="group">
-              <b>Billing &amp; polish</b>
-              <ul>
-                <li>Manage billing opens the Stripe Customer Portal for signed-in subscribers — cancel or update the card without emailing anyone.</li>
-                <li>Every generated palette passes WCAG AA text contrast automatically.</li>
-              </ul>
-            </div>
-            <p style="margin-top:16px"><a href="https://github.com/PallettAi/PallettAI-Studio/blob/v0.3.9/README.md" target="_blank" rel="noopener">Read the v0.3.9 README</a> · <a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.3.9" target="_blank" rel="noopener">View the v0.3.9 changenotes</a></p>
+            <p style="margin-top:16px"><a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.3.11" target="_blank" rel="noopener">View the v0.3.11 release notes</a> · <a href="changelog.html" target="_blank" rel="noopener">Full changelog</a></p>
           </div>
         </details>
       </div>

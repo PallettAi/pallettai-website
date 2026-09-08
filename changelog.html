@@ -47,20 +47,35 @@
     <section class="sec" aria-labelledby="current-release">
       <div class="current up">
         <div>
-          <div class="kicker">Latest release · 07 September 2026</div>
-          <h2 id="current-release">Studio 0.3.9 is ready to ship.</h2>
-          <p>An AI Studio that takes a real brief — structured fields, voice lock, and multi-page sites — plus twenty new niche packs, Copilot follow-ups, and one-click site translation.</p>
+          <div class="kicker">Latest release · 08 September 2026</div>
+          <h2 id="current-release">Studio 0.3.11 is ready to ship.</h2>
+          <p>Every launch now starts cleanly: 0.3.11 fixes the hardened build's startup crash, restores automatic updates on launch, and ships code-signed for both Apple Silicon and Intel — no Apple Developer account needed.</p>
           <div class="links">
             <a href="downloads.html">Download Studio ↗</a>
-            <a href="https://github.com/PallettAi/PallettAI-Studio/blob/v0.3.9/README.md" target="_blank" rel="noopener">Read the README ↗</a>
-            <a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.3.9" target="_blank" rel="noopener">View release notes ↗</a>
+            <a href="https://github.com/PallettAi/PallettAI-Studio/blob/v0.3.11/README.md" target="_blank" rel="noopener">Read the README ↗</a>
+            <a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.3.11" target="_blank" rel="noopener">View release notes ↗</a>
           </div>
         </div>
-        <div class="ver-badge" aria-label="Version 0.3.9"><span class="n">0.3.9</span><span class="s">current</span></div>
+        <div class="ver-badge" aria-label="Version 0.3.11"><span class="n">0.3.11</span><span class="s">current</span></div>
       </div>
     </section>
 
     <section class="sec" aria-label="Release history">
+      <article class="rel up">
+        <div class="when"><b>08 Sep 2026</b>0.3.11</div>
+        <div>
+          <h2>0.3.11 <span>Critical fixes &amp; signed builds</span></h2>
+          <p class="intro">The hardened 0.3.10 build crashed at launch — 0.3.11 fixes it and makes auto-updates actually work.</p>
+          <ul>
+            <li>Fixes a launch crash in the hardened build (browser-process V8 snapshot fuse turned off) — packaged apps start cleanly.</li>
+            <li>Fixes a blank window where the app could fail to load its own UI from the package (file:// privilege fuse back to its safe default).</li>
+            <li>Fixes the startup splash occasionally remaining pinned over the main window.</li>
+            <li>Restores deny-by-default permission handling (was registered on the wrong API).</li>
+            <li>Code-signed builds for Apple Silicon and Intel via a free self-signed certificate — no Apple Developer account required.</li>
+            <li>Auto-update feed restored: older installs update on launch, and new downloads stay current.</li>
+          </ul>
+        </div>
+      </article>
       <article class="rel up">
         <div class="when"><b>07 Sep 2026</b>0.3.9</div>
         <div>
