@@ -66,5 +66,22 @@ Logs: `.freebuff/grader-dev.log` / `.freebuff/grader-dev.log.err` when started d
   (DoH on the Worker, system DNS on the local harness) and any private A/AAAA
   answer is blocked. Redirect hops are re-checked the same way.
 - 12-second fetch timeout; HTML parsing capped at ~1.5 MB.
-- Soft rate limit: 20 checks per IP per minute.
+- Soft rate limits, in two independent budgets: 12 checks per IP per rolling
+  minute, **and** 90 upstream fetches per Worker isolate per minute. The second
+  budget is what bounds egress when a scraper spreads requests across many IPs.
+  Both return `429` with a `Retry-After` header.
 - CORS restricted to the origins in `ALLOWED_ORIGINS`; GET only.
+
+### Required: a Cloudflare rate-limiting Rule in front of the Worker
+
+The in-Worker counters are per isolate, and Cloudflare runs many isolates, so
+they only ever approximate a global limit. The real cap has to live at the edge:
+
+1. Cloudflare dashboard → **Security → WAF → Rate limiting rules** → **Create rule**.
+2. Expression: `http.request.uri.path eq "/grade"`.
+3. Rate: **20 requests per 1 minute**, counting by **IP address**.
+4. Action: **Block** for 1 minute (or Managed Challenge for a softer touch).
+5. Optionally add a second rule with a longer window (e.g. 200/hour) to catch
+   slow, sustained scraping that a one-minute window misses.
+6. If abuse continues, put **Turnstile** in front of the widget — a token per
+   check makes automated scanning expensive without affecting real visitors.

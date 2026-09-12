@@ -152,10 +152,10 @@ function corsHeaders(origin) {
   };
 }
 
-function json(obj, status, origin) {
+function json(obj, status, origin, extra) {
   return new Response(JSON.stringify(obj), {
     status,
-    headers: { 'Content-Type': 'application/json; charset=utf-8', ...corsHeaders(origin) },
+    headers: { 'Content-Type': 'application/json; charset=utf-8', ...corsHeaders(origin), ...(extra || {}) },
   });
 }
 
@@ -479,22 +479,41 @@ async function probe(target) {
   }
 }
 
-/* --- Soft in-memory rate limit (per isolate; good-enough guard for a free tool) --- */
+/* --- Soft in-memory rate limit (per isolate; good-enough guard for a free tool) ---
+   Two independent budgets. The per-IP window stops a single abuser; the
+   per-isolate ceiling bounds total upstream fetches even when the requests are
+   spread across many IPs (which is exactly how a distributed scraper dodges a
+   per-IP counter). Cloudflare runs many isolates, so these are a backstop, not
+   the whole defence — grader/README.md documents the dashboard Rule that has to
+   sit in front of this Worker. */
 const hits = new Map();
-const WINDOW_MS = 60_000, MAX_PER_WINDOW = 20;
+const WINDOW_MS = 60_000;
+const MAX_PER_IP = 12;       // rolling minute, one client IP, this isolate
+const MAX_PER_ISOLATE = 90;  // total upstream fetches per isolate per minute
+let isolateStart = Date.now();
+let isolateCount = 0;
+
 function allow(ip) {
   const now = Date.now();
+  if (now - isolateStart > WINDOW_MS) { isolateStart = now; isolateCount = 0; }
+  if (isolateCount >= MAX_PER_ISOLATE) {
+    return { ok: false, retryAfter: Math.ceil((isolateStart + WINDOW_MS - now) / 1000) };
+  }
   if (hits.size > 4000) {
     for (const [k, rec] of hits) {
       if (now - rec.t > WINDOW_MS) hits.delete(k);
     }
   }
-  if (hits.size > 8000 && !hits.has(ip)) return false;
+  if (hits.size > 8000 && !hits.has(ip)) return { ok: false, retryAfter: 60 };
   const rec = hits.get(ip) || { n: 0, t: now };
   if (now - rec.t > WINDOW_MS) { rec.n = 0; rec.t = now; }
   rec.n++;
   hits.set(ip, rec);
-  return rec.n <= MAX_PER_WINDOW;
+  if (rec.n > MAX_PER_IP) {
+    return { ok: false, retryAfter: Math.ceil((rec.t + WINDOW_MS - now) / 1000) };
+  }
+  isolateCount++;
+  return { ok: true };
 }
 
 export default {
@@ -511,8 +530,18 @@ export default {
       return json({ error: 'That doesn’t look like a public website address — try something like yourbusiness.co.uk.' }, 400, origin);
     }
 
+    // CF-Connecting-IP is set by Cloudflare itself and cannot be spoofed by
+    // the caller, so it is safe as the limiter key.
     const ip = request.headers.get('CF-Connecting-IP') || 'anon';
-    if (!allow(ip)) return json({ error: 'Blimey, that’s a lot of checks — take a breath and try again in a minute.' }, 429, origin);
+    const gate = allow(ip);
+    if (!gate.ok) {
+      return json(
+        { error: 'Blimey, that’s a lot of checks — take a breath and try again in a minute.' },
+        429,
+        origin,
+        { 'Retry-After': String(Math.max(1, gate.retryAfter || 60)) },
+      );
+    }
 
     const facts = await probe(target);
     const result = scoreFacts(facts);
