@@ -29,8 +29,8 @@
   <link rel="icon" type="image/svg+xml" href="signal-favicon.svg?v=2" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="preload" as="image" href="ghost-arb/profit/03.jpg" />
-  <link rel="stylesheet" href="terminal.css?v=2" />
-  <script src="terminal.js?v=2" defer></script>
+  <link rel="stylesheet" href="terminal.css?v=5" />
+  <script src="terminal.js?v=5" defer></script>
   <script data-goatcounter="https://pallettai.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   <noscript><img src="https://pallettai.goatcounter.com/count?p=/noscript" style="display:none" alt="" /></noscript>
 </head>
@@ -49,7 +49,7 @@
         </h1>
         <p class="lede lede-bar">Two Telegram bots, built for arbitrage betting — plus a sub-bot we put straight into a group of paying members. They scraped live prices, found the gaps, and the alert landed where people were already waiting. They ran on their own — and they made money.</p>
         <div class="btns">
-          <a class="btn go" href="#proof">The errors it found ↓</a>
+          <a class="btn go" href="#what">The short version ↓</a>
           <a class="btn alt" href="index.html#contact">Want one built →</a>
         </div>
       </div>
@@ -79,13 +79,41 @@
       </div>
     </section>
 
+    <section class="sec" id="what" aria-label="What Ghost Arb Bot is">
+      <div class="sec-head up">
+        <div>
+          <div class="kicker">The short version</div>
+          <h2>A pair of bots<br /><span class="g">that paid for themselves.</span></h2>
+        </div>
+        <p class="note">Arbitrage betting is simple on paper and miserable by hand. Two books disagree, you back both sides, and the difference is yours. The miserable part is spotting it in time. That's what Ghost Arb did — then the slips it caught, live.</p>
+      </div>
+      <div class="stats">
+        <div class="stat up" style="--d:.05s">
+          <b>3</b>
+          <p>The watching pair, plus a sub-bot inside a paying members' group</p>
+        </div>
+        <div class="stat up" style="--d:.1s">
+          <b>Live</b>
+          <p>Ran unattended. Prices in, alert out, no one sat watching a screen</p>
+        </div>
+        <div class="stat up" style="--d:.15s">
+          <b>API</b>
+          <p>Bookmaker and exchange prices pulled in as they moved</p>
+        </div>
+        <div class="stat up" style="--d:.2s">
+          <b>TG</b>
+          <p>The alert landed on a phone with the market, the books and the stakes</p>
+        </div>
+      </div>
+    </section>
+
     <section class="sec" id="proof" aria-label="The errors the bot found">
       <div class="sec-head up">
         <div>
           <div class="kicker">The errors</div>
           <h2>The slips it<br /><span class="g">caught live.</span></h2>
         </div>
-        <p class="note">Mispriced markets the bot found while they were still open. Arrow keys, swipe, or the buttons.</p>
+        <p class="note">Mispriced markets the bot found while they were still open. Arrow keys, swipe, or the buttons. After that: how it actually worked.</p>
       </div>
 
       <div class="proof proof-one up" style="--d:.06s">
@@ -115,41 +143,13 @@
       </div>
     </section>
 
-    <section class="sec" aria-label="What Ghost Arb Bot is">
-      <div class="sec-head up">
-        <div>
-          <div class="kicker">The short version</div>
-          <h2>A pair of bots<br /><span class="g">that paid for themselves.</span></h2>
-        </div>
-        <p class="note">Arbitrage betting is simple on paper and miserable by hand. Two books disagree, you back both sides, and the difference is yours. The miserable part is spotting it in time. That's what Ghost Arb did — and then a sub-bot took the same alert into a Telegram group people were already paying to be in.</p>
-      </div>
-      <div class="stats">
-        <div class="stat up" style="--d:.05s">
-          <b>3</b>
-          <p>The watching pair, plus a sub-bot inside a paying members' group</p>
-        </div>
-        <div class="stat up" style="--d:.1s">
-          <b>Live</b>
-          <p>Ran unattended. Prices in, alert out, no one sat watching a screen</p>
-        </div>
-        <div class="stat up" style="--d:.15s">
-          <b>API</b>
-          <p>Bookmaker and exchange prices pulled in as they moved</p>
-        </div>
-        <div class="stat up" style="--d:.2s">
-          <b>TG</b>
-          <p>The alert landed on a phone with the market, the books and the stakes</p>
-        </div>
-      </div>
-    </section>
-
     <section class="sec" id="how" aria-label="How Ghost Arb worked">
       <div class="sec-head up">
         <div>
           <div class="kicker">How it worked</div>
           <h2>Watch. Spot.<br /><span class="g">Size. Fire.</span></h2>
         </div>
-        <p class="note">Four jobs, in that order, every time. If any step was late, the window was gone — so the whole thing was built to be quicker than a person.</p>
+        <p class="note">Four jobs, in that order, every time. If any step was late, the window was gone — so the whole thing was built to be quicker than a person. After that: the working parts, as they shipped.</p>
       </div>
       <div class="steps">
         <article class="step up" style="--d:.05s">
@@ -182,7 +182,7 @@
           <div class="kicker">What it actually did</div>
           <h2>The working<br /><span class="g">parts.</span></h2>
         </div>
-        <p class="note">Built in Python, talked to Telegram over the Bot API, and left to run. This is the list as it shipped — not a wishlist.</p>
+        <p class="note">Built in Python, talked to Telegram over the Bot API, and left to run. This is the list as it shipped — not a wishlist. Need something like it? That's the last stop on this page.</p>
       </div>
       <div class="feat-list up" style="--d:.06s">
         <div class="feat">
@@ -255,7 +255,7 @@
       <div class="band up">
         <span class="pill"><span class="dot" aria-hidden="true"></span> Need something like this?</span>
         <h2>We can build<br /><span class="g">the next one.</span></h2>
-        <p>Alerts, scrapers, booking bots, anything that should land on a phone instead of an inbox. Custom builds start at £349 — a few sentences is enough to start.</p>
+        <p>That's the path: what it was, the slips it caught, how it worked, the parts. Alerts, scrapers, booking bots, anything that should land on a phone instead of an inbox. Custom builds start at £349 — a few sentences is enough to start.</p>
         <div class="btns">
           <a class="btn go" href="index.html#contact">Start a bot project ↗</a>
           <a class="btn alt" href="pricing.html">See bot pricing →</a>

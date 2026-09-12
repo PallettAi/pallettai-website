@@ -10,17 +10,22 @@
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* Same link set and labels as the live site. On the homepage the first two
-     point at in-page anchors; everywhere else they reach back to index.html. */
-  var LINKS = [
-    ['#features', 'index.html#features', 'Product'],
-    ['#grader', 'index.html#grader', 'Check'],
-    ['portfolio.html', 'portfolio.html', 'Showcase'],
-    ['telegram.html', 'telegram.html', 'Telegram'],
-    ['live.html', 'live.html', 'Live'],
-    ['downloads.html', 'downloads.html', 'Download'],
-    ['changelog.html', 'changelog.html', 'Changelog'],
-    ['pricing.html', 'pricing.html', 'Pricing']
+  /* Grouped nav — 6 top-level items so nothing clips. Work and Studio are
+     dropdowns; Product/Check are in-page anchors on the homepage. */
+  var NAV = [
+    { label: 'Product', homeHref: '#features', href: 'index.html#features' },
+    { label: 'Check', homeHref: '#grader', href: 'index.html#grader' },
+    { label: 'Work', id: 'work', children: [
+      { label: 'Showcase', href: 'portfolio.html' },
+      { label: 'Telegram', href: 'telegram.html' },
+      { label: 'Live', href: 'live.html' }
+    ]},
+    { label: 'Studio', id: 'studio', children: [
+      { label: 'Download', href: 'downloads.html' },
+      { label: 'Changelog', href: 'changelog.html' }
+    ]},
+    { label: 'Pricing', href: 'pricing.html' },
+    { label: 'Support', href: 'support.html' }
   ];
 
   var HERE = {
@@ -31,9 +36,15 @@
     downloads: 'downloads.html',
     changelog: 'changelog.html',
     pricing: 'pricing.html',
+    support: 'support.html',
     privacy: null,
     terms: null,
     lost: null
+  };
+
+  var GROUP_PAGES = {
+    work: ['portfolio.html', 'telegram.html', 'live.html'],
+    studio: ['downloads.html', 'changelog.html']
   };
 
   function injectNav() {
@@ -56,15 +67,59 @@
     var tabs = document.createElement('nav');
     tabs.className = 'tabs';
     tabs.setAttribute('aria-label', 'Sections');
-    LINKS.forEach(function (l) {
-      var a = document.createElement('a');
-      a.href = home ? l[0] : l[1];
-      a.textContent = l[2];
-      if (here && l[1] === here) {
-        a.className = 'on';
-        a.setAttribute('aria-current', 'page');
+
+    NAV.forEach(function (item) {
+      if (item.children) {
+        var group = document.createElement('div');
+        group.className = 'nav-group';
+        var isActiveGroup = here && GROUP_PAGES[item.id] && GROUP_PAGES[item.id].indexOf(here) !== -1;
+        if (isActiveGroup) group.classList.add('on');
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'nav-drop-btn' + (isActiveGroup ? ' on' : '');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-haspopup', 'true');
+        btn.textContent = item.label + '  \u25BE';
+        var menu = document.createElement('div');
+        menu.className = 'nav-drop';
+        menu.setAttribute('role', 'menu');
+        item.children.forEach(function (child) {
+          var a = document.createElement('a');
+          a.href = child.href;
+          a.textContent = child.label;
+          a.setAttribute('role', 'menuitem');
+          if (here === child.href) {
+            a.className = 'on';
+            a.setAttribute('aria-current', 'page');
+          }
+          menu.appendChild(a);
+        });
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var open = group.classList.contains('open');
+          document.querySelectorAll('.nav-group.open').forEach(function (g) {
+            g.classList.remove('open');
+            var b = g.querySelector('.nav-drop-btn');
+            if (b) b.setAttribute('aria-expanded', 'false');
+          });
+          if (!open) {
+            group.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+        group.appendChild(btn);
+        group.appendChild(menu);
+        tabs.appendChild(group);
+      } else {
+        var a = document.createElement('a');
+        a.href = home && item.homeHref ? item.homeHref : item.href;
+        a.textContent = item.label;
+        if (here && item.href === here) {
+          a.className = 'on';
+          a.setAttribute('aria-current', 'page');
+        }
+        tabs.appendChild(a);
       }
-      tabs.appendChild(a);
     });
     bar.appendChild(tabs);
 
@@ -76,6 +131,23 @@
 
     host.className = 'topbar';
     host.appendChild(bar);
+
+    document.addEventListener('click', function () {
+      document.querySelectorAll('.nav-group.open').forEach(function (g) {
+        g.classList.remove('open');
+        var b = g.querySelector('.nav-drop-btn');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.nav-group.open').forEach(function (g) {
+          g.classList.remove('open');
+          var b = g.querySelector('.nav-drop-btn');
+          if (b) b.setAttribute('aria-expanded', 'false');
+        });
+      }
+    });
   }
 
   function injectFooter() {
@@ -85,12 +157,21 @@
     var year = new Date().getFullYear();
     host.innerHTML =
       '<div class="wrap inner">' +
-      '<span>&copy; ' + year + ' PALLETTAI — MADE WITH CURIOSITY ✦</span>' +
-      '<a href="privacy.html">PRIVACY POLICY</a>' +
-      '<a href="terms.html">TERMS OF SERVICE</a>' +
-      '<a href="' + PORTAL + '" target="_blank" rel="noopener noreferrer">MANAGE SUBSCRIPTION ↗</a>' +
-      '<a href="https://github.com/PallettAi" target="_blank" rel="noopener noreferrer">GITHUB</a>' +
-      '<a href="https://x.com/1PallettAi" target="_blank" rel="noopener noreferrer">X</a>' +
+      '<span class="foot-left">&copy; ' + year + ' PALLETTAI — MADE WITH CURIOSITY ✦</span>' +
+      '<nav class="foot-links" aria-label="Footer">' +
+      '<a href="support.html">Support</a>' +
+      '<a href="privacy.html">Privacy</a>' +
+      '<a href="terms.html">Terms</a>' +
+      '<a href="' + PORTAL + '" target="_blank" rel="noopener noreferrer">Manage subscription ↗</a>' +
+      '</nav>' +
+      '<div class="foot-social" aria-label="Social links">' +
+      '<a href="https://github.com/PallettAi" target="_blank" rel="noopener noreferrer" aria-label="GitHub — PallettAi">' +
+      '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M12 2.04c-5.52 0-10 4.48-10 10 0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.52 9.52 0 015.02 0c1.9-1.3 2.74-1.03 2.74-1.03.56 1.38.21 2.4.1 2.65.64.7 1.03 1.59 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.59.69.49A10.05 10.05 0 0022 12.04C22 6.52 17.52 2.04 12 2.04z"/></svg>' +
+      '</a>' +
+      '<a href="https://x.com/1PallettAi" target="_blank" rel="noopener noreferrer" aria-label="X — @1PallettAi">' +
+      '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="currentColor"><path d="M18.9 2h2.68L13.82 10.96 22.5 22h-6.88L10.2 14.8 3.86 22H1.17l8.26-9.46L1 2h7.06l4.88 6.8L18.9 2zm-1.2 18.5h1.48L6.84 3.9H5.2z"/></svg>' +
+      '</a>' +
+      '</div>' +
       '</div>';
   }
 
@@ -475,7 +556,7 @@
     }).catch(function () {
       if (status) {
         status.className = 'status err';
-        status.textContent = '> something went wrong — email pallettai@proton.me and we will pick it up';
+        status.textContent = '> something went wrong — email support@pallettai.org and we will pick it up';
       }
     }).finally(function () {
       if (btn) { btn.disabled = false; btn.textContent = idleLabel; }

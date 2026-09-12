@@ -29,8 +29,8 @@
   <link rel="icon" type="image/svg+xml" href="signal-favicon.svg?v=2" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="preconnect" href="https://formspree.io" />
-  <link rel="stylesheet" href="terminal.css?v=3" />
-  <script src="terminal.js?v=2" defer></script>
+  <link rel="stylesheet" href="terminal.css?v=5" />
+  <script src="terminal.js?v=5" defer></script>
   <script data-goatcounter="https://pallettai.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   <noscript><img src="https://pallettai.goatcounter.com/count?p=/noscript" style="display:none" alt="" /></noscript>
 </head>
@@ -154,14 +154,91 @@
       </div>
     </section>
 
-    <section class="sec" aria-label="Free to start">
+    <section class="sec" id="studio-plans" aria-label="Studio plans">
+      <div class="sec-head up">
+        <div>
+          <div class="kicker">Studio plans</div>
+          <h2>Free to start.<br /><span class="g">Pro when you need more.</span></h2>
+        </div>
+        <p class="note">Studio runs on your Mac. Free gives you two projects and the full builder. Pro and Pro+ unlock unlimited work, premium assets and AI — billed monthly through Stripe. Cancel any time.</p>
+      </div>
+
+      <div class="tiers">
+        <div class="tier up" style="--d:.05s">
+          <span class="cat">Try it</span>
+          <h3>Free</h3>
+          <div class="price"><span class="amount">£0</span><span class="per">/forever</span></div>
+          <div class="annual-note">no card required</div>
+          <ul>
+            <li><b>2 projects</b> · up to 10 sections each</li>
+            <li>10 starter templates + Animation &amp; Contact suites</li>
+            <li>22 core fonts · 19 free layouts</li>
+            <li>3 AI Studio credits</li>
+            <li>“Made with PallettAI” on exports</li>
+          </ul>
+          <a class="btn alt" href="#top">Download Free ↗</a>
+        </div>
+
+        <div class="tier feat up" style="--d:.10s">
+          <span class="flag">Most popular</span>
+          <span class="cat">For freelancers</span>
+          <h3>Pro</h3>
+          <div class="price"><span class="amount">£9</span><span class="per">/mo</span></div>
+          <div class="annual-note">billed monthly · cancel any time</div>
+          <ul>
+            <li><b>Unlimited</b> projects &amp; sections</li>
+            <li>All templates &amp; upgrade suites</li>
+            <li>Premium Font Pack + 6 premium layouts</li>
+            <li>Live data widgets (crypto, GitHub, FX + more)</li>
+            <li>Unlimited AI Studio generations + image generation</li>
+          </ul>
+          <a class="btn go" href="https://buy.stripe.com/fZu3co2pDesB7wyfWL2B20m" target="_blank" rel="noopener">Get Pro — £9/mo ↗</a>
+        </div>
+
+        <div class="tier up" style="--d:.15s">
+          <span class="cat">For professionals</span>
+          <h3>Pro+</h3>
+          <div class="price"><span class="amount">£19</span><span class="per">/mo</span></div>
+          <div class="annual-note">everything in Pro, plus</div>
+          <ul>
+            <li>Unbranded exports — <b>no PallettAI badge</b></li>
+            <li>Reusable brand presets (up to 12 systems)</li>
+            <li>White-label client handoff ZIP</li>
+            <li>No attribution in hosting guide / brand kit</li>
+            <li>Delivery pack for every client</li>
+          </ul>
+          <a class="btn go" href="https://buy.stripe.com/4gM4gsggtfwFcQS11R2B20l" target="_blank" rel="noopener">Get Pro+ — £19/mo ↗</a>
+        </div>
+      </div>
+
+      <p class="after up">Prices in GBP. Need website build &amp; aftercare pricing instead? That's on the <a href="pricing.html">website pricing page</a>. Already subscribed? <a href="https://billing.stripe.com/p/login/5kQ5kwaW94S15oqcKz2B200" target="_blank" rel="noopener">Manage billing in the portal ↗</a></p>
+
+      <div class="tbl-wrap up" style="--d:.08s; margin-top: 28px">
+        <table class="t" aria-label="Studio plan comparison">
+          <thead>
+            <tr><th>Compare Studio</th><th>Free</th><th>Pro <span class="val">£9/mo</span></th><th>Pro+ <span class="val">£19/mo</span></th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="feat">Projects &amp; sections</td><td class="val">2 · 10 each</td><td class="yes">Unlimited</td><td class="yes">Unlimited</td></tr>
+            <tr><td class="feat">Templates &amp; suites</td><td class="val">10 + 2 suites</td><td class="yes">All unlocked</td><td class="yes">All unlocked</td></tr>
+            <tr><td class="feat">Fonts &amp; layouts</td><td class="val">22 + 19 free</td><td class="yes">Premium pack</td><td class="yes">Premium pack</td></tr>
+            <tr><td class="feat">AI Studio credits</td><td class="val">3</td><td class="yes">Unlimited</td><td class="yes">Unlimited</td></tr>
+            <tr><td class="feat">AI image generation</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><td class="feat">Unbranded / white-label</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
+            <tr><td class="feat">Brand presets</td><td class="no">—</td><td class="no">—</td><td class="val">12</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec" aria-label="Studio help">
       <div class="band up">
-        <span class="pill"><span class="dot" aria-hidden="true"></span> Free to start</span>
-        <h2>Build your first site<br /><span class="g">in minutes.</span></h2>
-        <p>That's the Mac path. Studio is free to start — two projects, all the core features. Pro is £9/mo and Pro+ is £19/mo when you need the limits taken off.</p>
+        <span class="pill"><span class="dot" aria-hidden="true"></span> Need help choosing?</span>
+        <h2>Try Free.<br /><span class="g">Upgrade when it pays.</span></h2>
+        <p>Start with two projects — no card, no trial clock. When a client job needs unlimited sections, premium layouts or white-label handoff, Pro and Pro+ are one click inside Studio.</p>
         <div class="btns">
-          <a class="btn go" href="index.html#contact">Ask about Studio ↗</a>
-          <a class="btn alt" href="#top">Back to download →</a>
+          <a class="btn go" href="#top">Download Studio ↗</a>
+          <a class="btn alt" href="support.html">Talk to support →</a>
         </div>
       </div>
     </section>
