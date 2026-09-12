@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Websites from £249, refreshes from £149, custom builds and Telegram bots from £349, aftercare from £19 a month. Pay by card. Nothing hidden." />
+  <meta name="description" content="Website pricing — sites from £249, refreshes from £149, custom builds &amp; Telegram bots from £349, aftercare from £19/mo. Studio app pricing lives on the Downloads page." />
   <meta name="author" content="PallettAi" />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#070B14" />
+  <meta name="theme-color" content="#04122b" />
   <link rel="canonical" href="https://pallettai.org/pricing" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="PallettAi" />
-  <meta property="og:title" content="Website Packages &amp; Aftercare Plans UK | PallettAi Pricing" />
-  <meta property="og:description" content="Websites from £249, refreshes from £149, custom builds and Telegram bots from £349, aftercare from £19 a month. Pay by card. Nothing hidden." />
+  <meta property="og:title" content="Website Pricing — Builds &amp; Aftercare | PallettAi" />
+  <meta property="og:description" content="Website pricing — sites from £249, refreshes from £149, custom builds &amp; Telegram bots from £349, aftercare from £19/mo. Studio app pricing lives on the Downloads page." />
   <meta property="og:url" content="https://pallettai.org/pricing" />
   <meta property="og:image" content="https://pallettai.org/share-v2.png" />
   <meta property="og:image:type" content="image/png" />
@@ -19,71 +19,92 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="PallettAi — Your website is losing you work." />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Website Packages &amp; Aftercare Plans UK | PallettAi Pricing" />
-  <meta name="twitter:description" content="Websites from £249, refreshes from £149, custom builds and Telegram bots from £349, aftercare from £19 a month. Pay by card. Nothing hidden." />
+  <meta name="twitter:title" content="Website Pricing — Builds &amp; Aftercare | PallettAi" />
+  <meta name="twitter:description" content="Website pricing — sites from £249, refreshes from £149, custom builds &amp; Telegram bots from £349, aftercare from £19/mo. Studio app pricing on Downloads." />
   <meta name="twitter:image" content="https://pallettai.org/share-v2.png" />
   <meta name="twitter:image:alt" content="PallettAi — Your website is losing you work." />
-  <title>Website Packages &amp; Aftercare Plans UK | PallettAi Pricing</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://pallettai.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'" />
+  <title>Website Pricing — Builds &amp; Aftercare | PallettAi</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://pallettai-grader.coreypallett20.workers.dev https://pallettai.goatcounter.com; object-src 'none'; base-uri 'self'; form-action https://formspree.io; frame-src 'none'" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
   <link rel="icon" type="image/svg+xml" href="signal-favicon.svg?v=2" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-  <link rel="stylesheet" href="terminal.css?v=2" />
-  <script src="terminal.js?v=2" defer></script>
+  <link rel="preload" href="fonts/inter-tight-latin-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="theme.css" />
+  <script src="theme.js" defer></script>
   <script data-goatcounter="https://pallettai.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   <noscript><img src="https://pallettai.goatcounter.com/count?p=/noscript" style="display:none" alt="" /></noscript>
 </head>
-<body>
-  <a class="skip" href="#top">Skip to content</a>
-  <div id="nav" data-page="pricing"></div>
+<body data-page="pricing">
 
-  <main class="wrap" id="top">
-    <header class="page-hero">
-      <span class="pill"><span class="dot" aria-hidden="true"></span> Pricing</span>
-      <h1>Simple pricing.<br /><span class="g">No surprises.</span></h1>
-      <p class="lede lede-bar">A one-off build to get you online, then monthly aftercare if you want us to keep looking after it. Everything is written down here. Nothing gets added later as a surprise.</p>
-      <div class="switch-row">
+<a class="skip" href="#top">Skip to content</a>
+<div class="sky" id="sky" aria-hidden="true"></div>
+<header class="nav" id="nav"></header>
+
+<main id="top">
+
+  <!-- ============ PAGE HERO ============ -->
+  <section class="phero">
+    <div class="wrap-l">
+      <p class="eyebrow rv">Website pricing</p>
+      <h1 class="rv" data-d="1">Simple pricing.<br /><span class="grad">No surprises.</span></h1>
+      <p class="lede rv" data-d="2">A one-off build to get you online, then monthly aftercare if you want us to keep looking after it. Everything is written down here, so nothing arrives later as a surprise.</p>
+
+      <div class="switch-row rv" data-d="2">
         <span class="lbl active" id="lbl-monthly">Monthly</span>
         <button class="switch" id="billing-switch" type="button" role="switch" aria-checked="false" aria-label="Toggle annual billing"></button>
         <span class="lbl" id="lbl-annual">Annual</span>
         <span class="save">2 months free</span>
       </div>
-    </header>
 
-    <!-- ============ ONE-TIME BUILDS ============ -->
-    <section class="sec" aria-label="One-time builds">
-      <div class="sec-head up">
-        <div>
-          <div class="kicker">Start here</div>
-          <h2>One-time builds.<br /><span class="g">Yours from day one.</span></h2>
+      <p class="meta rv" data-d="3">PallettAi Studio app plans are separate — they live on the <a href="downloads.html#studio-plans">Studio page</a>.</p>
+      <div class="btns rv" data-d="3">
+        <a class="btn ice" href="index.html#contact">Start a project</a>
+        <a class="btn line" href="index.html#grader">Run the free check</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ONE-TIME BUILDS ============ -->
+  <section class="sec" id="builds">
+    <svg class="wm" viewBox="0 0 1000 1000" aria-hidden="true"><use href="#wm"/></svg>
+    <div class="wrap-l">
+      <div class="head">
+        <div class="rv">
+          <p class="eyebrow">Start here</p>
+          <h2 class="big">One-time builds.<br /><span class="grad">Yours from day one.</span></h2>
         </div>
-        <p class="note">The first 30 days of aftercare come with the build. We don't launch you and disappear.</p>
+        <p class="lede rv" data-d="1">The first 30 days of aftercare come with the build. We don't launch you and disappear, and the code, content and domain stay yours.</p>
       </div>
 
-      <div class="tbl-wrap up" style="--d:.06s">
-        <table class="t">
+      <div class="cmp-wrap rv" data-d="1">
+        <table class="cmp">
+          <caption class="sr">One-time website packages</caption>
           <thead>
-            <tr><th>Package</th><th>What's included</th><th>From</th></tr>
+            <tr>
+              <th scope="col">Package</th>
+              <th scope="col">What's included</th>
+              <th scope="col">From</th>
+            </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="pkg">Create Website</td>
+              <th scope="row" class="pkg">Create Website</th>
               <td class="desc">A custom one-page site that works on a phone, loads quickly, and has a working contact form. Local SEO basics, a preview before launch, and two rounds of changes.
-                <div style="margin-top:12px"><a class="btn go sm" href="https://buy.stripe.com/6oU28k1lzbgpdUWcKz2B20g" target="_blank" rel="noopener">Start with £99 deposit ↗</a></div>
+                <div style="margin-top:18px"><a class="btn line" href="https://buy.stripe.com/6oU28k1lzbgpdUWcKz2B20g" target="_blank" rel="noopener">Start with £99 deposit ↗</a></div>
               </td>
               <td class="amt">£249</td>
             </tr>
             <tr>
-              <td class="pkg">Refresh &amp; Upgrade</td>
+              <th scope="row" class="pkg">Refresh &amp; Upgrade</th>
               <td class="desc">A tired site, made useful again — cleaner design, faster load, better on mobile, sharper copy, and a before/after health score so you can see the difference.
-                <div style="margin-top:12px"><a class="btn go sm" href="https://buy.stripe.com/6oUdR2d4hcktdUW9yn2B20f" target="_blank" rel="noopener">Start with £49 deposit ↗</a></div>
+                <div style="margin-top:18px"><a class="btn line" href="https://buy.stripe.com/6oUdR2d4hcktdUW9yn2B20f" target="_blank" rel="noopener">Start with £49 deposit ↗</a></div>
               </td>
               <td class="amt">£149</td>
             </tr>
             <tr>
-              <td class="pkg">Custom Builds &amp; Bots</td>
-              <td class="desc">Multi-page sites, booking, tools, Telegram bots, API work. We agree the scope, quote a fixed price, and show you previews as we go.
-                <div style="margin-top:12px"><a class="btn go sm" href="https://buy.stripe.com/00w9AM9S5709aIKh0P2B20h" target="_blank" rel="noopener">Start with £149 deposit ↗</a></div>
+              <th scope="row" class="pkg">Custom Builds &amp; Bots</th>
+              <td class="desc">Multi-page sites, booking, tools, Telegram bots and API work. We agree the scope, quote a fixed price, and show you previews as we go.
+                <div style="margin-top:18px"><a class="btn line" href="https://buy.stripe.com/00w9AM9S5709aIKh0P2B20h" target="_blank" rel="noopener">Start with £149 deposit ↗</a></div>
               </td>
               <td class="amt">£349</td>
             </tr>
@@ -91,128 +112,142 @@
         </table>
       </div>
 
-      <p class="after up">Already approved your design &amp; plan? Pay your remaining balance —
+      <p class="note-row rv" data-d="2">Already approved your design and plan? Pay your remaining balance —
         <a href="https://buy.stripe.com/8x2cMY8O184d8AC25V2B20i" target="_blank" rel="noopener">Create Website £150</a> ·
         <a href="https://buy.stripe.com/5kQ6oAfcp5W52ce6mb2B20j" target="_blank" rel="noopener">Refresh £100</a> ·
         <a href="https://buy.stripe.com/4gM14gfcp98h2cefWL2B20k" target="_blank" rel="noopener">Custom Builds £200</a>
       </p>
-    </section>
+    </div>
+  </section>
 
-    <!-- ============ AFTERCARE TIERS ============ -->
-    <section class="sec" aria-label="Aftercare plans">
-      <div class="sec-head up">
-        <div>
-          <div class="kicker">Then keep it running</div>
-          <h2 id="aftercare-heading">Aftercare that <span class="g">never sleeps.</span></h2>
+  <!-- ============ AFTERCARE TIERS ============ -->
+  <section class="sec sec-split" id="aftercare">
+    <div class="wrap-l">
+      <div class="head">
+        <div class="rv">
+          <p class="eyebrow">Then keep it running</p>
+          <h2 class="big" id="aftercare-heading">Aftercare that <span class="grad">never sleeps.</span></h2>
         </div>
-        <p class="note">No lock-in. Change tier or cancel with 30 days' notice — whenever you like, no awkward phone call.</p>
+        <p class="lede rv" data-d="1">No lock-in. Change tier or cancel with 30 days' notice, whenever you like. Aftercare is optional — every site we build runs fine without it.</p>
       </div>
 
       <div class="tiers">
-        <div class="tier up" style="--d:.05s">
-          <span class="cat">Stay online</span>
+        <div class="tier rv">
+          <p class="cat">Stay online</p>
           <h3>Care Lite</h3>
-          <div class="price"><span class="amount" data-monthly="£19" data-annual="£15">£19</span><span class="per">/mo</span></div>
+          <div class="price"><span class="amt" data-monthly="£19" data-annual="£15">£19</span><span class="per">/mo</span></div>
           <div class="annual-note"></div>
+          <p class="desc">The essentials, watched for you.</p>
           <ul>
-            <li>Monthly <b>backup &amp; uptime check</b></li>
+            <li>Monthly backup &amp; uptime check</li>
             <li>Security and SSL monitoring</li>
             <li>One content or image swap per month</li>
             <li>Email support — answered within 48 hours</li>
           </ul>
-          <a class="btn go" data-monthly="https://buy.stripe.com/14A4gs0hvckteZ025V2B20a" data-annual="https://buy.stripe.com/fZudR2aW984d7wyaCr2B20c" data-label-monthly="Subscribe — £19/mo" data-label-annual="Subscribe — £15/mo" href="https://buy.stripe.com/14A4gs0hvckteZ025V2B20a" target="_blank" rel="noopener noreferrer">Subscribe — £19/mo</a>
+          <a class="btn line" data-monthly="https://buy.stripe.com/14A4gs0hvckteZ025V2B20a" data-annual="https://buy.stripe.com/fZudR2aW984d7wyaCr2B20c" data-label-monthly="Subscribe — £19/mo" data-label-annual="Subscribe — £15/mo" href="https://buy.stripe.com/14A4gs0hvckteZ025V2B20a" target="_blank" rel="noopener noreferrer">Subscribe — £19/mo</a>
         </div>
 
-        <div class="tier feat up" style="--d:.1s">
-          <span class="flag">Most popular</span>
-          <span class="cat">Hands-off upkeep</span>
+        <div class="tier feat rv" data-d="1">
+          <span class="badge">Most popular</span>
+          <p class="cat">Hands-off upkeep</p>
           <h3>Care</h3>
-          <div class="price"><span class="amount" data-monthly="£49" data-annual="£39">£49</span><span class="per">/mo</span></div>
+          <div class="price"><span class="amt" data-monthly="£49" data-annual="£39">£49</span><span class="per">/mo</span></div>
           <div class="annual-note"></div>
+          <p class="desc">Changes handled for you, no tech skills needed.</p>
           <ul>
             <li>Everything in Care Lite</li>
-            <li><b>Small changes handled for you</b> — no tech skills needed</li>
+            <li>Small changes handled for you</li>
             <li>Monthly health-check score on speed &amp; security</li>
             <li>Priority support when you need a hand</li>
             <li>Seasonal refresh — banners, offers, announcements</li>
           </ul>
-          <a class="btn go" data-monthly="https://buy.stripe.com/8x2dR25BPfwF4kmeSH2B209" data-annual="https://buy.stripe.com/28E6oAd4hacl9EG6mb2B20d" data-label-monthly="Subscribe — £49/mo" data-label-annual="Subscribe — £39/mo" href="https://buy.stripe.com/8x2dR25BPfwF4kmeSH2B209" target="_blank" rel="noopener noreferrer">Subscribe — £49/mo</a>
+          <a class="btn ice" data-monthly="https://buy.stripe.com/8x2dR25BPfwF4kmeSH2B209" data-annual="https://buy.stripe.com/28E6oAd4hacl9EG6mb2B20d" data-label-monthly="Subscribe — £49/mo" data-label-annual="Subscribe — £39/mo" href="https://buy.stripe.com/8x2dR25BPfwF4kmeSH2B209" target="_blank" rel="noopener noreferrer">Subscribe — £49/mo</a>
         </div>
 
-        <div class="tier up" style="--d:.15s">
-          <span class="cat">Grow with it</span>
+        <div class="tier rv" data-d="2">
+          <p class="cat">Grow with it</p>
           <h3>Care Plus</h3>
-          <div class="price"><span class="amount" data-monthly="£99" data-annual="£79">£99</span><span class="per">/mo</span></div>
+          <div class="price"><span class="amt" data-monthly="£99" data-annual="£79">£99</span><span class="per">/mo</span></div>
           <div class="annual-note"></div>
+          <p class="desc">Build time every month, for sites that keep moving.</p>
           <ul>
             <li>Everything in Care</li>
-            <li>Up to <b>2 hours of build time</b> every month — new pages, features, tweaks</li>
+            <li>Up to 2 hours of build time every month — new pages, features, tweaks</li>
             <li>Quarterly performance &amp; SEO tune-up</li>
             <li>Same-day replies on weekdays</li>
             <li>Discounted rates on new one-off projects</li>
           </ul>
-          <a class="btn go" data-monthly="https://buy.stripe.com/cNi7sE2pD5W5cQS7qf2B208" data-annual="https://buy.stripe.com/5kQdR2aW9bgpdUWcKz2B20e" data-label-monthly="Subscribe — £99/mo" data-label-annual="Subscribe — £79/mo" href="https://buy.stripe.com/cNi7sE2pD5W5cQS7qf2B208" target="_blank" rel="noopener noreferrer">Subscribe — £99/mo</a>
+          <a class="btn line" data-monthly="https://buy.stripe.com/cNi7sE2pD5W5cQS7qf2B208" data-annual="https://buy.stripe.com/5kQdR2aW9bgpdUWcKz2B20e" data-label-monthly="Subscribe — £99/mo" data-label-annual="Subscribe — £79/mo" href="https://buy.stripe.com/cNi7sE2pD5W5cQS7qf2B208" target="_blank" rel="noopener noreferrer">Subscribe — £99/mo</a>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ============ COMPARISON MATRIX ============ -->
-    <section class="sec" aria-label="Feature comparison">
-      <div class="sec-head solo up">
-        <div>
-          <div class="kicker">Line by line</div>
-          <h2>Compare <span class="g">aftercare.</span></h2>
+  <!-- ============ COMPARISON MATRIX ============ -->
+  <section class="sec sec-split">
+    <div class="wrap-l">
+      <div class="head">
+        <div class="rv">
+          <p class="eyebrow">Line by line</p>
+          <h2 class="big">Compare<br /><span class="grad">aftercare.</span></h2>
         </div>
+        <p class="lede rv" data-d="1">Every tier is a monthly or annual subscription. Annual billing bills yearly at the effective monthly rate shown, which works out as two months free.</p>
       </div>
-      <div class="tbl-wrap up" style="--d:.06s">
-        <table class="t">
+
+      <div class="cmp-wrap rv" data-d="1">
+        <table class="cmp">
+          <caption class="sr">Comparison of Care Lite, Care and Care Plus</caption>
           <thead>
             <tr>
-              <th>Compare aftercare</th>
-              <th>Care Lite <span class="val" data-monthly="£19/mo" data-annual="£15/mo">£19/mo</span></th>
-              <th>Care <span class="val" data-monthly="£49/mo" data-annual="£39/mo">£49/mo</span></th>
-              <th>Care Plus <span class="val" data-monthly="£99/mo" data-annual="£79/mo">£99/mo</span></th>
+              <th scope="col">Compare aftercare</th>
+              <th scope="col">Care Lite <span class="val" data-monthly="£19/mo" data-annual="£15/mo">£19/mo</span></th>
+              <th scope="col">Care <span class="val" data-monthly="£49/mo" data-annual="£39/mo">£49/mo</span></th>
+              <th scope="col">Care Plus <span class="val" data-monthly="£99/mo" data-annual="£79/mo">£99/mo</span></th>
             </tr>
           </thead>
           <tbody>
-            <tr><td class="feat">Backup &amp; uptime monitoring</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-            <tr><td class="feat">Security &amp; SSL monitoring</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-            <tr><td class="feat">Content / image swaps</td><td class="val">1 / mo</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-            <tr><td class="feat">Small changes done for you</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-            <tr><td class="feat">Monthly health-check report</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-            <tr><td class="feat">Seasonal refreshes</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-            <tr><td class="feat">Monthly build time</td><td class="no">—</td><td class="no">—</td><td class="val">2 hrs</td></tr>
-            <tr><td class="feat">Performance &amp; SEO tune-ups</td><td class="no">—</td><td class="no">—</td><td class="val">Quarterly</td></tr>
-            <tr><td class="feat">Support response time</td><td class="val">48h</td><td class="val">Priority</td><td class="val">Same day</td></tr>
-            <tr><td class="feat">Discount on new projects</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
+            <tr><th scope="row">Backup &amp; uptime monitoring</th><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><th scope="row">Security &amp; SSL monitoring</th><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><th scope="row">Content / image swaps</th><td class="val">1 / mo</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><th scope="row">Small changes done for you</th><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><th scope="row">Monthly health-check report</th><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><th scope="row">Seasonal refreshes</th><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><th scope="row">Monthly build time</th><td class="no">—</td><td class="no">—</td><td class="val">2 hrs</td></tr>
+            <tr><th scope="row">Performance &amp; SEO tune-ups</th><td class="no">—</td><td class="no">—</td><td class="val">Quarterly</td></tr>
+            <tr><th scope="row">Support response time</th><td class="val">48h</td><td class="val">Priority</td><td class="val">Same day</td></tr>
+            <tr><th scope="row">Discount on new projects</th><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
           </tbody>
         </table>
       </div>
 
-      <p class="after up">No lock-in — cancel any aftercare tier with <b>30 days' notice</b>. Annual billing saves <b>two months</b> (prices shown are the effective monthly rate). Every build includes <b>30 days of free aftercare</b> so you're never launched and left. Local Midlands businesses get <b>10% off</b> their first three months of any tier.</p>
-      <p class="after up">Already on aftercare? <a href="https://billing.stripe.com/p/login/5kQ5kwaW94S15oqcKz2B200" target="_blank" rel="noopener">Manage your plan, billing &amp; invoices in the customer portal ↗</a></p>
-    </section>
+      <p class="note-row rv" data-d="2">No lock-in — cancel any aftercare tier with <b>30 days' notice</b>. Every build includes <b>30 days of free aftercare</b>, so you are never launched and left. Local Midlands businesses get <b>10% off</b> their first three months of any tier.</p>
+      <p class="note-row rv" data-d="2">Already on aftercare? <a href="https://billing.stripe.com/p/login/5kQ5kwaW94S15oqcKz2B200" target="_blank" rel="noopener">Manage your plan, billing and invoices in the customer portal ↗</a></p>
+    </div>
+  </section>
 
-    <!-- ============ FAQ ============ -->
-    <section class="sec" aria-label="Frequently asked questions">
-      <div class="sec-head solo up">
-        <div>
-          <div class="kicker">Questions</div>
-          <h2>Answered <span class="g">straight.</span></h2>
+  <!-- ============ FAQ ============ -->
+  <section class="sec sec-split">
+    <div class="wrap-l">
+      <div class="head">
+        <div class="rv">
+          <p class="eyebrow">Questions</p>
+          <h2 class="big">Answered<br /><span class="grad">straight.</span></h2>
         </div>
+        <p class="lede rv" data-d="1">If yours is not here, ask it — the answer will be plain either way.</p>
       </div>
-      <div class="faq up" style="--d:.06s">
+
+      <div class="faq rv" data-d="1">
         <details open>
           <summary>How does a project start?</summary>
-          <div class="a">Send the form or an email describing the idea. We reply within 48 hours, agree a price and a small deposit, then build a preview you can look at. Nothing goes live until you're happy with it.</div>
+          <div class="a">Send the form or an email describing the idea. We reply within 48 hours, agree a price and a small deposit, then build a preview you can look at. Nothing goes live until you are happy with it.</div>
         </details>
         <details>
           <summary>Can I pay online by card?</summary>
-          <div class="a">Yes — every payment runs through Stripe. New projects start with a deposit link (Refresh £49, Create Website £99, Custom Builds &amp; Bots £149); the remaining balance is paid by a second link or invoice before launch. Aftercare is a monthly or annual subscription you can manage any time in the <a href="https://billing.stripe.com/p/login/5kQ5kwaW94S15oqcKz2B200" target="_blank" rel="noopener">customer portal</a>.</div>
+          <div class="a">Yes — every payment runs through Stripe. New projects start with a deposit link (Refresh £49, Create Website £99, Custom Builds &amp; Bots £149); the remaining balance is paid by a second link or invoice before launch. Aftercare is a monthly or annual subscription you can manage at any time in the <a href="https://billing.stripe.com/p/login/5kQ5kwaW94S15oqcKz2B200" target="_blank" rel="noopener">customer portal</a>.</div>
         </details>
         <details>
           <summary>What does aftercare actually cover?</summary>
-          <div class="a">The unglamorous work of keeping a site healthy: backups, security checks, small copy swaps, and the odd fix. Care and Care Plus add a monthly health report and we make the changes for you; Care Plus also includes monthly build time for new pages. It's optional — every site we build runs fine without it — but it's the easiest way to stay current and secure.</div>
+          <div class="a">The unglamorous work of keeping a site healthy: backups, security checks, small copy swaps and the occasional fix. Care and Care Plus add a monthly health report and we make the changes for you; Care Plus also includes monthly build time for new pages. It is optional — every site we build runs fine without it — but it is the easiest way to stay current and secure.</div>
         </details>
         <details>
           <summary>Do I own everything you build?</summary>
@@ -220,29 +255,30 @@
         </details>
         <details>
           <summary>Can I switch tiers or cancel later?</summary>
-          <div class="a">Whenever you like. Upgrade, downgrade, or cancel with 30 days' notice — no exit fees. Cancel during the free first month and you pay nothing. Once you're subscribed, the <a href="https://billing.stripe.com/p/login/5kQ5kwaW94S15oqcKz2B200" target="_blank" rel="noopener">customer portal</a> is where you change cards, view invoices, or cancel in a couple of clicks.</div>
+          <div class="a">Whenever you like. Upgrade, downgrade or cancel with 30 days' notice — no exit fees. Cancel during the free first month and you pay nothing. Once subscribed, the <a href="https://billing.stripe.com/p/login/5kQ5kwaW94S15oqcKz2B200" target="_blank" rel="noopener">customer portal</a> is where you change cards, view invoices or cancel in a couple of clicks.</div>
         </details>
         <details>
-          <summary>Why "from £149" / "from £349"?</summary>
-          <div class="a">Because the work isn't always the same size. A three-page refresh costs less than a booking flow. After a short conversation we quote a fixed price, and that number stays put.</div>
+          <summary>Why "from £149" and "from £349"?</summary>
+          <div class="a">Because the work is not always the same size. A three-page refresh costs less than a booking flow. After a short conversation we quote a fixed price, and that number stays put.</div>
         </details>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ============ CTA ============ -->
-    <section class="sec" aria-label="Start a project">
-      <div class="band up">
-        <span class="pill"><span class="dot" aria-hidden="true"></span> Have an idea?</span>
-        <h2>Let's bring it<br /><span class="g">to life.</span></h2>
-        <p>A few sentences is enough. We'll come back with a price, a small deposit, and a preview before anything goes live.</p>
-        <div class="btns">
-          <a class="btn go" href="index.html#contact">Start your project ↗</a>
-          <a class="btn alt" href="index.html#grader">Run the free site check →</a>
-        </div>
+  <!-- ============ CTA ============ -->
+  <section class="closing">
+    <div class="wrap-l">
+      <p class="eyebrow rv" style="justify-content:center">Have an idea?</p>
+      <h2 class="rv" data-d="1" style="margin-top:24px">Let's bring it<br /><span class="grad">to life.</span></h2>
+      <p class="lede rv" data-d="2">A few sentences is enough. We'll come back with a price, a small deposit, and a preview before anything goes live.</p>
+      <div class="btns center rv" data-d="3">
+        <a class="btn ice" href="index.html#contact">Start your project</a>
+        <a class="btn line" href="index.html#grader">Run the free site check</a>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+</main>
 
-  <footer id="site-footer"></footer>
+<footer id="sitefooter"></footer>
 </body>
 </html>

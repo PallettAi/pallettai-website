@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A new startup with years of experience. We build websites, redesigns and Telegram bots — then we check them ourselves before anyone else sees them." />
+  <meta name="description" content="A new startup with years of experience. We build websites, redesigns and Telegram bots — then run every one through our own free website check before a customer sees it." />
   <meta name="author" content="PallettAi" />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#070B14" />
+  <meta name="theme-color" content="#04122b" />
   <link rel="canonical" href="https://pallettai.org/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="PallettAi" />
@@ -32,123 +32,157 @@
   <link rel="preconnect" href="https://formspree.io" />
   <link rel="preconnect" href="https://pallettai-grader.coreypallett20.workers.dev" />
   <link rel="preload" href="fonts/inter-tight-latin-600.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="terminal.css?v=2" />
-  <script src="terminal.js?v=2" defer></script>
+  <link rel="stylesheet" href="theme.css" />
+  <script src="theme.js" defer></script>
+  <script src="grader.js" defer></script>
+  <script src="app.js" defer></script>
   <script data-goatcounter="https://pallettai.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   <noscript><img src="https://pallettai.goatcounter.com/count?p=/noscript" style="display:none" alt="" /></noscript>
+  <noscript><style>.rv{opacity:1;transform:none}.hero h1 .ln{overflow:visible;padding-bottom:0;margin-bottom:0}.hero h1 .ln>i{animation:none}</style></noscript>
 </head>
-<body>
-  <a class="skip" href="#top">Skip to content</a>
-  <div id="nav" data-page="home"></div>
+<body data-page="home">
 
-  <main class="wrap" id="top">
-    <!-- ============ HERO ============ -->
-    <section class="hero">
+<a class="skip" href="#top">Skip to content</a>
+<div class="sky" id="sky" aria-hidden="true"></div>
+<header class="nav" id="nav"></header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap-l hero-grid">
       <div>
-        <span class="pill"><span class="dot" aria-hidden="true"></span> Websites · Tools · Telegram Bots</span>
-        <h1>
-          Your website<br />
-          is losing you<br />
-          <span class="g">work.</span><br />
-          <span class="c">We'll show you where.</span>
+        <p class="eyebrow rv">Websites · Tools · Telegram bots</p>
+        <h1 class="rv" data-d="1">
+          <span class="ln"><i>Your website is</i></span>
+          <span class="ln"><i>losing you <span class="grad">enquiries.</span></i></span>
+          <span class="ln"><i>We'll show you where.</i></span>
         </h1>
-        <p class="lede lede-bar">We're a new startup with years of experience behind us. We build websites, redesigns and Telegram bots — and we run every one through the same free checker you'll use below, before a customer ever sees it.</p>
-        <div class="btns">
-          <a class="btn go" href="#grader">Check your site ↓</a>
-          <a class="btn alt" href="pricing.html">See what it costs →</a>
+        <p class="lede rv" data-d="2">We're a new startup with years of experience behind us. We build websites, redesigns and Telegram bots — and we run every one through the same free checker sitting below, before a customer ever sees it.</p>
+        <div class="btns rv" data-d="3">
+          <a class="btn ice" href="#grader">Check your website</a>
+          <a class="btn line" href="pricing.html">See what it costs</a>
         </div>
+        <p class="hero-note rv" data-d="3">No account and no email address. The report appears on the page.</p>
       </div>
 
-      <div class="term-hold">
-        <div class="chip-float tl" aria-hidden="true">
-          <span>&gt; SCORE: <span class="v">100/100</span></span>
-          <span>&gt; STATUS: <span class="v">PASS</span></span>
-        </div>
-        <div class="win">
-          <div class="win-bar">
-            <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
-            <span class="file">pallett_check_v0.3.7</span>
-          </div>
-          <div class="term-body" id="term" aria-hidden="true"></div>
-        </div>
-        <div class="chip-float br" aria-hidden="true">
-          <span>&gt; TLS: <span class="v">ENFORCED</span></span>
-          <span>&gt; TTFB: <span class="v">0.12s</span></span>
-        </div>
-      </div>
-    </section>
+      <div class="orb rv" data-d="2" aria-hidden="true">
+        <svg class="art" viewBox="0 0 640 600" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#eaf5ff" stop-opacity=".9"/>
+              <stop offset="38%" stop-color="#9fd4ff" stop-opacity=".3"/>
+              <stop offset="100%" stop-color="#9fd4ff" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="beamGrad" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0%" stop-color="#eaf5ff" stop-opacity=".42"/>
+              <stop offset="60%" stop-color="#9fd4ff" stop-opacity=".1"/>
+              <stop offset="100%" stop-color="#9fd4ff" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="cLine" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#eaf5ff" stop-opacity=".5"/>
+              <stop offset="100%" stop-color="#5aa9ea" stop-opacity=".14"/>
+            </linearGradient>
+          </defs>
 
-    <!-- ============ TRACK RECORD ============ -->
-    <section class="sec" id="stats" aria-label="Track record">
-      <div class="sec-head up">
-        <div>
-          <div class="kicker">Track record</div>
-          <h2>New startup.<br /><span class="g">Serious output.</span></h2>
-        </div>
-        <p class="note">Nothing here is made up. Live bots, a 100/100 score on our own site, and a reply within two days — that's the lot, and you can check it.</p>
-      </div>
-      <div class="stats">
-        <div class="stat up" style="--d:.05s">
-          <b>3</b>
-          <p>Telegram bots already running for real — a watching pair plus a sub-bot, and they made money in the wild</p>
-        </div>
-        <div class="stat up" style="--d:.1s">
-          <b>100<small>/100</small></b>
-          <p>That's our own site, graded by the same free tool sitting further down this page</p>
-        </div>
-        <div class="stat up" style="--d:.15s">
-          <b>48h</b>
-          <p>We'll get back to you within two days. Always have, and we mean it</p>
-        </div>
-        <div class="stat up" style="--d:.2s">
-          <b>100<small>%</small></b>
-          <p>Every build goes through the same error and security checks before it goes live. No exceptions</p>
-        </div>
-      </div>
-    </section>
+          <g class="depth" data-depth="9">
+            <g class="chart" fill="none">
+              <circle cx="320" cy="300" r="248" stroke="rgba(159,212,255,.14)" stroke-width="1"/>
+              <circle cx="320" cy="300" r="196" stroke="rgba(159,212,255,.12)" stroke-width="1"/>
+              <circle cx="320" cy="300" r="276" stroke="rgba(159,212,255,.28)" stroke-width="14" stroke-dasharray="2 30"/>
+              <circle cx="320" cy="300" r="118" stroke="rgba(234,245,255,.2)" stroke-width="1" stroke-dasharray="4 8"/>
+              <line x1="320" y1="24" x2="320" y2="576" stroke="rgba(159,212,255,.1)" stroke-width="1"/>
+              <line x1="44" y1="300" x2="596" y2="300" stroke="rgba(159,212,255,.1)" stroke-width="1"/>
+            </g>
+          </g>
 
-    <!-- ============ WHAT WE BUILD ============ -->
-    <section class="sec" id="features" aria-label="What we build">
-      <div class="sec-head up">
-        <div>
-          <div class="kicker">What we build</div>
-          <h2>Useful tools,<br /><span class="g">finished by hand.</span></h2>
-        </div>
-        <p class="note">We move quickly, then we slow down and check the work. You see a preview, we test it, and it goes live without drama.</p>
-      </div>
-      <div class="grid3">
-        <a class="card up" style="--d:.05s" href="https://github.com/PallettAi" target="_blank" rel="noopener">
-          <span class="k">01 / Tooling</span>
-          <h3>Completed Public Release</h3>
-          <p>The first thing we put out in public — a proper FTP tool with live status, real-time stats, and a UI that isn't another grey dashboard.</p>
-          <span class="go">View on GitHub ↗</span>
-        </a>
-        <a class="card up" style="--d:.1s" href="#contact">
-          <span class="k">02 / Web</span>
-          <h3>Websites that work</h3>
-          <p>New sites and refreshes that load quickly, work on a phone, and get found. We grade them on our own checker before they go live.</p>
-          <span class="go">Start a project ↗</span>
-        </a>
-        <a class="card up" style="--d:.15s" href="telegram.html">
-          <span class="k">03 / Automation</span>
-          <h3>Telegram bots</h3>
-          <p>Scraping, alerts, and the boring jobs you shouldn't still be doing by hand. A pair plus a sub-bot of ours are already live — and they pay for themselves.</p>
-          <span class="go">See Ghost Arb Bot ↗</span>
-        </a>
-      </div>
-    </section>
+          <g class="depth" data-depth="17">
+            <g class="contours" fill="none" stroke="url(#cLine)" stroke-width="1.2">
+              <g class="d1">
+                <path d="M320 44 C406 44 488 82 530 152 C572 222 568 310 524 376 C480 442 398 500 318 498 C238 496 154 448 114 380 C74 312 78 218 124 154 C170 90 234 44 320 44 Z"/>
+                <path transform="translate(320 300) rotate(-2) scale(.955) translate(-320 -300)" d="M320 44 C406 44 488 82 530 152 C572 222 568 310 524 376 C480 442 398 500 318 498 C238 496 154 448 114 380 C74 312 78 218 124 154 C170 90 234 44 320 44 Z"/>
+                <path transform="translate(320 300) rotate(3) scale(.912) translate(-320 -300)" d="M320 44 C406 44 488 82 530 152 C572 222 568 310 524 376 C480 442 398 500 318 498 C238 496 154 448 114 380 C74 312 78 218 124 154 C170 90 234 44 320 44 Z"/>
+              </g>
+              <g class="d2">
+                <path class="hi" stroke="rgba(159,212,255,.5)" stroke-width="1.4" transform="translate(320 300) rotate(-5) scale(.87) translate(-320 -300)" d="M320 44 C406 44 488 82 530 152 C572 222 568 310 524 376 C480 442 398 500 318 498 C238 496 154 448 114 380 C74 312 78 218 124 154 C170 90 234 44 320 44 Z"/>
+                <path transform="translate(320 300) rotate(4) scale(.828) translate(-320 -300)" d="M320 44 C406 44 488 82 530 152 C572 222 568 310 524 376 C480 442 398 500 318 498 C238 496 154 448 114 380 C74 312 78 218 124 154 C170 90 234 44 320 44 Z"/>
+                <path transform="translate(320 300) rotate(-3) scale(.788) translate(-320 -300)" d="M320 44 C406 44 488 82 530 152 C572 222 568 310 524 376 C480 442 398 500 318 498 C238 496 154 448 114 380 C74 312 78 218 124 154 C170 90 234 44 320 44 Z"/>
+              </g>
+              <g class="d3">
+                <path transform="translate(320 300) rotate(6) scale(.75) translate(-320 -300)" d="M320 44 C406 44 488 82 530 152 C572 222 568 310 524 376 C480 442 398 500 318 498 C238 496 154 448 114 380 C74 312 78 218 124 154 C170 90 234 44 320 44 Z"/>
+                <path class="hi" stroke="rgba(159,212,255,.42)" stroke-width="1.4" transform="translate(320 300) rotate(-4) scale(.712) translate(-320 -300)" d="M320 44 C406 44 488 82 530 152 C572 222 568 310 524 376 C480 442 398 500 318 498 C238 496 154 448 114 380 C74 312 78 218 124 154 C170 90 234 44 320 44 Z"/>
+                <path transform="translate(320 300) rotate(3) scale(.672) translate(-320 -300)" d="M320 44 C406 44 488 82 530 152 C572 222 568 310 524 376 C480 442 398 500 318 498 C238 496 154 448 114 380 C74 312 78 218 124 154 C170 90 234 44 320 44 Z"/>
+                <path transform="translate(320 300) rotate(-2) scale(.63) translate(-320 -300)" d="M320 44 C406 44 488 82 530 152 C572 222 568 310 524 376 C480 442 398 500 318 498 C238 496 154 448 114 380 C74 312 78 218 124 154 C170 90 234 44 320 44 Z"/>
+              </g>
+            </g>
+          </g>
 
-    <!-- ============ THE CHECKER ============ -->
-    <section class="sec" id="grader" aria-label="Free website health check">
-      <div class="sec-head up">
-        <div>
-          <div class="kicker">Try it live</div>
-          <h2>Is your site<br /><span class="g">holding you back?</span></h2>
+          <g class="depth" data-depth="-13">
+            <g>
+              <circle class="sonar" cx="320" cy="300" r="252"/>
+              <circle class="sonar" cx="320" cy="300" r="252"/>
+              <circle class="sonar" cx="320" cy="300" r="252"/>
+            </g>
+            <g class="beam">
+              <path d="M320 300 L238 -70 L402 -70 Z" fill="url(#beamGrad)"/>
+              <path d="M320 300 L318 -70" stroke="rgba(234,245,255,.4)" stroke-width="1"/>
+            </g>
+            <circle cx="320" cy="300" r="34" fill="url(#coreGlow)" class="halo"/>
+            <circle cx="320" cy="300" r="4.5" fill="#eaf5ff"/>
+            <g class="orbitA"><circle cx="560" cy="300" r="3.4" fill="rgba(234,245,255,.85)"/></g>
+            <g class="orbitB"><circle cx="108" cy="300" r="2.6" fill="rgba(159,212,255,.8)"/></g>
+          </g>
+
+          <g class="depth" data-depth="26">
+            <g class="dust">
+              <circle cx="86" cy="120" r="1.5"/><circle cx="168" cy="72" r="1.2" style="animation-delay:-1.1s"/>
+              <circle cx="252" cy="128" r="1.7" style="animation-delay:-2.3s"/><circle cx="418" cy="86" r="1.3" style="animation-delay:-3.4s"/>
+              <circle cx="512" cy="148" r="1.6" style="animation-delay:-.7s"/><circle cx="574" cy="238" r="1.2" style="animation-delay:-1.9s"/>
+              <circle cx="96" cy="240" r="1.4" style="animation-delay:-2.8s"/><circle cx="146" cy="392" r="1.6" style="animation-delay:-4.1s"/>
+              <circle cx="262" cy="470" r="1.3" style="animation-delay:-.5s"/><circle cx="392" cy="498" r="1.5" style="animation-delay:-3.1s"/>
+              <circle cx="522" cy="418" r="1.2" style="animation-delay:-2s"/><circle cx="582" cy="330" r="1.4" style="animation-delay:-4.6s"/>
+              <circle cx="204" cy="206" r="1.1" style="animation-delay:-3.8s"/><circle cx="446" cy="182" r="1.4" style="animation-delay:-1.5s"/>
+              <circle cx="330" cy="62" r="1.2" style="animation-delay:-2.6s"/><circle cx="120" cy="330" r="1.3" style="animation-delay:-.9s"/>
+            </g>
+          </g>
+        </svg>
+
+        <span class="orb-tag">Live check · pallettai.org</span>
+        <div class="chip-row">
+          <span class="chip">Speed <b>100</b></span>
+          <span class="chip">Mobile <b>100</b></span>
+          <span class="chip">Security <b>100</b></span>
         </div>
-        <p class="note">Drop in any web address. In a few seconds you'll see how it holds up on speed, mobile, search and the security basics — and what to fix first. Add a competitor if you want the awkward comparison.</p>
+        <div class="orb-fig">
+          <b data-count="100">100</b>
+          <span>out of 100 — our own site</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap-l">
+      <div class="rail rv">
+        <div><b><span data-count="3">3</span></b><p>Telegram bots running for real — a watching pair plus a sub-bot, and they made money in the wild</p></div>
+        <div><b><span data-count="100">100</span>/100</b><p>Our own site, graded by the same free tool you can run further down this page</p></div>
+        <div><b><span data-count="24">24</span>h</b><p>Reply to a new project enquiry — a price, a deposit link and next steps</p></div>
+        <div><b><span data-count="48">48</span>h</b><p>Reply on support, plus a 30-day fix window on our own code</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE CHECKER ============ -->
+  <section class="sec" id="grader" aria-label="Free website health check">
+    <svg class="wm" viewBox="0 0 1000 1000" aria-hidden="true"><use href="#wm"/></svg>
+    <div class="wrap-l">
+      <div class="head">
+        <div class="rv">
+          <p class="eyebrow">Try it live · free</p>
+          <h2 class="big">Is your site<br /><span class="grad">holding you back?</span></h2>
+        </div>
+        <p class="lede rv" data-d="1">Drop in any web address. In a few seconds you'll see how it holds up on speed, mobile, search and the security basics — and what to fix first.</p>
       </div>
 
-      <div class="console up" id="check" style="--d:.08s">
+      <div class="console rv" data-d="1" id="check">
         <header class="print-sheet" id="print-sheet">
           <div class="ps-mark">PallettAi · Website health report</div>
           <p class="ps-title">How this site holds up</p>
@@ -158,15 +192,12 @@
             <div><dt>Checked</dt><dd id="ps-date">—</dd></div>
           </dl>
         </header>
-        <div class="win-bar">
-          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span class="file">pallett_check — free website health report</span>
-        </div>
+
         <div class="console-in">
           <form class="prompt" id="check-form">
             <span class="sig" aria-hidden="true">$</span>
             <input id="check-url" type="text" inputmode="url" autocomplete="off" placeholder="yourbusiness.co.uk" aria-label="Website address to check" />
-            <button class="btn go sm" type="submit">Run free check</button>
+            <button class="btn ice sm" type="submit">Run free check</button>
           </form>
 
           <button class="vs-toggle" type="button" id="vs-toggle" aria-expanded="false" aria-controls="vs-field">Compare with a competitor</button>
@@ -203,17 +234,17 @@
             <div class="gauge">
               <div class="host" id="g-host"></div>
               <div class="fig"><span id="g-score">0</span><small>/100</small></div>
-              <div class="band" id="g-band"></div>
+              <div class="bandlabel" id="g-band"></div>
               <div class="bars" id="g-bars"></div>
             </div>
             <div>
-              <div class="kicker">Your full findings</div>
+              <p class="eyebrow">Your full findings</p>
               <ul class="finds" id="g-finds"></ul>
             </div>
           </div>
 
           <div class="tools" id="check-tools" hidden>
-            <a class="btn go sm" href="#contact">Let us fix it ↗</a>
+            <a class="btn ice sm" href="#contact">Let us fix it</a>
             <button type="button" id="tool-copy">Copy report link</button>
             <span class="sep" aria-hidden="true">·</span>
             <button type="button" id="tool-print">Save as PDF</button>
@@ -221,38 +252,115 @@
           <p class="print-foot">Prepared by PallettAi · pallettai.org · A snapshot of speed, mobile, search and security basics — not a guarantee. We can fix what this report flags.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ============ PRICING STRIP ============ -->
-    <section class="sec" id="pricing" aria-label="Pricing">
-      <div class="sec-head up">
-        <div>
-          <div class="kicker">Pricing</div>
-          <h2>Simple pricing,<br /><span class="g">no surprises.</span></h2>
+  <!-- ============ WHAT WE BUILD ============ -->
+  <section class="sec sec-split" id="features" aria-label="What we build">
+    <div class="wrap-l">
+      <div class="head">
+        <div class="rv">
+          <p class="eyebrow">What we build</p>
+          <h2 class="big">Useful tools,<br /><span class="grad">finished by hand.</span></h2>
         </div>
-        <p class="note">Pay once to get online. Stay on aftercare if you'd rather we keep an eye on it. That's the whole menu.</p>
+        <p class="lede rv" data-d="1">That checker is the same pass every build gets. If the report found a hole, this is the work we do to close it.</p>
       </div>
-      <div class="rates up" style="--d:.06s">
-        <div class="rate"><span class="w">Websites from</span><span class="d" aria-hidden="true"></span><span class="a">£249</span></div>
-        <div class="rate"><span class="w">Refreshes from</span><span class="d" aria-hidden="true"></span><span class="a">£149</span></div>
-        <div class="rate"><span class="w">Bots &amp; builds from</span><span class="d" aria-hidden="true"></span><span class="a">£349</span></div>
-        <div class="rate"><span class="w">Aftercare from</span><span class="d" aria-hidden="true"></span><span class="a">£19<small>/mo</small></span></div>
-      </div>
-      <div class="btns up" style="--d:.12s; margin-top:26px">
-        <a class="btn alt" href="pricing.html">See full pricing →</a>
-      </div>
-    </section>
 
-    <!-- ============ ROI ============ -->
-    <section class="sec" id="roi" aria-label="What 56% more enquiries could be worth">
-      <div class="sec-head up">
-        <div>
-          <div class="kicker">The honest question</div>
-          <h2>What would 56% more enquiries<br /><span class="g">be worth to you?</span></h2>
-        </div>
-        <p class="note">People visit, hesitate, and leave. Slide the numbers to see what those quiet losses might add up to over a year.</p>
+      <div class="cards">
+        <article class="card rv">
+          <svg class="glyph" viewBox="0 0 220 130" aria-hidden="true">
+            <path class="edge" d="M38 94 C70 94 82 44 104 34"/>
+            <path class="edge" d="M104 34 C138 26 156 76 184 86"/>
+            <path class="edge" d="M38 94 C78 108 118 114 128 112"/>
+            <path class="edge" d="M128 112 C150 110 170 96 184 86"/>
+            <path class="edge" d="M104 34 C112 60 124 92 128 112"/>
+            <path class="pulse p1" d="M38 94 C70 94 82 44 104 34"/>
+            <path class="pulse p2" d="M104 34 C138 26 156 76 184 86"/>
+            <path class="pulse p3" d="M38 94 C78 108 118 114 128 112"/>
+            <circle class="node" cx="38" cy="94" r="7"/>
+            <circle class="node big" cx="104" cy="34" r="9"/>
+            <circle class="node" cx="184" cy="86" r="7"/>
+            <circle class="node" cx="128" cy="112" r="6"/>
+          </svg>
+          <p class="n">01 / Automation</p>
+          <h3>Telegram bots</h3>
+          <p>Scraping, alerts and the repetitive jobs nobody should still be doing by hand. A pair plus a sub-bot of ours are already live — and they paid for themselves.</p>
+          <a class="go" href="telegram.html">See Ghost Arb Bot →</a>
+        </article>
+
+        <article class="card rv" data-d="1">
+          <svg class="glyph" viewBox="0 0 220 130" aria-hidden="true">
+            <rect class="dr d1" x="16" y="14" width="188" height="102" rx="10"/>
+            <line class="dr d2" x1="16" y1="38" x2="204" y2="38"/>
+            <circle class="dot d3" cx="30" cy="26" r="2.6"/>
+            <circle class="dot d4" cx="41" cy="26" r="2.6"/>
+            <circle class="dot d5" cx="52" cy="26" r="2.6"/>
+            <line class="dr d4" x1="34" y1="56" x2="128" y2="56"/>
+            <line class="dr d5" x1="34" y1="70" x2="168" y2="70"/>
+            <rect class="dr d6" x="34" y="86" width="60" height="18" rx="9"/>
+            <rect class="dr d7" x="102" y="86" width="44" height="18" rx="9"/>
+          </svg>
+          <p class="n">02 / Web</p>
+          <h3>Websites that work</h3>
+          <p>New sites and refreshes that load quickly, work on a phone, and get found. Every one is graded on the checker above before it goes live.</p>
+          <a class="go" href="pricing.html">Website pricing →</a>
+        </article>
+
+        <article class="card rv" data-d="2">
+          <svg class="glyph" viewBox="0 0 220 130" aria-hidden="true">
+            <rect class="sheet d3" x="34" y="10" width="112" height="76" rx="10"/>
+            <rect class="sheet d2" x="46" y="22" width="112" height="76" rx="10"/>
+            <rect class="sheet d1" x="58" y="34" width="112" height="76" rx="10"/>
+            <line class="ink d6" x1="72" y1="56" x2="150" y2="56"/>
+            <line class="ink d7" x1="72" y1="70" x2="132" y2="70"/>
+            <rect class="inbtn d8" x="72" y="84" width="46" height="14" rx="7"/>
+          </svg>
+          <p class="n">03 / Tooling</p>
+          <h3>Completed public release</h3>
+          <p>The first thing we put out in public — a proper FTP tool with live status, real-time stats, and a UI that isn't another grey dashboard.</p>
+          <a class="go" href="https://github.com/PallettAi" target="_blank" rel="noopener">View on GitHub →</a>
+        </article>
       </div>
-      <div class="roi up" style="--d:.08s">
+    </div>
+  </section>
+
+  <!-- ============ PRICING STRIP ============ -->
+  <section class="sec sec-split" id="pricing" aria-label="Pricing">
+    <div class="wrap-l">
+      <div class="head">
+        <div class="rv">
+          <p class="eyebrow">Pricing</p>
+          <h2 class="big">Simple pricing,<br /><span class="grad">no surprises.</span></h2>
+        </div>
+        <p class="lede rv" data-d="1">Pay once to get online. Stay on aftercare if you would rather we kept an eye on it. Website builds and the Studio app are priced separately.</p>
+      </div>
+
+      <div class="rail rv" style="margin-top:0">
+        <div><b>£249</b><p>New websites, from</p></div>
+        <div><b>£149</b><p>Refreshes and upgrades, from</p></div>
+        <div><b>£349</b><p>Custom builds and bots, from</p></div>
+        <div><b>£19</b><p>Aftercare, per month, from</p></div>
+      </div>
+
+      <div class="btns rv" data-d="1" style="margin-top:28px">
+        <a class="btn ice" href="pricing.html">Website pricing</a>
+        <a class="btn line" href="downloads.html#studio-plans">Studio plans — Free / £9 / £19</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ROI ============ -->
+  <section class="sec sec-split" id="roi" aria-label="What more enquiries could be worth">
+    <div class="wrap-l">
+      <div class="head">
+        <div class="rv">
+          <p class="eyebrow">The honest question</p>
+          <h2 class="big">What would 56% more enquiries<br /><span class="grad">be worth to you?</span></h2>
+        </div>
+        <p class="lede rv" data-d="1">People visit, hesitate, and leave. Move the sliders to your own numbers, then write to us — that is the conversation this page is for.</p>
+      </div>
+
+      <div class="roi rv" data-d="1">
         <div>
           <div class="slider">
             <label for="roi-enq">Enquiries you get each month</label>
@@ -277,80 +385,97 @@
           </div>
         </div>
         <div class="roi-out">
-          <div class="kicker">At your current close rate</div>
+          <p class="kicker">At your current close rate</p>
           <span class="big" id="roi-extra" role="status">£0</span>
           <p id="roi-sub">a year, sitting in the gap between people who visited and people who actually got in touch.</p>
-          <a class="btn go sm" id="roi-cta" href="#contact">Tell me how ↗</a>
+          <a class="btn ice" id="roi-cta" href="#contact">Tell me how</a>
+        </div>
+
+        <!-- Drawn by app.js from the same three sliders. Decorative: the
+             figure above is the accessible statement of the same maths, and
+             the shaded gap at month 12 equals #roi-extra exactly. -->
+        <div class="roi-graph" id="roi-graph" aria-hidden="true">
+          <div class="rc-top">
+            <span class="rc-k rc-k1">Today's run rate</span>
+            <span class="rc-k rc-k2">With 56% more enquiries</span>
+            <span class="rc-tot" id="rc-tot">£0<small>over 12 months</small></span>
+          </div>
+          <svg class="rc" viewBox="0 0 720 208" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="rcFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(159,212,255,.42)"/>
+                <stop offset="100%" stop-color="rgba(159,212,255,.03)"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="rc-foot"><span>Now</span><span>6 months</span><span>12 months</span></div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ============ CONTACT ============ -->
-    <section class="sec" id="contact" aria-label="Contact">
-      <div class="sec-head up">
-        <div>
-          <div class="kicker">Have an idea?</div>
-          <h2>Let's bring it<br /><span class="g">to life.</span></h2>
+  <!-- ============ CONTACT ============ -->
+  <section class="sec sec-split" id="contact" aria-label="Contact">
+    <div class="wrap-l">
+      <div class="head">
+        <div class="rv">
+          <p class="eyebrow">Have an idea?</p>
+          <h2 class="big">Let's bring it<br /><span class="grad">to life.</span></h2>
         </div>
-        <p class="note">A few sentences is enough. We'll come back with a price, a small deposit, and a preview you can actually look at before anything goes live.</p>
+        <p class="lede rv" data-d="1">A few sentences is enough. We'll come back with a price, a small deposit, and a preview you can look at before anything goes live.</p>
       </div>
 
-      <div class="win form up" style="--d:.06s">
-        <div class="win-bar">
-          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span class="file">new_enquiry.txt</span>
-        </div>
-        <div class="console-in">
-          <form id="contact-form" action="https://formspree.io/f/xgaeoapw" method="POST">
-            <input type="hidden" name="_subject" value="New project enquiry from pallettai.org" />
-            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
-            <input type="hidden" name="roi_note" id="cf-roi" value="" />
-            <div class="two">
-              <div class="f">
-                <label for="cf-name">Your name</label>
-                <input id="cf-name" name="name" type="text" placeholder="Jane Doe" required autocomplete="name" />
-              </div>
-              <div class="f">
-                <label for="cf-email">Email</label>
-                <input id="cf-email" name="email" type="email" placeholder="you@company.com" required autocomplete="email" spellcheck="false" />
-              </div>
+      <div class="panel form rv" data-d="1">
+        <form id="contact-form" action="https://formspree.io/f/xgaeoapw" method="POST">
+          <input type="hidden" name="_subject" value="New project enquiry from pallettai.org" />
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <input type="hidden" name="roi_note" id="cf-roi" value="" />
+          <div class="two">
+            <div class="f">
+              <label for="cf-name">Your name</label>
+              <input id="cf-name" name="name" type="text" placeholder="Jane Doe" required autocomplete="name" />
             </div>
             <div class="f">
-              <label for="cf-company">Company / tell me about yourself</label>
-              <input id="cf-company" name="company" type="text" placeholder="Optional — your company, team, or background" autocomplete="organization" />
+              <label for="cf-email">Email</label>
+              <input id="cf-email" name="email" type="email" placeholder="you@company.com" required autocomplete="email" spellcheck="false" />
             </div>
-            <div class="f">
-              <label for="cf-details">What do you want to make?</label>
-              <textarea id="cf-details" name="details" rows="5" placeholder="What you need, who it's for, and anything you've seen that you like." required autocomplete="off"></textarea>
-            </div>
-            <div class="btns" style="margin-top:18px">
-              <button class="btn go" type="submit">Send enquiry ↗</button>
-            </div>
-            <p class="status" role="status" aria-live="polite"></p>
-          </form>
-        </div>
+          </div>
+          <div class="f">
+            <label for="cf-company">Company / tell me about yourself</label>
+            <input id="cf-company" name="company" type="text" placeholder="Optional — your company, team, or background" autocomplete="organization" />
+          </div>
+          <div class="f">
+            <label for="cf-details">What do you want to make?</label>
+            <textarea id="cf-details" name="details" rows="5" placeholder="What you need, who it's for, and anything you've seen that you like." required autocomplete="off"></textarea>
+          </div>
+          <div class="btns" style="margin-top:22px">
+            <button class="btn ice" type="submit">Send enquiry</button>
+          </div>
+          <p class="status" role="status" aria-live="polite"></p>
+        </form>
       </div>
 
-      <p class="after">We answer everything within 48 hours. If you'd rather skip the form, write to <a href="mailto:pallettai@proton.me">pallettai@proton.me</a></p>
-      <p class="after">Ready to go now? Secure your slot with a deposit — <a href="https://buy.stripe.com/6oUdR2d4hcktdUW9yn2B20f" target="_blank" rel="noopener">Refresh £49</a> · <a href="https://buy.stripe.com/6oU28k1lzbgpdUWcKz2B20g" target="_blank" rel="noopener">New website £99</a> · <a href="https://buy.stripe.com/00w9AM9S5709aIKh0P2B20h" target="_blank" rel="noopener">Custom build £149</a></p>
-    </section>
-  </main>
+      <p class="note-row rv" data-d="2">New project enquiries get a reply within 24 hours. Need help with something we have already built — a site, a bot, your account? The <a href="support.html">support desk</a> answers within 48 hours, or email <a href="mailto:support@pallettai.org">support@pallettai.org</a>.</p>
+      <p class="note-row rv" data-d="2">Ready to go now? Secure your slot with a deposit — <a href="https://buy.stripe.com/6oUdR2d4hcktdUW9yn2B20f" target="_blank" rel="noopener">Refresh £49</a> · <a href="https://buy.stripe.com/6oU28k1lzbgpdUWcKz2B20g" target="_blank" rel="noopener">New website £99</a> · <a href="https://buy.stripe.com/00w9AM9S5709aIKh0P2B20h" target="_blank" rel="noopener">Custom build £149</a></p>
+    </div>
+  </section>
+</main>
 
-  <footer id="site-footer"></footer>
+<footer id="sitefooter"></footer>
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "PallettAi",
-    "description": "A new startup with years of experience, building websites, intelligent tools, and Telegram automation.",
-    "email": "pallettai@proton.me",
-    "url": "https://pallettai.org/",
-    "logo": "https://pallettai.org/apple-touch-icon.png",
-    "priceRange": "££",
-    "areaServed": "United Kingdom",
-    "sameAs": ["https://github.com/PallettAi", "https://x.com/1PallettAi"]
-  }
-  </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "PallettAi",
+  "description": "A new startup with years of experience, building websites, intelligent tools, and Telegram automation.",
+  "email": "support@pallettai.org",
+  "url": "https://pallettai.org/",
+  "logo": "https://pallettai.org/apple-touch-icon.png",
+  "priceRange": "££",
+  "areaServed": "United Kingdom",
+  "sameAs": ["https://github.com/PallettAi", "https://x.com/1PallettAi"]
+}
+</script>
 </body>
 </html>
