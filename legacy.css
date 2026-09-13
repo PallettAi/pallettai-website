@@ -1,0 +1,202 @@
+/* ============================================================
+   PallettAi — legacy page bridge  (TEMPORARY)
+
+   The pages below still carry their original markup from the
+   terminal-* design. Rebuilding all of them into the new
+   vocabulary is a larger job, so this shim does the next best
+   thing: it recolours the old design into the new palette and
+   neutralises the handful of old rules that fight theme.css.
+
+   Load order on those pages:
+       terminal.css  →  theme.css  →  legacy.css
+
+   terminal.css stays only so the legacy components keep their
+   layout; theme.css wins every shared class, and this file
+   patches the collisions. As each page is rebuilt into the new
+   vocabulary, drop its terminal.css + legacy.css links.
+   When the last one is rebuilt, delete this file.
+
+   Pages: 404, changelog, downloads, live, portfolio, privacy,
+          support, telegram, terms
+   ============================================================ */
+
+/* ---------- 1. re-tokenise the old palette ----------
+   Every colour in terminal.css is driven by these variables, so
+   overriding them here recolours the whole legacy half of the
+   site in one place. */
+
+:root {
+  --bg: #04122b;
+  --bg-2: #020c1c;
+  --panel: rgba(159, 212, 255, 0.055);
+  --panel-2: rgba(159, 212, 255, 0.1);
+  --line: rgba(159, 212, 255, 0.3);
+  --line-soft: rgba(159, 212, 255, 0.16);
+
+  --acc: #9fd4ff;
+  --acc-deep: #5aa9ea;
+  --cyan: #dceeff;
+  --pass: #8ff0c8;
+  --amber: #e9c07a;
+  --red: #f08a8a;
+
+  --text: #eaf5ff;
+  --muted: rgba(234, 245, 255, 0.68);
+  --dim: rgba(234, 245, 255, 0.5);
+  --faint: rgba(234, 245, 255, 0.36);
+
+  --ease: cubic-bezier(0.2, 0.7, 0.25, 1);
+}
+
+/* ---------- 2. retire the old ambient layers ----------
+   terminal.css paints a violet/teal glow on body::before. theme.css
+   brings the living .sky instead, and two stacked backgrounds read
+   as mud — so the glow goes. */
+
+body::before { display: none; }
+
+/* body::after is shared, and this is the subtle one. terminal.css used
+   it for a schematic grid; theme.css uses it for the page vignette.
+   theme.css wins the background (a shorthand, so it clears the grid),
+   but terminal's opacity and mask-image are separate properties that
+   survive — which dimmed the vignette to 40% and re-masked it on every
+   legacy page. Reset them so the vignette matches the new pages. */
+
+body::after {
+  opacity: 1;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* ---------- 3. one gradient for every accent span ----------
+   Legacy markup marks accents with <span class="g">. It used to be
+   a flat purple; now it gets the same white→baby-blue sheen as the
+   new pages' .grad. Selectors listed so this outranks the old
+   "h1 .g { color: var(--acc) }" rule at equal specificity. */
+
+.g,
+h1 .g,
+h2 .g,
+h3 .g,
+h4 .g,
+.sec-head h2 .g,
+.page-hero h1 .g,
+.legal h2 .g {
+  background: linear-gradient(100deg, #eaf5ff 0%, #a9d8ff 34%, #7cc0f8 62%, #a9d8ff 86%, #dceeff 100%);
+  background-size: 160% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: sheen 17s ease-in-out infinite;
+}
+
+/* ---------- 4. drop the old terminal "signature" punctuation ----------
+   The old design prefixed headings with "> " and "// ". The new one
+   doesn't; leaving them makes half the site look like a changelog. */
+
+.card h3::before,
+.req h3::before,
+.f label::before,
+.legal h2::before,
+.kicker::before { content: none; margin: 0; }
+
+/* list items wore the same chevron; the new design marks them with a
+   short gradient dash, so swap the glyph for the rule */
+.rel li::before,
+.specs li::before,
+.gaps li::before {
+  content: "";
+  width: 12px;
+  height: 1.5px;
+  top: 11px;
+  color: transparent;
+  background: linear-gradient(90deg, var(--baby), transparent);
+}
+
+/* legacy form labels onto the new .form label voice */
+.f label {
+  display: block;
+  font-size: 13.5px;
+  color: var(--mist);
+  margin-bottom: 8px;
+}
+
+/* legacy section labels become the new eyebrow */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--baby);
+}
+.kicker::after {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--baby));
+}
+
+/* the answer blocks also carried the old mono voice */
+.faq summary { font-family: var(--sans); }
+
+/* h4 is the one heading level theme.css leaves alone */
+h4 {
+  font-family: var(--display);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+}
+
+/* ---------- 5. legacy buttons onto the new pair ----------
+   Old pages use .btn.go (primary) and .btn.alt (secondary).
+   Map them onto the new .ice / .line treatments so a call to
+   action looks identical wherever it sits. */
+
+.btn.go {
+  background: linear-gradient(120deg, #ffffff, #d8ecff 65%, #a9d8ff);
+  border-color: transparent;
+  color: #04122b;
+}
+.btn.go:hover {
+  background: linear-gradient(120deg, #ffffff, #e2f1ff 65%, #b9dfff);
+  box-shadow: 0 18px 50px rgba(159, 212, 255, 0.32);
+}
+.btn.alt {
+  border-color: var(--hair-2);
+  color: var(--ice);
+  background: var(--glass);
+}
+.btn.alt:hover {
+  border-color: var(--baby);
+  background: var(--glass-2);
+  box-shadow: 0 0 40px rgba(124, 192, 248, 0.16);
+}
+.btn.sm { padding: 10px 18px; font-size: 13px; }
+
+/* ---------- 6. restore prose rhythm ----------
+   theme.css sets p{margin:0} because the new pages space their copy
+   with layout gap. The legacy pages are plain documents and rely on
+   default margins, so without this every paragraph runs together.
+   More specific theme.css rules (.card p, .stat p, .sec-head .note)
+   still win, because a class beats two bare element selectors. */
+
+main p { margin: 0 0 1.05em; }
+main ul,
+main ol { margin: 0 0 1.05em; padding-left: 1.15em; }
+main li { margin: 0.32em 0; }
+main li:last-child { margin-bottom: 0; }
+
+/* the old pagetop spacing came from .page-hero padding, which the
+   new fixed nav needs a little more of */
+.page-hero { padding-top: 104px; }
+
+/* ---------- 7. reveals without script ----------
+   theme.js now reveals .up as well as .rv, so the legacy pages
+   animate in again. Without script they would stay invisible, so
+   each legacy page carries the same noscript override index.html
+   uses — see the <noscript><style> block in its <head>. */

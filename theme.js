@@ -414,8 +414,11 @@
     }
   }
 
-  /* ---------- reveals ---------- */
-  var items = doc.querySelectorAll('.rv');
+  /* ---------- reveals ----------
+     .rv is the new vocabulary; .up is the legacy one, which the
+     unrebuilt pages still use. Both are revealed, otherwise the
+     legacy half of the site would sit at opacity 0 forever. */
+  var items = doc.querySelectorAll('.rv, .up');
   if (rm || !('IntersectionObserver' in window)) {
     items.forEach(function (el) { el.classList.add('in'); });
   } else {
@@ -954,5 +957,108 @@
       }
     }, { rootMargin: '280px 0px 280px 0px' });
     [].forEach.call(secs, function (s) { io.observe(s); });
+  })();
+
+  /* ---------- 7. legacy page behaviours ----------
+     Two behaviours still live on the unrebuilt pages and used to come
+     from terminal.js, which those pages no longer load. Both are ported
+     here so nothing quietly stopped working:
+       [data-reel]    — the Ghost Arb Bot screenshot reel (telegram.html)
+       #win-waitlist  — the Windows waitlist form (downloads.html) */
+
+  function pingEvent(path) {
+    try {
+      if (window.goatcounter && typeof window.goatcounter.count === 'function') {
+        window.goatcounter.count({ path: path, title: path, event: true });
+      }
+    } catch (e) {}
+  }
+
+  (function reels() {
+    var reels = doc.querySelectorAll('[data-reel]');
+    if (!reels.length) return;
+    [].forEach.call(reels, function (reel) {
+      var slides = reel.querySelectorAll('figure');
+      if (!slides.length) return;
+      var count = reel.querySelector('[data-reel-count]');
+      var prev = reel.querySelector('[data-reel-prev]');
+      var next = reel.querySelector('[data-reel-next]');
+      var i = 0;
+
+      function show(n) {
+        i = (n + slides.length) % slides.length;
+        [].forEach.call(slides, function (s, idx) { s.classList.toggle('on', idx === i); });
+        if (count) count.textContent = (i + 1) + ' / ' + slides.length;
+        if (prev) prev.disabled = slides.length < 2;
+        if (next) next.disabled = slides.length < 2;
+      }
+
+      if (prev) prev.addEventListener('click', function () { show(i - 1); });
+      if (next) next.addEventListener('click', function () { show(i + 1); });
+
+      reel.setAttribute('tabindex', '0');
+      reel.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); show(i - 1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); show(i + 1); }
+      });
+
+      var startX = null;
+      reel.addEventListener('touchstart', function (e) {
+        startX = e.changedTouches[0].clientX;
+      }, { passive: true });
+      reel.addEventListener('touchend', function (e) {
+        if (startX === null) return;
+        var dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) > 40) show(i + (dx < 0 ? 1 : -1));
+        startX = null;
+      });
+
+      /* a missing screenshot falls back to the placeholder the markup
+         provides, rather than leaving an empty frame */
+      [].forEach.call(reel.querySelectorAll('img'), function (img) {
+        img.addEventListener('error', function () {
+          img.hidden = true;
+          var empty = img.parentElement.querySelector('.reel-empty');
+          if (empty) empty.hidden = false;
+        });
+      });
+
+      show(0);
+    });
+  })();
+
+  (function waitlist() {
+    var form = doc.getElementById('win-waitlist');
+    if (!form) return;
+    var btn = form.querySelector('button[type=submit]');
+    var status = form.querySelector('.status');
+    var idle = btn ? btn.textContent : '';
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (btn) { btn.disabled = true; btn.textContent = 'Joining…'; }
+      if (status) { status.className = 'status'; status.textContent = '> sending…'; }
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+        mode: 'cors'
+      }).then(function (r) {
+        if (!r.ok) throw new Error('bad');
+        if (status) {
+          status.className = 'status ok';
+          status.textContent = "> you're on the list — one email when the Windows build is ready, nothing else.";
+        }
+        form.reset();
+        pingEvent('/event/waitlist');
+      }).catch(function () {
+        if (status) {
+          status.className = 'status err';
+          status.textContent = '> something went wrong — email support@pallettai.org and we will pick it up';
+        }
+      }).finally(function () {
+        if (btn) { btn.disabled = false; btn.textContent = idle; }
+      });
+    });
   })();
 })();
