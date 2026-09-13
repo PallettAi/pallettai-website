@@ -68,7 +68,9 @@
     '</svg>';
 
   function brand(href) {
-    return      '<a class="brand" href="' + href + '"><img src="signal-logo.svg" alt="" width="27" height="27" />' +
+    /* the square mark, not the wide wordmark — the wordmark is 720x220 and
+       the nav box is square, so it squashed into an unreadable smear */
+    return      '<a class="brand" href="' + href + '"><img src="signal-mark.svg" alt="" width="30" height="30" />' +
       '<b>Pallett<i>Ai</i></b></a>';
   }
 
