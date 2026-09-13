@@ -5,31 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PallettAI — Redeem a referral code</title>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
-<link rel="icon" type="image/svg+xml" href="signal-favicon.svg?v=2" />
+<link rel="icon" type="image/svg+xml" href="signal-favicon.svg?v=3" />
 <meta name="description" content="Redeem your PallettAI Studio Pro referral code.">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://fjahxichioccknszuxhb.supabase.co; frame-ancestors 'none'; form-action 'self'; object-src 'none'; base-uri 'self'" />
 <style>
   :root{
-    --bg:#0b0d1a; --surface:#141731; --surface2:#1c2042; --border:rgba(255,255,255,.09);
-    --text:#eef0ff; --muted:#9aa3c4; --primary:#7c5cff; --accent:#22d3ee;
+    --bg:#04122b; --surface:#0a1f3d; --surface2:#0e2a4f; --border:rgba(159,212,255,.18);
+    --text:#eaf5ff; --muted:rgba(234,245,255,.6); --primary:#7cc0f8; --accent:#9fd4ff;
     --ok:#34d399; --err:#f87171; --warn:#fbbf24;
+    --ok-bg:rgba(52,211,153,.1); --warn-bg:rgba(251,191,36,.1); --err-bg:rgba(248,113,113,.1);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:radial-gradient(1200px 600px at 20% -10%,rgba(124,92,255,.22),transparent 60%),radial-gradient(1000px 500px at 90% 10%,rgba(34,211,238,.14),transparent 55%),var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:0 20px}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:radial-gradient(1200px 600px at 20% -10%,rgba(124,192,248,.2),transparent 60%),radial-gradient(1000px 500px at 90% 10%,rgba(159,212,255,.13),transparent 55%),var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:0 20px}
   .wrap{width:100%;max-width:560px;padding:56px 0 24px}
   .logo{display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:34px}
-  .logo-badge{width:44px;height:44px;border-radius:13px;background:linear-gradient(135deg,#7c5cff,#22d3ee);display:grid;place-items:center;font-size:1.3rem;color:#fff;font-weight:800;box-shadow:0 8px 24px rgba(124,92,255,.35)}
+  .logo-mark{width:44px;height:44px;flex:0 0 auto;filter:drop-shadow(0 0 14px rgba(159,212,255,.5))}
   .logo b{font-size:1.25rem;letter-spacing:-.01em}
+  .logo b i{font-style:normal;color:var(--accent)}
   .logo small{display:block;color:var(--muted);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase}
   .card{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:30px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
   h1{font-size:1.5rem;letter-spacing:-.02em;text-align:center}
   .sub{color:var(--muted);font-size:.9rem;line-height:1.55;text-align:center;margin:10px 0 22px}
-  .code-badge{display:block;width:fit-content;margin:0 auto 6px;font-family:ui-monospace,Consolas,monospace;font-weight:800;letter-spacing:.1em;color:var(--accent);background:rgba(34,211,238,.1);border:1px dashed rgba(34,211,238,.4);padding:8px 16px;border-radius:10px;font-size:1rem}
+  .code-badge{display:block;width:fit-content;margin:0 auto 6px;font-family:ui-monospace,Consolas,monospace;font-weight:800;letter-spacing:.1em;color:var(--accent);background:rgba(159,212,255,.1);border:1px dashed rgba(159,212,255,.4);padding:8px 16px;border-radius:10px;font-size:1rem}
   .field{margin-bottom:14px}
   .field label{display:block;font-size:.8rem;font-weight:600;color:var(--muted);margin-bottom:6px}
   .field input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:11px;padding:12px 14px;color:var(--text);font-size:.95rem;outline:none;transition:.15s}
-  .field input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(124,92,255,.22)}
-  .btn{width:100%;border:0;border-radius:12px;padding:13px;font-size:.95rem;font-weight:700;cursor:pointer;background:linear-gradient(135deg,#7c5cff,#5b3fd6);color:#fff;transition:.15s}
+  .field input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(159,212,255,.22)}
+  .btn{width:100%;border:0;border-radius:12px;padding:13px;font-size:.95rem;font-weight:700;cursor:pointer;background:linear-gradient(120deg,#ffffff,#d8ecff 65%,#a9d8ff);color:#04122b;transition:.15s}
   .btn:hover{filter:brightness(1.1)}
   .btn:disabled{opacity:.55;cursor:wait}
   .btn.ghost{background:var(--surface2);border:1px solid var(--border);color:var(--text);margin-top:10px;font-weight:600}
@@ -46,14 +48,14 @@
   footer a{color:var(--accent);text-decoration:none}
   footer .made{display:block;margin-top:6px;font-weight:600;color:var(--text)}
   .signed-line{display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
-  .pill{background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.4);color:var(--accent);font-size:.75rem;font-weight:700;padding:4px 12px;border-radius:999px;letter-spacing:.04em}
+  .pill{background:rgba(159,212,255,.12);border:1px solid rgba(159,212,255,.4);color:var(--accent);font-size:.75rem;font-weight:700;padding:4px 12px;border-radius:999px;letter-spacing:.04em}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="logo">
-    <div class="logo-badge">◆</div>
-    <div><b>PallettAI</b><small>STUDIO</small></div>
+    <img class="logo-mark" src="signal-mark.svg" alt="" width="44" height="44">
+    <div><b>Pallett<i>AI</i></b><small>STUDIO</small></div>
   </div>
 
   <div class="card">
@@ -71,7 +73,7 @@
 
 <footer>
   <a href="https://pallettai.org">pallettai.org</a>
-  <span class="made">Made by PallettAI ◆</span>
+  <span class="made">Made by PallettAI</span>
 </footer>
 
 <script>
