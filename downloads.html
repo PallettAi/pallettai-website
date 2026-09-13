@@ -24,7 +24,7 @@
   <meta name="twitter:image" content="https://pallettai.org/share-v2.png" />
   <meta name="twitter:image:alt" content="PallettAi — Your website is losing you work." />
   <title>Downloads — PallettAi Studio | PallettAi</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://pallettai.goatcounter.com; object-src 'none'; base-uri 'self'; form-action https://formspree.io; frame-src 'none'" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://api.github.com https://formspree.io https://pallettai.goatcounter.com; object-src 'none'; base-uri 'self'; form-action https://formspree.io; frame-src 'none'" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
   <link rel="icon" type="image/svg+xml" href="signal-favicon.svg?v=3" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -33,6 +33,7 @@
   <link rel="stylesheet" href="theme.css" />
   <link rel="stylesheet" href="legacy.css" />
   <script src="theme.js" defer></script>
+  <script src="releases.js" defer></script>
   <noscript><style>.rv,.up{opacity:1;transform:none}</style></noscript>
   <script data-goatcounter="https://pallettai.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   <noscript><img src="https://pallettai.goatcounter.com/count?p=/noscript" style="display:none" alt="" /></noscript>
@@ -52,19 +53,19 @@
     <section class="sec" aria-label="Download PallettAi Studio">
       <div class="dl-split">
         <div class="up">
-          <div class="kicker">Latest release <span style="color:var(--cyan)">v0.3.13</span></div>
+          <div class="kicker">Latest release <span style="color:var(--cyan)" data-rel-version>v0.3.13</span></div>
           <h2 style="margin-top:14px;font-size:clamp(26px,3.4vw,40px)">From first brief<br /><span class="g">to live site.</span></h2>
           <p class="lede" style="margin-top:16px">Studio is the workspace we use to go from a messy idea to something you can put in front of a client — real content, a considered layout, and a path all the way to launch.</p>
 
           <div class="dl-list">
-            <a class="dl-row primary" href="https://github.com/PallettAi/pallettai-website/releases/download/v0.3.13/PallettAI-Studio-0.3.13-mac-arm64.dmg" rel="noopener noreferrer">
+            <a class="dl-row primary" data-rel-dl="mac-arm64" href="https://github.com/PallettAi/pallettai-website/releases/download/v0.3.13/PallettAI-Studio-0.3.13-mac-arm64.dmg" rel="noopener noreferrer">
               <div>
                 <div class="arch">Apple Silicon</div>
                 <div class="for">Download for M1, M2, M3 &amp; M4 Macs</div>
               </div>
               <span class="arr" aria-hidden="true">↗</span>
             </a>
-            <a class="dl-row" href="https://github.com/PallettAi/pallettai-website/releases/download/v0.3.13/PallettAI-Studio-0.3.13-mac-x64.dmg" rel="noopener noreferrer">
+            <a class="dl-row" data-rel-dl="mac-x64" href="https://github.com/PallettAi/pallettai-website/releases/download/v0.3.13/PallettAI-Studio-0.3.13-mac-x64.dmg" rel="noopener noreferrer">
               <div>
                 <div class="arch">Intel Mac</div>
                 <div class="for">Download for Intel-based Macs</div>
@@ -88,11 +89,11 @@
             <div><span class="n">02</span><div><b>Build</b><span>Make it real</span></div></div>
             <div><span class="n">03</span><div><b>Launch</b><span>Ship with confidence</span></div></div>
           </div>
-          <div class="foot"><span>Current build <b>0.3.13</b></span><span>Made for Mac</span></div>
+          <div class="foot"><span>Current build <b data-rel-version-plain>0.3.13</b></span><span>Made for Mac</span></div>
         </div>
       </div>
 
-      <p class="notice up" style="--d:.12s"><b>Signed build:</b> the app is code-signed and auto-updates work, but it isn't notarized with Apple, so macOS may still show a security warning on first launch. If it does, right-click the app in Applications and choose <b>Open</b> to continue. Install steps and what's new in 0.3.13 are just below.</p>
+      <p class="notice up" style="--d:.12s"><b>Signed build:</b> the app is code-signed and auto-updates work, but it isn't notarized with Apple, so macOS may still show a security warning on first launch. If it does, right-click the app in Applications and choose <b>Open</b> to continue. Install steps, and what changed in the last build we documented, are just below.</p>
     </section>
 
     <section class="sec" id="install" aria-label="Install notes and release notes">
