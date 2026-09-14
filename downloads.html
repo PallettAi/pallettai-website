@@ -53,19 +53,24 @@
     <section class="sec" aria-label="Download PallettAi Studio">
       <div class="dl-split">
         <div class="up">
-          <div class="kicker">Latest release <span style="color:var(--cyan)" data-rel-version>v0.3.13</span></div>
+          <div class="kicker">Latest release <span style="color:var(--cyan);text-transform:none" data-rel-version></span></div>
           <h2 style="margin-top:14px;font-size:clamp(26px,3.4vw,40px)">From first brief<br /><span class="g">to live site.</span></h2>
           <p class="lede" style="margin-top:16px">Studio is the workspace we use to go from a messy idea to something you can put in front of a client — real content, a considered layout, and a path all the way to launch.</p>
 
+          <!-- These hrefs deliberately use the unversioned `latest/download` alias, which
+               GitHub resolves to the newest published release. The build workflow uploads
+               PallettAI-Studio-mac-arm64.dmg / -mac-x64.dmg on every tag, so these links are
+               correct without JavaScript and never need a commit per release. releases.js
+               only ever upgrades them (or fills the version labels) at runtime. -->
           <div class="dl-list">
-            <a class="dl-row primary" data-rel-dl="mac-arm64" href="https://github.com/PallettAi/pallettai-website/releases/download/v0.3.13/PallettAI-Studio-0.3.13-mac-arm64.dmg" rel="noopener noreferrer">
+            <a class="dl-row primary" data-rel-dl="mac-arm64" href="https://github.com/PallettAi/pallettai-website/releases/latest/download/PallettAI-Studio-mac-arm64.dmg" rel="noopener noreferrer">
               <div>
                 <div class="arch">Apple Silicon</div>
                 <div class="for">Download for M1, M2, M3 &amp; M4 Macs</div>
               </div>
               <span class="arr" aria-hidden="true">↗</span>
             </a>
-            <a class="dl-row" data-rel-dl="mac-x64" href="https://github.com/PallettAi/pallettai-website/releases/download/v0.3.13/PallettAI-Studio-0.3.13-mac-x64.dmg" rel="noopener noreferrer">
+            <a class="dl-row" data-rel-dl="mac-x64" href="https://github.com/PallettAi/pallettai-website/releases/latest/download/PallettAI-Studio-mac-x64.dmg" rel="noopener noreferrer">
               <div>
                 <div class="arch">Intel Mac</div>
                 <div class="for">Download for Intel-based Macs</div>
@@ -89,7 +94,7 @@
             <div><span class="n">02</span><div><b>Build</b><span>Make it real</span></div></div>
             <div><span class="n">03</span><div><b>Launch</b><span>Ship with confidence</span></div></div>
           </div>
-          <div class="foot"><span>Current build <b data-rel-version-plain>0.3.13</b></span><span>Made for Mac</span></div>
+          <div class="foot"><span>Current build <b data-rel-version-plain>—</b></span><span>Made for Mac</span></div>
         </div>
       </div>
 

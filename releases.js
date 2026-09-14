@@ -4,12 +4,19 @@
    build without a site commit for every release.
 
    Everything here is an enhancement. The page ships with working
-   v0.3.13 links, and they stay exactly as they are if the API is
-   unreachable, rate-limited, or blocked by the page's CSP. The
-   script never invents a URL: it only ever copies a download URL
-   that GitHub reports on a release, and only when the release
-   carries both Mac builds, so the page can never end up mixed
-   across two versions.
+   links that point at GitHub's unversioned `latest/download` alias,
+   so the downloads are correct with no JavaScript at all — this
+   script only ever upgrades them. If the API is unreachable,
+   rate-limited, or blocked by the page's CSP, the shipped links stand
+   exactly as they are.
+
+   Nothing here is required for the page to be correct. It fills the
+   version labels (which ship empty, so they can never read a stale
+   version to a visitor without JavaScript) and swaps in the exact
+   per-release asset URL. The script never invents a URL: it only ever
+   copies a download URL that GitHub reports on a release, and only
+   when the release carries both Mac builds, so the page can never end
+   up mixed across two versions.
 
    Loaded with defer and holds no inline script, so script-src
    'self' still applies.
