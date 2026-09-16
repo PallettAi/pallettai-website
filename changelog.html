@@ -52,19 +52,30 @@
       <div class="current up">
         <div>
           <div class="kicker">Latest release · 16 September 2026</div>
-          <h2 id="current-release">Studio 0.4.4 is ready to ship.</h2>
-          <p>Studio now acts only on what you actually asked for — a refusal is no longer a redesign, a named section is no longer ignored, and undo no longer throws away the work that came after it.</p>
+          <h2 id="current-release">Studio 0.4.5 is ready to ship.</h2>
+          <p>A small release fixing licence keys: entering one now has a proper home in Settings, and a key issued for life can no longer be quietly overwritten by a subscription renewal.</p>
           <div class="links">
             <a href="downloads.html">Download Studio ↗</a>
             <a href="https://github.com/PallettAi/PallettAI-Studio/blob/main/README.md" target="_blank" rel="noopener">Read the README ↗</a>
-            <a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.4.4" target="_blank" rel="noopener">View release notes ↗</a>
+            <a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.4.5" target="_blank" rel="noopener">View release notes ↗</a>
           </div>
         </div>
-        <div class="ver-badge" aria-label="Version 0.4.4"><span class="n">0.4.4</span><span class="s">current</span></div>
+        <div class="ver-badge" aria-label="Version 0.4.5"><span class="n">0.4.5</span><span class="s">current</span></div>
       </div>
     </section>
 
     <section class="sec" aria-label="Release history">
+      <article class="rel up">
+        <div class="when"><b>16 Sep 2026</b>0.4.5</div>
+        <div>
+          <h2>0.4.5 <span>Licence keys, properly handled</span></h2>
+          <p class="intro">A small release about one thing: the key we issue you. Two faults — one about entering a key, one about keeping it.</p>
+          <ul>
+            <li>A licence key could only be entered as the last row of the plan grid, and the Upgrade button that opens that grid is hidden once an account is on a paid plan — so the one person most likely to be holding a key was the one person with no visible way to type it in. Settings now offers <b>Redeem a licence key</b> under Plan &amp; billing, on every plan, with the referral box beside it. Verification is unchanged; only the door is new.</li>
+            <li>A key issued to never expire was safe from a cancellation but not from a renewal. Any paid event from the payment provider relabelled the entitlement and copied the subscription’s period end onto the key, so a lifetime licence quietly acquired a date it had never been given — and the cancellation after that read as revoking something that was never revocable at all. A licence now outranks a subscription on renewals too: it keeps its own tier, the tier may only move upward, and no expiry is written onto it. Billing, the customer portal and your receipts are untouched.</li>
+          </ul>
+        </div>
+      </article>
       <article class="rel up">
         <div class="when"><b>16 Sep 2026</b>0.4.4</div>
         <div>
