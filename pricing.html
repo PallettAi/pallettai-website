@@ -30,6 +30,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2" />
   <link rel="preload" href="fonts/inter-tight-latin-600.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="theme.css" />
+  <script src="payments.js" defer></script>
   <script src="theme.js" defer></script>
   <script data-goatcounter="https://pallettai.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   <noscript><img src="https://pallettai.goatcounter.com/count?p=/noscript" style="display:none" alt="" /></noscript>
@@ -90,21 +91,21 @@
             <tr>
               <th scope="row" class="pkg">Create Website</th>
               <td class="desc">A custom one-page site that works on a phone, loads quickly, and has a working contact form. Local SEO basics, a preview before launch, and two rounds of changes.
-                <div style="margin-top:18px"><a class="btn line" href="https://buy.stripe.com/6oU28k1lzbgpdUWcKz2B20g" target="_blank" rel="noopener">Start with £99 deposit ↗</a></div>
+                <div style="margin-top:18px"><a class="btn line" data-pay="depositCreate" href="support.html">Start with £99 deposit ↗</a></div>
               </td>
               <td class="amt">£249</td>
             </tr>
             <tr>
               <th scope="row" class="pkg">Refresh &amp; Upgrade</th>
               <td class="desc">A tired site, made useful again — cleaner design, faster load, better on mobile, sharper copy, and a before/after health score so you can see the difference.
-                <div style="margin-top:18px"><a class="btn line" href="https://buy.stripe.com/6oUdR2d4hcktdUW9yn2B20f" target="_blank" rel="noopener">Start with £49 deposit ↗</a></div>
+                <div style="margin-top:18px"><a class="btn line" data-pay="depositRefresh" href="support.html">Start with £49 deposit ↗</a></div>
               </td>
               <td class="amt">£149</td>
             </tr>
             <tr>
               <th scope="row" class="pkg">Custom Builds &amp; Bots</th>
               <td class="desc">Multi-page sites, booking, tools, Telegram bots and API work. We agree the scope, quote a fixed price, and show you previews as we go.
-                <div style="margin-top:18px"><a class="btn line" href="https://buy.stripe.com/00w9AM9S5709aIKh0P2B20h" target="_blank" rel="noopener">Start with £149 deposit ↗</a></div>
+                <div style="margin-top:18px"><a class="btn line" data-pay="depositCustom" href="support.html">Start with £149 deposit ↗</a></div>
               </td>
               <td class="amt">£349</td>
             </tr>
@@ -113,9 +114,9 @@
       </div>
 
       <p class="note-row rv" data-d="2">Already approved your design and plan? Pay your remaining balance —
-        <a href="https://buy.stripe.com/8x2cMY8O184d8AC25V2B20i" target="_blank" rel="noopener">Create Website £150</a> ·
-        <a href="https://buy.stripe.com/5kQ6oAfcp5W52ce6mb2B20j" target="_blank" rel="noopener">Refresh £100</a> ·
-        <a href="https://buy.stripe.com/4gM14gfcp98h2cefWL2B20k" target="_blank" rel="noopener">Custom Builds £200</a>
+        <a data-pay="balanceCreate" href="support.html">Create Website £150</a> ·
+        <a data-pay="balanceRefresh" href="support.html">Refresh £100</a> ·
+        <a data-pay="balanceCustom" href="support.html">Custom Builds £200</a>
       </p>
     </div>
   </section>
@@ -136,7 +137,7 @@
           <p class="cat">Stay online</p>
           <h3>Care Lite</h3>
           <div class="price"><span class="amt" data-monthly="£19" data-annual="£15">£19</span><span class="per">/mo</span></div>
-          <div class="annual-note"></div>
+          <div class="annual-note" data-annual-note="· £180 once for 12 months"></div>
           <p class="desc">The essentials, watched for you.</p>
           <ul>
             <li>Monthly backup &amp; uptime check</li>
@@ -144,7 +145,7 @@
             <li>One content or image swap per month</li>
             <li>Email support — answered within 48 hours</li>
           </ul>
-          <a class="btn line" data-monthly="https://buy.stripe.com/14A4gs0hvckteZ025V2B20a" data-annual="https://buy.stripe.com/fZudR2aW984d7wyaCr2B20c" data-label-monthly="Subscribe — £19/mo" data-label-annual="Subscribe — £15/mo" href="https://buy.stripe.com/14A4gs0hvckteZ025V2B20a" target="_blank" rel="noopener noreferrer">Subscribe — £19/mo</a>
+          <a class="btn line" data-pay="careLiteMonthly" data-pay-annual="careLiteAnnual" data-label-monthly="Subscribe — £19/mo" data-label-annual="Pay £180 for a year" href="support.html">Subscribe — £19/mo</a>
         </div>
 
         <div class="tier feat rv" data-d="1">
@@ -152,7 +153,7 @@
           <p class="cat">Hands-off upkeep</p>
           <h3>Care</h3>
           <div class="price"><span class="amt" data-monthly="£49" data-annual="£39">£49</span><span class="per">/mo</span></div>
-          <div class="annual-note"></div>
+          <div class="annual-note" data-annual-note="· £468 once for 12 months"></div>
           <p class="desc">Changes handled for you, no tech skills needed.</p>
           <ul>
             <li>Everything in Care Lite</li>
@@ -161,14 +162,14 @@
             <li>Priority support when you need a hand</li>
             <li>Seasonal refresh — banners, offers, announcements</li>
           </ul>
-          <a class="btn ice" data-monthly="https://buy.stripe.com/8x2dR25BPfwF4kmeSH2B209" data-annual="https://buy.stripe.com/28E6oAd4hacl9EG6mb2B20d" data-label-monthly="Subscribe — £49/mo" data-label-annual="Subscribe — £39/mo" href="https://buy.stripe.com/8x2dR25BPfwF4kmeSH2B209" target="_blank" rel="noopener noreferrer">Subscribe — £49/mo</a>
+          <a class="btn ice" data-pay="careMonthly" data-pay-annual="careAnnual" data-label-monthly="Subscribe — £49/mo" data-label-annual="Pay £468 for a year" href="support.html">Subscribe — £49/mo</a>
         </div>
 
         <div class="tier rv" data-d="2">
           <p class="cat">Grow with it</p>
           <h3>Care Plus</h3>
           <div class="price"><span class="amt" data-monthly="£99" data-annual="£79">£99</span><span class="per">/mo</span></div>
-          <div class="annual-note"></div>
+          <div class="annual-note" data-annual-note="· £948 once for 12 months"></div>
           <p class="desc">Build time every month, for sites that keep moving.</p>
           <ul>
             <li>Everything in Care</li>
@@ -177,7 +178,7 @@
             <li>Same-day replies on weekdays</li>
             <li>Discounted rates on new one-off projects</li>
           </ul>
-          <a class="btn line" data-monthly="https://buy.stripe.com/cNi7sE2pD5W5cQS7qf2B208" data-annual="https://buy.stripe.com/5kQdR2aW9bgpdUWcKz2B20e" data-label-monthly="Subscribe — £99/mo" data-label-annual="Subscribe — £79/mo" href="https://buy.stripe.com/cNi7sE2pD5W5cQS7qf2B208" target="_blank" rel="noopener noreferrer">Subscribe — £99/mo</a>
+          <a class="btn line" data-pay="carePlusMonthly" data-pay-annual="carePlusAnnual" data-label-monthly="Subscribe — £99/mo" data-label-annual="Pay £948 for a year" href="support.html">Subscribe — £99/mo</a>
         </div>
       </div>
     </div>
@@ -191,7 +192,7 @@
           <p class="eyebrow">Line by line</p>
           <h2 class="big">Compare<br /><span class="grad">aftercare.</span></h2>
         </div>
-        <p class="lede rv" data-d="1">Every tier is a monthly or annual subscription. Annual billing bills yearly at the effective monthly rate shown, which works out as two months free.</p>
+        <p class="lede rv" data-d="1">Monthly tiers are subscriptions — change or cancel any time. A year paid up front is a single payment covering twelve months, at the effective monthly rate shown; that works out as over two months free. We will get in touch before your year ends.</p>
       </div>
 
       <div class="cmp-wrap rv" data-d="1">
@@ -220,8 +221,8 @@
         </table>
       </div>
 
-      <p class="note-row rv" data-d="2">No lock-in — cancel any aftercare tier with <b>30 days' notice</b>. Every build includes <b>30 days of free aftercare</b>, so you are never launched and left. Local Midlands businesses get <b>10% off</b> their first three months of any tier.</p>
-      <p class="note-row rv" data-d="2">Already on aftercare? <a href="https://billing.stripe.com/p/login/5kQ5kwaW94S15oqcKz2B200" target="_blank" rel="noopener">Manage your plan, billing and invoices in the customer portal ↗</a></p>
+      <p class="note-row rv" data-d="2">No lock-in. Monthly tiers can be cancelled any time with <b>30 days' notice</b>, and a year paid up front simply covers twelve months — nothing renews on its own. Every build includes <b>30 days of free aftercare</b>, so you are never launched and left. Local Midlands businesses get <b>10% off</b> their first three months of any tier.</p>
+      <p class="note-row rv" data-d="2">Already on aftercare? <a data-portal href="support.html">Manage your plan, billing and invoices in the customer portal ↗</a></p>
     </div>
   </section>
 
@@ -243,7 +244,7 @@
         </details>
         <details>
           <summary>Can I pay online by card?</summary>
-          <div class="a">Yes — every payment runs through Stripe. New projects start with a deposit link (Refresh £49, Create Website £99, Custom Builds &amp; Bots £149); the remaining balance is paid by a second link or invoice before launch. Aftercare is a monthly or annual subscription you can manage at any time in the <a href="https://billing.stripe.com/p/login/5kQ5kwaW94S15oqcKz2B200" target="_blank" rel="noopener">customer portal</a>.</div>
+          <div class="a">Yes — every card payment runs through Dodo Payments. New projects start with a deposit link (Refresh £49, Create Website £99, Custom Builds &amp; Bots £149); the remaining balance is paid by a second link or invoice before launch. Aftercare runs monthly as a subscription you can manage at any time in the <a data-portal href="support.html">customer portal</a> — or by emailing us and we will do it for you. A year paid up front is a single payment rather than a subscription, so there is nothing to cancel; just email us and we will handle any change.</div>
         </details>
         <details>
           <summary>What does aftercare actually cover?</summary>
@@ -255,7 +256,7 @@
         </details>
         <details>
           <summary>Can I switch tiers or cancel later?</summary>
-          <div class="a">Whenever you like. Upgrade, downgrade or cancel with 30 days' notice — no exit fees. Cancel during the free first month and you pay nothing. Once subscribed, the <a href="https://billing.stripe.com/p/login/5kQ5kwaW94S15oqcKz2B200" target="_blank" rel="noopener">customer portal</a> is where you change cards, view invoices or cancel in a couple of clicks.</div>
+          <div class="a">Whenever you like. Upgrade, downgrade or cancel with 30 days' notice — no exit fees. Cancel during the free first month and you pay nothing. Once subscribed, the <a data-portal href="support.html">customer portal</a> is where you change cards, view invoices or cancel in a couple of clicks.</div>
         </details>
         <details>
           <summary>Why "from £149" and "from £349"?</summary>

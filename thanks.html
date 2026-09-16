@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Thank you — your PallettAi payment went through. What happens next, and how to reach us." />
+  <meta name="author" content="PallettAi" />
+  <!-- Deliberately not indexed: a receipt page has nothing to offer a search result,
+       and it can carry a payment reference in the query string. -->
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#070B14" />
+  <title>Thank you — PallettAi</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://pallettai.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=2" />
+  <link rel="icon" type="image/svg+xml" href="signal-favicon.svg?v=4" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2" />
+  <link rel="stylesheet" href="terminal.css?v=5" />
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="legacy.css" />
+  <script src="payments.js" defer></script>
+  <script src="theme.js" defer></script>
+  <noscript><style>.rv,.up{opacity:1;transform:none}</style></noscript>
+</head>
+<body data-page="support">
+  <a class="skip" href="#top">Skip to content</a>
+  <div class="sky" id="sky" aria-hidden="true"></div>
+  <header class="nav" id="nav"></header>
+
+  <main class="wrap" id="top">
+    <header class="page-hero">
+      <span class="pill"><span class="dot" aria-hidden="true"></span> Payment received</span>
+      <h1>Thank you —<br /><span class="g">you're all set.</span></h1>
+      <p class="lede lede-bar">Your payment went through. Dodo Payments is sending a receipt to the email you used at checkout — keep it, as it doubles as your VAT invoice. Here is what happens next.</p>
+    </header>
+
+    <section class="sec" aria-label="What happens next">
+      <article class="tile up" style="--d:.05s">
+        <div class="tile-top">
+          <span class="badge"><span class="dot" aria-hidden="true"></span> PallettAI Studio</span>
+          <span class="case-glyph" aria-hidden="true">↧</span>
+        </div>
+        <h2>Bought Pro or Pro+? Your plan is on your account, not this device</h2>
+        <p class="sub">Open Studio and sign in with the same email you paid with. The plan unlocks on that account once Dodo confirms the subscription, which usually takes a few seconds — if Studio still shows Free, press <b>Refresh plan</b> on the waiting screen, or sign out and back in.</p>
+        <ul class="specs">
+          <li><b>Already had Studio open?</b> — the waiting screen checks every few seconds and closes itself when the plan lands.</li>
+          <li><b>Paid with a different email?</b> — no problem. The plan attaches to the account you were signed in to, not to the email on the card.</li>
+          <li><b>Want to change or cancel it?</b> — the customer portal below handles cards, invoices and cancellation without emailing us.</li>
+        </ul>
+        <div class="btns">
+          <a class="btn go" href="downloads.html">Download or open Studio ↗</a>
+          <a class="btn alt" data-portal href="support.html">Manage billing →</a>
+        </div>
+      </article>
+
+      <article class="tile up" style="--d:.12s">
+        <div class="tile-top">
+          <span class="badge"><span class="dot" aria-hidden="true"></span> Websites &amp; aftercare</span>
+          <span class="case-glyph" aria-hidden="true">✉</span>
+        </div>
+        <h2>Paid a deposit or started aftercare? We'll be in touch within 24 hours</h2>
+        <p class="sub">A deposit books your slot and starts the design work. You'll get an email from us within 24 hours to gather what we need — the sooner we have your content, the sooner you see a preview. Nothing goes live until you're happy with it.</p>
+        <ul class="specs">
+          <li><b>Deposit paid</b> — we start on your site, and the remaining balance is due before launch.</li>
+          <li><b>Aftercare started</b> — your plan is active from today, and your first backup and uptime check runs within 24 hours.</li>
+          <li><b>Paid a balance</b> — thank you. We'll confirm and get your site over the line.</li>
+        </ul>
+        <div class="btns">
+          <a class="btn go" href="support.html">Get in touch ↗</a>
+          <a class="btn alt" href="pricing.html">See what's included →</a>
+        </div>
+      </article>
+
+      <p class="after up">Nothing arrived within 24 hours, or something here doesn't look right? Email <a href="mailto:support@pallettai.org">support@pallettai.org</a> and quote the payment reference from your receipt — we answer support within 48 hours, and new project enquiries within 24.</p>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+</body>
+</html>

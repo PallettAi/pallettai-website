@@ -476,8 +476,12 @@
         var next = annual ? el.getAttribute('data-annual') : el.getAttribute('data-monthly');
         if (next) el.textContent = next;
       });
+      /* The annual aftercare products are one-time payments, not yearly
+         subscriptions, so the note states the amount actually charged rather
+         than implying a bill that will arrive again next year. Per tier,
+         because the figure differs by tier. */
       doc.querySelectorAll('.tier .annual-note').forEach(function (el) {
-        el.textContent = annual ? '· billed yearly' : '';
+        el.textContent = annual ? (el.getAttribute('data-annual-note') || '') : '';
       });
       doc.querySelectorAll('.tier .btn[data-monthly]').forEach(function (el) {
         el.href = annual ? el.getAttribute('data-annual') : el.getAttribute('data-monthly');
@@ -486,7 +490,7 @@
       });
       if (heading) {
         heading.innerHTML = annual
-          ? 'Aftercare, <span class="g">billed yearly.</span>'
+          ? 'Aftercare, <span class="g">a year paid up front.</span>'
           : 'Aftercare that <span class="g">never sleeps.</span>';
       }
     });

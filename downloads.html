@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="terminal.css?v=5" />
   <link rel="stylesheet" href="theme.css" />
   <link rel="stylesheet" href="legacy.css" />
+  <script src="payments.js" defer></script>
   <script src="theme.js" defer></script>
   <script src="releases.js" defer></script>
   <noscript><style>.rv,.up{opacity:1;transform:none}</style></noscript>
@@ -184,7 +185,7 @@
           <div class="kicker">Studio plans</div>
           <h2>Free to start.<br /><span class="g">Pro when you need more.</span></h2>
         </div>
-        <p class="note">Studio runs on your Mac. Free gives you two projects and the full builder. Pro and Pro+ unlock unlimited work, premium assets and AI — billed monthly through Stripe. Cancel any time.</p>
+        <p class="note">Studio runs on your Mac. Free gives you two projects and the full builder. Pro and Pro+ unlock unlimited work, premium assets and AI — billed monthly through Dodo Payments, and cancellable any time from your own billing portal.</p>
       </div>
 
       <div class="tiers">
@@ -197,7 +198,7 @@
             <li><b>2 projects</b> · up to 10 sections each</li>
             <li>10 starter templates + Animation &amp; Contact suites</li>
             <li>22 core fonts · 19 free layouts</li>
-            <li>3 AI Studio credits</li>
+            <li>7 AI Studio credits</li>
             <li>“Made with PallettAI” on exports</li>
           </ul>
           <a class="btn alt" href="#download">Download Free ↗</a>
@@ -216,7 +217,7 @@
             <li>Live data widgets (crypto, GitHub, FX + more)</li>
             <li>Unlimited AI Studio generations + image generation</li>
           </ul>
-          <a class="btn go" href="https://buy.stripe.com/fZu3co2pDesB7wyfWL2B20m" target="_blank" rel="noopener">Get Pro — £9/mo ↗</a>
+          <a class="btn go" data-pay="studioPro" href="support.html">Get Pro — £9/mo ↗</a>
         </div>
 
         <div class="tier up" style="--d:.15s">
@@ -231,11 +232,11 @@
             <li>No attribution in hosting guide / brand kit</li>
             <li>Delivery pack for every client</li>
           </ul>
-          <a class="btn go" href="https://buy.stripe.com/4gM4gsggtfwFcQS11R2B20l" target="_blank" rel="noopener">Get Pro+ — £19/mo ↗</a>
+          <a class="btn go" data-pay="studioProPlus" href="support.html">Get Pro+ — £19/mo ↗</a>
         </div>
       </div>
 
-      <p class="after up">Prices in GBP. Need website build &amp; aftercare pricing instead? That's on the <a href="pricing.html">website pricing page</a>. Already subscribed? <a href="https://billing.stripe.com/p/login/5kQ5kwaW94S15oqcKz2B200" target="_blank" rel="noopener">Manage billing in the portal ↗</a></p>
+      <p class="after up">Prices in GBP. Need website build &amp; aftercare pricing instead? That's on the <a href="pricing.html">website pricing page</a>. Already subscribed? <a data-portal href="support.html">Manage billing in the portal ↗</a></p>
 
       <div class="tbl-wrap up" style="--d:.08s; margin-top: 28px">
         <table class="t" aria-label="Studio plan comparison">
@@ -246,7 +247,7 @@
             <tr><td class="feat">Projects &amp; sections</td><td class="val">2 · 10 each</td><td class="yes">Unlimited</td><td class="yes">Unlimited</td></tr>
             <tr><td class="feat">Templates &amp; suites</td><td class="val">10 + 2 suites</td><td class="yes">All unlocked</td><td class="yes">All unlocked</td></tr>
             <tr><td class="feat">Fonts &amp; layouts</td><td class="val">22 + 19 free</td><td class="yes">Premium pack</td><td class="yes">Premium pack</td></tr>
-            <tr><td class="feat">AI Studio credits</td><td class="val">3</td><td class="yes">Unlimited</td><td class="yes">Unlimited</td></tr>
+            <tr><td class="feat">AI Studio credits</td><td class="val">7</td><td class="yes">Unlimited</td><td class="yes">Unlimited</td></tr>
             <tr><td class="feat">AI image generation</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
             <tr><td class="feat">Unbranded / white-label</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
             <tr><td class="feat">Brand presets</td><td class="no">—</td><td class="no">—</td><td class="val">12</td></tr>
