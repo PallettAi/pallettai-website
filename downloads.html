@@ -116,37 +116,43 @@
           <div class="a"><b>Open the DMG</b>, drag <b>PallettAi Studio</b> into Applications, then open it. This build is code-signed but not notarized with Apple, so right-click the app in Applications → <b>Open</b> if macOS shows a security warning. Your projects live in the app's local storage — sign in to sync your plan and license across devices.</div>
         </details>
         <details>
-          <summary>v0.4.3 — What's new in Studio</summary>
+          <summary>v0.4.4 — What's new in Studio</summary>
           <div class="a">
             <div class="group">
-              <b>The export argues for itself</b>
+              <b>It reads the sentence, not just the words</b>
               <ul>
-                <li>A delivery report and a manifest ride along in every export: what was measured, what is worth fixing, and a <b>SHA-256 for every file</b>.</li>
-                <li>Anyone you send the folder to can confirm it is unaltered rather than taking your word for it, and the report is written to be forwarded.</li>
+                <li>"Do not make it dark" used to switch your site to <b>Midnight</b>. "I don't like the editorial look" used to apply it. A message is now read for what it is — a request, a refusal, a question, praise — before anything is planned.</li>
+                <li>Scope is read as written: two named sections are both handled, "every section" means every section, and "but keep the words" is honoured instead of quietly dropped. A refusal gets alternatives, never the thing you just turned down.</li>
               </ul>
             </div>
             <div class="group">
-              <b>A finished site, right to its edges</b>
+              <b>Undo one change, and keep everything after it</b>
               <ul>
-                <li>A share image per page, drawn from your own palette, so a link unfurls as the page it points at.</li>
-                <li>A 404 that wears the site's own navigation instead of the host's, plus host policy files with security headers included.</li>
+                <li>The sentence you type is <b>"put the colours back"</b>, not "undo one step". It now finds your most recent change to the colours and restores only that, so the work you did afterwards survives.</li>
+                <li>Because it works in paths rather than steps, either half of "make the hero punchier and switch to ocean" can be put back on its own.</li>
               </ul>
             </div>
             <div class="group">
-              <b>Faster for visitors, kinder to keyboards</b>
+              <b>Publish is a decision, not a button</b>
               <ul>
-                <li>Images offer the browser a smaller file wherever the host can resize, so a phone stops downloading a desktop-sized picture.</li>
-                <li>Keyboard visitors get a skip link, a focus ring the site's own styles cannot remove, and navigation that says which page they are on.</li>
+                <li>Six failures only exist once a site is live, and every one is invisible until a visitor hits it: two pages exporting to the same file, a menu link to a page that was never made, an enquiry with nowhere to go.</li>
+                <li>Also an insecure destination, a description left blank, and nothing to publish at all. The button now stops with the reason, rather than letting a stranger find it first.</li>
               </ul>
             </div>
             <div class="group">
-              <b>Hand over the system, not just the pixels</b>
+              <b>Sites that keep working once you have moved on</b>
               <ul>
-                <li>Your design tokens export as CSS, JSON and a working <b>Tailwind config</b>, with the contrast of each text pairing stated.</li>
-                <li>Copy is read for clarity and every link, anchor and asset is resolved before you send it.</li>
+                <li>A new audit asks what no other one asks — <b>is this still true?</b> Placeholder copy never filled in, our own sample address, an event date that has passed, last year's price beside your money, # links, images with no alt text.</li>
+                <li>Animated backgrounds that bind to your palette and honour motion settings, a free-tier badge carrying <b>your own referral link</b> so every site you sell recruits for you — and 7 free AI credits instead of 3.</li>
               </ul>
             </div>
-            <p style="margin-top:16px"><a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.4.3" target="_blank" rel="noopener">View the v0.4.3 release notes</a> · <a href="changelog.html" target="_blank" rel="noopener">Full changelog</a></p>
+            <div class="group">
+              <b>Billing moved to Dodo Payments</b>
+              <ul>
+                <li>Stripe's payment links carried your account id in a query string anyone could edit, so Pro could be bought for — or as — somebody else. Checkout now reads your account from your verified sign-in, and nothing is granted until the webhook verifies Dodo's signature.</li>
+              </ul>
+            </div>
+            <p style="margin-top:16px"><a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.4.4" target="_blank" rel="noopener">View the v0.4.4 release notes</a> · <a href="changelog.html" target="_blank" rel="noopener">Full changelog</a></p>
           </div>
         </details>
       </div>

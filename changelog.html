@@ -51,20 +51,36 @@
     <section class="sec" aria-labelledby="current-release">
       <div class="current up">
         <div>
-          <div class="kicker">Latest release · 14 September 2026</div>
-          <h2 id="current-release">Studio 0.4.3 is ready to ship.</h2>
-          <p>Every export now arrives with its own delivery report and a checksum for every file — so what you hand a client can be verified rather than trusted.</p>
+          <div class="kicker">Latest release · 16 September 2026</div>
+          <h2 id="current-release">Studio 0.4.4 is ready to ship.</h2>
+          <p>Studio now acts only on what you actually asked for — a refusal is no longer a redesign, a named section is no longer ignored, and undo no longer throws away the work that came after it.</p>
           <div class="links">
             <a href="downloads.html">Download Studio ↗</a>
             <a href="https://github.com/PallettAi/PallettAI-Studio/blob/main/README.md" target="_blank" rel="noopener">Read the README ↗</a>
-            <a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.4.3" target="_blank" rel="noopener">View release notes ↗</a>
+            <a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.4.4" target="_blank" rel="noopener">View release notes ↗</a>
           </div>
         </div>
-        <div class="ver-badge" aria-label="Version 0.4.3"><span class="n">0.4.3</span><span class="s">current</span></div>
+        <div class="ver-badge" aria-label="Version 0.4.4"><span class="n">0.4.4</span><span class="s">current</span></div>
       </div>
     </section>
 
     <section class="sec" aria-label="Release history">
+      <article class="rel up">
+        <div class="when"><b>16 Sep 2026</b>0.4.4</div>
+        <div>
+          <h2>0.4.4 <span>Does it understand what you asked?</span></h2>
+          <p class="intro">Seven changes to one question: whether Studio acts on what you said or merely on the words you used. A refusal stops being an instruction, a scope stops being dropped, undo stops being wholesale — and the moment a site goes live is gated rather than hoped for.</p>
+          <ul>
+            <li>The end of opposite-day edits. “Do not make it dark” switched the site to Midnight; “I don’t like the editorial look” applied it; “not the candy palette” switched to Candy. A message is now read once for what it is — request, refusal, rejection, praise, description or question — before anything is planned. A design change happens only when one was asked for, and a refusal is answered with alternatives the engine can actually run, never with the palette that just failed its own contrast check.</li>
+            <li>Scope and limits, read as written. “Make the pricing and faq sections consistent” names two places and one instruction, and used to leave the faq silently alone — so the client believed it was handled. “Every section” was dropped entirely. Now a scope word becomes one edit per section, and only where the write actually lands: a map, embed or countdown keeps its content elsewhere, so rewriting it would have taken a credit and changed nothing visible. “Make it more premium but keep the words” is honoured instead of dropped, and the copilot carries an instruction forward (“same for the FAQ”) while pointing at a section by position — refusing a target it cannot resolve rather than quietly editing the one it was already on.</li>
+            <li>Undo that leaves the rest of your work alone. ⌘Z walks backwards a step at a time, but the sentence you type is “put the colours back”, and answering that with “I undid your last change” asks you to remember what order you did things in. A change is not one thing — “make the hero punchier and switch to ocean” moved two independent paths — so the copilot now works in paths, restoring the most recent change to the one you named and leaving every later change intact.</li>
+            <li>Publish is gated on the failures that only exist live. Two pages exporting to the same file (the zip is valid, one page is simply missing), a menu link to a page that was never made, an enquiry with nowhere to go, an insecure http:// destination, a blank description, nothing to publish at all. Each is visitor-visible and invisible everywhere else, and each now stops the button with a reason.</li>
+            <li>Sites that stay true once you have moved on. A new audit asks what no other one asks — is this still true? Placeholder copy never filled in, our own template’s sample address and phone number, an event date that has passed, last year’s price beside your money, # links, images with no alt. It reports what is not the owner’s rather than what is blank, because the renderer substitutes template samples rather than leaving a section empty.</li>
+            <li>Smaller, but everywhere: free-tier sites carry your own referral link in the badge, so every site you sell recruits for you, and Pro+ exports ship no badge styles at all; generated sites gained animated backgrounds that bind to your palette and honour motion settings; the wheel’s grand prize is now a month of Pro+; the free tier went from 3 AI credits to 7; and “Report a Bug” no longer opens a 404.</li>
+            <li>Billing moved to Dodo Payments, and the account binding moved off the client. Stripe’s payment links carried the account id in a query string anyone could edit, so Pro could be bought for — or as — somebody else. Checkout now reads your account from your verified sign-in instead, and the webhook verifies Dodo’s signature before granting anything.</li>
+          </ul>
+        </div>
+      </article>
       <article class="rel up">
         <div class="when"><b>14 Sep 2026</b>0.4.3</div>
         <div>
