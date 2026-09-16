@@ -112,7 +112,7 @@
             '<div><p class="k">Studio</p>' +
               '<a href="downloads.html">PallettAi Studio</a>' +
               '<a href="downloads.html#studio-plans">Plans</a>' +
-              '<a href="downloads.html#download">Download for Mac</a>' +
+              '<a href="downloads.html#download">Download for Mac & Windows</a>' +
               '<a href="changelog.html">Release notes</a>' +
             '</div>' +
             '<div><p class="k">Company</p>' +

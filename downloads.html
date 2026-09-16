@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Download PallettAi Studio for Mac. Free to start — turn a brief into a working, animated website, then export it." />
+  <meta name="description" content="Download PallettAi Studio for Mac & Windows. Free to start — turn a brief into a working, animated website, then export it." />
   <meta name="author" content="PallettAi" />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#070B14" />
@@ -11,7 +11,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="PallettAi" />
   <meta property="og:title" content="Downloads — PallettAi Studio | PallettAi" />
-  <meta property="og:description" content="Download PallettAi Studio for Mac. Free to start — turn a brief into a working, animated website, then export it." />
+  <meta property="og:description" content="Download PallettAi Studio for Mac & Windows. Free to start — turn a brief into a working, animated website, then export it." />
   <meta property="og:url" content="https://pallettai.org/downloads" />
   <meta property="og:image" content="https://pallettai.org/share-v3.png" />
   <meta property="og:image:type" content="image/png" />
@@ -20,7 +20,7 @@
   <meta property="og:image:alt" content="PallettAi — Your website is losing you enquiries." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Downloads — PallettAi Studio | PallettAi" />
-  <meta name="twitter:description" content="Download PallettAi Studio for Mac. Free to start — turn a brief into a working, animated website, then export it." />
+  <meta name="twitter:description" content="Download PallettAi Studio for Mac & Windows. Free to start — turn a brief into a working, animated website, then export it." />
   <meta name="twitter:image" content="https://pallettai.org/share-v3.png" />
   <meta name="twitter:image:alt" content="PallettAi — Your website is losing you enquiries." />
   <title>Downloads — PallettAi Studio | PallettAi</title>
@@ -46,9 +46,9 @@
 
   <main class="wrap" id="top">
     <header class="page-hero">
-      <span class="pill"><span class="dot" aria-hidden="true"></span> PallettAi Studio for Mac</span>
+      <span class="pill"><span class="dot" aria-hidden="true"></span> PallettAi Studio for Mac &amp; Windows</span>
       <h1>Get Studio.<br /><span class="g">Build beautifully.</span></h1>
-      <p class="lede lede-bar">Turn a rough brief into a working, animated website — then export it. Free to start on Mac, Apple Silicon or Intel. Grab the DMG, then the install notes are next.</p>
+      <p class="lede lede-bar">Turn a rough brief into a working, animated website — then export it. Free to start on Mac, Apple Silicon or Intel — and a Windows build is ready to test. Grab the DMG or the EXE, then the install notes are next.</p>
     </header>
 
     <section class="sec" id="download" aria-label="Download PallettAi Studio">
@@ -84,6 +84,22 @@
             <span class="dl-chip">macOS <b>Sequoia 15+</b></span>
             <span class="dl-chip">Builds <b>arm64 + x64</b></span>
             <span class="dl-chip"><b>Auto-updates</b> included</span>
+            <span class="dl-chip">Windows <b>10/11 · x64</b></span>
+          </div>
+
+          <!-- Windows ships through the same stable alias pattern as the Mac links:
+               PallettAI-Studio-setup.exe resolves to the newest published release that
+               carries it. The current build is unsigned (SmartScreen warns), so this
+               row is labelled as a test build. releases.js deliberately does not
+               upgrade this href — it only swaps the two Mac DMG links. -->
+          <div class="dl-list" style="margin-top:14px">
+            <a class="dl-row" data-rel-dl="win-x64" href="https://github.com/PallettAi/pallettai-website/releases/latest/download/PallettAI-Studio-setup.exe" rel="noopener noreferrer">
+              <div>
+                <div class="arch">Windows 10/11 — x64</div>
+                <div class="for">Download the installer · test build (unsigned)</div>
+              </div>
+              <span class="arr" aria-hidden="true">↗</span>
+            </a>
           </div>
         </div>
 
@@ -95,7 +111,7 @@
             <div><span class="n">02</span><div><b>Build</b><span>Make it real</span></div></div>
             <div><span class="n">03</span><div><b>Launch</b><span>Ship with confidence</span></div></div>
           </div>
-          <div class="foot"><span>Current build <b data-rel-version-plain>—</b></span><span>Made for Mac</span></div>
+          <div class="foot"><span>Current build <b data-rel-version-plain>—</b></span><span>Mac + Windows</span></div>
         </div>
       </div>
 
@@ -108,12 +124,16 @@
           <div class="kicker">Everything in the box</div>
           <h2>Start fast.<br /><span class="g">Stay in control.</span></h2>
         </div>
-        <p class="note">Install first, then what's in this build. Mac requirements and the Windows waitlist follow.</p>
+        <p class="note">Install first, then what's in this build. Mac and Windows install notes follow.</p>
       </div>
       <div class="faq up" style="--d:.06s">
         <details open>
           <summary>Install notes — Mac</summary>
           <div class="a"><b>Open the DMG</b>, drag <b>PallettAi Studio</b> into Applications, then open it. This build is code-signed but not notarized with Apple, so right-click the app in Applications → <b>Open</b> if macOS shows a security warning. Your projects live in the app's local storage — sign in to sync your plan and license across devices.</div>
+        </details>
+        <details>
+          <summary>Install notes — Windows</summary>
+          <div class="a"><b>Run the EXE</b>, choose an install folder, done. The Windows build is new and not yet code-signed, so SmartScreen shows “Windows protected your PC” — click <b>More info</b> → <b>Run anyway</b>. Needs Windows 10 (1809+) or Windows 11, 64-bit. Use <b>Help → Check for Updates</b> to retry an update check manually.</div>
         </details>
         <details>
           <summary>v0.4.5 — What's new in Studio</summary>
@@ -164,15 +184,15 @@
         <div class="up" style="--d:.08s"><h3>Two native Mac builds</h3><p>Choose the architecture made for your machine</p></div>
         <div class="up" style="--d:.16s"><h3>Auto-updates included</h3><p>New versions download and install automatically</p></div>
       </div>
-      <p class="after up">On a Mac that's the lot. On Windows? Leave an email below — you'll hear the day a build ships, and not before.</p>
+      <p class="after up">On a Mac, that's the lot. On Windows, the installer above is yours to try today — and the email list below still hears about the properly signed launch first.</p>
     </section>
 
     <section class="sec" aria-label="Windows version waitlist">
       <div class="win-wait up">
         <div>
-          <span class="pill"><span class="dot" aria-hidden="true"></span> Coming soon</span>
+          <span class="pill"><span class="dot" aria-hidden="true"></span> In testing — signed build coming</span>
           <h2 style="margin-top:16px">On Windows?<br /><span class="g">Get told first.</span></h2>
-          <p>Studio is Mac-only today. A Windows build is on the way — leave your email and you'll hear from us the day it ships, and not before.</p>
+          <p>An unsigned Windows test build is live in the download section above. This list is for the properly code-signed, general-availability release — leave your email and you'll hear the day that ships, and not before.</p>
         </div>
         <form id="win-waitlist" action="https://formspree.io/f/xgaeoapw" method="POST">
           <input type="hidden" name="_subject" value="Windows waitlist — new signup" />
