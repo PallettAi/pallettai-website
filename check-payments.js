@@ -55,9 +55,14 @@ function makeEl(attrs) {
    product id was pasted in — which is the moment it starts mattering.) */
 function withProducts(src, overrides) {
   Object.keys(overrides || {}).forEach(function (key) {
-    const re = new RegExp('\\b' + key + ':\\s*\'[^\']*\'');
+    /* Two shapes are staged: the PRODUCTS map (`key: 'value'`) and the
+       top-level settings (`var KEY = 'value'`). The portal business id is the
+       second shape, and missing it is what let the portal's unconfigured
+       branch stop being tested the moment a real business id went in — the
+       same way the product map did, one shape further out. */
+    const re = new RegExp('(\\b' + key + '\\s*[:=]\\s*)\'[^\']*\'');
     if (!re.test(src)) throw new Error('no config entry for ' + key);
-    src = src.replace(re, key + ': \'' + overrides[key] + '\'');
+    src = src.replace(re, '$1\'' + overrides[key] + '\'');
   });
   return src;
 }
@@ -161,12 +166,28 @@ console.log('\n== A junk product id is refused rather than linked ==');
 
 console.log('\n== The portal needs a business id ==');
 {
-  const api = loadPayments([]);
+  /* Staged, not read. This block asserted against the shipped value and passed
+     only while PORTAL_BUSINESS_ID was a placeholder, so it would have gone red
+     the moment the real business id was pasted in — which is the moment the
+     fallback below starts being the thing a customer might actually hit. */
+  const api = loadPayments([], { PORTAL_BUSINESS_ID: '' });
   assert(api.portalUrl() === '', 'with no business id there is no portal link');
   const link = makeEl({ 'data-portal': '', href: 'support.html', textContent: 'customer portal' });
-  loadPayments([link]);
+  loadPayments([link], { PORTAL_BUSINESS_ID: '' });
   assert(link.getAttribute('data-pay-state') === 'unavailable', 'the portal link is marked unavailable');
   assert(link.textContent === 'Email us about your plan \u2197', 'and offers email instead of a dead link');
+}
+
+console.log('\n== A configured business id builds the real portal link ==');
+{
+  const api = loadPayments([]);
+  const url = api.portalUrl();
+  assert(/^https:\/\/customer\.dodopayments\.com\/login\/[A-Za-z0-9_-]{6,}$/.test(url),
+    'the shipped business id builds a customer-portal link (' + url.replace(/\/login\/.*/, '/login/\u2026') + ')');
+  const link = makeEl({ 'data-portal': '', href: 'support.html', textContent: 'customer portal' });
+  loadPayments([link]);
+  assert(link.getAttribute('data-pay-state') === 'ready', 'the live link is marked ready');
+  assert(link.href === url, 'and points at the portal rather than the support page');
 }
 
 /* ---------- readiness report ---------- */
