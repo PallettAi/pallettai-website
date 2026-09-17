@@ -11,6 +11,7 @@
      compare: #vs-host-a/b #vs-score-a/b #vs-col-a/b #vs-verdict #vs-gaps
      print:   #ps-host #ps-score #ps-date   + body.printing-report
      actions: #tool-copy  #tool-print
+     handoff: #check-next #next-head #next-body #next-copy #next-dl
 
    Deep link:  ?check=example.co.uk&vs=rival.co.uk#check
    ============================================================ */
@@ -32,6 +33,52 @@
   }
 
   function rank(got, max) { var p = max ? got / max : 1; return p >= 0.85 ? '' : p >= 0.5 ? 'warn' : 'fail'; }
+
+  /* ---------- what a rebuild genuinely changes ----------
+
+     The handoff makes a claim about PallettAI Studio's export, so the claim
+     is written down here once, as two lists of check ids, where it can be
+     read and argued with rather than being scattered through a sentence.
+
+     REBUILD — checks an exported page writes for you, unconditionally:
+     a <title> and meta description, a mobile viewport, a single <h1> (every
+     template opens with a hero), and JSON-LD built from the business
+     details. Those five are read off builder.js rather than assumed.
+
+     HOST — checks no export can answer for you, because they are properties
+     of where the site is served from rather than of the page itself.
+
+     Deliberately absent, each for a reason:
+       og      — Studio defaults the share image to an SVG, which X and
+                 WhatsApp ignore. Rebuilding does not fix that.
+       imgdims — the builder sizes images in CSS (aspect-ratio) rather than
+                 with width/height attributes, which is what this check
+                 reads. Rebuilding does not fix that either.
+       canonical — only emitted when the project has a domain set, which the
+                 rebuild flow asks for but cannot require.
+       payload — depends on how much content the site carries, so it is a
+                 property of the site rather than of the builder.
+     Because 'og' and 'imgdims' are reported by this same page, promising
+     them would be a claim the reader can disprove in one click. They are
+     named in the copy below instead, as what to verify afterwards. */
+  var REBUILD = { title: 1, description: 1, viewport: 1, h1: 1, jsonld: 1 };
+  var HOST = { https: 1, forms: 1, ttfb: 1, compression: 1 };
+
+  function names(checks, list) {
+    var out = [];
+    for (var i = 0; i < (checks || []).length; i++) {
+      var c = checks[i];
+      if (c && c.status && c.status !== 'pass' && c.id && list[c.id]) out.push(String(c.label || c.id).toLowerCase());
+    }
+    return out;
+  }
+
+  /* "a, b and c" — an Oxford-comma-free British list, to match the site. */
+  function sentence(list) {
+    if (!list.length) return '';
+    if (list.length === 1) return list[0];
+    return list.slice(0, -1).join(', ') + ' and ' + list[list.length - 1];
+  }
 
   function normalize(raw) {
     var v = (raw || '').trim();
@@ -129,6 +176,72 @@
       renderFinds(doc.getElementById('g-finds'), j.checks);
       out.hidden = false;
       if (tools) tools.hidden = false;
+      showNext(host, j);
+    }
+
+    /* ---------- the handoff ----------
+
+       The report is the only place on the site where a visitor has just been
+       told, in specific terms, what is wrong with their website. That is the
+       highest-intent moment we get, and it used to end at a PDF button.
+
+       What this must NOT do is claim a rebuild fixes everything above it —
+       half of what the grader finds is a hosting property, and anyone can
+       re-run the check after rebuilding and see for themselves. So it splits
+       the findings: the ones an export starts clean on, the ones only the
+       host can answer for, and the two this page reports that an export can
+       still trip on. Naming that last group costs a little polish and buys
+       the whole block its credibility. */
+    function showNext(host, j) {
+      var box = doc.getElementById('check-next');
+      if (!box) return;
+
+      var clears = names(j.checks, REBUILD);
+      var hosted = names(j.checks, HOST);
+      var head = doc.getElementById('next-head');
+      var body = doc.getElementById('next-body');
+
+      if (head) {
+        head.textContent = j.score >= 85
+          ? 'Sites built in Studio score well here.'
+          : 'Rebuild this site in Studio.';
+      }
+
+      if (body) {
+        var lines = [];
+        lines.push(clears.length
+          ? 'Of what this report flagged, a rebuild starts clean on ' + sentence(clears) + '.'
+          : 'Nothing this report flagged sits in the part a rebuild handles — that half is already right.');
+
+        if (hosted.length) {
+          lines.push('The rest is your hosting, not your page — ' + sentence(hosted) + '. No tool can fix those for you; who serves the site decides them.');
+        }
+
+        lines.push('Two things to re-check after any rebuild: the share image (Studio defaults it to an SVG, which X and WhatsApp ignore) and image dimensions. Both are scored above, and both are fixable in the app.');
+
+        body.textContent = lines.join(' ');
+      }
+
+      /* The address travels in the link, not in the app — a URL survives the
+         hop from the phone this check was run on to the Mac it will be
+         rebuilt on, and it survives it today. A bare "pre-filled" promise
+         would need an app release with a registered URL scheme. */
+      var dl = doc.getElementById('next-dl');
+      if (dl) {
+        dl.setAttribute('href', 'downloads.html?utm_source=grader&utm_medium=checker&utm_campaign=site-check' +
+          '&rebuild=' + encodeURIComponent(host) + '&score=' + encodeURIComponent(j.score) + '#from-checker');
+        dl.addEventListener('click', function () { ping('/event/grader-to-studio'); });
+      }
+
+      var copy = doc.getElementById('next-copy');
+      var copyHost = doc.getElementById('next-copy-host');
+      if (copyHost) copyHost.textContent = host;
+      if (copy) {
+        copy.setAttribute('data-host', host);
+        copy.addEventListener('click', function () { ping('/event/grader-copy-address'); });
+      }
+
+      box.hidden = false;
     }
 
     function showCompare(a, ja, b, jb) {
@@ -181,6 +294,8 @@
       out.hidden = true;
       compare.hidden = true;
       if (tools) tools.hidden = true;
+      var nextBox = doc.getElementById('check-next');
+      if (nextBox) nextBox.hidden = true;
       status.className = 'status';
       status.textContent = other
         ? '> measuring ' + target.hostname + ' against ' + other.hostname + '…'
@@ -233,6 +348,48 @@
         }
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(url).then(function () { done(true); }, fallback);
+        } else fallback();
+      });
+    }
+
+    /* Copy the graded address, not the report link — the thing the visitor
+       actually needs on the next screen is the address, because the next
+       screen is a desktop app on a different machine. Falls back to a
+       selection when the clipboard is unavailable or denied (the same
+       fallback the report-link button uses, minus the toast). */
+    var addressBtn = doc.getElementById('next-copy');
+    if (addressBtn) {
+      addressBtn.addEventListener('click', function () {
+        var host = addressBtn.getAttribute('data-host') || '';
+        if (!host) return;
+        /* Rebuilt as nodes rather than innerHTML: the address comes from
+           the visitor, and a copy button is not the place to find out
+           whether a hostname can carry markup. */
+        function relabel() {
+          addressBtn.textContent = '';
+          addressBtn.appendChild(doc.createTextNode('Copy '));
+          var b = doc.createElement('span');
+          b.textContent = host;
+          addressBtn.appendChild(b);
+        }
+        function done(ok) {
+          addressBtn.textContent = ok ? 'Copied — paste it into Studio' : 'Select the address above';
+          setTimeout(relabel, 2200);
+        }
+        function fallback() {
+          var ta = doc.createElement('textarea');
+          ta.value = host;
+          ta.setAttribute('readonly', '');
+          ta.style.cssText = 'position:fixed;left:-9999px;top:0';
+          doc.body.appendChild(ta);
+          ta.select();
+          var ok = false;
+          try { ok = doc.execCommand('copy'); } catch (err) { ok = false; }
+          doc.body.removeChild(ta);
+          done(ok);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(host).then(function () { done(true); }, fallback);
         } else fallback();
       });
     }

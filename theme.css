@@ -625,6 +625,58 @@ p{text-wrap:pretty}
 .tools button:hover{color:#fff;border-color:var(--baby);background:var(--glass-2)}
 .tools .sep{color:var(--faint)}
 
+/* ---------- the handoff (report → Studio) ----------
+   Sits between the report and the tools row, so the order a visitor reads
+   is: what is wrong, what to do about it, and only then the small print
+   actions. One border, one gradient, no more than three lines of copy. */
+.next{margin-top:28px;padding:clamp(22px,2.6vw,32px);border:1px solid var(--hair-2);border-radius:26px;
+  background:linear-gradient(180deg,rgba(159,212,255,.1),rgba(2,12,28,.35) 65%);
+  box-shadow:0 26px 70px rgba(2,8,20,.4),0 0 60px rgba(124,192,248,.08)}
+.next[hidden]{display:none} /* class display would otherwise beat the attribute */
+.next .eyebrow{margin:0}
+.next-h{margin:10px 0 0;font-size:clamp(20px,2.3vw,26px);font-weight:500;letter-spacing:-.02em;
+  background:linear-gradient(120deg,#ffffff,#9fd4ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.next-p{margin-top:12px;max-width:62ch;color:var(--mist);font-size:15px;line-height:1.65}
+.next-steps{margin:20px 0 0;padding:0;list-style:none;counter-reset:nx;display:grid;gap:12px}
+.next-steps li{counter-increment:nx;position:relative;padding-left:38px;color:var(--mist);font-size:14.5px;line-height:1.6}
+.next-steps li::before{content:counter(nx);position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:50%;
+  display:grid;place-items:center;border:1px solid var(--hair-2);background:var(--glass);
+  font-family:var(--mono);font-size:11px;color:var(--baby)}
+.next-steps b{color:var(--ice);font-weight:500}
+.nx-copy{margin-left:6px;padding:4px 12px;border-radius:999px;border:1px dashed var(--hair-2);background:transparent;
+  color:var(--baby);font-family:var(--mono);font-size:11.5px;cursor:pointer;transition:color .25s,border-color .25s,background .25s}
+.nx-copy:hover{color:#fff;border-style:solid;border-color:var(--baby);background:var(--glass-2)}
+.next .btns{margin-top:24px}
+.next-or{color:var(--faint);font-size:14px}
+.next-or a{color:var(--mist);text-decoration:none;border-bottom:1px solid var(--hair-2)}
+.next-or a:hover{color:#fff;border-color:var(--baby)}
+.next-foot{margin-top:16px;color:var(--faint);font-size:12.5px;line-height:1.6}
+
+/* ---------- the other end of the handoff (downloads.html) ----------
+   Same panel as .next, because it is the same conversation one page
+   later — the reader should recognise it rather than wonder where the
+   checker went. Sits directly above the download list, since the thing
+   it asks for (paste this address) happens after the install. */
+.from-check{margin-top:26px;padding:clamp(20px,2.4vw,28px);border:1px solid var(--hair-2);border-radius:24px;
+  background:linear-gradient(180deg,rgba(159,212,255,.1),rgba(2,12,28,.35) 65%);
+  box-shadow:0 22px 60px rgba(2,8,20,.38)}
+.from-check[hidden]{display:none}
+.from-check .eyebrow{margin:0}
+.fc-h{margin:10px 0 0;font-size:clamp(19px,2.2vw,25px);font-weight:500;letter-spacing:-.02em;color:var(--ice)}
+.fc-h span{font-family:var(--mono);font-size:.82em;background:linear-gradient(120deg,#ffffff,#9fd4ff);
+  -webkit-background-clip:text;background-clip:text;color:transparent;word-break:break-all}
+.fc-p{margin-top:12px;max-width:64ch;color:var(--mist);font-size:15px;line-height:1.65}
+.fc-row{margin-top:20px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.fc-copy{padding:9px 16px;border-radius:999px;border:1px dashed var(--hair-2);background:transparent;
+  color:var(--baby);font-family:var(--mono);font-size:12px;cursor:pointer;transition:color .25s,border-color .25s,background .25s}
+.fc-copy:hover{color:#fff;border-style:solid;border-color:var(--baby);background:var(--glass-2)}
+.fc-copy span{color:var(--ice)}
+.fc-row a{color:var(--mist);font-size:13.5px;text-decoration:none;border-bottom:1px solid var(--hair-2);padding-bottom:2px}
+.fc-row a:hover{color:#fff;border-color:var(--baby)}
+.fc-skip{margin-left:auto;background:none;border:0;padding:4px 2px;color:var(--faint);font-size:12.5px;cursor:pointer;
+  text-decoration:underline;text-underline-offset:3px}
+.fc-skip:hover{color:var(--mist)}
+
 /* ---------- print sheet (hidden on screen) ---------- */
 .print-sheet{display:none}
 .print-foot{display:none}
@@ -669,6 +721,10 @@ p{text-wrap:pretty}
 
 @media print{
   .sky,.nav,footer,.closing,.phero,.roi,.steps,.cards,.tiers,.cmp-wrap{display:none!important}
+  /* the handoff panel lives inside #grader, so the section list above misses
+     it. A printed page cannot be clicked, and this block is nothing but
+     buttons — the report itself is the part worth keeping on paper. */
+  .next{display:none!important}
   body.printing-report{background:#fff;color:#111}
   body.printing-report .sky,body.printing-report .nav,body.printing-report footer{display:none!important}
   body.printing-report main>*:not(#grader){display:none!important}
@@ -681,7 +737,7 @@ p{text-wrap:pretty}
   body.printing-report dl.ps-meta dt{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#777}
   body.printing-report .gauge .fig,body.printing-report .vs-col .score,body.printing-report .roi-out .big{
     -webkit-text-fill-color:#111;color:#111;background:none}
-  body.printing-report .status,body.printing-report .prompt,body.printing-report .vs-toggle,body.printing-report .tools{display:none!important}
+  body.printing-report .status,body.printing-report .prompt,body.printing-report .vs-toggle,body.printing-report .tools,body.printing-report .next{display:none!important}
   body.printing-report .out,body.printing-report .compare{border-color:#ccc}
   body.printing-report *{color:#111}
 }

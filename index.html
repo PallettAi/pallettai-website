@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A new startup with years of experience. We build websites, redesigns and Telegram bots — then run every one through our own free website check before a customer sees it." />
+  <meta name="description" content="A new startup with years of experience. We build websites, redesigns and Telegram bots — then run each through our own free check before anyone sees it." />
   <meta name="author" content="PallettAi" />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#04122b" />
@@ -242,6 +242,31 @@
               <p class="eyebrow">Your full findings</p>
               <ul class="finds" id="g-finds"></ul>
             </div>
+          </div>
+
+          <!-- The handoff. A scored report is the highest-intent moment on
+               this site, and until now it dead-ended: you learned what was
+               wrong and there was nowhere to take it. This block is the only
+               place the checker points at Studio, and it is deliberately
+               specific — it names the fixes the report just found.
+               Filled by grader.js; hidden without JavaScript, because a
+               handoff that cannot name your score is just an advert. -->
+          <div class="next" id="check-next" hidden>
+            <p class="eyebrow">The next step</p>
+            <h3 class="next-h" id="next-head">Rebuild this site in Studio.</h3>
+            <p class="next-p" id="next-body"></p>
+            <ol class="next-steps">
+              <li>Download <b>PallettAI Studio</b> — free, for Mac.</li>
+              <li>Paste your address into <b>“Your current website URL”</b>
+                <button type="button" class="nx-copy" id="next-copy" data-host="">Copy <span id="next-copy-host"></span></button></li>
+              <li>It keeps your brand, contact details and services, and rebuilds
+                around them — then you export a site you own outright.</li>
+            </ol>
+            <div class="btns">
+              <a class="btn ice sm" id="next-dl" href="downloads.html?utm_source=grader&amp;utm_medium=checker&amp;utm_campaign=site-check">Get Studio — free</a>
+              <span class="next-or">or <a href="#contact">have us rebuild it</a></span>
+            </div>
+            <p class="next-foot">The rebuild is yours to edit — nothing is published anywhere until you say so.</p>
           </div>
 
           <div class="tools" id="check-tools" hidden>

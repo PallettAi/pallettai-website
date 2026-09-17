@@ -58,6 +58,26 @@
           <h2 style="margin-top:14px;font-size:clamp(26px,3.4vw,40px)">From first brief<br /><span class="g">to live site.</span></h2>
           <p class="lede" style="margin-top:16px">Studio is the workspace we use to go from a messy idea to something you can put in front of a client — real content, a considered layout, and a path all the way to launch.</p>
 
+          <!-- Arrived from the free site check on the homepage. The address the
+               visitor graded travels in the query string, not in the app, so
+               the handoff survives the hop from the phone that ran the check
+               to the Mac that will do the rebuild. Hidden without ?rebuild=,
+               and filled by theme.js — never by inline script, so the CSP
+               still has no hole in it. -->
+          <div class="from-check" id="from-checker" hidden>
+            <p class="eyebrow">From your site check</p>
+            <h3 class="fc-h">You checked <span id="fc-host">—</span></h3>
+            <p class="fc-p">Studio rebuilds the same business around those findings. When you
+              create the project, paste your address into the field marked <b>“Your current
+              website URL”</b> — it keeps your brand, contact details, services and wording,
+              and rebuilds the rest.</p>
+            <div class="fc-row">
+              <button type="button" class="fc-copy" id="fc-copy" data-host="">Copy <span id="fc-copy-host"></span></button>
+              <a id="fc-report" href="index.html#grader">See the full report again ↗</a>
+              <button type="button" class="fc-skip" id="fc-dismiss">Not now</button>
+            </div>
+          </div>
+
           <!-- These hrefs deliberately use the unversioned `latest/download` alias, which
                GitHub resolves to the newest published release. The build workflow uploads
                PallettAI-Studio-mac-arm64.dmg / -mac-x64.dmg on every tag, so these links are

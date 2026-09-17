@@ -1033,6 +1033,118 @@
     });
   })();
 
+  /* ---------- 8. the free check → Studio handoff ----------
+
+     Two behaviours, one funnel.
+
+     (a) A download is the only outcome that matters on this site, and
+         until now nothing counted one. GoatCounter sees a page view of
+         /downloads; it cannot see whether anybody took the file. The
+         DMG rows are the last click we own, so they are counted here,
+         tagged with whether the visitor arrived from the free check.
+
+     (b) When somebody does arrive from the check, the address they
+         graded is in the query string (see grader.js). This puts it on
+         the page, offers a copy button, and links back to the report.
+         It is read from the URL rather than stored, so it works across
+         devices and leaves nothing behind afterwards. */
+
+  (function downloads() {
+    var rows = doc.querySelectorAll('[data-rel-dl]');
+    var fromCheck = /[?&]rebuild=/.test(location.search) && /[?&]utm_source=grader/.test(location.search);
+    var kind = '';
+
+    /* Hostnames only. Anything with a slash, a space, a quote or a
+       scheme is not an address we put on the page — the parameter is
+       visitor-supplied and the page reflects it back. */
+    function hostOnly(raw) {
+      var v = String(raw || '').trim();
+      if (!v || v.length > 253) return '';
+      if (!/^[a-z0-9.-]+(:\d+)?$/i.test(v)) return '';
+      if (v.indexOf('.') === -1) return '';
+      if (/(^|\.)\.|\.$/.test(v)) return '';
+      return v;
+    }
+
+    if (fromCheck) {
+      var params = new URLSearchParams(location.search);
+      var host = hostOnly(params.get('rebuild'));
+      var box = doc.getElementById('from-checker');
+      var copy = doc.getElementById('fc-copy');
+      var label = doc.getElementById('fc-copy-host');
+      var head = doc.getElementById('fc-host');
+      var back = doc.getElementById('fc-report');
+      var skip = doc.getElementById('fc-dismiss');
+
+      if (host && box) {
+        if (head) head.textContent = host;
+        if (label) label.textContent = host;
+        if (copy) copy.setAttribute('data-host', host);
+        if (back) back.setAttribute('href', 'index.html?check=' + encodeURIComponent(host) + '#check');
+        box.hidden = false;
+        kind = '-from-check';
+        pingEvent('/event/check-to-downloads');
+
+        /* The link carries #from-checker, so honour it — but only now,
+           because a hidden element cannot be scrolled to, and jumping
+           on arrival is exactly what the visitor asked for. */
+        if (location.hash === '#from-checker' && box.scrollIntoView) {
+          box.scrollIntoView({ block: 'center', behavior: rm ? 'auto' : 'smooth' });
+        }
+
+        /* Dismissed for the session only — no cookie, nothing stored
+           beyond this tab, and a shared link still shows it to the
+           next person. */
+        if (skip) {
+          skip.addEventListener('click', function () { box.hidden = true; });
+        }
+
+        if (copy) {
+          copy.addEventListener('click', function () {
+            var value = copy.getAttribute('data-host') || '';
+            if (!value) return;
+            function done(ok) {
+              copy.textContent = ok ? 'Copied — paste it into Studio' : 'Select the address above';
+              setTimeout(function () {
+                copy.textContent = '';
+                copy.appendChild(doc.createTextNode('Copy '));
+                var b = doc.createElement('span');
+                b.textContent = value;
+                copy.appendChild(b);
+              }, 2200);
+            }
+            function fallback() {
+              var ta = doc.createElement('textarea');
+              ta.value = value;
+              ta.setAttribute('readonly', '');
+              ta.style.cssText = 'position:fixed;left:-9999px;top:0';
+              doc.body.appendChild(ta);
+              ta.select();
+              var ok = false;
+              try { ok = doc.execCommand('copy'); } catch (e) { ok = false; }
+              doc.body.removeChild(ta);
+              done(ok);
+            }
+            pingEvent('/event/check-copy-address');
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(value).then(function () { done(true); }, fallback);
+            } else fallback();
+          });
+        }
+      }
+    }
+
+    /* The click that actually sends a file. Counted separately from the
+       page view, because a page view is not a download and the whole
+       point of the exercise is to tell those two apart. */
+    [].forEach.call(rows, function (row) {
+      row.addEventListener('click', function () {
+        var arch = row.getAttribute('data-rel-dl') || 'unknown';
+        pingEvent('/event/download/' + arch + kind);
+      });
+    });
+  })();
+
   (function waitlist() {
     var form = doc.getElementById('win-waitlist');
     if (!form) return;
