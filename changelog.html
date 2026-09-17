@@ -52,19 +52,31 @@
       <div class="current up">
         <div>
           <div class="kicker">Latest release · 17 September 2026</div>
-          <h2 id="current-release">Studio 0.4.6 is ready to ship.</h2>
-          <p>Two things a static site normally cannot do: answer a visitor’s question, and change on a date. Both now ship inside the exported file, with no server, no API key and no monthly cost behind them.</p>
+          <h2 id="current-release">Studio 0.4.7 is ready to ship.</h2>
+          <p>An updater has one job: finish. Studio’s was handing the install to macOS and then never quitting, so the installer waited for a process that was never going to leave and the update could sit at “Installing update…” until it was force-quit. This release is the repair — and the guard rail, so a stalled update can never lock you out of your own projects again.</p>
           <div class="links">
             <a href="downloads.html">Download Studio ↗</a>
             <a href="https://github.com/PallettAi/PallettAI-Studio/blob/main/README.md" target="_blank" rel="noopener">Read the README ↗</a>
-            <a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.4.6" target="_blank" rel="noopener">View release notes ↗</a>
+            <a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.4.7" target="_blank" rel="noopener">View release notes ↗</a>
           </div>
         </div>
-        <div class="ver-badge" aria-label="Version 0.4.6"><span class="n">0.4.6</span><span class="s">current</span></div>
+        <div class="ver-badge" aria-label="Version 0.4.7"><span class="n">0.4.7</span><span class="s">current</span></div>
       </div>
     </section>
 
     <section class="sec" aria-label="Release history">
+      <article class="rel up">
+        <div class="when"><b>17 Sep 2026</b>0.4.7</div>
+        <div>
+          <h2>0.4.7 <span>An updater that finishes</span></h2>
+          <p class="intro">This is a repair rather than a feature, and it is worth explaining because the fault looked like a freeze. On macOS, installing an update means handing the job to the system’s installer, which replaces the app only once the running copy is gone. Studio asked it to install and then never quit — so the installer waited for a process that was never going to exit. Measured on a real machine: eight minutes of nothing, then installation completed six seconds after the process was killed by hand.</p>
+          <ul>
+            <li><b>The app now leaves for its own update.</b> The updater window closes, the process exits, and the installer swaps the app in seconds. Restarting to install an update is a restart again — no force-quit, and nothing to know about how macOS installs software.</li>
+            <li><b>A stalled update can no longer lock you out.</b> The update check runs before your workspace opens, so anything that hung there meant a window you could not dismiss and no way into your own projects. A few seconds in, that window now offers <b>Skip the update and open Studio</b>: the version you already have opens with your work where you left it, and the update is offered again next time you open Studio. A bad connection costs you a restart, not access.</li>
+            <li><b>Updates name their version.</b> The prompt that asks you to restart now names the version waiting to be installed, rather than asking about “a new version”.</li>
+          </ul>
+        </div>
+      </article>
       <article class="rel up">
         <div class="when"><b>17 Sep 2026</b>0.4.6</div>
         <div>
