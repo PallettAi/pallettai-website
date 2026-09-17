@@ -156,10 +156,26 @@
           <div class="a"><b>Run the EXE</b>, choose an install folder, done. The Windows build is new and not yet code-signed, so SmartScreen shows “Windows protected your PC” — click <b>More info</b> → <b>Run anyway</b>. Needs Windows 10 (1809+) or Windows 11, 64-bit. Use <b>Help → Check for Updates</b> to retry an update check manually.</div>
         </details>
         <details>
-          <summary>v0.4.5 — What's new in Studio</summary>
+          <summary>What's new in Studio — 0.4.5 to 0.4.7</summary>
           <div class="a">
             <div class="group">
-              <b>It reads the sentence, not just the words</b>
+              <b>The updater finishes what it starts — 0.4.7</b>
+              <ul>
+                <li>Installing an update on a Mac means quitting the app first. Studio asked the system to install and then never quit, so the installer waited on a process that was never leaving — an update could sit at "Installing update…" until it was force-quit. It now exits, and the swap completes in seconds.</li>
+                <li>If the update check stalls, the window offers <b>Skip the update and open Studio</b> and names the version waiting — so a bad connection costs you a restart, not access to your projects.</li>
+                <li><b>Windows is current again.</b> Windows reads its update manifest from the newest published release, and the last two releases shipped Mac builds only — so Windows had nothing to find. This release carries the Windows installer and its manifest.</li>
+              </ul>
+            </div>
+            <div class="group">
+              <b>Sites that answer, and sites that date themselves — 0.4.6</b>
+              <ul>
+                <li><b>Concierge.</b> An "Ask us" panel on the exported site, answering from a knowledge pack you fill in — hours, prices, services, booking link. It runs in the visitor's browser: no server, no API key, nothing leaving the page. It refuses rather than guesses, and anything it cannot place becomes an enquiry through the form your site already delivers.</li>
+                <li><b>Self-scheduling content.</b> An offer with an end date removes itself after midnight; seasonal and term-time hours appear on the day. Content already expired at export is dropped from the file entirely, and nothing disappears a day early for a visitor in another timezone.</li>
+                <li>Share cards now rasterise to PNG, so shared links unfurl with a picture. <b>Site Care</b> sweeps every project you have shipped for what has quietly stopped being true — a date that has passed, last year's price, placeholder copy, links that point at nothing.</li>
+              </ul>
+            </div>
+            <div class="group">
+              <b>It reads the sentence, not just the words — 0.4.5</b>
               <ul>
                 <li>"Do not make it dark" used to switch your site to <b>Midnight</b>. "I don't like the editorial look" used to apply it. A message is now read for what it is — a request, a refusal, a question, praise — before anything is planned.</li>
                 <li>Scope is read as written: two named sections are both handled, "every section" means every section, and "but keep the words" is honoured instead of quietly dropped. A refusal gets alternatives, never the thing you just turned down.</li>
@@ -192,7 +208,7 @@
                 <li>Stripe's payment links carried your account id in a query string anyone could edit, so Pro could be bought for — or as — somebody else. Checkout now reads your account from your verified sign-in, and nothing is granted until the webhook verifies Dodo's signature.</li>
               </ul>
             </div>
-            <p style="margin-top:16px"><a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.4.5" target="_blank" rel="noopener">View the v0.4.5 release notes</a> · <a href="changelog.html" target="_blank" rel="noopener">Full changelog</a></p>
+            <p style="margin-top:16px"><a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.4.7" target="_blank" rel="noopener">View the v0.4.7 release notes</a> · <a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.4.6" target="_blank" rel="noopener">v0.4.6</a> · <a href="changelog.html" target="_blank" rel="noopener">Full changelog</a></p>
           </div>
         </details>
       </div>

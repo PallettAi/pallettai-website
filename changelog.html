@@ -74,6 +74,7 @@
             <li><b>The app now leaves for its own update.</b> The updater window closes, the process exits, and the installer swaps the app in seconds. Restarting to install an update is a restart again — no force-quit, and nothing to know about how macOS installs software.</li>
             <li><b>A stalled update can no longer lock you out.</b> The update check runs before your workspace opens, so anything that hung there meant a window you could not dismiss and no way into your own projects. A few seconds in, that window now offers <b>Skip the update and open Studio</b>: the version you already have opens with your work where you left it, and the update is offered again next time you open Studio. A bad connection costs you a restart, not access.</li>
             <li><b>Updates name their version.</b> The prompt that asks you to restart now names the version waiting to be installed, rather than asking about “a new version”.</li>
+            <li><b>Windows is current again.</b> The Windows build had no release of its own since 0.4.5, and its updater reads the manifest from the newest published release — which the last two releases did not carry, so a Windows install had nothing to find and no way forward. 0.4.7 publishes the Windows installer and that manifest. It is still unsigned, so SmartScreen asks once on install; the note on the <a href="downloads.html">download page</a> explains the click.</li>
           </ul>
         </div>
       </article>
