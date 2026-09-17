@@ -51,20 +51,33 @@
     <section class="sec" aria-labelledby="current-release">
       <div class="current up">
         <div>
-          <div class="kicker">Latest release · 16 September 2026</div>
-          <h2 id="current-release">Studio 0.4.5 is ready to ship.</h2>
-          <p>A small release fixing licence keys: entering one now has a proper home in Settings, and a key issued for life can no longer be quietly overwritten by a subscription renewal.</p>
+          <div class="kicker">Latest release · 17 September 2026</div>
+          <h2 id="current-release">Studio 0.4.6 is ready to ship.</h2>
+          <p>Two things a static site normally cannot do: answer a visitor’s question, and change on a date. Both now ship inside the exported file, with no server, no API key and no monthly cost behind them.</p>
           <div class="links">
             <a href="downloads.html">Download Studio ↗</a>
             <a href="https://github.com/PallettAi/PallettAI-Studio/blob/main/README.md" target="_blank" rel="noopener">Read the README ↗</a>
-            <a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.4.5" target="_blank" rel="noopener">View release notes ↗</a>
+            <a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.4.6" target="_blank" rel="noopener">View release notes ↗</a>
           </div>
         </div>
-        <div class="ver-badge" aria-label="Version 0.4.5"><span class="n">0.4.5</span><span class="s">current</span></div>
+        <div class="ver-badge" aria-label="Version 0.4.6"><span class="n">0.4.6</span><span class="s">current</span></div>
       </div>
     </section>
 
     <section class="sec" aria-label="Release history">
+      <article class="rel up">
+        <div class="when"><b>17 Sep 2026</b>0.4.6</div>
+        <div>
+          <h2>0.4.6 <span>A site that answers, and a site that dates itself</span></h2>
+          <p class="intro">Website chatbots are normally a hosted service: an API key, a subscription, per-seat pricing, and every visitor’s question passing through someone else’s server. Everything in this release runs inside the file you export — and keeps working if you stop paying us.</p>
+          <ul>
+            <li><b>Concierge.</b> An “Ask us” panel on the site itself, answering from a knowledge pack you fill in — hours, prices, services, the area you cover, a booking link, plus any question you get asked. It runs in the visitor’s browser: no server, no API key, and nothing leaves the page until someone presses send. It is built to refuse rather than guess, because a chatbot that invents an answer is worse than one that says it does not know — anything it cannot place becomes an enquiry through the form your site already delivers. Choose your own wording for the greeting, every answer, and the reply when it does not know. It doubles as an accessible FAQ, since it is keyboard- and screen-reader-operable and needs no JavaScript-optional rendering.</li>
+            <li><b>Self-scheduling content.</b> A dated strip above the navigation that is written once and then behaves. Put an offer up with an end date and it removes itself after midnight; add seasonal or term-time hours and they appear on the day. There is no cron job and nothing to remember: content already expired when you export is dropped from the file entirely, and live or upcoming entries reveal themselves in the visitor’s own browser. End dates are inclusive and read as the visitor’s local day, so nothing disappears a day early for anyone in a different timezone.</li>
+            <li><b>Shared links finally unfurl with a picture.</b> Every site has always generated a share card, but it was handed over as an SVG — and X, WhatsApp and LinkedIn will not render an SVG share image, so most shared links showed a bare title instead. The card is now rasterised to a PNG at export, so a link to your site shows the artwork. The same export pass declares each image’s dimensions, which stops photographs shoving the page around while they load.</li>
+            <li><b>Site Care.</b> A new view for the part of the job that comes after delivery. It sweeps every project you have shipped and reports what has quietly stopped being true: a date that has passed, a price still beside last year, placeholder or sample text nobody replaced, a section left empty that the next export will fill with stock photos, images missing alt text, and links that point at nothing.</li>
+          </ul>
+        </div>
+      </article>
       <article class="rel up">
         <div class="when"><b>16 Sep 2026</b>0.4.5</div>
         <div>
