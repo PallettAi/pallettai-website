@@ -17,6 +17,13 @@
   var fine = window.matchMedia('(pointer:fine)').matches;
   var doc = document;
 
+  /* The stylesheet gates every reveal-y, rise-y hidden state on html.js, so
+     that a visitor without script gets the finished page rather than a
+     blank heading or a missing hairline. This line is that gate. It has to
+     happen before the chrome is built, because the chrome is what carries
+     the current-page state into the nav. */
+  doc.documentElement.classList.add('js');
+
   /* ---------- shared chrome ---------- */
 
   /* keys match each page's data-page attribute, so the current item highlights */
@@ -144,11 +151,30 @@
 
   chrome();
 
+  /* ---------- section headings rise out of their own mask ----------
+     theme.css animates a .rh span inside each .head h2 and .phero h1, and
+     hides it until the surrounding .rv is revealed. Nothing in the markup
+     creates that span, so this does — and only where a .rv ancestor exists,
+     because .rv is what adds .in. Wrapping a heading whose reveal can never
+     fire would park it permanently below its own overflow:hidden mask. */
+  (function headRise() {
+    var heads = doc.querySelectorAll('.head h2, .phero h1');
+    [].forEach.call(heads, function (h) {
+      if (h.querySelector('.rh') || !h.closest('.rv')) return;
+      var wrap = doc.createElement('span');
+      wrap.className = 'rh';
+      while (h.firstChild) wrap.appendChild(h.firstChild);
+      h.appendChild(wrap);
+    });
+  })();
+
   /* ---------- nav, scroll progress, scroll-linked hero depth ---------- */
 
   var nav = doc.getElementById('nav');
   var prog = doc.getElementById('prog');
   var hero = doc.querySelector('.hero');
+  var heroArt = hero ? hero.querySelector('.art') : null;
+  var heroCopy = hero ? hero.querySelector('.hero-grid>div:first-child') : null;
   var ticking = false;
 
   /* Page metrics are measured on resize and on any change to the body's size,
@@ -188,7 +214,15 @@
       prog.style.transform = 'scaleX(' + (maxScroll > 0 ? Math.min(1, y / maxScroll) : 0).toFixed(4) + ')';
     }
     if (hero && !rm) {
-      hero.style.setProperty('--sy', Math.max(0, Math.min(1, y / (heroH || 1))).toFixed(3));
+      /* Written straight onto the two elements rather than as a custom
+         property on .hero. A --sy write invalidates style for the whole
+         hero subtree — and the hero holds the rose, which is a couple of
+         hundred SVG nodes — on every scroll frame. Two plain transforms
+         touch two elements and nothing else. */
+      var sy = Math.max(0, Math.min(1, y / (heroH || 1)));
+      if (heroArt) heroArt.style.transform =
+        'translate3d(0,' + (sy * 26).toFixed(2) + 'px,0) scale(' + (1 - sy * 0.04).toFixed(4) + ')';
+      if (heroCopy) heroCopy.style.transform = 'translate3d(0,' + (sy * -16).toFixed(2) + 'px,0)';
     }
     spy();
   }
@@ -243,12 +277,17 @@
       var st = doc.createElement('i');
       st.className = 'st';
       var sz = (1 + rnd() * 1.7).toFixed(1);
-      st.style.cssText = 'left:' + (rnd() * 100).toFixed(2) + '%;top:' + (rnd() * 100).toFixed(2) +
-        '%;width:' + sz + 'px;height:' + sz + 'px;animation-duration:' + (3.5 + rnd() * 5).toFixed(1) +
-        's;animation-delay:-' + (rnd() * 9).toFixed(1) + 's';
+      st.style.cssText = 'left:' + (rnd() * 100).toFixed(2) + '%;top:' + (rnd() * 100).toFixed(2) +        '%;width:' + sz + 'px;height:' + sz + 'px;animation-duration:' + (9 + rnd() * 9).toFixed(1) +
+        's;animation-delay:-' + (rnd() * 18).toFixed(1) + 's';
       frag.appendChild(st);
     }
     sky.appendChild(frag);
+    ['m1', 'm2', 'm3'].forEach(function (name) {
+      var meteor = doc.createElement('i');
+      meteor.className = 'meteor ' + name;
+      meteor.setAttribute('aria-hidden', 'true');
+      sky.appendChild(meteor);
+    });
   }
 
   /* ---------- the instrument rose — procedural hero artwork ----------
@@ -545,12 +584,28 @@
       nodeB.push([]);
     }
 
+    /* The backing store is the largest thing this page allocates, and it is
+       held for as long as the tab is open: a full-screen canvas at a 2x
+       device ratio is ~24 MB on a laptop display and over 100 MB on a 4K
+       one. Nothing drawn on it is wider than a pixel and most of it is half
+       transparent, so it does not need that. BUDGET caps the whole surface
+       in device pixels and spends it on a ratio of at most 2, and never
+       below 1, which keeps every stroke a real pixel wide. */
+    var BUDGET = 2600000;
     function size() {
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
       W = sky.clientWidth || window.innerWidth;
       H = sky.clientHeight || window.innerHeight;
-      cv.width = Math.round(W * dpr);
-      cv.height = Math.round(H * dpr);
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var fit = Math.sqrt(BUDGET / Math.max(1, W * H));
+      if (fit < dpr) dpr = Math.max(1, fit);
+      var bw = Math.round(W * dpr), bh = Math.round(H * dpr);
+      /* Assigning width or height clears the canvas, so only do it when the
+         numbers actually moved — a resize that leaves the size alone should
+         not blank the field for a frame. */
+      if (bw !== cv.width || bh !== cv.height) {
+        cv.width = bw;
+        cv.height = bh;
+      }
       cv.style.width = W + 'px';
       cv.style.height = H + 'px';
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -955,7 +1010,12 @@
      One class toggle per section, no per-frame work. */
   (function offstage() {
     if (rm || !('IntersectionObserver' in window)) return;
-    var secs = doc.querySelectorAll('main > section');
+    /* The footer is in here as well as the sections: it sits outside <main>
+       and used to keep animating for the whole visit while it was thousands of
+       pixels below the fold. It carries no animation of its own any more, so
+       this is now belt and braces — but the next thing added down there will
+       get parked along with everything else instead of quietly running on. */
+    var secs = doc.querySelectorAll('main > section, footer');
     if (!secs.length) return;
     var io = new IntersectionObserver(function (entries) {
       for (var i = 0; i < entries.length; i++) {

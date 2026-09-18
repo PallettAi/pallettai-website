@@ -14,9 +14,9 @@
    version labels (which ship empty, so they can never read a stale
    version to a visitor without JavaScript) and swaps in the exact
    per-release asset URL. The script never invents a URL: it only ever
-   copies a download URL that GitHub reports on a release, and only
-   when the release carries both Mac builds, so the page can never end
-   up mixed across two versions.
+   copies a download URL that GitHub reports on a release, and only       when the release carries both Mac builds and a Windows installer, so
+   the page can never end up mixed across two versions or advertise a missing
+   Windows build.
 
    Loaded with defer and holds no inline script, so script-src
    'self' still applies.
@@ -73,7 +73,8 @@
       tag: tag,
       version: tag.replace(/^v/, ''),
       macArm: assetUrl(assets, /-mac-arm64\.dmg$/) || assetUrl(assets, /(^|\/)PallettAI-Studio-mac-arm64\.dmg$/) || '',
-      macX64: assetUrl(assets, /-mac-x64\.dmg$/) || assetUrl(assets, /(^|\/)PallettAI-Studio-mac-x64\.dmg$/) || ''
+      macX64: assetUrl(assets, /-mac-x64\.dmg$/) || assetUrl(assets, /(^|\/)PallettAI-Studio-mac-x64\.dmg$/) || '',
+      winX64: assetUrl(assets, /-setup\.exe$/) || assetUrl(assets, /PallettAI-Studio-setup\.exe$/) || ''
     };
   }
 
@@ -94,15 +95,16 @@
     /* A version is only ever digits and dots. Anything else means the
        tag is not a release we understand, so leave the page alone. */
     if (!/^\d+(\.\d+)*$/.test(rel.version)) return;
-    /* Both Mac builds or nothing — a half-updated page would show one
-       version in the label and another in a download button. */
-    if (!rel.macArm || !rel.macX64) return;
+    /* Both Mac builds and Windows or nothing — a half-updated page would
+       show one version in the label and another in a download button. */
+    if (!rel.macArm || !rel.macX64 || !rel.winX64) return;
 
     setText('[data-rel-version]', 'v' + rel.version);
     setText('[data-rel-version-plain]', rel.version);
 
     setHref('[data-rel-dl="mac-arm64"]', rel.macArm);
     setHref('[data-rel-dl="mac-x64"]', rel.macX64);
+    setHref('[data-rel-dl="win-x64"]', rel.winX64);
 
     /* A hook for anything that wants to know the resolved release. */
     document.documentElement.setAttribute('data-release', rel.version);
