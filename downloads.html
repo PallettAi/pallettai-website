@@ -156,8 +156,17 @@
           <div class="a"><b>Run the EXE</b>, choose an install folder, done. The Windows build is new and not yet code-signed, so SmartScreen shows “Windows protected your PC” — click <b>More info</b> → <b>Run anyway</b>. Needs Windows 10 (1809+) or Windows 11, 64-bit. Use <b>Help → Check for Updates</b> to retry an update check manually.</div>
         </details>
         <details>
-          <summary>What's new in Studio — 0.4.5 to 0.4.9</summary>
+          <summary>What's new in Studio — 0.4.5 to 0.4.10</summary>
           <div class="a">
+            <div class="group">
+              <b>A dependable launch and safer updates — 0.4.10</b>
+              <ul>
+                <li>Older machines now use a lighter rendering path automatically, with software-rendering fallback when graphics acceleration is unavailable.</li>
+                <li>Advanced Canvas loads GrapesJS and VvvebJS only when opened, so optional visual tools cannot slow or break normal startup.</li>
+                <li>Updater hand-off is bounded and explicit, with a skip route if an update check stalls and no competing install-on-quit path.</li>
+                <li>A signed data-only hotfix channel can deliver bounded copy and configuration fixes without replacing executable app code.</li>
+              </ul>
+            </div>
             <div class="group">
               <b>A creative direction before generation — 0.4.9</b>
               <ul>
@@ -226,7 +235,7 @@
                 <li>Stripe's payment links carried your account id in a query string anyone could edit, so Pro could be bought for — or as — somebody else. Checkout now reads your account from your verified sign-in, and nothing is granted until the webhook verifies Dodo's signature.</li>
               </ul>
             </div>
-            <p style="margin-top:16px"><a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.4.9" target="_blank" rel="noopener">View the v0.4.9 release notes</a> · <a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.4.7" target="_blank" rel="noopener">v0.4.7</a> · <a href="changelog.html" target="_blank" rel="noopener">Full changelog</a></p>
+            <p style="margin-top:16px"><a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.4.10" target="_blank" rel="noopener">View the v0.4.10 release notes</a> · <a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.4.7" target="_blank" rel="noopener">v0.4.7</a> · <a href="changelog.html" target="_blank" rel="noopener">Full changelog</a></p>
           </div>
         </details>
       </div>

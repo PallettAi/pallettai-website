@@ -51,20 +51,34 @@
     <section class="sec" aria-labelledby="current-release">
       <div class="current up">
         <div>
-          <div class="kicker">Latest release · 19 September 2026</div>
-          <h2 id="current-release">Studio 0.4.9 turns a brief into a creative point of view.</h2>
-          <p>Studio now asks better questions before it builds, presents contrasting creative routes, and explains the strategy behind the structure it chooses. Save proven project shapes as reusable starters, refine the visitor action or signature moment, and keep the work resilient with safer background jobs and opt-in, scrubbed crash reporting.</p>
+          <div class="kicker">Latest release · 21 September 2026</div>
+          <h2 id="current-release">Studio 0.4.10 makes launch, updates and everyday work more dependable.</h2>
+          <p>Studio now opens reliably when graphics acceleration is unavailable, keeps optional canvas tools out of startup, and makes the updater safer to hand off on macOS. The new signed data-only hotfix channel is ready for bounded copy and configuration fixes without replacing app code, while the workspace keeps its faster tab transitions and older-device mode.</p>
           <div class="links">
             <a href="downloads.html">Download Studio ↗</a>
             <a href="https://github.com/PallettAi/PallettAI-Studio/blob/main/README.md" target="_blank" rel="noopener">Read the README ↗</a>
-            <a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.4.9" target="_blank" rel="noopener">View release notes ↗</a>
+            <a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.4.10" target="_blank" rel="noopener">View release notes ↗</a>
           </div>
         </div>
-        <div class="ver-badge" aria-label="Version 0.4.9"><span class="n">0.4.9</span><span class="s">current</span></div>
+        <div class="ver-badge" aria-label="Version 0.4.10"><span class="n">0.4.10</span><span class="s">current</span></div>
       </div>
     </section>
 
     <section class="sec" aria-label="Release history">
+      <article class="rel up">
+        <div class="when"><b>21 Sep 2026</b>0.4.10</div>
+        <div>
+          <h2>0.4.10 <span>A dependable launch and a safer update path</span></h2>
+          <p class="intro">This release is about getting back to work without friction: older machines get a lighter rendering path, optional canvas engines no longer affect the normal shell, and the updater has a bounded hand-off instead of racing macOS.</p>
+          <ul>
+            <li><b>Reliable on older hardware.</b> Studio falls back to software rendering when Electron cannot initialise graphics acceleration, and low-power machines automatically reduce expensive blur, shadow and hover work.</li>
+            <li><b>Advanced Canvas loads on demand.</b> GrapesJS and VvvebJS remain local and pinned, but they are not loaded during normal startup. Open Advanced Canvas when you need them; if a canvas dependency fails, the main Studio remains usable.</li>
+            <li><b>Updates no longer race the app.</b> The installer hand-off waits for the archive stage, closes the startup window cleanly and leaves a skip route if a check stalls. Implicit installation on quit is disabled so macOS does not run two installer paths.</li>
+            <li><b>Signed data-only hotfix channel.</b> Bounded feature flags, copy, template hints and release notes can be verified and applied without replacing executable code. Invalid, expired or unsigned data is ignored and the normal bundled app remains the fallback.</li>
+            <li><b>Faster navigation.</b> Tab changes use a small compositor-friendly fade instead of snapshotting the whole app, with reduced-motion support retained.</li>
+          </ul>
+        </div>
+      </article>
       <article class="rel up">
         <div class="when"><b>19 Sep 2026</b>0.4.9</div>
         <div>
