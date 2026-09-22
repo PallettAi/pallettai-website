@@ -73,6 +73,20 @@ button{font:inherit}
 @keyframes bloomA{0%,100%{transform:translate3d(0,0,0) scale(1.5);opacity:.7}50%{transform:translate3d(17vw,10vh,0) scale(1.95);opacity:1}}
 @keyframes bloomB{0%,100%{transform:translate3d(0,0,0) scale(1.86);opacity:1}50%{transform:translate3d(-19vw,-8vh,0) scale(1.35);opacity:.55}}
 @keyframes bloomC{0%,100%{transform:translate3d(0,0,0) scale(1.35);opacity:.5}50%{transform:translate3d(12vw,-14vh,0) scale(1.89);opacity:.95}}
+/* Machines that told us they are short of memory (theme.js adds .lean) hold
+   the ambience still. Nothing is removed, only stopped, and each layer is
+   pinned at its 0% keyframe so the picture it starts from is the picture
+   that stays. What this buys is not the animation — it is the layers: an
+   animated transform or opacity is what promotes an element into a
+   compositor layer of its own, and each of those is a texture the size of
+   the element. Held still, the blooms and both current layers raster into
+   the sky's own layer like any other painted content, so six viewport-sized
+   textures stop being allocated. The stars are reduced in script instead,
+   because they are built there. */
+.lean .b1{animation:none;transform:scale(1.5)}
+.lean .b2{animation:none;transform:scale(1.86)}
+.lean .b3{animation:none;transform:scale(1.35)}
+.lean .currents,.lean .currents.b{animation:none}
 /* currents: two tiled layers, each scrolled one full tile per loop, opposite ways.
 
    The drift is written as a fraction of the layer's own box, not in px, and

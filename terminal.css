@@ -743,6 +743,11 @@ table.t thead th:first-child { background: #141a32; }
   transition: opacity 0.35s var(--ease);
 }
 .reel figure.on { opacity: 1; pointer-events: auto; }
+/* The slides are revealed by script adding .on to one of them, so with no
+   script no slide was ever shown and the reel rendered as an empty frame.
+   The first screenshot stands in until script takes over — hidden states on
+   this site are gated on html.js, which is the same gate the reveals use. */
+html:not(.js) .reel figure:first-of-type { opacity: 1; pointer-events: auto; }
 .reel figure img {
   width: 100%;
   height: 100%;
