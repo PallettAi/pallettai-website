@@ -52,19 +52,32 @@
       <div class="current up">
         <div>
           <div class="kicker">Latest release · 23 September 2026</div>
-          <h2 id="current-release">Studio 0.4.11 finishes the features that were half-connected.</h2>
-          <p>Every generated site now starts from one of six visual archetypes instead of the same layout in a new colour. The preview grew a toolbar that acts on the section you clicked, a Design Tokens panel with a live contrast reading, and a searchable Studio Guides tab — and the feature screens that existed in development but were missing from installed builds now ship.</p>
+          <h2 id="current-release">Studio 0.4.12 makes the updater finish what it starts.</h2>
+          <p>“The update downloads and the app does not come back” turned out to be one fault with two halves. Studio left as soon as the download finished, while the installer still had to expand the archive afterwards — quitting at that moment cut the expansion in half and the update was discarded without a word. The installer was also being told not to reopen Studio once it had finished. Both are fixed, and an expansion that simply takes a long time can no longer cost you the update.</p>
           <div class="links">
             <a href="downloads.html">Download Studio ↗</a>
             <a href="https://github.com/PallettAi/PallettAI-Studio/blob/main/README.md" target="_blank" rel="noopener">Read the README ↗</a>
-            <a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.4.11" target="_blank" rel="noopener">View release notes ↗</a>
+            <a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.4.12" target="_blank" rel="noopener">View release notes ↗</a>
           </div>
         </div>
-        <div class="ver-badge" aria-label="Version 0.4.11"><span class="n">0.4.11</span><span class="s">current</span></div>
+        <div class="ver-badge" aria-label="Version 0.4.12"><span class="n">0.4.12</span><span class="s">current</span></div>
       </div>
     </section>
 
     <section class="sec" aria-label="Release history">
+      <article class="rel up">
+        <div class="when"><b>23 Sep 2026</b>0.4.12</div>
+        <div>
+          <h2>0.4.12 <span>An update that finishes, and an app that comes back</span></h2>
+          <p class="intro">Two reports of the same thing — “it downloads, then nothing” — traced to one hand-off. Update 0.4.11 itself is unaffected: this release is about the mechanism that carries it.</p>
+          <ul>
+            <li><b>Studio no longer leaves too early.</b> On macOS the installer expands the downloaded archive inside Studio's own process, and only then starts the helper that swaps the app. Studio was quitting when the <i>download</i> completed — one step before that expansion — so the archive was cut short and the update thrown away silently. It now waits for the installer's own ready signal, and the <b>Skip</b> button stays available for the whole wait, however long the expansion takes.</li>
+            <li><b>Studio reopens when the update is done.</b> The installer was being handed an instruction not to relaunch the app, so a finished update left you with a closed Studio and nothing to open. That instruction is corrected: a completed install ends with the new version running.</li>
+            <li><b>A slow expansion can no longer lose the update.</b> Expanding a 240 MB build takes minutes on an older machine. If that cannot be confirmed, Studio opens anyway, keeps the downloaded update and installs it the next time you quit — rather than closing and leaving you guessing.</li>
+            <li><b>Everything from 0.4.11 ships here too:</b> six visual archetypes for generation, the section toolbar in the preview, Design Tokens with a measured WCAG reading, and the searchable Studio Guides tab.</li>
+          </ul>
+        </div>
+      </article>
       <article class="rel up">
         <div class="when"><b>23 Sep 2026</b>0.4.11</div>
         <div>
