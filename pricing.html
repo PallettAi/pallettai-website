@@ -25,6 +25,20 @@
   <meta name="twitter:image:alt" content="PallettAi — Your website is losing you enquiries." />
   <title>Website Pricing — Builds &amp; Aftercare | PallettAi</title>
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://pallettai-grader.coreypallett20.workers.dev https://pallettai.goatcounter.com; object-src 'none'; base-uri 'self'; form-action https://formspree.io; frame-src 'none'" />
+  <script type="application/ld+json">{
+    "@context":"https://schema.org",
+    "@graph":[
+      {"@type":"Product","name":"PallettAi Create Website","description":"A custom one-page website build with preview, contact form and local SEO basics.","brand":{"@type":"Brand","name":"PallettAi"},"offers":{"@type":"Offer","priceCurrency":"GBP","price":"249","url":"https://pallettai.org/pricing#builds","availability":"https://schema.org/InStock"}},
+      {"@type":"Product","name":"PallettAi Create Website deposit","description":"Deposit to start a PallettAi Create Website build. The remaining balance is due after preview approval and before launch.","brand":{"@type":"Brand","name":"PallettAi"},"offers":{"@type":"Offer","priceCurrency":"GBP","price":"99","url":"https://pallettai.org/pricing#builds","availability":"https://schema.org/InStock"}},
+      {"@type":"Product","name":"PallettAi Refresh & Upgrade","description":"A fixed-scope website refresh with a before-and-after health score.","brand":{"@type":"Brand","name":"PallettAi"},"offers":{"@type":"Offer","priceCurrency":"GBP","price":"149","url":"https://pallettai.org/pricing#builds","availability":"https://schema.org/InStock"}},
+      {"@type":"Product","name":"PallettAi Refresh & Upgrade deposit","description":"Deposit to start a PallettAi Refresh & Upgrade project. The remaining balance is due before launch.","brand":{"@type":"Brand","name":"PallettAi"},"offers":{"@type":"Offer","priceCurrency":"GBP","price":"49","url":"https://pallettai.org/pricing#builds","availability":"https://schema.org/InStock"}},
+      {"@type":"Product","name":"PallettAi Custom Builds & Bots","description":"Custom multi-page websites, booking flows, tools, Telegram bots and API work.","brand":{"@type":"Brand","name":"PallettAi"},"offers":{"@type":"Offer","priceCurrency":"GBP","price":"349","url":"https://pallettai.org/pricing#builds","availability":"https://schema.org/InStock"}},
+      {"@type":"Product","name":"PallettAi Custom Builds & Bots deposit","description":"Deposit to start a quoted PallettAi Custom Builds & Bots project.","brand":{"@type":"Brand","name":"PallettAi"},"offers":{"@type":"Offer","priceCurrency":"GBP","price":"149","url":"https://pallettai.org/pricing#builds","availability":"https://schema.org/InStock"}},
+      {"@type":"Product","name":"PallettAi Care Lite","description":"Optional website aftercare with backups, uptime and security monitoring.","brand":{"@type":"Brand","name":"PallettAi"},"offers":{"@type":"Offer","priceCurrency":"GBP","price":"19","url":"https://pallettai.org/pricing#aftercare","availability":"https://schema.org/InStock","priceSpecification":{"@type":"UnitPriceSpecification","price":"19","priceCurrency":"GBP","unitText":"MONTH"}}},
+      {"@type":"Product","name":"PallettAi Care","description":"Hands-off website aftercare with content changes and health checks.","brand":{"@type":"Brand","name":"PallettAi"},"offers":{"@type":"Offer","priceCurrency":"GBP","price":"49","url":"https://pallettai.org/pricing#aftercare","availability":"https://schema.org/InStock","priceSpecification":{"@type":"UnitPriceSpecification","price":"49","priceCurrency":"GBP","unitText":"MONTH"}}},
+      {"@type":"Product","name":"PallettAi Care Plus","description":"Website aftercare with monthly build time, performance and SEO tune-ups.","brand":{"@type":"Brand","name":"PallettAi"},"offers":{"@type":"Offer","priceCurrency":"GBP","price":"99","url":"https://pallettai.org/pricing#aftercare","availability":"https://schema.org/InStock","priceSpecification":{"@type":"UnitPriceSpecification","price":"99","priceCurrency":"GBP","unitText":"MONTH"}}}
+    ]
+  }</script>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=2" />
   <link rel="icon" type="image/svg+xml" href="signal-favicon.svg?v=4" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2" />
@@ -52,9 +66,9 @@
 
       <div class="switch-row rv" data-d="2">
         <span class="lbl active" id="lbl-monthly">Monthly</span>
-        <button class="switch" id="billing-switch" type="button" role="switch" aria-checked="false" aria-label="Toggle annual billing"></button>
+        <button class="switch" id="billing-switch" type="button" role="switch" aria-checked="false" aria-label="Switch to annual billing" aria-describedby="billing-saving"></button>
         <span class="lbl" id="lbl-annual">Annual</span>
-        <span class="save">2 months free</span>
+        <span class="save" id="billing-saving" role="status">Save 2 months with annual</span>
       </div>
 
       <p class="meta rv" data-d="3">PallettAi Studio app plans are separate — they live on the <a href="downloads.html#studio-plans">Studio page</a>.</p>
@@ -83,14 +97,14 @@
           <thead>
             <tr>
               <th scope="col">Package</th>
-              <th scope="col">What's included</th>
+              <th scope="col">What's included <details class="scope-help"><summary aria-label="Explain what is included">?</summary><span role="tooltip">Every package includes a clear scope, a preview before launch and a written handover. The exact deliverables are agreed before work begins.</span></details></th>
               <th scope="col">From</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row" class="pkg">Create Website</th>
-              <td class="desc">A custom one-page site that works on a phone, loads quickly, and has a working contact form. Local SEO basics, a preview before launch, and two rounds of changes.
+              <td class="desc">A custom one-page site that works on a phone, loads quickly, and has a working contact form. Local SEO basics, a preview before launch, and two rounds of changes. <details class="scope-help inline"><summary aria-label="Explain deposit and balance">Deposit + balance</summary><span role="tooltip">The deposit starts the work. The remaining balance is due after you approve the finished preview and before launch.</span></details>
                 <div style="margin-top:18px"><a class="btn line" data-pay="depositCreate" href="support.html">Start with £99 deposit ↗</a></div>
               </td>
               <td class="amt">£249</td>
@@ -184,6 +198,33 @@
     </div>
   </section>
 
+  <!-- ============ PRICING FAQ ============ -->
+  <section class="sec sec-split" id="pricing-faq">
+    <div class="wrap-l">
+      <div class="head">
+        <div class="rv">
+          <p class="eyebrow">Before you choose</p>
+          <h2 class="big">Pricing,<br /><span class="grad">answered.</span></h2>
+        </div>
+        <p class="lede rv" data-d="1">The three things people usually want to know before they click pay.</p>
+      </div>
+      <div class="faq rv" data-d="1">
+        <details open>
+          <summary>When is the balance due after paying a build deposit?</summary>
+          <div class="a">The deposit reserves the work and starts the build. The remaining balance is due once you approve the finished preview and before the site is published. We will show the balance clearly before launch.</div>
+        </details>
+        <details>
+          <summary>How do monthly aftercare subscriptions change or end?</summary>
+          <div class="a">Monthly aftercare can be upgraded, downgraded or cancelled with 30 days' notice through the customer portal or by emailing support. Annual aftercare is a single twelve-month payment and does not renew automatically.</div>
+        </details>
+        <details>
+          <summary>How do Studio AI credits reset or roll over?</summary>
+          <div class="a">Free-plan credits are a usage allowance, not stored credit. They reset according to the allowance shown inside Studio and unused credits do not roll over. Pro and Pro+ include unlimited AI Studio generations while the plan is active.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ COMPARISON MATRIX ============ -->
   <section class="sec sec-split">
     <div class="wrap-l">
@@ -239,6 +280,18 @@
 
       <div class="faq rv" data-d="1">
         <details open>
+          <summary>When is the balance due after paying a build deposit?</summary>
+          <div class="a">The deposit reserves the work and starts the build. The remaining balance is due once you approve the finished preview and before the site is published. We will show the balance clearly before launch.</div>
+        </details>
+        <details>
+          <summary>How do monthly aftercare subscriptions change or end?</summary>
+          <div class="a">Monthly aftercare can be upgraded, downgraded or cancelled with 30 days' notice through the customer portal or by emailing support. Annual aftercare is a single twelve-month payment and does not renew automatically.</div>
+        </details>
+        <details>
+          <summary>How do Studio AI credits reset or roll over?</summary>
+          <div class="a">Free-plan credits are a usage allowance, not stored credit. They reset according to the allowance shown inside Studio and unused credits do not roll over. Pro and Pro+ include unlimited AI Studio generations while the plan is active.</div>
+        </details>
+        <details>
           <summary>How does a project start?</summary>
           <div class="a">Send the form or an email describing the idea. We reply within 48 hours, agree a price and a small deposit, then build a preview you can look at. Nothing goes live until you are happy with it.</div>
         </details>

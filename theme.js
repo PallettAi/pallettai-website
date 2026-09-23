@@ -584,6 +584,38 @@
     });
   })();
 
+  /* ---------- downloads: choose the least surprising installer ----------
+     The static Apple Silicon link remains the safe no-JS fallback. When the
+     browser exposes a platform hint, move the primary emphasis to the
+     matching native installer without hiding any alternative or trusting a
+     user-agent value for security decisions. */
+  (function initDownloadChoice() {
+    var rows = [].slice.call(doc.querySelectorAll('[data-os]'));
+    if (!rows.length) return;
+    var ua = String(navigator.userAgent || '').toLowerCase();
+    var uaData = navigator.userAgentData || {};
+    var platform = String(uaData.platform || navigator.platform || '').toLowerCase();
+    var architecture = String(uaData.architecture || navigator.cpuClass || '').toLowerCase();
+    var key = '';
+    if (/win/.test(platform) || /windows/.test(ua)) key = 'win-x64';
+    else if (/mac/.test(platform) || /macintosh|mac os/.test(ua)) key = /arm|apple silicon|aarch/.test(platform + ' ' + architecture + ' ' + ua) ? 'mac-arm64' : 'mac-x64';
+    if (!key) return;
+    var chosen = doc.querySelector('[data-os="' + key + '"]');
+    if (!chosen) return;
+    rows.forEach(function (row) {
+      var active = row === chosen;
+      row.classList.toggle('detected', active);
+      row.classList.toggle('primary', active);
+      row.removeAttribute('aria-current');
+    });
+    chosen.setAttribute('aria-current', 'true');
+    var platformLabel = doc.getElementById('detected-platform');
+    if (platformLabel) {
+      platformLabel.hidden = false;
+      platformLabel.textContent = key === 'win-x64' ? 'Detected: Windows x64' : key === 'mac-arm64' ? 'Detected: Apple Silicon' : 'Detected: Intel Mac';
+    }
+  })();
+
   /* ---------- pause the ambience while the tab is hidden ---------- */
   doc.addEventListener('visibilitychange', function () {
     doc.documentElement.classList.toggle('paused', doc.hidden);

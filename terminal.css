@@ -571,6 +571,17 @@ table.t thead th:first-child { background: #141a32; }
 .dl-row { display: flex; align-items: center; gap: 16px; border: 1px solid var(--line-soft); background: linear-gradient(180deg, rgba(17, 26, 46, 0.8), rgba(11, 17, 32, 0.8)); padding: 18px 20px; transition: border-color 0.22s, transform 0.22s var(--ease), box-shadow 0.22s; }
 .dl-row:hover { border-color: rgba(167, 139, 250, 0.5); transform: translateY(-3px); box-shadow: 0 18px 40px rgba(2, 6, 16, 0.5), 0 0 40px rgba(139, 92, 246, 0.12); }
 .dl-row.primary { border-color: rgba(167, 139, 250, 0.4); }
+.dl-row.detected { border-color: rgba(159, 212, 255, 0.9); box-shadow: 0 0 0 2px rgba(159, 212, 255, 0.12), 0 18px 42px rgba(2, 6, 16, 0.45); }
+.dl-row.detected::before { content: "Recommended"; align-self: flex-start; order: 2; margin-left: auto; padding: 4px 8px; border: 1px solid rgba(159, 212, 255, 0.4); color: var(--cyan); font: 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+.dl-row.detected .arr { margin-left: 0; }
+.checksums { margin-top: 22px; padding: 16px 18px; border: 1px solid var(--line-soft); background: rgba(10, 17, 30, .62); }
+.checksum-head { display: flex; justify-content: space-between; gap: 12px; font: 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--cyan); }
+.checksum-head b { color: var(--text); font-weight: 500; }
+.checksum-note { margin: 9px 0 12px; color: var(--muted); font-size: 12.5px; line-height: 1.5; }
+.checksum-row { display: grid; grid-template-columns: minmax(110px, .8fr) minmax(0, 1.7fr); gap: 12px; padding: 8px 0; border-top: 1px solid var(--line-soft); color: var(--dim); font-size: 12px; align-items: baseline; }
+.checksum-row code { overflow-wrap: anywhere; color: var(--cyan); font: 10.5px var(--mono); }
+.checksum-row code[data-hash-state="unavailable"] { color: var(--dim); }
+@media (max-width: 600px) { .dl-row.detected::before { order: 0; margin-left: auto; } .checksum-row { grid-template-columns: 1fr; gap: 4px; } }
 .dl-row .arch { font-family: var(--mono); font-size: 15px; font-weight: 500; color: var(--text); }
 .dl-row .for { font-size: 13.5px; color: var(--muted); margin-top: 4px; }
 .dl-row .arr { margin-left: auto; font-family: var(--mono); color: var(--acc); font-size: 16px; }

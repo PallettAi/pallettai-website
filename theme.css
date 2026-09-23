@@ -602,6 +602,18 @@ p{text-wrap:pretty}
 .cmp .amt{font-family:var(--mono);color:var(--ice)}
 .cmp .no{color:var(--faint)}
 
+/* Small, keyboard-accessible explanations for pricing language. Details keeps
+   the content usable on touch screens and with scripts disabled. */
+.scope-help{display:inline-flex;position:relative;vertical-align:middle;margin-left:6px;font:inherit}
+.scope-help summary{display:grid;place-items:center;width:19px;height:19px;border:1px solid var(--hair-2);border-radius:50%;color:var(--baby);font-size:12px;cursor:pointer;list-style:none}
+.scope-help summary::-webkit-details-marker{display:none}
+.scope-help [role=tooltip]{position:absolute;z-index:4;left:0;top:calc(100% + 9px);width:min(280px,70vw);padding:12px 14px;border:1px solid var(--hair-2);border-radius:12px;background:#06152f;color:var(--mist);font:13px/1.5 var(--sans);font-weight:400;box-shadow:0 16px 44px rgba(2,8,20,.6)}
+.scope-help:not([open]) [role=tooltip]{display:none}
+.scope-help.inline{display:inline-flex;margin-left:8px}
+.scope-help.inline summary{display:inline-flex;width:auto;height:auto;padding:3px 9px;border-radius:999px;font-size:11px}
+.scope-help.inline [role=tooltip]{left:auto;right:0}
+
+
 /* ============================================================
    THE FREE CHECKER — console, report, compare, tools
    Markup and ids come from grader.js; only the skin lives here.
@@ -901,6 +913,10 @@ html.js .sec-split.seen::before{transform:scaleX(1)}
    The pulse is now .brand::before { haloPulse } up in the header block: an
    animated filter on a fixed element repaints the nav every frame, whereas
    opacity/scale on the halo is composited. Same effect, no per-frame paint. */
+
+/* Keep native controls visible even when a legacy stylesheet is absent or
+   loaded in a different order. */
+.switch-row .switch{display:inline-block;width:52px;height:30px;min-width:52px;box-sizing:border-box}
 
 /* ---------- reduced motion: everything lands static and finished ---------- */
 @media (prefers-reduced-motion:reduce){

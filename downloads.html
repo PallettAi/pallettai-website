@@ -25,6 +25,23 @@
   <meta name="twitter:image:alt" content="PallettAi — Your website is losing you enquiries." />
   <title>Downloads — PallettAi Studio | PallettAi</title>
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://api.github.com https://formspree.io https://pallettai.goatcounter.com; object-src 'none'; base-uri 'self'; form-action https://formspree.io; frame-src 'none'" />
+  <script type="application/ld+json">{
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"PallettAi Studio",
+    "applicationCategory":"DesignApplication",
+    "operatingSystem":"macOS 15+, Windows 10, Windows 11",
+    "softwareVersion":"0.4.11",
+    "description":"An offline-first website studio that turns a brief into a working, animated website and exports it.",
+    "url":"https://pallettai.org/downloads",
+    "downloadUrl":"https://pallettai.org/downloads#download",
+    "offers":[
+      {"@type":"Offer","price":"0","priceCurrency":"GBP","name":"Free"},
+      {"@type":"Offer","price":"9","priceCurrency":"GBP","name":"Pro","priceSpecification":{"@type":"UnitPriceSpecification","price":"9","priceCurrency":"GBP","unitText":"MONTH"}},
+      {"@type":"Offer","price":"19","priceCurrency":"GBP","name":"Pro+","priceSpecification":{"@type":"UnitPriceSpecification","price":"19","priceCurrency":"GBP","unitText":"MONTH"}}
+    ],
+    "publisher":{"@type":"Organization","name":"PallettAi","url":"https://pallettai.org"}
+  }</script>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=2" />
   <link rel="icon" type="image/svg+xml" href="signal-favicon.svg?v=4" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2" />
@@ -84,14 +101,14 @@
                correct without JavaScript and never need a commit per release. releases.js
                only ever upgrades them (or fills the version labels) at runtime. -->
           <div class="dl-list">
-            <a class="dl-row primary" data-rel-dl="mac-arm64" href="https://github.com/PallettAi/pallettai-website/releases/latest/download/PallettAI-Studio-mac-arm64.dmg" rel="noopener noreferrer">
+            <a class="dl-row primary" data-os="mac-arm64" data-rel-dl="mac-arm64" aria-label="Download PallettAi Studio v0.4.11 for Apple Silicon Macs" data-default-aria-label="Download PallettAi Studio v0.4.11 for Apple Silicon Macs" href="https://github.com/PallettAi/pallettai-website/releases/latest/download/PallettAI-Studio-mac-arm64.dmg" rel="noopener noreferrer">
               <div>
                 <div class="arch">Apple Silicon</div>
                 <div class="for">Download for M1, M2, M3 &amp; M4 Macs</div>
               </div>
               <span class="arr" aria-hidden="true">↗</span>
             </a>
-            <a class="dl-row" data-rel-dl="mac-x64" href="https://github.com/PallettAi/pallettai-website/releases/latest/download/PallettAI-Studio-mac-x64.dmg" rel="noopener noreferrer">
+            <a class="dl-row" data-os="mac-x64" data-rel-dl="mac-x64" aria-label="Download PallettAi Studio v0.4.11 for Intel Macs" data-default-aria-label="Download PallettAi Studio v0.4.11 for Intel Macs" href="https://github.com/PallettAi/pallettai-website/releases/latest/download/PallettAI-Studio-mac-x64.dmg" rel="noopener noreferrer">
               <div>
                 <div class="arch">Intel Mac</div>
                 <div class="for">Download for Intel-based Macs</div>
@@ -100,7 +117,8 @@
             </a>
           </div>
 
-          <div class="dl-meta">
+          <div class="dl-meta" id="download-meta" aria-live="polite">
+            <span class="dl-chip" id="detected-platform" hidden></span>
             <span class="dl-chip">macOS <b>Sequoia 15+</b></span>
             <span class="dl-chip">Builds <b>arm64 + x64</b></span>
             <span class="dl-chip"><b>Auto-updates</b> included</span>
@@ -112,8 +130,16 @@
                carries it. The current build is unsigned (SmartScreen warns), so this
                row is labelled as a test build. releases.js deliberately does not
                upgrade this href — it only swaps the two Mac DMG links. -->
+          <div class="checksums" id="checksums" aria-label="Download verification hashes">
+            <div class="checksum-head"><b>Verify your download</b><span>SHA-256</span></div>
+            <p class="checksum-note">Hashes appear when the published release exposes them. Compare the value with your local file before installing.</p>
+            <div class="checksum-row" data-checksum-for="mac-arm64"><span>Apple Silicon DMG</span><code data-checksum>Published release hash unavailable</code></div>
+            <div class="checksum-row" data-checksum-for="mac-x64"><span>Intel DMG</span><code data-checksum>Published release hash unavailable</code></div>
+            <div class="checksum-row" data-checksum-for="win-x64"><span>Windows installer</span><code data-checksum>Published release hash unavailable</code></div>
+          </div>
+
           <div class="dl-list" style="margin-top:14px">
-            <a class="dl-row" data-rel-dl="win-x64" href="https://github.com/PallettAi/pallettai-website/releases/latest/download/PallettAI-Studio-setup.exe" rel="noopener noreferrer">
+            <a class="dl-row" data-os="win-x64" data-rel-dl="win-x64" aria-label="Download PallettAi Studio v0.4.11 installer for Windows 10 and 11, 64-bit" data-default-aria-label="Download PallettAi Studio v0.4.11 installer for Windows 10 and 11, 64-bit" href="https://github.com/PallettAi/pallettai-website/releases/latest/download/PallettAI-Studio-setup.exe" rel="noopener noreferrer">
               <div>
                 <div class="arch">Windows 10/11 — x64</div>
                 <div class="for">Download the installer · test build (unsigned)</div>
@@ -156,8 +182,18 @@
           <div class="a"><b>Run the EXE</b>, choose an install folder, done. The Windows build is new and not yet code-signed, so SmartScreen shows “Windows protected your PC” — click <b>More info</b> → <b>Run anyway</b>. Needs Windows 10 (1809+) or Windows 11, 64-bit. Use <b>Help → Check for Updates</b> to retry an update check manually.</div>
         </details>
         <details>
-          <summary>What's new in Studio — 0.4.5 to 0.4.10</summary>
+          <summary>What's new in Studio — 0.4.5 to 0.4.11</summary>
           <div class="a">
+            <div class="group">
+              <b>Six visual directions and section-level control — 0.4.11</b>
+              <ul>
+                <li><b>Different sites, not different colours.</b> Generation picks between six named visual archetypes — editorial magazine, bento glass, brutalist kinetic, neo-minimalist, organic clay and retro cyberpunk — differing in type, rhythm, borders, button shape and motion.</li>
+                <li><b>The section toolbar.</b> Select a section in the preview to rewrite its copy, change its layout, or open a pre-filled prompt naming that section. Each action becomes a Copilot request, so it costs the same credit and undoes in the same step.</li>
+                <li><b>Design Tokens.</b> Brand colour, surface, section rhythm, button radius and button shadow, with a live WCAG AA reading of body text on surface.</li>
+                <li><b>Studio Guides.</b> A searchable offline knowledge base for design DNA, contrast, SEO checks, client facts and prompt craft.</li>
+                <li><b>Fixed:</b> a layout command such as “make the second section floating chips” now changes that section, and every feature screen now ships inside the installed app.</li>
+              </ul>
+            </div>
             <div class="group">
               <b>A dependable launch and safer updates — 0.4.10</b>
               <ul>
@@ -235,7 +271,7 @@
                 <li>Stripe's payment links carried your account id in a query string anyone could edit, so Pro could be bought for — or as — somebody else. Checkout now reads your account from your verified sign-in, and nothing is granted until the webhook verifies Dodo's signature.</li>
               </ul>
             </div>
-            <p style="margin-top:16px"><a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.4.10" target="_blank" rel="noopener">View the v0.4.10 release notes</a> · <a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.4.7" target="_blank" rel="noopener">v0.4.7</a> · <a href="changelog.html" target="_blank" rel="noopener">Full changelog</a></p>
+            <p style="margin-top:16px"><a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.4.11" target="_blank" rel="noopener">View the v0.4.11 release notes</a> · <a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.4.7" target="_blank" rel="noopener">v0.4.7</a> · <a href="changelog.html" target="_blank" rel="noopener">Full changelog</a></p>
           </div>
         </details>
       </div>
@@ -284,10 +320,10 @@
           <div class="price"><span class="amount">£0</span><span class="per">/forever</span></div>
           <div class="annual-note">no card required</div>
           <ul>
-            <li><b>2 projects</b> · up to 10 sections each</li>
+            <li><b>2 projects</b> · up to 10 sections each <details class="scope-help"><summary aria-label="Explain the Free project limit">?</summary><span role="tooltip">Free includes two projects, with up to ten sections in each. Pro removes the project and section limits.</span></details></li>
             <li>10 starter templates + Animation &amp; Contact suites</li>
             <li>22 core fonts · 19 free layouts</li>
-            <li>7 AI Studio credits</li>
+            <li>7 AI Studio credits <details class="scope-help"><summary aria-label="Explain AI Studio credits">?</summary><span role="tooltip">Credits are used when an AI Studio action runs. Free credits reset as shown in Studio and unused credits do not roll over; Pro and Pro+ include unlimited generations.</span></details></li>
             <li>“Made with PallettAI” on exports</li>
           </ul>
           <a class="btn alt" href="#download">Download Free ↗</a>
@@ -336,7 +372,7 @@
             <tr><td class="feat">Projects &amp; sections</td><td class="val">2 · 10 each</td><td class="yes">Unlimited</td><td class="yes">Unlimited</td></tr>
             <tr><td class="feat">Templates &amp; suites</td><td class="val">10 + 2 suites</td><td class="yes">All unlocked</td><td class="yes">All unlocked</td></tr>
             <tr><td class="feat">Fonts &amp; layouts</td><td class="val">22 + 19 free</td><td class="yes">Premium pack</td><td class="yes">Premium pack</td></tr>
-            <tr><td class="feat">AI Studio credits</td><td class="val">7</td><td class="yes">Unlimited</td><td class="yes">Unlimited</td></tr>
+            <tr><td class="feat">AI Studio credits <details class="scope-help"><summary aria-label="Explain AI Studio credits in the plan comparison">?</summary><span role="tooltip">The free allowance resets according to the rules shown inside Studio. It is not stored credit and does not roll over.</span></details></td><td class="val">7</td><td class="yes">Unlimited</td><td class="yes">Unlimited</td></tr>
             <tr><td class="feat">AI image generation</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
             <tr><td class="feat">Unbranded / white-label</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
             <tr><td class="feat">Brand presets</td><td class="no">—</td><td class="no">—</td><td class="val">12</td></tr>

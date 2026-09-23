@@ -51,20 +51,35 @@
     <section class="sec" aria-labelledby="current-release">
       <div class="current up">
         <div>
-          <div class="kicker">Latest release · 21 September 2026</div>
-          <h2 id="current-release">Studio 0.4.10 makes launch, updates and everyday work more dependable.</h2>
-          <p>Studio now opens reliably when graphics acceleration is unavailable, keeps optional canvas tools out of startup, and makes the updater safer to hand off on macOS. The new signed data-only hotfix channel is ready for bounded copy and configuration fixes without replacing app code, while the workspace keeps its faster tab transitions and older-device mode.</p>
+          <div class="kicker">Latest release · 23 September 2026</div>
+          <h2 id="current-release">Studio 0.4.11 finishes the features that were half-connected.</h2>
+          <p>Every generated site now starts from one of six visual archetypes instead of the same layout in a new colour. The preview grew a toolbar that acts on the section you clicked, a Design Tokens panel with a live contrast reading, and a searchable Studio Guides tab — and the feature screens that existed in development but were missing from installed builds now ship.</p>
           <div class="links">
             <a href="downloads.html">Download Studio ↗</a>
             <a href="https://github.com/PallettAi/PallettAI-Studio/blob/main/README.md" target="_blank" rel="noopener">Read the README ↗</a>
-            <a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.4.10" target="_blank" rel="noopener">View release notes ↗</a>
+            <a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.4.11" target="_blank" rel="noopener">View release notes ↗</a>
           </div>
         </div>
-        <div class="ver-badge" aria-label="Version 0.4.10"><span class="n">0.4.10</span><span class="s">current</span></div>
+        <div class="ver-badge" aria-label="Version 0.4.11"><span class="n">0.4.11</span><span class="s">current</span></div>
       </div>
     </section>
 
     <section class="sec" aria-label="Release history">
+      <article class="rel up">
+        <div class="when"><b>23 Sep 2026</b>0.4.11</div>
+        <div>
+          <h2>0.4.11 <span>Six directions, one section at a time</span></h2>
+          <p class="intro">The complaint this release answers is the one that matters most to a studio selling sites: two briefs in the same trade came back as the same website. A generation prompt with named visual archetypes fixes the source of that, and the preview gained the controls to keep pushing a site further once it exists.</p>
+          <ul>
+            <li><b>Six visual archetypes, not six palettes.</b> Generation now picks between editorial magazine, bento glass, brutalist kinetic, neo-minimalist, organic clay and retro cyberpunk — differing in type, rhythm, borders, button shape and motion as well as colour, with the chosen archetype's own tokens written into the export.</li>
+            <li><b>The section toolbar.</b> Select a section in the preview and act on that section: rewrite its copy, change its layout, or open a prompt pre-filled with the section named. Each button writes a sentence into Copilot rather than editing behind its back, so the change takes one credit where it should, arrives as a single undo step, and is refused with a reason when the request does not make sense.</li>
+            <li><b>Design Tokens with a real contrast reading.</b> Brand colour, surface, section rhythm, button radius and button shadow are editable against the open project and the badge measures body text on surface (WCAG AA), not a decorative pair. Every edit survives a reopen and lands in the exported files.</li>
+            <li><b>Studio Guides.</b> A searchable offline knowledge base covering design DNA, contrast, SEO launch checks, treating client facts as fixed, static-export rules and prompt craft.</li>
+            <li><b>Layout commands land on the section you pointed at.</b> "Make the second section floating chips" used to resolve to the last section of that kind — invisible on a site with one of them, and the wrong edit on a site with two.</li>
+            <li><b>The features now exist in installed builds.</b> Four feature scripts were loaded by the shell and missing from the packaged app, so they worked in development and vanished for anyone who downloaded Studio. The release gate now fails a build whose shell loads a script the packager would not ship.</li>
+          </ul>
+        </div>
+      </article>
       <article class="rel up">
         <div class="when"><b>21 Sep 2026</b>0.4.10</div>
         <div>
