@@ -51,20 +51,33 @@
     <section class="sec" aria-labelledby="current-release">
       <div class="current up">
         <div>
-          <div class="kicker">Latest release · 23 September 2026</div>
-          <h2 id="current-release">Studio 0.4.12 makes the updater finish what it starts.</h2>
-          <p>“The update downloads and the app does not come back” turned out to be one fault with two halves. Studio left as soon as the download finished, while the installer still had to expand the archive afterwards — quitting at that moment cut the expansion in half and the update was discarded without a word. The installer was also being told not to reopen Studio once it had finished. Both are fixed, and an expansion that simply takes a long time can no longer cost you the update.</p>
+          <div class="kicker">Latest release · 24 September 2026</div>
+          <h2 id="current-release">Studio 0.4.13 makes a manual update visible, and honest.</h2>
+          <p>0.4.12 fixed the update that arrived on its own. This one fixes the two places where asking for an update yourself went quiet: <b>Restart now</b> handed over to a step that takes minutes on an older machine with no window at all, and <b>Later</b> promised the update would install when you quit — which Studio had deliberately switched off. Both are corrected, and Skip now tells you the truth about what happens to a downloaded update.</p>
           <div class="links">
             <a href="downloads.html">Download Studio ↗</a>
             <a href="https://github.com/PallettAi/PallettAI-Studio/blob/main/README.md" target="_blank" rel="noopener">Read the README ↗</a>
-            <a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.4.12" target="_blank" rel="noopener">View release notes ↗</a>
+            <a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.4.13" target="_blank" rel="noopener">View release notes ↗</a>
           </div>
         </div>
-        <div class="ver-badge" aria-label="Version 0.4.12"><span class="n">0.4.12</span><span class="s">current</span></div>
+        <div class="ver-badge" aria-label="Version 0.4.13"><span class="n">0.4.13</span><span class="s">current</span></div>
       </div>
     </section>
 
     <section class="sec" aria-label="Release history">
+      <article class="rel up">
+        <div class="when"><b>24 Sep 2026</b>0.4.13</div>
+        <div>
+          <h2>0.4.13 <span>A manual update you can see, and trust</span></h2>
+          <p class="intro">0.4.12 fixed updates arriving on their own. This release fixes the two places where asking for one yourself told you less than the truth.</p>
+          <ul>
+            <li><b>“Restart now” shows its work.</b> Starting an update from the menu handed over to the installer with no window on screen — and on an older machine that expansion takes minutes, which looked exactly like a crash. It now shows the same progress screen the launch check uses, with <b>Skip</b> still clickable throughout, and returns your window if the hand-off does not complete.</li>
+            <li><b>“Later” now really means later.</b> The prompt has always said a deferred update installs when you quit, but Studio had deliberately disabled that to stop the installer racing its own safe hand-off. Choose Later and the already-downloaded update is genuinely armed for your next quit.</li>
+            <li><b>Skip says what happens to your update.</b> Skipping before the download finishes loses the work; skipping after it keeps it for your next quit. The message under the button now distinguishes the two instead of always claiming you will be asked again.</li>
+            <li><b>Everything from 0.4.12 and 0.4.11 ships here too:</b> the guarded installer hand-off that made automatic updates finish, six visual archetypes, the section toolbar, Design Tokens with a measured contrast reading, and Studio Guides.</li>
+          </ul>
+        </div>
+      </article>
       <article class="rel up">
         <div class="when"><b>23 Sep 2026</b>0.4.12</div>
         <div>
