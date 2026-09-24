@@ -6,7 +6,7 @@
   <meta name="description" content="Download PallettAi Studio for Mac & Windows. Free to start — turn a brief into a working, animated website, then export it." />
   <meta name="author" content="PallettAi" />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#070B14" />
+  <meta name="theme-color" content="#f7f8f5" />
   <link rel="canonical" href="https://pallettai.org/downloads" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="PallettAi" />
@@ -31,7 +31,7 @@
     "name":"PallettAi Studio",
     "applicationCategory":"DesignApplication",
     "operatingSystem":"macOS 15+, Windows 10, Windows 11",
-    "softwareVersion":"0.4.14",
+    "softwareVersion":"0.4.15",
     "description":"An offline-first website studio that turns a brief into a working, animated website and exports it.",
     "url":"https://pallettai.org/downloads",
     "downloadUrl":"https://pallettai.org/downloads#download",
@@ -46,9 +46,7 @@
   <link rel="icon" type="image/svg+xml" href="signal-favicon.svg?v=4" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2" />
   <link rel="preconnect" href="https://formspree.io" />
-  <link rel="stylesheet" href="terminal.css?v=5" />
   <link rel="stylesheet" href="theme.css" />
-  <link rel="stylesheet" href="legacy.css" />
   <script src="payments.js" defer></script>
   <script src="theme.js" defer></script>
   <script src="releases.js" defer></script>
@@ -101,14 +99,14 @@
                correct without JavaScript and never need a commit per release. releases.js
                only ever upgrades them (or fills the version labels) at runtime. -->
           <div class="dl-list">
-            <a class="dl-row primary" data-os="mac-arm64" data-rel-dl="mac-arm64" aria-label="Download PallettAi Studio v0.4.14 for Apple Silicon Macs" data-default-aria-label="Download PallettAi Studio v0.4.14 for Apple Silicon Macs" href="https://github.com/PallettAi/pallettai-website/releases/latest/download/PallettAI-Studio-mac-arm64.dmg" rel="noopener noreferrer">
+            <a class="dl-row primary" data-os="mac-arm64" data-rel-dl="mac-arm64" aria-label="Download PallettAi Studio v0.4.15 for Apple Silicon Macs" data-default-aria-label="Download PallettAi Studio v0.4.15 for Apple Silicon Macs" href="https://github.com/PallettAi/pallettai-website/releases/latest/download/PallettAI-Studio-mac-arm64.dmg" rel="noopener noreferrer">
               <div>
                 <div class="arch">Apple Silicon</div>
                 <div class="for">Download for M1, M2, M3 &amp; M4 Macs</div>
               </div>
               <span class="arr" aria-hidden="true">↗</span>
             </a>
-            <a class="dl-row" data-os="mac-x64" data-rel-dl="mac-x64" aria-label="Download PallettAi Studio v0.4.14 for Intel Macs" data-default-aria-label="Download PallettAi Studio v0.4.14 for Intel Macs" href="https://github.com/PallettAi/pallettai-website/releases/latest/download/PallettAI-Studio-mac-x64.dmg" rel="noopener noreferrer">
+            <a class="dl-row" data-os="mac-x64" data-rel-dl="mac-x64" aria-label="Download PallettAi Studio v0.4.15 for Intel Macs" data-default-aria-label="Download PallettAi Studio v0.4.15 for Intel Macs" href="https://github.com/PallettAi/pallettai-website/releases/latest/download/PallettAI-Studio-mac-x64.dmg" rel="noopener noreferrer">
               <div>
                 <div class="arch">Intel Mac</div>
                 <div class="for">Download for Intel-based Macs</div>
@@ -139,7 +137,7 @@
           </div>
 
           <div class="dl-list" style="margin-top:14px">
-            <a class="dl-row" data-os="win-x64" data-rel-dl="win-x64" aria-label="Download PallettAi Studio v0.4.14 installer for Windows 10 and 11, 64-bit" data-default-aria-label="Download PallettAi Studio v0.4.14 installer for Windows 10 and 11, 64-bit" href="https://github.com/PallettAi/pallettai-website/releases/latest/download/PallettAI-Studio-setup.exe" rel="noopener noreferrer">
+            <a class="dl-row" data-os="win-x64" data-rel-dl="win-x64" aria-label="Download PallettAi Studio v0.4.15 installer for Windows 10 and 11, 64-bit" data-default-aria-label="Download PallettAi Studio v0.4.15 installer for Windows 10 and 11, 64-bit" href="https://github.com/PallettAi/pallettai-website/releases/latest/download/PallettAI-Studio-setup.exe" rel="noopener noreferrer">
               <div>
                 <div class="arch">Windows 10/11 — x64</div>
                 <div class="for">Download the installer · test build (unsigned)</div>
@@ -182,8 +180,18 @@
           <div class="a"><b>Run the EXE</b>, choose an install folder, done. The Windows build is new and not yet code-signed, so SmartScreen shows “Windows protected your PC” — click <b>More info</b> → <b>Run anyway</b>. Needs Windows 10 (1809+) or Windows 11, 64-bit. Use <b>Help → Check for Updates</b> to retry an update check manually.</div>
         </details>
         <details>
-          <summary>What's new in Studio — 0.4.5 to 0.4.14</summary>
+          <summary>What's new in Studio — 0.4.5 to 0.4.15</summary>
           <div class="a">
+            <div class="group">
+              <b>Widget Studio and a safer 0.4.15</b>
+              <ul>
+                <li><b>Describe a tool and preview it running.</b> Widget Studio compiles calculators, quote estimators and booking steps into dependency-free components that travel in the static export — and refuses generated code that tries to use the network, storage, workers or navigation.</li>
+                <li><b>Optional strict security.</b> Give exported pages a hash-based Content Security Policy, with every script covered and external origins derived from the finished document. Private network targets, including redirects and IPv4-mapped IPv6 addresses, are rejected before a request is made.</li>
+                <li><b>A verified folder export.</b> Write the site to a chosen folder, verify every delivered file against its SHA-256 manifest, and refuse unsafe paths, remote dependencies and asset collisions.</li>
+                <li><b>Offline artwork that actually travels.</b> Missing hero, about and gallery images now become deterministic labelled SVGs embedded in the project. Your uploads still win and no remote image URL is left to fail after the file is moved.</li>
+                <li><b>More presentation controls.</b> Optional dark mode, print styles, a branded 404, a web-app manifest, reduced-motion-safe scroll classes and a local copy-rewrite engine join the release.</li>
+              </ul>
+            </div>
             <div class="group">
               <b>The generator works again — 0.4.14</b>
               <ul>
@@ -294,7 +302,7 @@
                 <li>Stripe's payment links carried your account id in a query string anyone could edit, so Pro could be bought for — or as — somebody else. Checkout now reads your account from your verified sign-in, and nothing is granted until the webhook verifies Dodo's signature.</li>
               </ul>
             </div>
-            <p style="margin-top:16px"><a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.4.14" target="_blank" rel="noopener">View the v0.4.14 release notes</a> · <a href="https://github.com/PallettAi/pallettai-website/releases/tag/v0.4.7" target="_blank" rel="noopener">v0.4.7</a> · <a href="changelog.html" target="_blank" rel="noopener">Full changelog</a></p>
+            <p style="margin-top:16px"><a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.4.15" target="_blank" rel="noopener">View the v0.4.15 release notes</a> · <a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.4.14" target="_blank" rel="noopener">v0.4.14</a> · <a href="changelog.html" target="_blank" rel="noopener">Full changelog</a></p>
           </div>
         </details>
       </div>

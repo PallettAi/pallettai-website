@@ -32,7 +32,7 @@
   /* Never let a stale GitHub release API response downgrade the version the
      page already advertises. The static links remain usable while a newer
      release is being published. */
-  var MIN_VERSION = '0.4.14';
+  var MIN_VERSION = '0.4.15';
 
   /* ---------- cache ----------
      The GitHub API allows 60 unauthenticated calls an hour per IP, and

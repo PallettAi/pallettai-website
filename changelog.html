@@ -6,7 +6,7 @@
   <meta name="description" content="PallettAi Studio release notes, product updates, and changelog." />
   <meta name="author" content="PallettAi" />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#070B14" />
+  <meta name="theme-color" content="#f7f8f5" />
   <link rel="canonical" href="https://pallettai.org/changelog" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="PallettAi" />
@@ -28,9 +28,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=2" />
   <link rel="icon" type="image/svg+xml" href="signal-favicon.svg?v=4" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2" />
-  <link rel="stylesheet" href="terminal.css?v=5" />
   <link rel="stylesheet" href="theme.css" />
-  <link rel="stylesheet" href="legacy.css" />
   <script src="theme.js" defer></script>
   <noscript><style>.rv,.up{opacity:1;transform:none}</style></noscript>
   <script data-goatcounter="https://pallettai.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
@@ -51,20 +49,38 @@
     <section class="sec" aria-labelledby="current-release">
       <div class="current up">
         <div>
-          <div class="kicker">Latest release · 24 September 2026</div>
-          <h2 id="current-release">Studio 0.4.14 brings site generation back.</h2>
-          <p>Every generation was failing immediately and refunding the credit you had just spent — the refund was working, the generator was not. A leftover debug line read a setting that only exists outside Studio's own window, so it threw before building anything. It works again, and the release gate now refuses any build whose scripts quietly depend on something the real app does not have.</p>
+          <div class="kicker">Latest release · 25 September 2026</div>
+          <h2 id="current-release">Studio 0.4.15 builds richer tools — and ships them safer.</h2>
+          <p>Widget Studio turns a plain-English request into a self-contained interactive tool, strict export can add a real hash-based Content Security Policy, and offline image generation now fills every missing visual with local artwork instead of a remote URL that fails later. The public site also gets a clearer light-first refresh with honestly labelled sample results.</p>
           <div class="links">
             <a href="downloads.html">Download Studio ↗</a>
             <a href="https://github.com/PallettAi/PallettAI-Studio/blob/main/README.md" target="_blank" rel="noopener">Read the README ↗</a>
-            <a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.4.14" target="_blank" rel="noopener">View release notes ↗</a>
+            <a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.4.15" target="_blank" rel="noopener">View release notes ↗</a>
           </div>
         </div>
-        <div class="ver-badge" aria-label="Version 0.4.14"><span class="n">0.4.14</span><span class="s">current</span></div>
+        <div class="ver-badge" aria-label="Version 0.4.15"><span class="n">0.4.15</span><span class="s">current</span></div>
       </div>
     </section>
 
     <section class="sec" aria-label="Release history">
+      <article class="rel up">
+        <div class="when"><b>25 Sep 2026</b>0.4.15</div>
+        <div>
+          <h2>0.4.15 <span>More building, safer delivery, proper offline images</span></h2>
+          <p class="intro">A larger Studio release with three practical themes: make the useful things clients ask for, put a real boundary around what ships, and stop an offline export from pretending a remote image is a fallback.</p>
+          <ul>
+            <li><b>Widget Studio.</b> Describe a roofing quote estimator, mortgage calculator, booking step or another small interactive tool. Studio compiles it into a dependency-free web component, previews the running result, places it in the project and carries it into the static export. The generated code is refused if it tries to use the network, browser storage, workers, cross-frame messaging or navigation.</li>
+            <li><b>A verified folder export.</b> A site can now be written straight to a chosen folder and checked file by file against a SHA-256 integrity manifest. The compiler rejects path traversal, remote dependencies, unsafe URLs, asset collisions and generated files that could shadow one another.</li>
+            <li><b>Strict security export.</b> The new opt-in setting gives every executable inline script its own SHA-256 policy hash and derives the external origins the finished page actually uses. Fonts, forms, maps, booking tools, analytics and the built-in chat are handled explicitly; if Studio cannot describe a page honestly, it leaves that page unchanged and says why instead of applying half a policy.</li>
+            <li><b>Network and app-boundary checks expanded.</b> URL fetches now reject private IPv4 and IPv6 destinations through every redirect, including IPv4-mapped IPv6 forms. IPC channels validate their sender, signed hotfixes are verified before use, and secret storage fails closed rather than quietly falling back to plaintext.</li>
+            <li><b>Offline image generation finishes the job.</b> With networking disabled, every empty hero, about and gallery slot receives deterministic, clearly labelled SVG artwork embedded in the file. Creator uploads still take priority, alt text is filled, and a remote URL learned from another site cannot survive into the export.</li>
+            <li><b>More presentation and motion controls.</b> Exports can carry an optional visitor dark-mode toggle, print-specific styles, a branded 404 and a web-app manifest. Three reusable scroll effects — reveal, parallax and kinetic type — ship with progressive fallbacks and respect reduced-motion preferences.</li>
+            <li><b>A safer local copy path.</b> The new desktop copy engine removes generic AI phrasing, applies warm, premium, punchy and editorial voice locks, and writes a selected result into the intended part of a section without flattening its markup. It works without a model and falls back locally when one is absent or fails.</li>
+            <li><b>The release gate grew with the product.</b> New suites cover the complete prompt-to-widget-to-export path, the real Electron app, copy rewriting, static compilation, verified folder writing, motion classes, launch extras, redirect and IPv6 SSRF cases, strict export on real Builder pages, and offline artwork. A receipt proves the real-app suites actually ran rather than passing without doing anything.</li>
+            <li><b>The public site is clearer and more honest.</b> A light-first visual refresh rolls across the download, changelog, support, legal and referral pages. The homepage's report preview is now plainly labelled as a sample rather than presenting illustrative numbers as a live result.</li>
+          </ul>
+        </div>
+      </article>
       <article class="rel up">
         <div class="when"><b>24 Sep 2026</b>0.4.14</div>
         <div>

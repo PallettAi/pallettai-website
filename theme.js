@@ -65,11 +65,11 @@
     '<svg class="currents" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true">' +
       '<defs>' +
         '<pattern id="cur" width="200" height="120" patternUnits="userSpaceOnUse">' +
-          '<path d="M0 92 C50 44 92 138 140 92 C176 56 190 122 200 90" fill="none" stroke="rgba(159,212,255,.42)" stroke-width="1"/>' +
-          '<path d="M0 30 C46 -8 96 74 142 30 C178 -2 190 54 200 28" fill="none" stroke="rgba(159,212,255,.2)" stroke-width="1"/>' +
+          '<path d="M0 92 C50 44 92 138 140 92 C176 56 190 122 200 90" fill="none" stroke="rgba(65,104,237,.16)" stroke-width="1"/>' +
+          '<path d="M0 30 C46 -8 96 74 142 30 C178 -2 190 54 200 28" fill="none" stroke="rgba(65,104,237,.09)" stroke-width="1"/>' +
         '</pattern>' +
         '<pattern id="cur2" width="140" height="90" patternUnits="userSpaceOnUse">' +
-          '<path d="M0 70 C36 34 68 104 104 70 C128 46 136 84 140 68" fill="none" stroke="rgba(234,245,255,.24)" stroke-width="1"/>' +
+          '<path d="M0 70 C36 34 68 104 104 70 C128 46 136 84 140 68" fill="none" stroke="rgba(65,104,237,.1)" stroke-width="1"/>' +
         '</pattern>' +
       '</defs>' +
       '<rect width="1200" height="800" fill="url(#cur)"/>' +
@@ -82,7 +82,7 @@
   var SPRITE =
     '<svg class="sprite" aria-hidden="true">' +
       '<symbol id="wm" viewBox="0 0 1000 1000">' +
-        '<g fill="none" stroke="rgba(159,212,255,.15)" stroke-width="1.3">' +
+        '<g fill="none" stroke="rgba(65,104,237,.15)" stroke-width="1.3">'+
           '<circle cx="500" cy="500" r="450"/><circle cx="500" cy="500" r="408"/>' +
           '<circle cx="500" cy="500" r="368"/><circle cx="500" cy="500" r="330"/>' +
           '<circle cx="500" cy="500" r="294"/><circle cx="500" cy="500" r="260"/>' +
@@ -90,9 +90,9 @@
           '<circle cx="500" cy="500" r="170"/><circle cx="500" cy="500" r="144"/>' +
           '<circle cx="500" cy="500" r="120"/>' +
         '</g>' +
-        '<circle cx="500" cy="500" r="428" fill="none" stroke="rgba(159,212,255,.34)" stroke-width="17" stroke-dasharray="2 32"/>' +
-        '<circle cx="500" cy="500" r="88" fill="none" stroke="rgba(234,245,255,.22)" stroke-width="1.3" stroke-dasharray="5 9"/>' +
-        '<g stroke="rgba(234,245,255,.5)" stroke-width="1.4">' +
+        '<circle cx="500" cy="500" r="428" fill="none" stroke="rgba(65,104,237,.2)" stroke-width="17" stroke-dasharray="2 32"/>' +
+        '<circle cx="500" cy="500" r="88" fill="none" stroke="rgba(65,104,237,.14)" stroke-width="1.3" stroke-dasharray="5 9"/>' +
+        '<g stroke="rgba(65,104,237,.22)" stroke-width="1.4">' +
           '<line x1="500" y1="52" x2="500" y2="924"/><line x1="52" y1="500" x2="924" y2="500"/>' +
         '</g>' +
         '<circle cx="500" cy="500" r="4" fill="rgba(234,245,255,.7)"/>' +
@@ -448,7 +448,7 @@
       lg.setAttribute('id', 'arcGrad');
       lg.setAttribute('x1', '0'); lg.setAttribute('y1', '1');
       lg.setAttribute('x2', '1'); lg.setAttribute('y2', '0');
-      [['0%', 'rgba(159,212,255,0)'], ['30%', 'rgba(159,212,255,.45)'], ['100%', '#eaf5ff']]
+      [['0%', 'rgba(65,104,237,0)'], ['30%', 'rgba(65,104,237,.3)'], ['100%', '#3153d1']]
         .forEach(function (s) {
           var st = el('stop');
           st.setAttribute('offset', s[0]);
@@ -663,11 +663,11 @@
        strokeStyle strings and stroke() calls per frame with six of each. */
     var LNK_L = 6, NODE_L = 4, linkC = [], nodeC = [], linkB = [], nodeB = [], q;
     for (q = 0; q < LNK_L; q++) {
-      linkC.push('rgba(159,212,255,' + (((q + 1) / LNK_L) * .17).toFixed(3) + ')');
+      linkC.push('rgba(65,104,237,' + (((q + 1) / LNK_L) * .12).toFixed(3) + ')');
       linkB.push([]);
     }
     for (q = 0; q < NODE_L; q++) {
-      nodeC.push('rgba(220,238,255,' + (.09 + ((q + 1) / NODE_L) * .2).toFixed(3) + ')');
+      nodeC.push('rgba(65,104,237,' + (.045 + ((q + 1) / NODE_L) * .1).toFixed(3) + ')');
       nodeB.push([]);
     }
 
@@ -816,13 +816,12 @@
       for (i = 0; i < pulses.length; i++) {
         var pu = pulses[i];
         if (pu.b < 0 || !nodes[pu.b]) continue;
-        var ax = px[pu.a], ay = py[pu.a], bx = px[pu.b], by = py[pu.b];
-        ctx.strokeStyle = 'rgba(234,245,255,.26)';
+        var ax = px[pu.a], ay = py[pu.a], bx = px[pu.b], by = py[pu.b];          ctx.strokeStyle = 'rgba(65,104,237,.16)';
         ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke();
         for (var k = 0; k < 4; k++) {
           var tt = pu.t - k * .05;
           if (tt < 0) break;
-          ctx.fillStyle = 'rgba(234,245,255,' + (.8 - k * .2).toFixed(3) + ')';
+          ctx.fillStyle = 'rgba(65,104,237,' + (.55 - k * .12).toFixed(3) + ')';
           ctx.beginPath();
           ctx.arc(ax + (bx - ax) * tt, ay + (by - ay) * tt, 1.9 - k * .42, 0, 6.2832);
           ctx.fill();
