@@ -12,6 +12,7 @@
      print:   #ps-host #ps-score #ps-date   + body.printing-report
      actions: #tool-copy  #tool-print
      handoff: #check-next #next-head #next-body #next-copy #next-dl
+              #next-project #next-project-note
 
    Deep link:  ?check=example.co.uk&vs=rival.co.uk#check
    ============================================================ */
@@ -143,6 +144,53 @@
     });
   }
 
+  /* ---------- the rebuild, as a file ----------
+
+     The handoff above sends people to the app to paste an address and let it
+     read the site. That needs the app and a live URL. This is the other half:
+     the report you are already looking at, turned into a project file on the
+     spot — for anyone who already has Studio, and for anyone who would rather
+     not hand their address to a page that has to fetch it again.
+
+     grader/converter.js does the conversion; this only hands its result to the
+     browser's own downloader. The payload is data — no script, no markup, no
+     request — and Studio re-validates every field of it on import, so a file
+     that arrives altered is refused there rather than trusted here. */
+
+  function downloadProject(j, button) {
+    var note = doc.getElementById('next-project-note');
+    var api = window.GraderConverter;
+    var payload = null;
+
+    if (api && typeof api.exportGraderToProject === 'function') {
+      try { payload = api.exportGraderToProject(j); } catch (e) { payload = null; }
+    }
+    if (!payload || !payload.project || !payload.project.site) {
+      if (note) note.textContent = 'That file could not be built from this report — the address in Studio is the reliable route.';
+      return;
+    }
+
+    var name = (payload.project.name || 'site')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '') + '.pallettai.json';
+    var url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' }));
+    var a = doc.createElement('a');
+    a.href = url;
+    a.download = name;
+    doc.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+
+    ping('/event/grader-project-file');
+    if (button) {
+      var label = button.textContent;
+      button.textContent = 'Downloaded ✓';
+      setTimeout(function () { button.textContent = label; }, 2400);
+    }
+  }
+
   /* ---------- the checker ---------- */
 
   function initChecker() {
@@ -239,6 +287,19 @@
       if (copy) {
         copy.setAttribute('data-host', host);
         copy.addEventListener('click', function () { ping('/event/grader-copy-address'); });
+      }
+
+      /* The project file is offered only when the converter actually loaded.
+         A button that appears and then does nothing is worse than no button:
+         if grader/converter.js is missing or blocked, the handoff simply keeps
+         the address-in-the-app route it already had. */
+      var proj = doc.getElementById('next-project');
+      var projNote = doc.getElementById('next-project-note');
+      var canExport = !!(window.GraderConverter && typeof window.GraderConverter.exportGraderToProject === 'function');
+      if (proj && projNote && canExport) {
+        proj.hidden = false;
+        projNote.hidden = false;
+        proj.onclick = function () { downloadProject(j, proj); };
       }
 
       box.hidden = false;

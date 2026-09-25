@@ -34,10 +34,18 @@ detail and an "Our fix:" line for anything not passing. Finds are sorted worst-f
   the local harness can reuse it.
 - `server.mjs` — local dev harness: same API contract on plain Node
   (regex parsing instead of HTMLRewriter). Runs on `http://127.0.0.1:8787`.
-- Front-end widget lives inside `index.html` (`#grader` section + the second
-  `<script>` block). It picks its API automatically:
+- `converter.js` — turns a finished report into a `.pallettai` project file,
+  the same one Studio's dashboard exports. It is loaded by `index.html` only,
+  and is reachable only from the `#check-next` handoff, which appears once a
+  report is on screen. Dependency-free and pure: what it builds is data — no
+  script, no markup, no request — and Studio re-validates every field of it in
+  `modules/importer.js` before the project is opened. If the converter is
+  missing or blocked the button stays hidden, so the handoff never offers
+  something it cannot deliver.
+- Front-end widget lives in `grader.js` (the `#grader` section in `index.html`
+  is its markup). It picks its API automatically:
   - on `127.0.0.1` / `localhost` → `http://127.0.0.1:8787` (the dev harness)
-  - anywhere else → the `GRADER_API` constant at the top of that script block
+  - anywhere else → the `GRADER` constant at the top of `grader.js`
     (**update this after deploying the Worker**).
 
 ## Run locally

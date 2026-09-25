@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="theme.css" />
   <script src="payments.js" defer></script>
   <script src="theme.js" defer></script>
+  <script src="grader/converter.js" defer></script>
   <script src="grader.js" defer></script>
   <script src="app.js" defer></script>
   <script data-goatcounter="https://pallettai.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
@@ -201,8 +202,10 @@
             </ol>
             <div class="btns">
               <a class="btn ice sm" id="next-dl" href="downloads.html?utm_source=grader&amp;utm_medium=checker&amp;utm_campaign=site-check">Get Studio — free</a>
+              <button type="button" class="btn line sm" id="next-project" hidden>Already have Studio? Take the project file</button>
               <span class="next-or">or <a href="#contact">have us rebuild it</a></span>
             </div>
+            <p class="next-foot" id="next-project-note" hidden>The file is this same rebuild, pre-filled with what the report found — open it with <b>Import project</b> on the Studio dashboard, and everything in it is yours to edit.</p>
             <p class="next-foot">The rebuild is yours to edit — nothing is published anywhere until you say so.</p>
           </div>
 
