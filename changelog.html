@@ -49,20 +49,36 @@
     <section class="sec" aria-labelledby="current-release">
       <div class="current up">
         <div>
-          <div class="kicker">Latest release · 25 September 2026</div>
-          <h2 id="current-release">Studio 0.4.15 builds richer tools — and ships them safer.</h2>
-          <p>Widget Studio turns a plain-English request into a self-contained interactive tool, strict export can add a real hash-based Content Security Policy, and offline image generation now fills every missing visual with local artwork instead of a remote URL that fails later. The public site also gets a clearer light-first refresh with honestly labelled sample results.</p>
+          <div class="kicker">Latest release · 28 September 2026</div>
+          <h2 id="current-release">Two sites from the same brief finally look like two different sites.</h2>
+          <p>Generated pages now vary their real proportions — spacing, type scale, corner roundness, borders, shadows and timing — while each visual school keeps its character, and the values travel into the export as live design tokens. Studio also gains local full-text project search, a self-contained project folder you can export, import or turn into a reusable template, and a real WCAG accessibility pass on the page you built.</p>
           <div class="links">
             <a href="downloads.html">Download Studio ↗</a>
             <a href="https://github.com/PallettAi/PallettAI-Studio/blob/main/README.md" target="_blank" rel="noopener">Read the README ↗</a>
-            <a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.4.15" target="_blank" rel="noopener">View release notes ↗</a>
+            <a href="https://github.com/PallettAi/PallettAI-Studio/releases/tag/v0.4.16" target="_blank" rel="noopener">View release notes ↗</a>
           </div>
         </div>
-        <div class="ver-badge" aria-label="Version 0.4.15"><span class="n">0.4.15</span><span class="s">current</span></div>
+        <div class="ver-badge" aria-label="Version 0.4.16"><span class="n">0.4.16</span><span class="s">current</span></div>
       </div>
     </section>
 
     <section class="sec" aria-label="Release history">
+      <article class="rel up">
+        <div class="when"><b>28 Sep 2026</b>0.4.16</div>
+        <div>
+          <h2>0.4.16 <span>Every site looks like itself, not like the last one</span></h2>
+          <p class="intro">If two sites from the same brief still looked like the same site with a different colour, this is the release that changes it. The proportions that decide how a page actually reads now vary per generation, and three local-first features join them.</p>
+          <ul>
+            <li><b>Sites stop cloning each other's shape.</b> Corner roundness, spacing, type scale, letter spacing, line height, border weight, shadow depth and animation timing are now varied per generation instead of being fixed by the chosen style. Each of the eight visual schools keeps its own character, so a brutalist site still reads as brutalist — it just no longer measures the same as the last one. These values are written into the export as live design tokens, so the finished page carries the variation with it.</li>
+            <li><b>Find anything in your library, entirely on your machine.</b> Full-text search across projects, sections and copy runs locally: no account, no upload, nothing sent anywhere. It matches what you meant rather than the exact words, and it reads your project through a bounded snapshot, so the search can never see more than the list you are searching.</li>
+            <li><b>A project folder you can actually hand over.</b> Projects export as a self-contained folder — project.json, assets and version history together — and import straight back. Any project can be saved as a reusable template with placeholder variables. Every operation checks who is asking before it touches the filesystem, and the export no longer builds a shell command out of your file path.</li>
+            <li><b>An accessibility pass on the page you built.</b> Studio can run a real WCAG audit against your rendered export using the established axe-core engine, inlined locally under a per-audit content policy. Findings sit alongside the existing design review, and the audit runs sandboxed so your own page scripts never execute during it.</li>
+            <li><b>Several faults that could have shipped quietly are fixed.</b> A fractional seed could leave the generator reading past the end of a copy list — a crash that appeared only on some briefs and looked like a bad prompt. A colour-distance check assumed palettes were hex values when most are names, which quietly zeroed a whole originality score. Two IPC channels were registered in a form the security audit cannot read, so they went unchecked. All three now have tests that fail without the fix.</li>
+            <li><b>Generation is reproducible again.</b> Freshness now comes from the counter Studio already increments when you ask for another version, rather than from the wall clock. The same brief and settings produce the same site, so a project can be reopened to the result you designed.</li>
+            <li><b>More layouts reach real use.</b> Testimonial sections now choose among every layout the catalogue offers instead of collapsing onto one, and four further visual archetypes are available in the stylebook and token tools.</li>
+          </ul>
+        </div>
+      </article>
       <article class="rel up">
         <div class="when"><b>25 Sep 2026</b>0.4.15</div>
         <div>
