@@ -1,0 +1,383 @@
+/* ============================================================
+   PallettAi — motion & craft layer
+
+   Loaded after theme.css, so it can restyle anything the design
+   system already drew without rewriting it. Everything here is
+   additive and progressive:
+
+     • no JavaScript  -> html:not(.js) shows the finished page
+     • reduced motion -> nothing moves, everything stays readable
+     • low-power      -> html.lean drops the expensive decoration
+     • older browser  -> @supports gates keep the plain design
+
+   The design system owns colour, spacing and type. This file owns
+   *how things move*, plus the editorial serif accents that give the
+   page a voice the UI-kit default could not.
+   ============================================================ */
+
+/* ---------- tokens ---------- */
+
+:root{
+  /* Easing. --ease is the house curve from theme.css; these add the
+     overshoot and the slow settle that make movement feel physical. */
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-in-out:cubic-bezier(.65,0,.35,1);
+  --ease-spring:cubic-bezier(.34,1.4,.64,1);
+
+  /* Duration scale, so a hover and a page transition stay related. */
+  --dur-1:.18s;
+  --dur-2:.34s;
+  --dur-3:.6s;
+  --dur-4:.9s;
+
+  /* A real elevation scale. Cards previously each invented a shadow;
+     these five steps let any surface pick its altitude by name. */
+  --sh-1:0 1px 2px rgba(23,32,51,.04),0 1px 1px rgba(23,32,51,.03);
+  --sh-2:0 6px 18px rgba(23,32,51,.055),0 1px 3px rgba(23,32,51,.035);
+  --sh-3:0 18px 44px rgba(23,32,51,.085),0 3px 10px rgba(23,32,51,.04);
+  --sh-4:0 34px 80px rgba(23,32,51,.13),0 8px 24px rgba(23,32,51,.05);
+  --sh-blue:0 12px 30px rgba(65,104,237,.22);
+  --sh-blue-lg:0 22px 52px rgba(65,104,237,.28);
+
+  --r-sm:10px;
+  --r-md:14px;
+  --r-lg:20px;
+  --r-xl:28px;
+
+  /* The editorial voice. */
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+
+  --grain:.03;
+  --sheen:linear-gradient(104deg,#293e8b 0%,#3153d1 52%,#5c78dd 100%);
+}
+
+/* Registered so a conic border can be *interpolated* rather than
+   snapped. Without @property the angle is an unregistered custom
+   property and only jumps at keyframes, so the ring would stutter.
+   Browsers that do not support it keep a static gradient. */
+@property --sweep-angle{syntax:"<angle>";inherits:false;initial-value:0deg}
+
+/* ---------- two names the design system reuses ---------- */
+
+/* theme.css lays the pricing tiers out under the name `.price-cards`, but
+   the markup says `.tiers` — a name that only ever appears inside the
+   breakpoints. With no base rule the three cards fall back to block layout,
+   so each one claims the full 1140px column and they stack instead of
+   sitting side by side. Declared here rather than in theme.css so the fix
+   does not collide with other work landing in the design system; the gap
+   and the track shape copy the sibling .price-cards rule. */
+.tiers{display:grid;gap:14px}
+/* The column count has to live in its own query. theme.css folds .tiers to
+   two columns at 940px, and a media query adds no specificity — so an
+   unconditional three-column rule here would tie on (0,1,0) and win on
+   source order, and the tablet layout would never fold. Staying above
+   940px hands the middle of the range back to the breakpoint that owns it. */
+@media(min-width:941px){.tiers{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* `.feat` is the two-column row inside a .feat-list, and theme.css declares
+   it as a bare class selector. The same word is also used as a *modifier* in
+   three other places — the featured pricing tier (pricing, downloads, and the
+   demo), and the highlighted first-column cells of the Studio plan table —
+   and all of them inherit that row's grid. On a tier it turns the flex
+   column into a 19px/1fr grid, so the eyebrow, price, description and button
+   collapse into the 19px track while the heading and bullet list take the
+   rest, and the card reads as a stack of broken words.
+
+   Re-declaring the grid where it belongs, then handing the modifier back the
+   display it is supposed to have, fixes all of them at once. */
+.feat-list .feat{display:grid;grid-template-columns:19px 1fr;gap:10px;padding:15px}
+.tier.feat{display:flex;flex-direction:column;grid-template-columns:none;gap:0;padding:22px}
+
+/* The Studio plan comparison is the one table on the site with no rules of
+   its own — it was running on browser defaults, with the .feat collision
+   above drawing a rounded card around every label in the first column. It
+   gets the same treatment as the .cmp table: hairline rows, a real header,
+   and figures that line up on tabular numerals. The .cmp table is untouched.
+
+   Scoped to `table.t` deliberately. redesign-demo.html uses a bare `.t` on
+   eleven bar-chart label rows, and nothing stops that page loading this file
+   later; matching the element type defuses the collision without renaming a
+   class in someone else's markup. min-width matches .cmp, so the wrapper's
+   overflow:auto gives a real horizontal scroll on a phone instead of three
+   forty-pixel columns. */
+table.t{width:100%;min-width:640px;border-collapse:collapse;font-size:13px}
+table.t th,table.t td{padding:13px 16px;border-bottom:1px solid var(--line);text-align:center;vertical-align:middle}
+table.t th:first-child,table.t td:first-child{width:38%;text-align:left}
+table.t thead th{color:var(--faint);font-size:9px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;white-space:nowrap}
+table.t thead th .val{font-size:11px;letter-spacing:0;text-transform:none}
+table.t tbody tr{transition:background var(--dur-1) var(--ease-out)}
+/* Only where there is a real hover. On touch this fires on tap and then
+   sticks to the row the visitor last pressed. */
+@media(hover:hover){table.t tbody tr:hover{background:#fafbff}}
+table.t tbody tr:last-child td{border-bottom:0}
+table.t td.feat,table.t th.feat{display:table-cell;grid-template-columns:none;gap:0;padding:13px 16px;
+  border:0;border-bottom:1px solid var(--line);border-radius:0;
+  background:none;box-shadow:none;color:var(--ink-soft);font-weight:500}
+table.t .val{color:var(--muted);font-variant-numeric:tabular-nums}
+table.t .yes{color:var(--ink-soft)}
+table.t .no{color:#c6cfdb}
+
+/* theme.css's 620px query sets every other card grid to one column but
+   misses this one, and being later in source it outranks the 940px rule. */
+@media(max-width:620px){.tiers{grid-template-columns:1fr;gap:10px}}
+
+/* ---------- ambient: grain, aurora, cursor light ---------- */
+
+/* Film grain. A single fixed layer of fractal noise over the whole
+   page. It is what stops the large flat areas of #f7f8f5 from looking
+   like an empty div, and at 3% it is felt rather than seen. */
+.grain{position:fixed;inset:-50%;z-index:1;pointer-events:none;opacity:var(--grain);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode:multiply}
+
+/* An aurora behind the hero only. Two wide, very soft conic washes
+   drifting on a very long cycle: slow enough to read as light rather
+   than as motion, and faint enough that the headline contrast is
+   untouched. */
+.aurora{position:absolute;inset:-30% -10%;z-index:-1;overflow:hidden;pointer-events:none;opacity:.55}
+.aurora::before,.aurora::after{position:absolute;inset:0;content:"";will-change:transform}
+.aurora::before{background:conic-gradient(from 0deg at 30% 40%,rgba(65,104,237,.2),rgba(140,170,255,.16) 28%,rgba(200,215,255,.05) 48%,rgba(65,104,237,.18) 72%,rgba(65,104,237,.2));
+  filter:blur(70px);animation:auroraSpin 74s linear infinite}
+.aurora::after{background:conic-gradient(from 180deg at 70% 62%,rgba(88,120,235,.16),rgba(180,200,255,.12) 34%,rgba(255,255,255,0) 60%,rgba(88,120,235,.14));
+  filter:blur(84px);animation:auroraSpin 103s linear infinite reverse}
+@keyframes auroraSpin{to{transform:rotate(1turn)}}
+
+/* A soft light that follows the cursor across the hero. One fixed
+   element moved by transform only, so it never triggers layout.
+   Pointer devices only — see the .mgate rules at the foot. */
+.cursor-light{position:absolute;top:0;left:0;z-index:-1;width:620px;height:620px;margin:-310px 0 0 -310px;
+  border-radius:50%;pointer-events:none;opacity:0;will-change:transform;
+  background:radial-gradient(closest-side,rgba(65,104,237,.14),rgba(120,150,250,.06) 45%,transparent 72%)}
+
+/* ---------- editorial serif accents ---------- */
+
+/* The serif carries meaning rather than decoration, so it is spent
+   on the places a person reads as "content" rather than "chrome":
+   section numerals, release dates, the design-study caption, and the
+   handoff headline after a scored report. */
+.card .n,.step .n,.flow .n,.rel .when b,.concept-caption p,.next-h{
+  font-family:var(--serif);font-weight:400;letter-spacing:0
+}
+.card .n,.step .n{font-size:13px;letter-spacing:.04em;color:var(--blue-dark);opacity:.85}
+.flow .n{font-size:14px}
+.rel .when b{font-size:15px;letter-spacing:.005em}
+.concept-caption p{max-width:62ch;font-size:13.5px;line-height:1.6}
+.next-h{font-size:29px;line-height:1.12;letter-spacing:-.018em;color:var(--ink)}
+
+/* An italic-serif accent for a single emphasised word in a heading.
+   .grad keeps doing the blue-gradient job; this is the quieter option. */
+.ed{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.012em}
+
+/* Numerals in the hero rail and the report gauge are data, so they stay
+   on the grotesque — but they can take the heavier weights the variable
+   Inter Tight now makes available. */
+.rail b{font-weight:600;letter-spacing:-.055em}
+.gauge .fig,.vs-col .score,.roi-out .big{font-weight:600}
+
+/* Display weight, now that 700 and 800 exist. Only where the extra
+   presence earns its place — the closing statement and page titles. */
+.closing h2{font-weight:600;letter-spacing:-.052em}
+.page-hero h1,.phero h1{font-weight:600}
+
+/* ---------- page transitions ---------- */
+
+/* Cross-document View Transitions. Each link click dissolves one page
+   into the next with a small directional drift rather than a hard cut,
+   and the brand holds still across the swap so the page appears to turn
+   around a fixed logo. Browsers without support simply navigate. */
+@view-transition{navigation:auto}
+
+::view-transition-old(root){animation:vtOut var(--dur-2) var(--ease-in-out) both}
+::view-transition-new(root){animation:vtIn var(--dur-3) var(--ease-out) both}
+@keyframes vtOut{to{opacity:0;transform:translate3d(0,-14px,0) scale(.985);filter:blur(3px)}}
+@keyframes vtIn{from{opacity:0;transform:translate3d(0,18px,0) scale(1.008);filter:blur(5px)}}
+
+/* The brand is pinned so it does not slide with the rest of the root. */
+.nav .brand{view-transition-name:brandmark}
+::view-transition-group(brandmark){animation-duration:var(--dur-2)}
+::view-transition-old(brandmark),::view-transition-new(brandmark){animation:none;mix-blend-mode:normal}
+
+/* A thin blue rule that wipes across the top of the viewport as the new
+   page arrives — the one deliberately recognisable flourish. */
+::view-transition-new(pagewipe){animation:pageWipe var(--dur-3) var(--ease-out) both}
+@keyframes pageWipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+
+/* ---------- reveals ---------- */
+
+/* The house reveal, upgraded. theme.css lifts 15px with no filter; this
+   adds a short blur and a longer settle, which reads as focus arriving
+   rather than as a box sliding. --i is written by motion.js for
+   siblings inside a grid, so a row of cards cascades. */
+[data-reveal]{opacity:0;transform:translate3d(0,24px,0);filter:blur(7px);
+  transition:opacity var(--dur-3) var(--ease-out),transform var(--dur-3) var(--ease-out),filter var(--dur-3) var(--ease-out);
+  transition-delay:calc(var(--i,0) * 72ms + var(--d,0s))}
+[data-reveal].in{opacity:1;transform:none;filter:none}
+
+/* A wipe variant for wide flat blocks (bands, panels, the console). */
+[data-reveal="wipe"]{transform:none;filter:none;clip-path:inset(0 0 100% 0);
+  transition:opacity var(--dur-2) var(--ease-out),clip-path var(--dur-3) var(--ease-out);
+  transition-delay:calc(var(--i,0) * 72ms + var(--d,0s))}
+[data-reveal="wipe"].in{clip-path:inset(0 0 0 0)}
+
+/* Word-by-word display reveal. motion.js wraps each word in a clipping
+   span and staggers them; the parent heading stays in the layout at its
+   final size, so nothing reflows when the animation runs. */
+.split{display:block}
+.split .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.14em;margin-bottom:-.14em}
+.split .w>i{display:block;font-style:inherit;transform:translate3d(0,110%,0);
+  transition:transform .82s var(--ease-out);transition-delay:calc(var(--i,0) * 58ms + var(--d,0s))}
+.split.in .w>i{transform:none}
+
+/* A split heading is masked per word, so the line-level mask theme.js
+   puts on .head h2 and .phero h1 has nothing left to do. Left running,
+   the two would slide the same text twice in opposite directions. */
+h2.big.split,.head h2.split,.page-hero h1.split,.closing h2.split,.band h2.split{overflow:visible}
+.split .rh{overflow:visible;padding:0;margin:0;animation:none}
+
+/* ---------- micro-interactions ---------- */
+
+/* Buttons. The lift is already in theme.css; this adds a light that
+   travels with the pointer along the button's own axis, so a wide
+   button does not get a uniform wash. */
+.btn{position:relative;isolation:isolate;overflow:hidden}
+.btn::before{position:absolute;inset:0;z-index:-1;opacity:0;content:"";pointer-events:none;
+  background:radial-gradient(120px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.4),transparent 62%);
+  transition:opacity var(--dur-2) var(--ease-out)}
+.btn:hover::before{opacity:1}
+
+/* The primary action gets a slow travelling highlight, so the eye is
+   drawn to it even at rest. */
+.btn.ice,.btn.go{position:relative;isolation:isolate;overflow:hidden}
+.btn.ice::after,.btn.go::after{position:absolute;z-index:-2;top:-60%;bottom:-60%;left:-45%;width:32%;
+  transform:skewX(-19deg);content:"";opacity:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent)}
+.btn.ice:hover::after,.btn.go:hover::after{opacity:.9;animation:buttonSheen .8s var(--ease)}
+@keyframes buttonSheen{to{transform:translateX(620%) skewX(-19deg)}}
+
+/* Body-copy links get a real underline.
+
+   theme.css already sets text-decoration-color, -thickness and -offset on
+   these, and transitions the colour — but never turns the line on, so
+   `a{text-decoration:none}` was leaving every inline link identified by
+   blue alone. The selector below repeats theme.css's own :not() list so
+   nothing the design system excluded (buttons, cards, the brand) gains one,
+   and the colour transition it already declared becomes the animation. */
+main a:not(.btn):not(.brand):not(.go):not(.card):not(.nav-cta):not(.button){
+  text-decoration:underline;
+  text-decoration-color:rgba(49,83,209,.32);
+  transition:text-decoration-color var(--dur-2) var(--ease-out),color var(--dur-1) var(--ease-out)}
+main a:not(.btn):not(.brand):not(.go):not(.card):not(.nav-cta):not(.button):hover{
+  text-decoration-color:currentColor;text-decoration-thickness:1.5px}
+
+/* Cards. Elevation now comes from the scale, and a pointer-driven glare
+   gives the surface a physical edge. The glare is a pseudo-element on
+   the card, painted only while the pointer is over it. */
+.card,.case,.tier,.tile,.studio-card,.feat,.step,.proof{
+  box-shadow:var(--sh-1);transition:transform var(--dur-2) var(--ease-out),box-shadow var(--dur-2) var(--ease-out),border-color var(--dur-2) var(--ease-out),background var(--dur-2) var(--ease-out)}
+.card:hover,.case:hover,.tier:hover,.tile:hover,.step:hover,.studio-card:hover{
+  box-shadow:var(--sh-3);border-color:#c6d2f4}
+.card::after,.tier::after,.case::after{position:absolute;inset:0;z-index:2;border-radius:inherit;opacity:0;
+  content:"";pointer-events:none;transition:opacity var(--dur-2) var(--ease-out);
+  background:radial-gradient(280px circle at var(--mx,50%) var(--my,0%),rgba(65,104,237,.09),transparent 62%)}
+.card:hover::after,.tier:hover::after,.case:hover::after{opacity:1}
+
+/* The hairline that already sits on top of a card becomes a gradient
+   that brightens under the pointer, so the top edge catches light. */
+.card::before,.case::before,.tile::before{transition:opacity var(--dur-2) var(--ease-out),background var(--dur-2) var(--ease-out)}
+.card:hover::before,.case:hover::before,.tile:hover::before{background:linear-gradient(90deg,transparent,rgba(65,104,237,.6),transparent)}
+
+/* Pricing tiers: the featured one earns a slowly turning conic ring. */
+.tier.featured,.tier.feat{position:relative;isolation:isolate;box-shadow:var(--sh-2)}
+.tier.featured::before,.tier.feat::before{position:absolute;inset:-1px;z-index:-1;border-radius:inherit;padding:1px;content:"";
+  background:conic-gradient(from var(--sweep-angle),rgba(65,104,237,.65),rgba(160,185,255,.25) 32%,rgba(65,104,237,.08) 55%,rgba(65,104,237,.65));
+  --sweep-angle:120deg;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;
+  animation:ringTurn 9s linear infinite}
+@keyframes ringTurn{to{--sweep-angle:1turn}}
+/* --sweep-angle is set to a fixed 120deg on the rule above, and the
+   keyframe overrides it wherever @property makes it interpolable. An earlier
+   version gated the animation on `@supports not (background:paint(x))`,
+   which tests the Houdini Paint API rather than @property — Safari 16.4+ and
+   Firefox 128+ support @property but not Houdini, so they matched the frozen
+   branch and the ring only ever turned in Chrome. With no feature test at
+   all the static angle is the fallback and the animation simply wins wherever
+   it can actually run. */
+
+/* ---------- navigation ---------- */
+
+/* The active page marker becomes a dot that slides, so the current
+   section is legible at a glance in the sticky bar. */
+.nav-links a{transition:color var(--dur-1) var(--ease-out),background var(--dur-1) var(--ease-out)}
+.nav-links a.active::after{animation:navMark var(--dur-3) var(--ease-out) both}
+@keyframes navMark{from{transform:scaleX(.1);opacity:0}to{transform:scaleX(1);opacity:1}}
+
+/* The scroll progress rule gains a soft leading highlight. */
+.prog i{box-shadow:0 0 12px rgba(65,104,237,.55)}
+
+/* ---------- ambient depth on large surfaces ---------- */
+
+/* The closing band and the concept window get a slow sheen crossing
+   them, which keeps a big empty panel from sitting perfectly still. */
+.band::after,.closing .wrap-l::after{position:absolute;inset:0;z-index:0;border-radius:inherit;pointer-events:none;content:"";opacity:.55;
+  background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.72) 48%,transparent 58%);
+  transform:translateX(-120%);animation:panelSheen 11s var(--ease-in-out) infinite}
+@keyframes panelSheen{0%,62%{transform:translateX(-120%)}88%,100%{transform:translateX(120%)}}
+
+/* Focus rings get a little more presence, because everything else
+   moved and the focus state should not be the only still thing. */
+:focus-visible{outline:3px solid var(--blue);outline-offset:4px;transition:outline-offset var(--dur-1) var(--ease-out)}
+:focus-visible:focus{outline-offset:6px}
+
+/* ---------- gates ---------- */
+
+/* No script: the page is already finished, so nothing may be hidden.
+   This has to outrank the [data-reveal] rule above. */
+html:not(.js) [data-reveal]{opacity:1;transform:none;filter:none;clip-path:none}
+html:not(.js) .split .w>i{transform:none}
+html:not(.js) .grain,html:not(.js) .aurora,html:not(.js) .cursor-light{display:none}
+
+/* Low-power: drop the per-frame work. The static composition is the
+   same one a screenshot would show, so nothing is lost. */
+.lean .grain{display:none}
+.lean .aurora::before,.lean .aurora::after{animation:none}
+.lean .cursor-light{display:none}
+.lean .tier.featured::before,.lean .tier.feat::before{animation:none}
+.lean .band::after,.lean .closing .wrap-l::after{display:none}
+
+/* Touch and coarse pointers never get the cursor light or the glare:
+   there is no hover state to reveal them. */
+@media (hover:none),(pointer:coarse){
+  .cursor-light{display:none!important}
+  .card::after,.tier::after,.case::after{display:none}
+  .btn::before{display:none}
+}
+
+/* Reduced motion. Everything that moves stops; nothing that carries
+   meaning disappears. Text is un-blurred and un-clipped, the reveals
+   resolve to their final state, and the page transition is cut. */
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-old(root),::view-transition-new(root){animation:none}
+  ::view-transition-group(brandmark){animation:none}
+  .aurora::before,.aurora::after,.band::after,.closing .wrap-l::after{animation:none}
+  .tier.featured::before,.tier.feat::before{animation:none;--sweep-angle:120deg}
+  .grad{animation:none}
+  [data-reveal]{opacity:1;transform:none;filter:none;clip-path:none;transition:none}
+  .split .w>i{transform:none;transition:none}
+  .cursor-light{display:none}
+  .grain{opacity:calc(var(--grain) * .6)}
+}
+
+/* ---------- print ---------- */
+
+@media print{
+  .grain,.aurora,.cursor-light{display:none!important}
+  [data-reveal],.split .w>i{opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important}
+  /* theme.css hides the pricing comparison in print via .cmp-wrap, but the
+     Studio plan table sits in a .tbl-wrap, which was never in that list. It
+     only became a problem once the table below gave it min-width:640px for
+     the phone scroll — a 640px four-column table in an A4 text column
+     overflows, and with no repeating thead it also breaks mid-header across
+     pages. Hidden for the same reason its sibling is. */
+  .tbl-wrap{display:none!important}
+}

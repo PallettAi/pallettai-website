@@ -140,6 +140,7 @@
               '<a href="telegram.html">Ghost Arb Bot</a>' +
               '<a href="live.html">Live board</a>' +
               '<a href="index.html#grader">Free website check</a>' +
+              '<a href="index.html#showcase">Design preview</a>' +
             '</div>' +
             '<div><p class="k">Studio</p>' +
               '<a href="downloads.html">PallettAi Studio</a>' +

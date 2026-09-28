@@ -1,11 +1,41 @@
-# Local / internal
+# Local agent / developer state; never commit credentials.
 .freebuff/
 .DS_Store
 .env
 .env.*
+!.env.example
+!.env.sample
+!.env.template
 *.local
 
-# Design previews that must never ship
+# Generated dependency, interpreter, and tool caches.
+node_modules/
+.cache/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Temporary files, editor leftovers, and local logs.
+*.log
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+*.swp
+*.swo
+*~
+
+# Generated test reports (keep website source and deployment output trackable).
+coverage/
+playwright-report/
+test-results/
+
+# Design previews and prototype scratch that must never ship.
 analytics-preview-*.html
 redesign-demo.html
-redesign/
+/redesign/
