@@ -17,10 +17,13 @@
    plate ever became the only description of a case, that would
    be the moment to give it a role="img" and a real label.
 
-   Stroke weight is 1.6 throughout, and the plates are drawn in a
+   Three stroke weights, and the gaps between them are the whole
+   drawing: 1px hairlines (.plate-line, .plate-faint) for anything
+   structural, 1.6px for the subjects themselves, and flat fills for
+   anything that should read as solid mass. The plates are drawn in a
    188×84 window with the subject centred and the dot grid running to
    the edges. In a two-up grid at the full 1160px wrap a plate comes
-   out around 528×236 — large enough that the drawings read as
+   out around 566×252 — large enough that the drawings read as
    illustrations rather than as icons, short enough that the words
    under them stay the point of the card.
    ============================================================ */
@@ -123,6 +126,20 @@
   stroke-width:1.6;
   stroke-linecap:round;
   stroke-linejoin:round;
+}
+/* ...but the plane itself is filled, not outlined. The silhouette is
+   only about 13 units nose-to-tail, so at plate scale an outline is
+   wider than the gaps it is meant to enclose and the whole thing
+   collapses into a scribble. Filled, it is a plane on sight. The fold
+   is then cut back out in the plate's own background colour, which is
+   what makes a flat wedge read as folded paper rather than as an
+   arrowhead. */
+.plate-plane-solid{fill:var(--ink)}
+.plate-plane-crease{
+  fill:none;
+  stroke:#f1f4fd;
+  stroke-width:1;
+  stroke-linecap:round;
 }
 /* The shield and the chevron on the last card each need a filled
    shape as well as an outline. The fill path is written *before* the
