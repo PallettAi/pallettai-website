@@ -30,10 +30,14 @@
   --btn-press:0.975;
   --btn-ring:rgba(49,83,209,.34);
 
-  /* The global focus rule sets border-radius:5px, which on an
-     11px-radius button snaps the corners the instant the button
-     takes focus. Restore the shape and let the ring do the
-     talking. */
+  /* The global focus rule at theme.css:63 puts border-radius:5px
+     on every focused element. It happens to lose to .btn's own
+     radius by source order rather than by specificity, so no
+     button has ever actually snapped — measured, not assumed.
+     Restating it here is deliberate belt-and-braces: it makes the
+     focus state explicit and keeps holding if theme.css is ever
+     reordered, instead of resting on a coincidence of line
+     numbers. */
   border-radius:var(--btn-r);
 
   /* Labels run to 42 characters on some pages ("Already have
