@@ -183,16 +183,20 @@
       var label = (flat.textContent || '').replace(/\s+/g, ' ').trim();
       if (!label) return;
 
-      /* The class goes on before the split, not after. splitNode()
-         replaces text nodes one at a time, so a throw partway through
-         leaves the heading holding some words already wrapped in .w —
-         and the .split ancestor is both what applies that mask and what
-         lets showAll() take it off again. Set afterwards, a half-split
-         heading ends up with wrappers that showAll() cannot match and
-         nothing else can ever reveal, which is the one outcome this
-         whole chain exists to prevent. Set first, a throw simply lands
-         on a heading that is already .split, and showAll() resolves it
-         like any other. */
+      /* The class goes on before the split, so read .split here as
+         "claimed by the split routine" rather than "fully split" —
+         without that, the order below looks like a pointless swap.
+         splitNode() replaces text nodes one at a time, so a throw
+         partway through leaves the heading holding some words already
+         wrapped in .w, and the .split ancestor is both what applies
+         that mask and what lets showAll() take it off again. Set
+         afterwards, such a heading matches neither and nothing else can
+         ever reveal it, which is the one outcome this whole chain
+         exists to prevent. Set first, a throw simply lands on a heading
+         that is already .split, and showAll() resolves it like any
+         other. Claiming it early is otherwise harmless: every rule keyed
+         off .split is a descendant selector, so a heading with no .w
+         wrappers yet matches none of them. */
       el.classList.add('split');
       splitNode(splitTarget(el));
       /* The visual words are decorative duplicates of the name the
