@@ -1,0 +1,213 @@
+/* ============================================================
+   art.css — original illustrations for the case studies
+   ------------------------------------------------------------
+   Six pieces of drawn artwork, one per case card. Each is an
+   inline SVG sized to a 128×84 plate, so it scales with the card
+   and costs one HTTP request less than an image would.
+
+   Everything is drawn in the design system's own tokens: the
+   ink/blue/muted ramp, --line for hairlines, and the blue tints
+   already used by .case-glyph. Nothing here introduces a colour
+   the rest of the site does not already use, so the plates sit
+   inside the design system rather than on top of it.
+
+   The plates are decorative — every card already carries a real
+   <h2> and a sentence describing the work — so each SVG is
+   aria-hidden and labelled by the card heading instead. If a
+   plate ever became the only description of a case, that would
+   be the moment to give it a role="img" and a real label.
+
+   Stroke weight is 1.6 throughout. At the rendered size (a plate
+   is roughly 250px wide in a two-up grid) that reads as a hairline
+   drawing rather than a diagram, which is the register the rest of
+   the site works in.
+   ============================================================ */
+
+/* ---------- the plate ---------- */
+
+.case-plate{
+  position:relative;
+  display:block;
+  overflow:hidden;
+  margin:-22px -22px 0;
+  border-bottom:1px solid var(--line);
+  border-radius:15px 15px 0 0;   /* the card's own radius, minus the 1px border */
+  background:linear-gradient(168deg,#fbfcff 0%,#f4f6fd 55%,#eef1fb 100%);
+}
+
+.case-plate svg{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:128/84;
+}
+
+/* The faint dot grid shared by every plate, so the six read as one
+   set rather than six unrelated pictures. */
+.plate-grid{
+  fill:url(#plate-dot);
+  opacity:.5;
+}
+
+/* Every plate shares one hairline treatment. */
+.plate-line{
+  fill:none;
+  stroke:var(--line-strong);
+  stroke-width:1;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.plate-faint{
+  fill:none;
+  stroke:#dfe5f2;
+  stroke-width:1;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.plate-ink{
+  fill:none;
+  stroke:var(--ink);
+  stroke-width:1.6;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.plate-ink-fill{fill:var(--ink)}
+.plate-muted{
+  fill:none;
+  stroke:var(--muted);
+  stroke-width:1.6;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.plate-muted-fill{fill:var(--muted)}
+.plate-blue{
+  fill:none;
+  stroke:var(--blue);
+  stroke-width:1.6;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.plate-blue-fill{fill:var(--blue)}
+.plate-mint{
+  fill:none;
+  stroke:var(--mint);
+  stroke-width:1.6;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.plate-mint-fill{fill:var(--mint)}
+.plate-amber{
+  fill:none;
+  stroke:var(--amber);
+  stroke-width:1.6;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.plate-amber-fill{fill:var(--amber)}
+.plate-cyan{
+  fill:none;
+  stroke:var(--cyan);
+  stroke-width:1.6;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.plate-cyan-fill{fill:var(--cyan)}
+.plate-wash{fill:var(--blue-pale)}
+.plate-wash-2{fill:#dde5fb}
+
+/* The paper-plane, reused by the two cards that are about sending
+   something somewhere. Drawn in the top layer so the tint passes
+   under it and the form stays legible. */
+.plate-plane{
+  fill:none;
+  stroke:var(--ink);
+  stroke-width:1.6;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+/* The shield's fill is drawn as a second path over the top of the
+   stroke, so it cannot be opaque: a stroke straddles its own path,
+   and at full strength the fill buries the inner half of the
+   outline. Translucent pale keeps the outline, and keeps the ink
+   checkmark legible — which is the whole meaning of the card. The
+   cleaner fix is to move the fill path *under* the stroke in the
+   markup; that has not been done yet. */
+.plate-plane-fill{fill:var(--blue-pale);fill-opacity:.7}
+
+/* Two small labels carry the only words in the artwork: the version
+   on the release card and the 100 on the one that claims a perfect
+   score. Both are set in the site's mono at plate scale, so they
+   read as annotation rather than as headings — and both say the
+   same thing as the sentence directly beneath them, which is the
+   point: the drawing and the claim agree. */
+.plate-tiny{
+  fill:#fff;
+  font:500 8px var(--mono);
+  letter-spacing:-.02em;
+}
+.plate-score{
+  fill:var(--faint);
+  font:500 8px var(--mono);
+  letter-spacing:.02em;
+}
+
+/* ---------- one slow sweep, opt-in per plate ---------- */
+
+/* Applied to a single class inside a plate. The sweep travels once
+   and then stops: it has already read as a scan by the time anyone
+   has finished looking at it, and a loop would be motion for its
+   own sake. Paired with the reduced-motion override at the foot. */
+.plate-sweep{
+  fill:none;
+  stroke:var(--blue);
+  stroke-width:1.6;
+  stroke-linecap:round;
+  animation:plateSweep 5.2s var(--ease) .9s both;
+}
+@keyframes plateSweep{
+  from{transform:translateX(-30px);opacity:0}
+  20%{opacity:.85}
+  to{transform:translateX(168px);opacity:0}
+}
+
+/* ---------- the one thing that can move, when motion is welcome ---------- */
+
+/* A soft pulse on the grader's score badge — the one place on the
+   page where something being *live* rather than archived is the
+   point of the picture. Slow enough to read as a heartbeat. */
+.plate-pulse{
+  transform-box:fill-box;
+  transform-origin:center;
+  animation:platePulse 3.4s ease-in-out infinite;
+}
+@keyframes platePulse{
+  0%,100%{transform:scale(1);opacity:.55}
+  50%{transform:scale(1.16);opacity:0}
+}
+
+/* ---------- gates ---------- */
+
+/* No script: motion.css has already made the same call with a
+   .lean class, so this only has to cover the reduced-motion case
+   and any future engine that sets it without that class. */
+@media (prefers-reduced-motion:reduce){
+  .plate-sweep{animation:none;display:none}
+  .plate-pulse{animation:none}
+}
+
+/* Print: the plates are illustrative, and a 15% of a page spent on
+   ornament is a page spent on nothing. The facts beneath each one
+   carry the same information in words. */
+@media print{
+  .case-plate{display:none!important}
+}
+
+/* ---------- narrow ---------- */
+
+/* Below the 620px breakpoint the plate would drop to roughly 290px
+   wide while keeping its 128:84 ratio, which is still the right
+   shape — but the padding is what needs to go, since the card is
+   already tight at that width. */
+@media(max-width:620px){
+  .case-plate{margin:-18px -18px 0;border-radius:15px 15px 0 0}
+}
