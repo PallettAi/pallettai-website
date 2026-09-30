@@ -2,7 +2,7 @@
    art.css — original illustrations for the case studies
    ------------------------------------------------------------
    Six pieces of drawn artwork, one per case card. Each is an
-   inline SVG sized to a 128×84 plate, so it scales with the card
+   inline SVG sized to a 188×84 plate, so it scales with the card
    and costs one HTTP request less than an image would.
 
    Everything is drawn in the design system's own tokens: the
@@ -17,10 +17,12 @@
    plate ever became the only description of a case, that would
    be the moment to give it a role="img" and a real label.
 
-   Stroke weight is 1.6 throughout. At the rendered size (a plate
-   is roughly 250px wide in a two-up grid) that reads as a hairline
-   drawing rather than a diagram, which is the register the rest of
-   the site works in.
+   Stroke weight is 1.6 throughout, and the plates are drawn in a
+   188×84 window with the subject centred and the dot grid running to
+   the edges. In a two-up grid at the full 1160px wrap a plate comes
+   out around 528×236 — large enough that the drawings read as
+   illustrations rather than as icons, short enough that the words
+   under them stay the point of the card.
    ============================================================ */
 
 /* ---------- the plate ---------- */
@@ -39,15 +41,15 @@
   display:block;
   width:100%;
   height:auto;
-  aspect-ratio:128/84;
+  aspect-ratio:188/84;
 }
 
-/* The faint dot grid shared by every plate, so the six read as one
-   set rather than six unrelated pictures. */
-.plate-grid{
-  fill:url(#plate-dot);
-  opacity:.5;
-}
+/* The faint dot grid that every plate is drawn over is a <pattern>
+   sitting inside that plate's own <defs> — it has to be, because one
+   shared id would mean six plates on the same page racing to define
+   it. Identical markup six times beats an id that is only ever right
+   for whichever plate happens to render first. The identical geometry
+   is what makes the six read as one set rather than six pictures. */
 
 /* Every plate shares one hairline treatment. */
 .plate-line{
@@ -79,7 +81,6 @@
   stroke-linecap:round;
   stroke-linejoin:round;
 }
-.plate-muted-fill{fill:var(--muted)}
 .plate-blue{
   fill:none;
   stroke:var(--blue);
@@ -96,13 +97,8 @@
   stroke-linejoin:round;
 }
 .plate-mint-fill{fill:var(--mint)}
-.plate-amber{
-  fill:none;
-  stroke:var(--amber);
-  stroke-width:1.6;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
+/* The one place --amber appears: a single data point on the sparkline,
+   so the eye has one warm mark to land on in an otherwise cool plate. */
 .plate-amber-fill{fill:var(--amber)}
 .plate-cyan{
   fill:none;
@@ -112,12 +108,15 @@
   stroke-linejoin:round;
 }
 .plate-cyan-fill{fill:var(--cyan)}
+/* The one dashed line in the set, and it earns it: it draws the empty
+   slot on the last card, so the dashes read as "not filled in yet"
+   rather than as another outline. */
+.plate-dash{stroke-dasharray:3 4}
 .plate-wash{fill:var(--blue-pale)}
 .plate-wash-2{fill:#dde5fb}
 
 /* The paper-plane, reused by the two cards that are about sending
-   something somewhere. Drawn in the top layer so the tint passes
-   under it and the form stays legible. */
+   something somewhere. */
 .plate-plane{
   fill:none;
   stroke:var(--ink);
@@ -125,17 +124,16 @@
   stroke-linecap:round;
   stroke-linejoin:round;
 }
-/* The shield's fill is drawn as a second path over the top of the
-   stroke, so it cannot be opaque: a stroke straddles its own path,
-   and at full strength the fill buries the inner half of the
-   outline. Translucent pale keeps the outline, and keeps the ink
-   checkmark legible — which is the whole meaning of the card. The
-   cleaner fix is to move the fill path *under* the stroke in the
-   markup; that has not been done yet. */
-.plate-plane-fill{fill:var(--blue-pale);fill-opacity:.7}
+/* The shield and the chevron on the last card each need a filled
+   shape as well as an outline. The fill path is written *before* the
+   stroke path in the markup so the tint passes underneath, which is
+   what lets this be an opaque pale: a stroke straddles its own path,
+   so a fill drawn on top at full strength would bury the inner half
+   of the outline it is meant to be sitting behind. */
+.plate-plane-fill{fill:var(--blue-pale)}
 
 /* Two small labels carry the only words in the artwork: the version
-   on the release card and the 100 on the one that claims a perfect
+   on the release card and the /100 on the one that claims a perfect
    score. Both are set in the site's mono at plate scale, so they
    read as annotation rather than as headings — and both say the
    same thing as the sentence directly beneath them, which is the
@@ -165,9 +163,9 @@
   animation:plateSweep 5.2s var(--ease) .9s both;
 }
 @keyframes plateSweep{
-  from{transform:translateX(-30px);opacity:0}
+  from{transform:translateX(-60px);opacity:0}
   20%{opacity:.85}
-  to{transform:translateX(168px);opacity:0}
+  to{transform:translateX(190px);opacity:0}
 }
 
 /* ---------- the one thing that can move, when motion is welcome ---------- */
@@ -204,9 +202,8 @@
 
 /* ---------- narrow ---------- */
 
-/* Below the 620px breakpoint the plate would drop to roughly 290px
-   wide while keeping its 128:84 ratio, which is still the right
-   shape — but the padding is what needs to go, since the card is
+/* Below the 620px breakpoint the plate keeps its ratio and just gets
+   narrower — the padding is what needs to go, since the card is
    already tight at that width. */
 @media(max-width:620px){
   .case-plate{margin:-18px -18px 0;border-radius:15px 15px 0 0}
