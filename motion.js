@@ -342,14 +342,35 @@
   /* ---------- go ---------- */
 
   function start() {
-    prepare();
-    splitHeadings();
-    observe();
-    grain();
-    ambience();
-    magnetic();
-    tilt();
-    buttonLight();
+    /* splitHeadings() masks every word behind an overflow:hidden wrapper
+       and observe() is the only thing that unmasks it. A throw between
+       the two therefore doesn't just skip an animation, it hides the
+       headline outright — which is why the reveal has a no-observer
+       path. Everything here is decorative, so the reveal chain is
+       guarded as a unit and resolved to "everything visible" if it
+       fails, and the purely cosmetic steps are isolated individually
+       so a broken flourish can't take the page down with it. */
+    try {
+      prepare();
+      splitHeadings();
+      observe();
+    } catch (err) {
+      showAll();
+      warn(err, 'reveal');
+      return;
+    }
+
+    each([grain, ambience, magnetic, tilt, buttonLight], function (fn) {
+      try {
+        fn();
+      } catch (err) {
+        warn(err, fn.name || 'flourish');
+      }
+    });
+  }
+
+  function warn(err, where) {
+    if (window.console && console.warn) console.warn('motion: ' + where + ' failed', err);
   }
 
   if (doc.readyState === 'loading') {
