@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PallettAI — Redeem a referral code</title>
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=2" />
-<link rel="icon" type="image/svg+xml" href="signal-favicon.svg?v=4" />
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=3" />
+<link rel="icon" type="image/svg+xml" href="signal-favicon.svg?v=5" />
 <meta name="description" content="Redeem your PallettAI Studio Pro referral code.">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://fjahxichioccknszuxhb.supabase.co; frame-ancestors 'none'; form-action 'self'; object-src 'none'; base-uri 'self'" />
 <style>
   :root{
     color-scheme:light;
-    --paper:#f7f8f5; --white:#fff; --ink:#172033; --ink-soft:#29364d;
-    --muted:#58657a; --faint:#68758a; --line:#e2e7ec; --line-strong:#d3dce6;
-    --blue:#4168ed; --blue-dark:#3153d1; --blue-pale:#edf1ff;
+    --paper:#fbf4e8; --white:#fff; --ink:#30251f; --ink-soft:#48362d;
+    --muted:#756052; --faint:#756052; --line:#e5d6c6; --line-strong:#cfb9a5;
+    --blue:#88442c; --blue-dark:#88442c; --blue-pale:#f6e4d3;
     --ok:#267452; --err:#a92e3e; --warn:#805100;
     --ok-bg:#eef7f1; --warn-bg:#fff7e8; --err-bg:#fff0f1;
     --sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
@@ -73,6 +73,20 @@
   .pill{display:inline-flex;align-items:center;gap:7px;border:1px solid #c8dfd3;border-radius:999px;padding:5px 10px;background:#f0f8f3;color:#28654d;font-size:.7rem;font-weight:500;letter-spacing:.04em}
   @media(max-width:480px){body{padding-inline:16px}.wrap{padding-top:33px}.logo{margin-bottom:22px}.card{border-radius:18px}.sub{font-size:.84rem}}
   @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+  /* Open-form identity; redemption and authentication contracts unchanged. */
+  body{background:var(--paper)}
+  ::selection{background:#f4b183}
+  .logo b,.logo b i{color:var(--ink)}
+  .card{border:1px solid var(--line-strong);border-radius:7px;background:var(--paper);box-shadow:none}
+  .card::before{content:none}
+  .code-badge{color:var(--ink);background:var(--blue-pale);border-color:#c1946d;border-radius:5px}
+  .field input{border-radius:5px}
+  .field input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #88442c14}
+  .btn{border-radius:5px;background:#f4b183;color:var(--ink);box-shadow:none}
+  .btn:hover{transform:none;background:#eca171;box-shadow:none}
+  .btn:not(.ghost)::after{content:none}
+  .btn.ghost,.btn.ghost:hover{background:transparent;color:var(--ink);border-color:var(--line-strong);box-shadow:none}
+  .fine code{color:var(--blue)}
 </style>
 </head>
 <body>
@@ -89,7 +103,7 @@
 
     <div id="authArea"></div>
     <div id="outcomeBox" class="outcome"></div>
-    <p class="status" id="status"></p>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
   </div>
 
   <p class="fine">Codes are verified server-side by the PallettAI registry — one stable code per account, stamped trace log, rewards that follow you across devices.<br>After redeeming, open <code>PallettAI Studio</code> and sign in with the same account to sync.</p>
@@ -182,8 +196,8 @@ function renderAuth() {
   } else {
     var mode = window.__mode || 'signin';
     area.innerHTML =
-      '<div class="field"><label>Email</label><input id="email" type="email" placeholder="you@example.com" autocomplete="email"></div>' +
-      '<div class="field"><label>Password</label><input id="pass" type="password" placeholder="min 6 characters" autocomplete="' + (mode === 'signup' ? 'new-password' : 'current-password') + '"></div>' +
+      '<div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="you@example.com" autocomplete="email"></div>' +
+      '<div class="field"><label for="pass">Password</label><input id="pass" type="password" placeholder="min 6 characters" autocomplete="' + (mode === 'signup' ? 'new-password' : 'current-password') + '"></div>' +
       '<button class="btn" id="authBtn">' + (mode === 'signup' ? 'Create account & redeem' : 'Sign in & redeem') + '</button>' +
       '<button class="btn ghost" id="toggleBtn">' + (mode === 'signup' ? 'I already have an account' : 'Create a new account') + '</button>';
     $('authBtn').onclick = authClicked;

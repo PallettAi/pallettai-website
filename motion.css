@@ -1,383 +1,234 @@
-/* ============================================================
-   PallettAi — motion & craft layer
-
-   Loaded after theme.css, so it can restyle anything the design
-   system already drew without rewriting it. Everything here is
-   additive and progressive:
-
-     • no JavaScript  -> html:not(.js) shows the finished page
-     • reduced motion -> nothing moves, everything stays readable
-     • low-power      -> html.lean drops the expensive decoration
-     • older browser  -> @supports gates keep the plain design
-
-   The design system owns colour, spacing and type. This file owns
-   *how things move*, plus the editorial serif accents that give the
-   page a voice the UI-kit default could not.
-   ============================================================ */
-
-/* ---------- tokens ---------- */
-
-:root{
-  /* Easing. --ease is the house curve from theme.css; these add the
-     overshoot and the slow settle that make movement feel physical. */
-  --ease-out:cubic-bezier(.16,1,.3,1);
-  --ease-in-out:cubic-bezier(.65,0,.35,1);
-  --ease-spring:cubic-bezier(.34,1.4,.64,1);
-
-  /* Duration scale, so a hover and a page transition stay related. */
-  --dur-1:.18s;
-  --dur-2:.34s;
-  --dur-3:.6s;
-  --dur-4:.9s;
-
-  /* A real elevation scale. Cards previously each invented a shadow;
-     these five steps let any surface pick its altitude by name. */
-  --sh-1:0 1px 2px rgba(23,32,51,.04),0 1px 1px rgba(23,32,51,.03);
-  --sh-2:0 6px 18px rgba(23,32,51,.055),0 1px 3px rgba(23,32,51,.035);
-  --sh-3:0 18px 44px rgba(23,32,51,.085),0 3px 10px rgba(23,32,51,.04);
-  --sh-4:0 34px 80px rgba(23,32,51,.13),0 8px 24px rgba(23,32,51,.05);
-  --sh-blue:0 12px 30px rgba(65,104,237,.22);
-  --sh-blue-lg:0 22px 52px rgba(65,104,237,.28);
-
-  --r-sm:10px;
-  --r-md:14px;
-  --r-lg:20px;
-  --r-xl:28px;
-
-  /* The editorial voice. */
-  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
-
-  --grain:.03;
-  --sheen:linear-gradient(104deg,#293e8b 0%,#3153d1 52%,#5c78dd 100%);
-}
-
-/* Registered so a conic border can be *interpolated* rather than
-   snapped. Without @property the angle is an unregistered custom
-   property and only jumps at keyframes, so the ring would stutter.
-   Browsers that do not support it keep a static gradient. */
-@property --sweep-angle{syntax:"<angle>";inherits:false;initial-value:0deg}
-
-/* ---------- two names the design system reuses ---------- */
-
-/* theme.css lays the pricing tiers out under the name `.price-cards`, but
-   the markup says `.tiers` — a name that only ever appears inside the
-   breakpoints. With no base rule the three cards fall back to block layout,
-   so each one claims the full 1140px column and they stack instead of
-   sitting side by side. Declared here rather than in theme.css so the fix
-   does not collide with other work landing in the design system; the gap
-   and the track shape copy the sibling .price-cards rule. */
-.tiers{display:grid;gap:14px}
-/* The column count has to live in its own query. theme.css folds .tiers to
-   two columns at 940px, and a media query adds no specificity — so an
-   unconditional three-column rule here would tie on (0,1,0) and win on
-   source order, and the tablet layout would never fold. Staying above
-   940px hands the middle of the range back to the breakpoint that owns it. */
-@media(min-width:941px){.tiers{grid-template-columns:repeat(3,minmax(0,1fr))}}
-
-/* `.feat` is the two-column row inside a .feat-list, and theme.css declares
-   it as a bare class selector. The same word is also used as a *modifier* in
-   three other places — the featured pricing tier (pricing, downloads, and the
-   demo), and the highlighted first-column cells of the Studio plan table —
-   and all of them inherit that row's grid. On a tier it turns the flex
-   column into a 19px/1fr grid, so the eyebrow, price, description and button
-   collapse into the 19px track while the heading and bullet list take the
-   rest, and the card reads as a stack of broken words.
-
-   Re-declaring the grid where it belongs, then handing the modifier back the
-   display it is supposed to have, fixes all of them at once. */
+/* PallettAI / Open form
+   A deliberately quiet identity: warm paper, graphite, apricot highlights and copper reflections.
+   Legacy component geometry stays in theme.css; this is the shared visual layer. */
+:root{--serif:"Instrument Serif",Georgia,serif;--accent:#f4b183;--paper:#fbf4e8;--ink:#30251f;--ink-soft:#48362d;--muted:#756052;--dim:#756052;--faint:#756052;--mist:#756052;--blue:#88442c;--blue-dark:#88442c;--blue-pale:#f6e4d3;--line:#e5d6c6;--line-strong:#cfb9a5;--panel-2:#f3e6d8;--deep:#30251f;--wrap:1280px;--pad:clamp(64px,8vw,112px)}
+body{background:var(--paper)}
+::selection{background:var(--accent);color:var(--ink)}
+.wrap,.wrap-l{width:min(1280px,calc(100% - 80px))}
+h1,h2,h3,h4{font-weight:550;letter-spacing:-.055em}
+.grad{background:none;color:var(--ink);animation:none}
+.ed{font:italic 400 1.07em/1 var(--serif);letter-spacing:-.025em}
+.eyebrow,.kicker{font:400 10px/1.7 var(--mono);letter-spacing:.09em;color:var(--muted)}
+.eyebrow::before,.kicker::before{content:none}
+.lede{font-size:15px;line-height:1.85;max-width:49ch}
+h2.big,.sec-head h2{font-size:clamp(38px,4.3vw,62px);line-height:1.04}
+.head,.sec-head{margin-bottom:42px;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:60px}
+.head h2{margin-top:19px}
+.sec-split::before,.wm,.sky,.grain,.aurora,.cursor-light,.prog{display:none}
+.rv,.up,.rh,[data-reveal]{opacity:1;transform:none;filter:none;clip-path:none;animation:none}
+.head h2,.phero h1{overflow:visible}
+.rh{display:block}
+.nav{padding:16px max(40px,calc((100vw - 1280px)/2));background:rgba(251,244,232,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+.nav.stuck{background:rgba(251,244,232,.98);box-shadow:none}
+.nav-in{min-height:44px}
+.brand{gap:9px;font:600 23px var(--display);letter-spacing:-.055em}
+.brand img{width:36px;height:36px}
+.brand::before{content:none}
+.brand b{font-weight:600}
+.brand b i{color:var(--ink)}
+.nav-links{gap:14px}
+.nav-links a{padding:9px 8px;color:var(--muted);border-radius:0;font-size:12px}
+.nav-links a:hover,.nav-links a.active{background:none;color:var(--ink)}
+.nav-links a.active::after{background:var(--ink);height:1px;bottom:2px;right:8px;left:8px;animation:none}
+.nav-links a.nav-cta,.nav-links a.nav-cta.active{background:var(--ink)!important;color:var(--paper)!important;border-radius:5px;padding:13px 18px;box-shadow:none;margin-left:18px}
+.nav-links a.nav-cta:hover,.nav-links a.nav-cta.active:hover{background:#564035!important;box-shadow:none;transform:none}
+.burger{border-radius:5px;background:transparent;width:44px;height:44px}
+.burger:hover{background:var(--accent);border-color:var(--ink)}
+.btn,.btn.sm{--btn-r:5px;min-height:52px;padding:13px 21px;border-radius:5px;font-size:12px;line-height:1.5;white-space:normal;will-change:auto;box-shadow:none;transition:background .2s,border-color .2s,color .2s}
+.btn span[aria-hidden]{margin-left:18px;font-size:16px}
+.btn.ice,.btn.go{background:var(--accent)!important;border-color:var(--accent)!important;color:var(--ink)!important;box-shadow:none}
+.btn.ice:hover,.btn.go:hover{background:#eca171!important;box-shadow:none;transform:none}
+.btn.line,.btn.alt{background:transparent!important;border-color:var(--line-strong)!important;color:var(--ink)!important;box-shadow:none}
+.btn.line:hover,.btn.alt:hover{background:#f0decb!important;border-color:var(--ink)!important;color:var(--ink)!important;box-shadow:none;transform:none}
+.btn::before,.btn::after{content:none!important}
+.btn.sm{min-height:44px;padding:10px 16px}
+.btn:active{scale:.98}
+.text-link{display:inline-flex;gap:22px;align-items:center;font-size:12px;font-weight:500;color:var(--ink)!important;text-decoration:none!important;border-bottom:1px solid var(--line-strong);padding-bottom:5px}
+.text-link:hover{border-color:var(--ink)}
+.head .text-link{margin-top:20px}
+main a:not(.btn):not(.brand):not(.go):not(.card):not(.nav-cta):not(.button){text-decoration:underline;text-decoration-color:var(--line-strong)}
+main a:not(.btn):not(.brand):not(.go):not(.card):not(.nav-cta):not(.button):hover{color:var(--ink);text-decoration-color:var(--ink)}
+.studio-hero{padding:32px 0 0}
+.hero-topline{display:flex;justify-content:space-between;gap:20px;align-items:center}
+.availability-dot{display:inline-block;flex:none;width:6px;height:6px;border-radius:50%;background:#9b5033;box-shadow:0 0 0 4px #f2dcc7}
+.edition{font:9px var(--mono);letter-spacing:.1em;color:var(--muted)}
+.studio-hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center;margin-top:20px}
+.studio-hero-copy{padding:30px 0 36px}
+.studio-hero h1{font-size:clamp(70px,7.8vw,112px);line-height:.95;letter-spacing:-.073em;font-weight:550;text-wrap:initial}
+.hero-last{white-space:nowrap}
+.lime-stop{color:#aa5030}
+.hero-description{margin-top:30px;font-size:16px;color:var(--muted);line-height:1.75;max-width:36ch}
+.studio-hero .btns{margin-top:27px;gap:12px}
+.hero-price{margin-top:17px;font-size:11px;color:var(--muted)}
+.hero-price b{font-weight:500;color:var(--ink)}
+.hero-sculpture{position:relative;margin:0;align-self:stretch;display:flex;flex-direction:column;justify-content:center;min-width:0;background:#f2e4d4;border:1px solid #e5d0ba;border-radius:8px}
+.hero-sculpture img{width:100%;height:auto;max-height:550px;object-fit:contain}
+.art-index{position:absolute;top:19px;left:22px;right:22px;display:flex;justify-content:space-between;font:9px var(--mono);letter-spacing:.07em;color:var(--muted)}
+.hero-sculpture figcaption{position:absolute;bottom:19px;left:22px;right:22px;display:flex;justify-content:space-between;gap:15px;font-size:9px;color:var(--muted)}
+.hero-bottom{margin-top:32px;border-top:1px solid var(--line);padding:22px 0 29px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.hero-bottom p{font-size:11px;color:var(--muted);line-height:1.7}
+.hero-bottom b{font-weight:400;color:var(--ink)}
+.principle-band{background:var(--ink);color:var(--paper)}
+.principle-band .wrap-l{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding-block:23px}
+.principle-band span{display:flex;align-items:center;gap:12px;font-size:11px}
+.principle-band i{font-style:normal;color:var(--accent);font-size:19px}
+.design-studies{display:grid;grid-template-columns:1.08fr .92fr;gap:20px}
+.study{position:relative;min-width:0;min-height:460px;border-radius:7px;overflow:hidden;padding:25px 30px;display:flex;flex-direction:column}
+.study-coffee{background:#eadbc6;color:#47392b}
+.study-label{display:flex;justify-content:space-between;align-items:center;font:8px var(--mono);letter-spacing:.07em;opacity:.85}
+.study-label>span:last-child{font:20px var(--sans)}
+.coffee-study-nav{margin-top:35px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.coffee-study-nav>b{font:400 27px var(--serif);letter-spacing:-.04em}
+.coffee-study-nav b span{vertical-align:super;font:9px var(--sans);margin-left:2px}
+.coffee-study-nav>span{font-size:8px}
+.coffee-study-body{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:15px;flex:1;padding:28px 0}
+.coffee-study-body h3{font:400 clamp(36px,3.7vw,54px)/.98 var(--serif);letter-spacing:-.04em}
+.coffee-study-body h3 em{font-weight:400;color:#965438}
+.coffee-bag{justify-self:center;width:155px;min-height:222px;padding:17px 15px 15px;background:linear-gradient(100deg,#994d35,#b76b49 36%,#bb7450 70%,#98533c);border-radius:5px 5px 12px 12px;box-shadow:15px 22px 24px #624c2f30;transform:rotate(8deg);text-align:center;color:#f8e8ca;position:relative;border-top:11px solid #a26546}
+.coffee-bag::before{content:"";position:absolute;top:6px;left:10px;right:10px;border-top:1px solid #d5a57c}
+.coffee-bag>span{font:6px var(--mono);letter-spacing:.06em}
+.coffee-bag b{display:block;font:400 36px/.85 var(--serif);margin-top:20px;letter-spacing:-.04em}
+.coffee-bag i{display:block;font-style:normal;font-size:31px;line-height:1;margin:15px 0}
+.coffee-bag small{font:6px/1.9 var(--mono);letter-spacing:.04em}
+.study-base{display:flex;justify-content:space-between;gap:14px;font:8px/1.7 var(--mono);border-top:1px solid #47392b40;padding-top:14px;margin-top:auto}
+.study-architecture{background:#47372b;color:#faf0e1}
+.architecture-nav{display:flex;justify-content:space-between;align-items:center;margin-top:30px;gap:10px;font-size:8px}
+.architecture-nav b{font:500 12px var(--sans);letter-spacing:.04em}
+.architecture-scene{position:absolute;right:20px;bottom:80px;width:58%;height:285px;overflow:hidden}
+.arch-wall{position:absolute;inset:0 0 0 20%;background:linear-gradient(120deg,#d5c8ad,#a99a7e)}
+.arch-cutout{position:absolute;width:55%;height:89%;bottom:0;left:25%;border-radius:100px 100px 0 0;background:linear-gradient(100deg,#4a3428,#9a7a5b);box-shadow:inset 15px 0 20px #32201580}
+.arch-shadow{position:absolute;inset:20% 0 0 0;background:#33241c;transform:skewY(-18deg)}
+.arch-stairs{position:absolute;width:95%;height:33%;bottom:0;left:0;transform:skewY(-12deg);background:repeating-linear-gradient(0deg,#b3a288 0 13px,#dbceb2 13px 25px);box-shadow:0 -3px 12px #49302340}
+.arch-sun{position:absolute;width:57px;height:57px;top:24px;right:17px;border-radius:50%;background:#f1be89}
+.study-architecture h3{position:relative;z-index:1;font:400 clamp(35px,3.4vw,49px)/1.04 var(--serif);letter-spacing:-.025em;margin-top:96px;margin-bottom:67px;max-width:8ch}
+.study-architecture h3 em{font-weight:400}
+.study-architecture .study-base{position:relative;border-color:#ffffff30}
+.study-caption{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:20px}
+.study-caption p{font-size:10px;color:var(--muted);max-width:62ch}
+.packages-section{background:#f3e6d8;border-block:1px solid var(--line)}
+.build-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.build-card{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:7px;padding:30px 26px;display:flex;flex-direction:column;min-width:0}
+.package-number{font:8px/1.8 var(--mono);letter-spacing:.055em;color:var(--muted);min-height:30px}
+.build-card h3{font-size:28px;margin-top:28px;letter-spacing:-.045em}
+.package-description{font-size:12px;color:var(--muted);line-height:1.8;min-height:65px;margin-top:14px}
+.build-price{font:550 52px/1 var(--display);letter-spacing:-.06em;margin-top:25px;display:flex;gap:10px;align-items:baseline}
+.build-price>span{font:11px var(--sans);letter-spacing:0;color:var(--muted)}
+.build-card ul{list-style:none;padding:24px 0 27px;margin:25px 0 0;border-top:1px solid var(--line);font-size:11px;color:var(--muted);display:grid;gap:12px}
+.build-card li{display:flex;gap:9px;align-items:baseline}
+.build-card li::before{content:"↗";color:var(--ink)}
+.build-card .btn{margin-top:auto;width:100%;padding-inline:12px}
+.deposit-note{font-size:9px;color:var(--muted);margin-top:13px;text-align:center}
+.build-featured{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.build-featured .package-number,.build-featured .package-description,.build-featured .build-price>span,.build-featured ul,.build-featured .deposit-note{color:#d8c3b2}
+.build-featured ul{border-color:#655044}
+.build-featured li::before{color:var(--accent)}
+.package-tag{position:absolute;right:24px;top:56px;font:8px var(--mono);color:var(--accent)}
+.purchase-note{font-size:11px;color:var(--muted);line-height:1.85;margin-top:25px;max-width:94ch}
+.process-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:42px}
+.process-grid article{border-top:1px solid var(--line-strong);padding-top:24px}
+.process-grid article>span{font:400 38px var(--serif);color:#997153}
+.process-grid h3{font-size:23px;margin-top:23px}
+.process-grid p{font-size:12px;line-height:1.9;color:var(--muted);margin-top:15px;max-width:37ch}
+.checker-section{background:#f1dfcc;border-block:1px solid var(--line)}
+.console{margin-top:0;background:var(--paper);border-color:var(--line-strong);border-radius:7px;box-shadow:none;padding:30px}
+.console::before,.console::after{content:none}
+.prompt{border-radius:5px;border-color:var(--line-strong)}
+.prompt:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px #88442c14}
+.prompt .sig{font-family:var(--sans)}
+.status{font:11px/1.8 var(--sans)}
+.gauge,.vs-col,.gaps{background:#f3e6d8;border-radius:6px}
+.gauge .bandlabel{color:var(--muted)}
+.bar .fill{background:#9b5033}
+.vs-col.win{background:#f4dfca;border-color:#c1946d}
+.next{background:#f3e6d8;border-color:var(--line-strong);border-radius:6px}
+.next-h{font:400 28px var(--serif)}
+.studio-promo{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:80px}
+.studio-promo .big{margin-top:19px}
+.studio-promo .lede{margin-top:22px}
+.studio-promo .btn{margin-top:25px}
+.studio-promo-art{background:#f0decb;border:1px solid var(--line);border-radius:7px;padding:40px 30px;overflow:hidden}
+.mini-editor{background:var(--paper);border:1px solid #cbb195;border-radius:5px;box-shadow:10px 16px 0 #dfc7ae;transform:rotate(-3deg)}
+.mini-editor-bar{display:flex;align-items:center;gap:12px;padding:14px;border-bottom:1px solid var(--line);font:7px var(--mono);letter-spacing:.04em}
+.mini-editor-bar i{width:5px;height:5px;background:#9b5033;border-radius:50%;margin-left:auto}
+.mini-editor-page{padding:30px 25px}
+.mini-editor-page>span{font:7px var(--mono);color:var(--muted)}
+.mini-editor-page>b{display:block;font:500 39px/1.05 var(--display);letter-spacing:-.04em;margin-top:17px}
+.mini-editor-page>b em{font:italic 400 43px var(--serif)}
+.mini-editor-blocks{display:flex;gap:8px;margin-top:23px}
+.mini-editor-blocks i{height:42px;flex:1;background:#eacfb2;border-radius:2px}
+.mini-editor-blocks i:nth-child(2){background:#f4b183}.mini-editor-blocks i:nth-child(3){background:#5c3d2a}
+.contact-section{background:var(--ink);color:var(--paper)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:start}
+.contact-copy .eyebrow{color:#d8c3b2}
+.contact-copy .big{font-size:clamp(47px,5.8vw,78px);margin-top:28px}
+.contact-copy .lede{color:#d8c3b2;margin-top:27px;max-width:38ch}
+.contact-email{display:inline-flex;align-items:center;gap:22px;margin-top:34px;color:var(--paper)!important;font-size:14px}
+.contact-assurance{font-size:11px;color:#d8c3b2;line-height:1.9;margin-top:24px}
+.contact-grid .panel{background:transparent;border:0;padding:0;box-shadow:none;max-width:none}
+.contact-grid .f label{color:var(--paper);font-size:11px;letter-spacing:0;text-transform:none}
+.contact-grid .f label span{color:#d8c3b2}
+.contact-grid .f input,.contact-grid .f textarea{background:#3b2e26;border:1px solid #876b56;color:var(--paper);border-radius:5px;font-size:12px;padding:14px}
+.contact-grid .f input::placeholder,.contact-grid .f textarea::placeholder{color:#d3bba7}
+.contact-grid .f input:focus,.contact-grid .f textarea:focus{border-color:var(--accent);box-shadow:none}
+.contact-grid .f{margin-bottom:21px}
+.contact-grid .btn{margin-top:3px;width:100%}
+.form-privacy{font-size:9px;color:#d8c3b2;margin-top:14px;line-height:1.8}
+.form-privacy a{color:var(--paper)!important}
+.contact-grid .status{color:#ebd4c0}.contact-grid .status.err{color:#ffb8b8}.contact-grid .status.ok{color:var(--accent)}
+/* Shared public pages: same material language, without changing their contracts. */
+.phero,.page-hero{padding-top:78px!important}
+.phero h1,.page-hero h1{font-size:clamp(50px,6.8vw,86px);line-height:1.02;letter-spacing:-.06em}
+.card,.case,.stat,.tile,.step,.feat,.req>div,.current,.win-wait,.proof,.studio-card,.dl-row,.panel{border-radius:7px;background:var(--paper);box-shadow:none;border-color:var(--line)}
+.card::before,.case::before,.tile::before{content:none}
+.card:hover,.case:hover,.tile:hover,.step:hover,.dl-row:hover{transform:none;border-color:#b8997c;background:var(--paper);box-shadow:none}
+.card .go::after,.case .go::after{content:none}
+.card .n,.step .n,.flow .n{font:9px var(--mono);color:var(--muted)}
+.case-glyph{background:#f2ddc7;border-color:var(--line-strong);color:var(--ink);border-radius:5px;box-shadow:none}
+.pill,.badge{background:#f2ddc7;color:var(--ink);border-color:#d8bda3}
+.tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.tier,.tier.feat{display:flex;flex-direction:column;padding:30px 26px;border-radius:7px;box-shadow:none;background:var(--paper);border-color:var(--line-strong)}
+.tier.feat{background:#f6e1cc;border-color:#c1946d}.tier:hover{transform:none;box-shadow:none;border-color:#c1946d}.tier .annual-note{color:var(--muted)}.cmp tbody tr:hover td,.cmp tbody tr:hover th{background:#f7ecde}.cmp thead th:first-child{background:#f1dfcc}.cmp tbody th:first-child{background:#f3e6d8}.from-check,.studio-card,.current,.machine,.band{background:#f3e6d8;border-color:var(--line-strong)}.dl-row.primary,.dl-row.detected{background:#f6e1cc;border-color:#c1946d;box-shadow:none}.dl-row.detected::before{background:var(--accent);border-color:#c1946d;color:var(--ink)}.from-check,.current,.machine,.band{border-radius:7px}
+.tier.feat::before,.tier.featured::before,.tier::after{content:none}
+.tier .badge{background:var(--accent);color:var(--ink);border-color:var(--accent)}
+.tier h3{font-size:28px}
+.tier .price .amt{font-family:var(--display);font-weight:550;color:var(--ink)}
+.tier ul li::before{color:var(--blue)}
 .feat-list .feat{display:grid;grid-template-columns:19px 1fr;gap:10px;padding:15px}
-.tier.feat{display:flex;flex-direction:column;grid-template-columns:none;gap:0;padding:22px}
-
-/* The Studio plan comparison is the one table on the site with no rules of
-   its own — it was running on browser defaults, with the .feat collision
-   above drawing a rounded card around every label in the first column. It
-   gets the same treatment as the .cmp table: hairline rows, a real header,
-   and figures that line up on tabular numerals. The .cmp table is untouched.
-
-   Scoped to `table.t` deliberately. redesign-demo.html uses a bare `.t` on
-   eleven bar-chart label rows, and nothing stops that page loading this file
-   later; matching the element type defuses the collision without renaming a
-   class in someone else's markup. min-width matches .cmp, so the wrapper's
-   overflow:auto gives a real horizontal scroll on a phone instead of three
-   forty-pixel columns. */
-table.t{width:100%;min-width:640px;border-collapse:collapse;font-size:13px}
-table.t th,table.t td{padding:13px 16px;border-bottom:1px solid var(--line);text-align:center;vertical-align:middle}
-table.t th:first-child,table.t td:first-child{width:38%;text-align:left}
-table.t thead th{color:var(--faint);font-size:9px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;white-space:nowrap}
-table.t thead th .val{font-size:11px;letter-spacing:0;text-transform:none}
-table.t tbody tr{transition:background var(--dur-1) var(--ease-out)}
-/* Only where there is a real hover. On touch this fires on tap and then
-   sticks to the row the visitor last pressed. */
-@media(hover:hover){table.t tbody tr:hover{background:#fafbff}}
-table.t tbody tr:last-child td{border-bottom:0}
-table.t td.feat,table.t th.feat{display:table-cell;grid-template-columns:none;gap:0;padding:13px 16px;
-  border:0;border-bottom:1px solid var(--line);border-radius:0;
-  background:none;box-shadow:none;color:var(--ink-soft);font-weight:500}
-table.t .val{color:var(--muted);font-variant-numeric:tabular-nums}
-table.t .yes{color:var(--ink-soft)}
-table.t .no{color:#c6cfdb}
-
-/* theme.css's 620px query sets every other card grid to one column but
-   misses this one, and being later in source it outranks the 940px rule. */
-@media(max-width:620px){.tiers{grid-template-columns:1fr;gap:10px}}
-
-/* ---------- ambient: grain, aurora, cursor light ---------- */
-
-/* Film grain. A single fixed layer of fractal noise over the whole
-   page. It is what stops the large flat areas of #f7f8f5 from looking
-   like an empty div, and at 3% it is felt rather than seen. */
-.grain{position:fixed;inset:-50%;z-index:1;pointer-events:none;opacity:var(--grain);
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  mix-blend-mode:multiply}
-
-/* An aurora behind the hero only. Two wide, very soft conic washes
-   drifting on a very long cycle: slow enough to read as light rather
-   than as motion, and faint enough that the headline contrast is
-   untouched. */
-.aurora{position:absolute;inset:-30% -10%;z-index:-1;overflow:hidden;pointer-events:none;opacity:.55}
-.aurora::before,.aurora::after{position:absolute;inset:0;content:"";will-change:transform}
-.aurora::before{background:conic-gradient(from 0deg at 30% 40%,rgba(65,104,237,.2),rgba(140,170,255,.16) 28%,rgba(200,215,255,.05) 48%,rgba(65,104,237,.18) 72%,rgba(65,104,237,.2));
-  filter:blur(70px);animation:auroraSpin 74s linear infinite}
-.aurora::after{background:conic-gradient(from 180deg at 70% 62%,rgba(88,120,235,.16),rgba(180,200,255,.12) 34%,rgba(255,255,255,0) 60%,rgba(88,120,235,.14));
-  filter:blur(84px);animation:auroraSpin 103s linear infinite reverse}
-@keyframes auroraSpin{to{transform:rotate(1turn)}}
-
-/* A soft light that follows the cursor across the hero. One fixed
-   element moved by transform only, so it never triggers layout.
-   Pointer devices only — see the .mgate rules at the foot. */
-.cursor-light{position:absolute;top:0;left:0;z-index:-1;width:620px;height:620px;margin:-310px 0 0 -310px;
-  border-radius:50%;pointer-events:none;opacity:0;will-change:transform;
-  background:radial-gradient(closest-side,rgba(65,104,237,.14),rgba(120,150,250,.06) 45%,transparent 72%)}
-
-/* ---------- editorial serif accents ---------- */
-
-/* The serif carries meaning rather than decoration, so it is spent
-   on the places a person reads as "content" rather than "chrome":
-   section numerals, release dates, the design-study caption, and the
-   handoff headline after a scored report. */
-.card .n,.step .n,.flow .n,.rel .when b,.concept-caption p,.next-h{
-  font-family:var(--serif);font-weight:400;letter-spacing:0
-}
-.card .n,.step .n{font-size:13px;letter-spacing:.04em;color:var(--blue-dark);opacity:.85}
-.flow .n{font-size:14px}
-.rel .when b{font-size:15px;letter-spacing:.005em}
-.concept-caption p{max-width:62ch;font-size:13.5px;line-height:1.6}
-.next-h{font-size:29px;line-height:1.12;letter-spacing:-.018em;color:var(--ink)}
-
-/* An italic-serif accent for a single emphasised word in a heading.
-   .grad keeps doing the blue-gradient job; this is the quieter option. */
-.ed{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.012em}
-
-/* Numerals in the hero rail and the report gauge are data, so they stay
-   on the grotesque — but they can take the heavier weights the variable
-   Inter Tight now makes available. */
-.rail b{font-weight:600;letter-spacing:-.055em}
-.gauge .fig,.vs-col .score,.roi-out .big{font-weight:600}
-
-/* Display weight, now that 700 and 800 exist. Only where the extra
-   presence earns its place — the closing statement and page titles. */
-.closing h2{font-weight:600;letter-spacing:-.052em}
-.page-hero h1,.phero h1{font-weight:600}
-
-/* ---------- page transitions ---------- */
-
-/* Cross-document View Transitions. Each link click dissolves one page
-   into the next with a small directional drift rather than a hard cut,
-   and the brand holds still across the swap so the page appears to turn
-   around a fixed logo. Browsers without support simply navigate. */
-@view-transition{navigation:auto}
-
-::view-transition-old(root){animation:vtOut var(--dur-2) var(--ease-in-out) both}
-::view-transition-new(root){animation:vtIn var(--dur-3) var(--ease-out) both}
-@keyframes vtOut{to{opacity:0;transform:translate3d(0,-14px,0) scale(.985);filter:blur(3px)}}
-@keyframes vtIn{from{opacity:0;transform:translate3d(0,18px,0) scale(1.008);filter:blur(5px)}}
-
-/* The brand is pinned so it does not slide with the rest of the root. */
-.nav .brand{view-transition-name:brandmark}
-::view-transition-group(brandmark){animation-duration:var(--dur-2)}
-::view-transition-old(brandmark),::view-transition-new(brandmark){animation:none;mix-blend-mode:normal}
-
-/* A thin blue rule that wipes across the top of the viewport as the new
-   page arrives — the one deliberately recognisable flourish. */
-::view-transition-new(pagewipe){animation:pageWipe var(--dur-3) var(--ease-out) both}
-@keyframes pageWipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
-
-/* ---------- reveals ---------- */
-
-/* The house reveal, upgraded. theme.css lifts 15px with no filter; this
-   adds a short blur and a longer settle, which reads as focus arriving
-   rather than as a box sliding. --i is written by motion.js for
-   siblings inside a grid, so a row of cards cascades. */
-[data-reveal]{opacity:0;transform:translate3d(0,24px,0);filter:blur(7px);
-  transition:opacity var(--dur-3) var(--ease-out),transform var(--dur-3) var(--ease-out),filter var(--dur-3) var(--ease-out);
-  transition-delay:calc(var(--i,0) * 72ms + var(--d,0s))}
-[data-reveal].in{opacity:1;transform:none;filter:none}
-
-/* A wipe variant for wide flat blocks (bands, panels, the console). */
-[data-reveal="wipe"]{transform:none;filter:none;clip-path:inset(0 0 100% 0);
-  transition:opacity var(--dur-2) var(--ease-out),clip-path var(--dur-3) var(--ease-out);
-  transition-delay:calc(var(--i,0) * 72ms + var(--d,0s))}
-[data-reveal="wipe"].in{clip-path:inset(0 0 0 0)}
-
-/* Word-by-word display reveal. motion.js wraps each word in a clipping
-   span and staggers them; the parent heading stays in the layout at its
-   final size, so nothing reflows when the animation runs. */
-.split{display:block}
-.split .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.14em;margin-bottom:-.14em}
-.split .w>i{display:block;font-style:inherit;transform:translate3d(0,110%,0);
-  transition:transform .82s var(--ease-out);transition-delay:calc(var(--i,0) * 58ms + var(--d,0s))}
-.split.in .w>i{transform:none}
-
-/* A split heading is masked per word, so the line-level mask theme.js
-   puts on .head h2 and .phero h1 has nothing left to do. Left running,
-   the two would slide the same text twice in opposite directions. */
-h2.big.split,.head h2.split,.page-hero h1.split,.closing h2.split,.band h2.split{overflow:visible}
-.split .rh{overflow:visible;padding:0;margin:0;animation:none}
-
-/* ---------- micro-interactions ---------- */
-
-/* Buttons. The lift is already in theme.css; this adds a light that
-   travels with the pointer along the button's own axis, so a wide
-   button does not get a uniform wash. */
-.btn{position:relative;isolation:isolate;overflow:hidden}
-.btn::before{position:absolute;inset:0;z-index:-1;opacity:0;content:"";pointer-events:none;
-  background:radial-gradient(120px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.4),transparent 62%);
-  transition:opacity var(--dur-2) var(--ease-out)}
-.btn:hover::before{opacity:1}
-
-/* The primary action gets a slow travelling highlight, so the eye is
-   drawn to it even at rest. */
-.btn.ice,.btn.go{position:relative;isolation:isolate;overflow:hidden}
-.btn.ice::after,.btn.go::after{position:absolute;z-index:-2;top:-60%;bottom:-60%;left:-45%;width:32%;
-  transform:skewX(-19deg);content:"";opacity:0;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent)}
-.btn.ice:hover::after,.btn.go:hover::after{opacity:.9;animation:buttonSheen .8s var(--ease)}
-@keyframes buttonSheen{to{transform:translateX(620%) skewX(-19deg)}}
-
-/* Body-copy links get a real underline.
-
-   theme.css already sets text-decoration-color, -thickness and -offset on
-   these, and transitions the colour — but never turns the line on, so
-   `a{text-decoration:none}` was leaving every inline link identified by
-   blue alone. The selector below repeats theme.css's own :not() list so
-   nothing the design system excluded (buttons, cards, the brand) gains one,
-   and the colour transition it already declared becomes the animation. */
-main a:not(.btn):not(.brand):not(.go):not(.card):not(.nav-cta):not(.button){
-  text-decoration:underline;
-  text-decoration-color:rgba(49,83,209,.32);
-  transition:text-decoration-color var(--dur-2) var(--ease-out),color var(--dur-1) var(--ease-out)}
-main a:not(.btn):not(.brand):not(.go):not(.card):not(.nav-cta):not(.button):hover{
-  text-decoration-color:currentColor;text-decoration-thickness:1.5px}
-
-/* Cards. Elevation now comes from the scale, and a pointer-driven glare
-   gives the surface a physical edge. The glare is a pseudo-element on
-   the card, painted only while the pointer is over it. */
-.card,.case,.tier,.tile,.studio-card,.feat,.step,.proof{
-  box-shadow:var(--sh-1);transition:transform var(--dur-2) var(--ease-out),box-shadow var(--dur-2) var(--ease-out),border-color var(--dur-2) var(--ease-out),background var(--dur-2) var(--ease-out)}
-.card:hover,.case:hover,.tier:hover,.tile:hover,.step:hover,.studio-card:hover{
-  box-shadow:var(--sh-3);border-color:#c6d2f4}
-.card::after,.tier::after,.case::after{position:absolute;inset:0;z-index:2;border-radius:inherit;opacity:0;
-  content:"";pointer-events:none;transition:opacity var(--dur-2) var(--ease-out);
-  background:radial-gradient(280px circle at var(--mx,50%) var(--my,0%),rgba(65,104,237,.09),transparent 62%)}
-.card:hover::after,.tier:hover::after,.case:hover::after{opacity:1}
-
-/* The hairline that already sits on top of a card becomes a gradient
-   that brightens under the pointer, so the top edge catches light. */
-.card::before,.case::before,.tile::before{transition:opacity var(--dur-2) var(--ease-out),background var(--dur-2) var(--ease-out)}
-.card:hover::before,.case:hover::before,.tile:hover::before{background:linear-gradient(90deg,transparent,rgba(65,104,237,.6),transparent)}
-
-/* Pricing tiers: the featured one earns a slowly turning conic ring. */
-.tier.featured,.tier.feat{position:relative;isolation:isolate;box-shadow:var(--sh-2)}
-.tier.featured::before,.tier.feat::before{position:absolute;inset:-1px;z-index:-1;border-radius:inherit;padding:1px;content:"";
-  background:conic-gradient(from var(--sweep-angle),rgba(65,104,237,.65),rgba(160,185,255,.25) 32%,rgba(65,104,237,.08) 55%,rgba(65,104,237,.65));
-  --sweep-angle:120deg;
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;
-  animation:ringTurn 9s linear infinite}
-@keyframes ringTurn{to{--sweep-angle:1turn}}
-/* --sweep-angle is set to a fixed 120deg on the rule above, and the
-   keyframe overrides it wherever @property makes it interpolable. An earlier
-   version gated the animation on `@supports not (background:paint(x))`,
-   which tests the Houdini Paint API rather than @property — Safari 16.4+ and
-   Firefox 128+ support @property but not Houdini, so they matched the frozen
-   branch and the ring only ever turned in Chrome. With no feature test at
-   all the static angle is the fallback and the animation simply wins wherever
-   it can actually run. */
-
-/* ---------- navigation ---------- */
-
-/* The active page marker becomes a dot that slides, so the current
-   section is legible at a glance in the sticky bar. */
-.nav-links a{transition:color var(--dur-1) var(--ease-out),background var(--dur-1) var(--ease-out)}
-.nav-links a.active::after{animation:navMark var(--dur-3) var(--ease-out) both}
-@keyframes navMark{from{transform:scaleX(.1);opacity:0}to{transform:scaleX(1);opacity:1}}
-
-/* The scroll progress rule gains a soft leading highlight. */
-.prog i{box-shadow:0 0 12px rgba(65,104,237,.55)}
-
-/* ---------- ambient depth on large surfaces ---------- */
-
-/* The closing band and the concept window get a slow sheen crossing
-   them, which keeps a big empty panel from sitting perfectly still. */
-.band::after,.closing .wrap-l::after{position:absolute;inset:0;z-index:0;border-radius:inherit;pointer-events:none;content:"";opacity:.55;
-  background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.72) 48%,transparent 58%);
-  transform:translateX(-120%);animation:panelSheen 11s var(--ease-in-out) infinite}
-@keyframes panelSheen{0%,62%{transform:translateX(-120%)}88%,100%{transform:translateX(120%)}}
-
-/* Focus rings get a little more presence, because everything else
-   moved and the focus state should not be the only still thing. */
-:focus-visible{outline:3px solid var(--blue);outline-offset:4px;transition:outline-offset var(--dur-1) var(--ease-out)}
-:focus-visible:focus{outline-offset:6px}
-
-/* ---------- gates ---------- */
-
-/* No script: the page is already finished, so nothing may be hidden.
-   This has to outrank the [data-reveal] rule above. */
-html:not(.js) [data-reveal]{opacity:1;transform:none;filter:none;clip-path:none}
-html:not(.js) .split .w>i{transform:none}
-html:not(.js) .grain,html:not(.js) .aurora,html:not(.js) .cursor-light{display:none}
-
-/* Low-power: drop the per-frame work. The static composition is the
-   same one a screenshot would show, so nothing is lost. */
-.lean .grain{display:none}
-.lean .aurora::before,.lean .aurora::after{animation:none}
-.lean .cursor-light{display:none}
-.lean .tier.featured::before,.lean .tier.feat::before{animation:none}
-.lean .band::after,.lean .closing .wrap-l::after{display:none}
-
-/* Touch and coarse pointers never get the cursor light or the glare:
-   there is no hover state to reveal them. */
-@media (hover:none),(pointer:coarse){
-  .cursor-light{display:none!important}
-  .card::after,.tier::after,.case::after{display:none}
-  .btn::before{display:none}
-}
-
-/* Reduced motion. Everything that moves stops; nothing that carries
-   meaning disappears. Text is un-blurred and un-clipped, the reveals
-   resolve to their final state, and the page transition is cut. */
-@media (prefers-reduced-motion:reduce){
-  ::view-transition-old(root),::view-transition-new(root){animation:none}
-  ::view-transition-group(brandmark){animation:none}
-  .aurora::before,.aurora::after,.band::after,.closing .wrap-l::after{animation:none}
-  .tier.featured::before,.tier.feat::before{animation:none;--sweep-angle:120deg}
-  .grad{animation:none}
-  [data-reveal]{opacity:1;transform:none;filter:none;clip-path:none;transition:none}
-  .split .w>i{transform:none;transition:none}
-  .cursor-light{display:none}
-  .grain{opacity:calc(var(--grain) * .6)}
-}
-
-/* ---------- print ---------- */
-
-@media print{
-  .grain,.aurora,.cursor-light{display:none!important}
-  [data-reveal],.split .w>i{opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important}
-  /* theme.css hides the pricing comparison in print via .cmp-wrap, but the
-     Studio plan table sits in a .tbl-wrap, which was never in that list. It
-     only became a problem once the table below gave it min-width:640px for
-     the phone scroll — a 640px four-column table in an A4 text column
-     overflows, and with no repeating thead it also breaks mid-header across
-     pages. Hidden for the same reason its sibling is. */
-  .tbl-wrap{display:none!important}
-}
+.rail{background:transparent;border-radius:7px}
+.rail b{color:var(--ink)}
+.switch-row{margin:0 0 32px;flex-wrap:wrap}
+.switch{background:#eddbc7;border-color:#c6a78a}
+.switch::after{background:var(--ink)}
+.switch[aria-checked="true"]{background:var(--accent)}
+.save{background:#f4dfca;color:var(--ink);border-color:#d2b498}
+.cmp-wrap,.tbl-wrap{overflow:auto;border-radius:7px;border:1px solid var(--line);background:var(--paper)}
+table.t{width:100%;min-width:640px;border-collapse:collapse;font-size:12px}
+table.t td,table.t th{padding:14px 16px;border-bottom:1px solid var(--line);text-align:center}
+table.t td:first-child,table.t th:first-child{text-align:left;width:38%}
+table.t td.feat,table.t th.feat{display:table-cell;border-radius:0;background:none;box-shadow:none}
+.cmp thead th{background:#f3e6d8}
+.faq details{background:transparent;border-radius:0;border:0;border-bottom:1px solid var(--line-strong);padding:0 0 16px;margin-top:16px}
+.faq summary{font-size:14px;padding:5px 0;line-height:1.7}
+.faq .a{font-size:12px;line-height:1.85}
+.closing{background:#f1dfcc}
+.closing .wrap-l{background:transparent;border:0;box-shadow:none}
+.closing .wrap-l::before,.closing .wrap-l::after{content:none}
+footer{background:var(--paper);margin-top:0;padding:64px 0 27px}
+footer::before{content:none}
+footer .brand{display:inline-flex}
+.fg>div:first-child .brand{font-size:23px}
+.fg .k{color:var(--ink);font:9px var(--mono)}
+.fnote{font-size:12px;margin-top:18px;max-width:27ch}
+.fg a{font-size:11px;padding-block:6px}
+.fbase .fine{font-size:10px}
+.socials a{background:transparent;border-radius:5px;border-color:var(--line-strong);color:var(--ink)}
+.socials a:hover{background:#f2ddc7;border-color:var(--ink);color:var(--ink);transform:none}
+@media(min-width:1600px){.studio-hero h1{font-size:120px}.hero-sculpture img{max-height:600px}}
+@media(min-width:941px){.nav .burger{display:none}.nav .nav-links{display:flex;position:static;flex-direction:row;align-items:center;padding:0;border:0;background:none;box-shadow:none}.nav.open .nav-links a{font-size:12px}.nav.open .nav-links a.nav-cta{margin:0 0 0 18px}}
+@media(max-width:1000px){.wrap,.wrap-l{width:calc(100% - 48px)}.nav{padding-inline:24px}.nav-links{gap:5px}.nav-links a.nav-cta{margin-left:7px}.studio-hero h1{font-size:clamp(67px,8.7vw,88px)}.hero-sculpture img{min-height:460px}.study{padding:22px;min-height:430px}.coffee-study-body{gap:5px}.coffee-bag{width:132px;min-height:211px}.coffee-study-nav>span{display:none}.build-card{padding:25px 19px}.build-card h3{font-size:24px}.build-card .btn{font-size:11px}.build-card .btn span{margin-left:7px}.package-description{min-height:85px}.package-number{font-size:7px}.contact-grid,.studio-promo{gap:40px}.process-grid{gap:25px}.head,.sec-head{gap:35px}.tiers{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.nav{padding-block:12px}.nav-links{gap:4px}.studio-hero-grid{grid-template-columns:1fr 1fr;gap:12px}.studio-hero h1{font-size:clamp(53px,8.6vw,68px)}.studio-hero-copy{padding-top:25px}.hero-description{font-size:13px;margin-top:23px}.hero-sculpture img{min-height:400px}.hero-sculpture figcaption{flex-direction:column;gap:1px;font-size:8px;left:15px;bottom:15px}.art-index{left:15px;right:15px;font-size:8px}.studio-hero .btns{gap:8px}.studio-hero .btn{padding:12px 14px}.studio-hero .btn span{margin-left:4px}.hero-price{font-size:9px}.edition{display:none}.principle-band .wrap-l{grid-template-columns:repeat(2,1fr);row-gap:15px}.design-studies{gap:13px}.study{min-height:375px;padding:17px}.coffee-study-body{grid-template-columns:1fr}.coffee-study-body h3{position:relative;z-index:1;max-width:6ch}.coffee-bag{position:absolute;right:20px;bottom:66px;width:107px;min-height:174px;padding:13px 9px}.coffee-bag b{font-size:30px;margin-top:14px}.coffee-bag>span{font-size:5px}.coffee-bag i{font-size:24px;margin:10px 0}.coffee-bag small{font-size:5px}.coffee-study-nav{margin-top:21px}.study-label{font-size:6px}.architecture-nav>span{display:none}.architecture-scene{height:225px;right:12px;bottom:61px}.study-architecture h3{margin-top:74px;font-size:34px;margin-bottom:60px}.study-base{font-size:6px}.build-grid{grid-template-columns:1fr}.build-card{padding:27px}.build-featured{order:-1}.package-description{min-height:0;max-width:50ch}.build-card h3{margin-top:16px;font-size:28px}.package-number{font-size:9px;min-height:0}.package-tag{top:27px;font-size:8px}.build-price{margin-top:20px}.build-card ul{margin-top:20px;grid-template-columns:1fr 1fr;font-size:11px}.build-card .btn{font-size:12px}.process-grid{gap:20px}.process-grid h3{font-size:20px}.studio-promo{gap:30px}.mini-editor-page>b{font-size:27px}.mini-editor-page>b em{font-size:31px}.mini-editor-page{padding:23px 16px}.studio-promo-art{padding:25px 16px}.mini-editor-bar{font-size:6px;gap:6px}.contact-grid{grid-template-columns:1fr;gap:45px}.contact-copy .big{font-size:65px}.contact-copy .lede{max-width:49ch}.contact-grid .two{grid-template-columns:1fr 1fr}.head,.sec-head{grid-template-columns:1fr;gap:22px}.head .lede{max-width:57ch}.head .text-link{margin-top:12px}.study-caption{align-items:flex-start;gap:20px}.study-caption p{font-size:9px}.study-caption .text-link{font-size:10px;flex-shrink:0}}
+@media(min-width:621px) and (max-width:940px){.nav .burger{display:grid}.nav .nav-links{display:none}.nav.open .nav-links{display:flex;position:absolute;top:58px;left:0;right:0;flex-direction:column;align-items:stretch;background:var(--paper);border:1px solid var(--line-strong);border-radius:6px;padding:17px;box-shadow:none}.nav.open .nav-links a{padding:12px;font-size:13px}.nav.open .nav-links a.nav-cta{margin:7px 0 0;text-align:center}}
+html:not(.js) .nav .nav-in{flex-wrap:wrap}html:not(.js) .nav .nav-links{display:flex;position:static;flex-wrap:wrap;flex-direction:row;padding:0;border:0;box-shadow:none;margin-left:0;gap:8px}html:not(.js) .nav .nav-links a{font-size:11px;padding:8px}html:not(.js) .nav .nav-links a.nav-cta{margin:0}html:not(.js) .nav .burger{display:none}
+@media(max-width:620px){.wrap,.wrap-l{width:calc(100% - 40px)}.nav{padding-inline:20px}.brand{font-size:21px}.brand img{width:32px;height:32px}.nav-in{min-height:40px}.burger{display:block}.nav .nav-links{display:none}.nav.open .nav-links{display:flex;position:absolute;left:0;right:0;top:52px;flex-direction:column;align-items:stretch;padding:17px;background:var(--paper);border:1px solid var(--line-strong);border-radius:6px;box-shadow:0 15px 25px #30251f10;gap:4px}.nav-links a{padding:12px;font-size:13px}.nav-links a.active::after{display:none}.nav-links a.nav-cta{margin:7px 0 0;text-align:center}.studio-hero{padding-top:24px}.hero-topline .eyebrow{font-size:8px;letter-spacing:.03em}.studio-hero-grid{grid-template-columns:1fr;gap:10px;margin-top:15px}.studio-hero-copy{padding:15px 0 20px}.studio-hero h1{font-size:clamp(67px,14.9vw,90px);line-height:.97}.hero-description{font-size:14px;max-width:35ch;margin-top:25px}.studio-hero .btns{margin-top:24px;gap:10px}.studio-hero .btn{padding:13px 18px}.studio-hero .btn span{margin-left:8px}.hero-price{font-size:10px}.hero-sculpture{aspect-ratio:1.13;min-height:0}.hero-sculpture img{min-height:0;max-height:100%;height:100%;object-fit:contain}.hero-sculpture figcaption{flex-direction:row;font-size:7px}.art-index{top:14px;font-size:7px}.hero-bottom{margin-top:20px;padding:18px 0 24px}.hero-bottom p{font-size:9px}.hero-bottom .text-link{font-size:9px;gap:10px;max-width:18ch}.principle-band .wrap-l{gap:12px;padding-block:18px}.principle-band span{font-size:9px;gap:9px}.principle-band i{font-size:16px}.head,.sec-head{margin-bottom:30px}.design-studies{grid-template-columns:1fr;gap:16px}.study{padding:23px;min-height:400px}.study-label{font-size:7px}.coffee-study-body{grid-template-columns:1fr 1fr;gap:10px}.coffee-study-nav>b{font-size:29px}.coffee-study-body h3{font-size:46px}.coffee-bag{position:relative;right:auto;bottom:auto;width:132px;min-height:212px}.coffee-bag b{font-size:36px;margin-top:20px}.coffee-bag>span,.coffee-bag small{font-size:6px}.coffee-bag i{font-size:29px;margin:15px 0}.study-base{font-size:7px}.study-architecture h3{font-size:44px;margin-top:85px}.architecture-scene{height:260px}.study-caption{flex-direction:column;gap:12px}.study-caption p{font-size:10px}.study-caption .text-link{font-size:11px}.process-grid{grid-template-columns:1fr;gap:30px}.process-grid article{display:grid;grid-template-columns:42px 1fr;gap:5px 20px;padding-top:21px}.process-grid article>span{grid-row:1/3;font-size:33px}.process-grid h3{font-size:24px;margin-top:5px}.process-grid p{margin-top:8px;max-width:none}.console{padding:20px}.prompt{flex-wrap:wrap;gap:4px;padding:9px 12px}.prompt input{width:calc(100% - 25px);flex:auto;font-size:13px}.prompt .btn{width:100%;margin-top:5px;min-height:44px}.out{grid-template-columns:1fr}.studio-promo{grid-template-columns:1fr;gap:35px}.studio-promo-art{padding:33px 25px}.mini-editor-page{padding:27px}.mini-editor-page>b{font-size:36px}.mini-editor-page>b em{font-size:40px}.mini-editor-bar{font-size:7px}.contact-copy .big{font-size:62px}.contact-grid .two{grid-template-columns:1fr}.contact-email{font-size:13px}.tiers{grid-template-columns:1fr}.tier,.tier.feat{padding:27px}.phero,.page-hero{padding-top:49px!important}.phero h1,.page-hero h1{font-size:50px}.fg{grid-template-columns:repeat(2,minmax(0,1fr));gap:35px 25px}.fg>div:first-child{grid-column:1/-1}.fnote{max-width:38ch}.fbase{gap:18px}.fbase .fine{font-size:9px;min-width:0}.build-card ul{grid-template-columns:1fr}.package-tag{position:static;margin-top:12px}.build-card h3{margin-top:20px}.purchase-note{font-size:10px}.switch-row{gap:10px}.closing h2{font-size:48px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.btn:active{scale:1}}
+@media print{.studio-hero,.principle-band,.packages-section,.process-section,.studio-secondary,.contact-section,.hero-bottom,.study-caption{display:none!important}.console{border:0;padding:0}.tbl-wrap{display:none!important}}

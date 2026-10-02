@@ -14,7 +14,10 @@
   'use strict';
 
   var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var fine = window.matchMedia('(pointer:fine)').matches;
+  // The open-form identity is intentionally static. Functional widgets below
+  // still run; legacy ambient and pointer effects are not allocated.
+  var calmDesign = true;
+  var fine = !calmDesign && window.matchMedia('(pointer:fine)').matches;
   var doc = document;
 
   /* ---------- what this machine can afford ----------
@@ -38,7 +41,7 @@
      the same breath. */
   var mem = navigator.deviceMemory || 0;
   var cores = navigator.hardwareConcurrency || 0;
-  var lean = !!((navigator.connection && navigator.connection.saveData) ||
+  var lean = calmDesign || !!((navigator.connection && navigator.connection.saveData) ||
     (mem && mem <= 4) || (cores && cores <= 2));
   if (lean) doc.documentElement.classList.add('lean');
 
@@ -53,9 +56,9 @@
 
   /* keys match each page's data-page attribute, so the current item highlights */
   var LINKS = [
-    ['portfolio', 'Work', 'portfolio.html'],
+    ['pricing', 'Websites & pricing', 'pricing.html'],
+    ['portfolio', 'Our work', 'portfolio.html'],
     ['downloads', 'Studio', 'downloads.html'],
-    ['pricing', 'Pricing', 'pricing.html'],
     ['support', 'Support', 'support.html']
   ];
 
@@ -103,7 +106,7 @@
     /* the square mark, not the wide wordmark — the wordmark is 720x220 and
        the nav box is square, so it squashed into an unreadable smear */
     return      '<a class="brand" href="' + href + '"><img src="signal-mark.svg" alt="" width="30" height="30" />' +
-      '<b>Pallett<i>Ai</i></b></a>';
+      '<b>Pallett<i>AI</i></b></a>';
   }
 
   function chrome() {
@@ -120,7 +123,7 @@
           brand('index.html') +
           '<button class="burger" id="burger" aria-expanded="false" aria-controls="navlinks" aria-label="Menu">☰</button>' +
           '<nav class="nav-links" id="navlinks" aria-label="Primary">' + links +
-            '<a class="nav-cta" href="index.html#contact">Start a project</a>' +
+            '<a class="nav-cta" href="pricing.html#builds">Find your website ↗</a>' +
           '</nav>' +
           '<span class="prog" aria-hidden="true"><i id="prog"></i></span>' +
         '</div>';
@@ -133,7 +136,7 @@
         '<div class="wrap-l">' +
           '<div class="fg">' +
             '<div>' + brand('index.html') +
-              '<p class="fnote">Websites, tools and Telegram bots. Built and checked in the United Kingdom.</p>' +
+              '<p class="fnote">A different kind of website.<br>Distinctive by design. Yours to own.</p>' +
             '</div>' +
             '<div><p class="k">Work</p>' +
               '<a href="portfolio.html">Case studies</a>' +
@@ -155,7 +158,7 @@
             '</div>' +
           '</div>' +
           '<div class="fbase">' +
-            '<p class="fine">© 2026 PallettAi · Registered in the United Kingdom · ' +
+            '<p class="fine">© 2026 PallettAI · Built in the United Kingdom · ' +
               '<a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>' +
             '<div class="socials">' +
               '<a href="https://github.com/PallettAi" target="_blank" rel="noopener" aria-label="PallettAi on GitHub">' +
@@ -170,7 +173,7 @@
     }
 
     var sky = doc.getElementById('sky');
-    if (sky) sky.innerHTML = SKY;
+    if (sky && !calmDesign) sky.innerHTML = SKY;
 
     doc.body.insertAdjacentHTML('beforeend', SPRITE);
   }
@@ -184,6 +187,7 @@
      because .rv is what adds .in. Wrapping a heading whose reveal can never
      fire would park it permanently below its own overflow:hidden mask. */
   (function headRise() {
+    if (calmDesign) return;
     var heads = doc.querySelectorAll('.head h2, .phero h1');
     [].forEach.call(heads, function (h) {
       if (h.querySelector('.rh') || !h.closest('.rv')) return;
@@ -255,7 +259,7 @@
     if (prog) {
       prog.style.transform = 'scaleX(' + (maxScroll > 0 ? Math.min(1, y / maxScroll) : 0).toFixed(4) + ')';
     }
-    if (hero && !rm) {
+    if (hero && !rm && !calmDesign) {
       /* Written straight onto the two elements rather than as a custom
          property on .hero. A --sy write invalidates style for the whole
          hero subtree — and the hero holds the rose, which is a couple of
@@ -312,7 +316,7 @@
 
   /* ---------- twinkling drift field across the whole background ---------- */
   var sky = doc.querySelector('.sky');
-  if (sky && !rm) {
+  if (sky && !rm && !calmDesign) {
     var seed = 20260912, frag = doc.createDocumentFragment();
     function rnd() { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; }
     /* Eight on a lean machine rather than thirty-two: each star is an
@@ -524,7 +528,7 @@
   /* ---------- figure count-ups ---------- */
   function countUp(el) {
     var target = parseInt(el.getAttribute('data-count'), 10);
-    if (rm || isNaN(target)) { el.textContent = target; return; }
+    if (calmDesign || rm || isNaN(target)) { el.textContent = target; return; }
     var start = null;
     function step(ts) {
       if (start === null) start = ts;
@@ -559,6 +563,7 @@
     sw.addEventListener('click', function () {
       annual = !annual;
       sw.setAttribute('aria-checked', String(annual));
+      sw.setAttribute('aria-label', annual ? 'Switch to monthly aftercare billing' : 'Switch to annual aftercare billing');
       if (lblM) lblM.classList.toggle('active', !annual);
       if (lblA) lblA.classList.toggle('active', annual);
       doc.querySelectorAll('.tier .amt, thead .val[data-monthly]').forEach(function (el) {
@@ -579,8 +584,8 @@
       });
       if (heading) {
         heading.innerHTML = annual
-          ? 'Aftercare, <span class="g">a year paid up front.</span>'
-          : 'Aftercare that <span class="g">never sleeps.</span>';
+          ? 'A year of care.<br><span class="ed">One payment.</span>'
+          : 'Keep it running.<br><span class="ed">Keep it yours.</span>';
       }
     });
   })();
@@ -928,15 +933,17 @@
     var gauge = doc.querySelector('.gauge');
     var fig = gauge && gauge.querySelector('.fig');
     var scoreEl = doc.getElementById('g-score');
-    if (!gauge || !fig || !scoreEl) return;
+    if (calmDesign || !gauge || !fig || !scoreEl) return;
 
     var NS = 'http://www.w3.org/2000/svg';
     var wrapEl = doc.createElement('div');
     wrapEl.className = 'dialwrap';
-    wrapEl.setAttribute('aria-hidden', 'true');
+    // The numeric score is meaningful; only its decorative dial is hidden.
+
     var svg = doc.createElementNS(NS, 'svg');
     svg.setAttribute('viewBox', '0 0 240 240');
     svg.setAttribute('class', 'dial');
+    svg.setAttribute('aria-hidden', 'true');
 
     var ticks = [], i, a, rad, major, r1;
     for (i = 0; i < 100; i++) {
@@ -1024,7 +1031,7 @@
      then it stops for good and stays stopped while you are typing. */
   (function typingField() {
     var input = doc.getElementById('check-url');
-    if (!input || rm) return;
+    if (!input || rm || calmDesign) return;
     var words = ['yourbusiness.co.uk', 'newclients.co.uk', 'yourstudio.co.uk', 'mybuilders.co.uk', 'yourcompany.com'];
     var n = 0, c = 0, deleting = false, onScreen = true;
 

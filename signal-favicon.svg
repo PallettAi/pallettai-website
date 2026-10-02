@@ -1,18 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="PallettAi">
-  <!-- Favicon: the P/ monogram on the site's ink, so it holds up in both light
-       and dark browser chrome. Replaces the old purple P/. -->
-  <defs>
-    <linearGradient id="pm" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#eaf5ff"/>
-      <stop offset=".45" stop-color="#a9d8ff"/>
-      <stop offset="1" stop-color="#7cc0f8"/>
-    </linearGradient>
-  </defs>
-  <rect width="64" height="64" rx="15" fill="#04122b"/>
-  <rect x="1" y="1" width="62" height="62" rx="14" fill="none" stroke="rgba(159,212,255,.3)" stroke-width="1.4"/>
-  <g transform="translate(10 10) scale(0.9167)" stroke="url(#pm)" stroke-width="6" stroke-linecap="round" fill="none">
-    <path d="M14 39V10"/>
-    <path d="M14 10h6.2a7.3 7.3 0 0 1 0 14.6H14"/>
-    <path d="M27.5 39.8 38 9"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#f4b183"/><path d="M14 51V13h21c10 0 17 6 17 15s-7 15-17 15h-8V33h8c4 0 7-2 7-5s-3-5-7-5H24v28H14Z" fill="#30251f"/><path d="M27 43h10L27 53V43Z" fill="#30251f"/></svg>

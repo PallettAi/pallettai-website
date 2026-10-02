@@ -64,8 +64,9 @@ Logs: `.freebuff/grader-dev.log` / `.freebuff/grader-dev.log.err` when started d
 1. Cloudflare dashboard → **Workers & Pages** → **Create** → pick the "Hello world" starter → **Edit code**.
 2. Paste the entire contents of `worker.js` → **Deploy**.
 3. Note the `*.workers.dev` URL (or attach a custom route, e.g. `grader.pallettai.org`).
-4. In `index.html`, set `GRADER_API` to that URL and keep `ALLOWED_ORIGINS` in
-   `worker.js` in sync with the site's origin(s). Redeploy the Worker after any change.
+4. Set the `GRADER` constant at the top of `grader.js` to that URL and keep
+   `ALLOWED_ORIGINS` in `worker.js` in sync with the site's origin(s). Redeploy
+   the Worker after any change.
 5. Commit + push — GitHub Pages serves the front-end, Cloudflare serves the API.
 
 ## Built-in guards

@@ -36,8 +36,8 @@
   overflow:hidden;
   margin:-22px -22px 0;
   border-bottom:1px solid var(--line);
-  border-radius:15px 15px 0 0;   /* the card's own radius, minus the 1px border */
-  background:linear-gradient(168deg,#fbfcff 0%,#f4f6fd 55%,#eef1fb 100%);
+  border-radius:6px 6px 0 0;   /* the card's own radius, minus the 1px border */
+  background:linear-gradient(168deg,#fbf4e8 0%,#f3e6d8 55%,#edd7c0 100%);
 }
 
 .case-plate svg{
@@ -64,7 +64,7 @@
 }
 .plate-faint{
   fill:none;
-  stroke:#dfe5f2;
+  stroke:#dfc9b1;
   stroke-width:1;
   stroke-linecap:round;
   stroke-linejoin:round;
@@ -116,7 +116,7 @@
    rather than as another outline. */
 .plate-dash{stroke-dasharray:3 4}
 .plate-wash{fill:var(--blue-pale)}
-.plate-wash-2{fill:#dde5fb}
+.plate-wash-2{fill:#eacfb2}
 
 /* The paper-plane, reused by the two cards that are about sending
    something somewhere. */
@@ -137,7 +137,7 @@
 .plate-plane-solid{fill:var(--ink)}
 .plate-plane-crease{
   fill:none;
-  stroke:#f1f4fd;
+  stroke:#f3e6d8;
   stroke-width:1;
   stroke-linecap:round;
 }
@@ -223,5 +223,5 @@
    narrower — the padding is what needs to go, since the card is
    already tight at that width. */
 @media(max-width:620px){
-  .case-plate{margin:-18px -18px 0;border-radius:15px 15px 0 0}
+  .case-plate{margin:-18px -18px 0;border-radius:6px 6px 0 0}
 }

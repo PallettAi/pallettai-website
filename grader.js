@@ -21,6 +21,14 @@
   'use strict';
 
   var GRADER = 'https://pallettai-grader.coreypallett20.workers.dev';
+
+  /* Local previews cannot reach the production Worker: its CORS allowlist is
+     the live origin only, so a page served from loopback gets "Failed to
+     fetch" from the real endpoint. When the page IS served from loopback,
+     talk to the local dev harness (grader/server.mjs) instead — same API, on
+     8787, allowing any loopback origin. Production behaviour is unchanged. */
+  var LOCAL = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+  var API = LOCAL ? 'http://127.0.0.1:8787' : GRADER;
   var doc = document;
 
   /* ---------- helpers ---------- */
@@ -92,7 +100,7 @@
   }
 
   function grade(href) {
-    return fetch(GRADER + '/grade?url=' + encodeURIComponent(href)).then(function (r) {
+    return fetch(API + '/grade?url=' + encodeURIComponent(href)).then(function (r) {
       return r.text().then(function (t) {
         var j = null;
         try { j = JSON.parse(t); } catch (e) {}
