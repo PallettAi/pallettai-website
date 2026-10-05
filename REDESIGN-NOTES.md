@@ -58,6 +58,16 @@ Studio verification: **52 Director checks**, **18 actual Electron UI checks**, a
 
 Studio preview: http://127.0.0.1:4173/ — **AI Studio → write a brief → Creative ideas → Use this idea → Generate site**. These are source changes only: existing downloadable installers have **not** been rebuilt. Concurrent edits from other work in the shared Studio checkout were preserved and are not claimed as part of this feature.
 
+## Coordinated Studio refresh and material lighting
+
+The Studio source now uses this website's Open form identity throughout the dashboard, navigation, AI panels, controls, dialogs, onboarding, favicon and native startup screen. Shared fonts are self-hosted in desktop packaging with their redistribution license. Fresh workspaces default to paper; existing explicit themes and custom accents are retained. Generated client palettes remain independent. Desktop installers and OS app icons have not been rebuilt.
+
+Website refinements add radial material lighting, an understated sculpture grid/orbit and copper headline rule, layered coffee-packaging and architecture studies, warmer Studio artwork and restrained entry/hover motion. Reduced-motion and print rules remain intact; no runtime library or external asset request was added. Checkout products, prices, enquiries and download aliases are unchanged.
+
+Verification for this pass: **223 website browser checks, zero failures**, plus the payment suite. Studio's full release gate passed, including **18 real Electron generation checks**, **65 widget checks**, **121 WCAG engine checks**, and **99 performance/delivery-gate checks**. After the final responsive repair, the brand, chrome, polish and real Electron generation suites passed again. Manually inspected desktop/light/dark Studio, 390px Studio/creative ideas, and desktop/360px website artwork. Targeted AI-panel WCAG scans reported zero violations in light/mobile and dark/desktop. Local font loading and hidden result panels were checked in the actual browser.
+
+Reviewed and included the previously approved offline creative ideas, configurable performance target/strict delivery gate, and missing native-module packaging fix. Restored the existing quality-warning step for open-project exports and pinned that regression with an executable test. Clarified that a transfer target produces warnings, with strict blocking above twice the target, rather than claiming that every warning blocks.
+
 ## Published
 
 Authorized and published: the front end is committed to `main`, so GitHub Pages serves pallettai.org. Preserve the production checkout IDs, Formspree action and existing download aliases on future changes. A controlled live service smoke test and Safari/Firefox check remain sensible release checks. Removed as orphaned: `legacy.css`, `terminal.css` (no page links them) and the superseded `website-design-demo.html` concept page. The previous unrelated Studio packaging edits remain outside this website redesign.
