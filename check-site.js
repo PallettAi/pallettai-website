@@ -76,6 +76,27 @@ if (!process.versions.electron) {
       await win.loadURL(BASE + '/');
       const formInvalid = await win.webContents.executeJavaScript(`document.querySelector('#contact-form').checkValidity()`);
       check('Empty enquiry uses browser required-field validation', !formInvalid, formInvalid);
+      const plannerMatrix = await win.webContents.executeJavaScript(`(() => {
+        const results=[];
+        for(const start of ['new','refresh','custom']) for(const scope of ['one','pages','booking']) for(const goal of ['enquiries','brand','clarity']) {
+          for(const [id,value] of [['plan-start',start],['plan-scope',scope],['plan-goal',goal]]) { const el=document.getElementById(id);el.value=value;el.dispatchEvent(new Event('change',{bubbles:true})); }
+          const custom=start==='custom'||scope!=='one';
+          const expected=custom?'£349':start==='refresh'?'£149':'£249';
+          const deposit=custom?'£149 deposit':start==='refresh'?'£49 deposit':'£99 deposit';
+          results.push({start,scope,goal,ok:document.getElementById('plan-price').textContent===expected&&document.getElementById('plan-deposit').textContent.includes(deposit)&&document.getElementById('plan-focus').textContent.includes(document.getElementById('plan-goal').selectedOptions[0].text.toLowerCase()),map:document.getElementById('plan-map').textContent});
+        }
+        return results;
+      })()`);
+      check('All 27 planner combinations use correct package, deposit and focus', plannerMatrix.length===27 && plannerMatrix.every(r=>r.ok), plannerMatrix.filter(r=>!r.ok));
+      check('Planner maps connected workflows rather than promising a standard site', plannerMatrix.filter(r=>r.scope==='booking'&&r.start!=='custom').every(r=>r.map.includes('Booking / workflow'))&&plannerMatrix.filter(r=>r.start==='custom').every(r=>r.map.includes('Outcome')), plannerMatrix);
+      const handoff = await win.webContents.executeJavaScript(`(() => {
+        const details=document.getElementById('cf-details'),button=document.getElementById('plan-handoff');
+        details.value='Please keep my own notes.';button.click();button.click();
+        const repeated=details.value,focused=document.activeElement===details;
+        const start=document.getElementById('plan-start'),scope=document.getElementById('plan-scope');start.value='refresh';scope.value='one';scope.dispatchEvent(new Event('change',{bubbles:true}));button.click();
+        return {repeated,focused,updated:details.value,visible:!document.getElementById('project-planner').hidden};
+      })()`);
+      check('Planner handoff preserves notes, avoids duplicates and focuses enquiry', handoff.visible&&handoff.focused&&handoff.repeated.startsWith('Please keep my own notes.')&&handoff.repeated.split('Project planner outline').length===2&&handoff.updated.includes('Website redesign — from £149')&&!handoff.updated.includes('Something custom —'), handoff);
       const fixture = { score: 72, band: 'Room to improve', categories: { Speed: {got:18,max:25}, Mobile:{got:20,max:25}, Search:{got:15,max:25}, Security:{got:19,max:25} }, checks: [{id:'viewport',label:'Mobile viewport',status:'pass',detail:'Configured.'},{id:'title',label:'Page title',status:'warn',detail:'Too short.',fix:'Write a descriptive title.'}] };
       await win.webContents.executeJavaScript(`window.__testRequests=[];window.fetch=async (url,options)=>{window.__testRequests.push({url:String(url),method:options&&options.method});if(String(url).includes('/grade?'))return new Response(JSON.stringify(${JSON.stringify(fixture)}),{status:200});if(String(url).includes('formspree.io'))return new Response('{}',{status:window.__failForm?500:200});throw new Error('Unexpected network request');};document.querySelector('#check-url').value='not-a-url';document.querySelector('#check-form').requestSubmit();`);
       check('Checker rejects invalid address without network', await win.webContents.executeJavaScript(`document.querySelector('#check-status').classList.contains('err')&&window.__testRequests.length===0`));
@@ -104,6 +125,7 @@ if (!process.versions.electron) {
       for (const page of ['index.html','pricing.html']) {
         await staticWin.loadURL(BASE + '/' + page);
         const source = fs.readFileSync(path.join(ROOT,page),'utf8');
+        if(page==='index.html') check('Planner has a no-JavaScript pricing and contact alternative', /<noscript>[\s\S]*?website packages and starting prices[\s\S]*?tell us about your project/.test(source));
         check(page + ' provides static navigation, content and email checkout fallback', /<header class="nav"[\s\S]*?<nav/.test(source) && /href="support.html"/.test(source) && /<h1/.test(source));
       }
       staticWin.destroy();

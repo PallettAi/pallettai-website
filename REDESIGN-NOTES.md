@@ -68,6 +68,16 @@ Verification for this pass: **223 website browser checks, zero failures**, plus 
 
 Reviewed and included the previously approved offline creative ideas, configurable performance target/strict delivery gate, and missing native-module packaging fix. Restored the existing quality-warning step for open-project exports and pinned that regression with an executable test. Clarified that a transfer target produces warnings, with strict blocking above twice the target, rather than claiming that every warning blocks.
 
+## Interactive project planner
+
+The homepage now includes a three-choice project planner after the package cards, linked from the pricing introduction. Starting point, scope and priority produce an immediate recommendation using the existing £149/£249/£349 starting prices and £49/£99/£149 deposits. Multiple pages, connected workflows and custom tools route to an agreed custom quote rather than implying inclusion in a one-page package.
+
+A warm drafting-board illustration changes with scope; paper panels, copper connectors and responsive controls extend the Open form visual identity without dependencies or external assets. Native labelled selects, a polite result announcement, reduced-motion compatibility and a no-JavaScript pricing/contact alternative keep the feature accessible.
+
+“Bring this brief to us” inserts a readable outline into the existing enquiry textarea, preserves visitor notes, replaces only an unchanged previous planner outline, avoids duplicate outlines on repeated clicks, and focuses the enquiry. Choices are not persisted or transmitted by the planner; the existing enquiry submission remains the only way to send the brief. Pricing, checkout configuration and the Formspree endpoint are unchanged.
+
+Verification: **227 browser checks, zero failures**, including all 27 planner combinations, workflow diagrams, preserved notes/repeated handoff, 320/360/768/1440px layout and automated WCAG A/AA checks. The payment suite and JavaScript syntax checks passed. Manually inspected 1440px and 360px planner views and clicked the handoff in the actual browser. No production enquiry or purchase was submitted. No TypeScript project/typecheck command exists; the existing syntax and browser checks apply. Safari/Firefox and manual screen-reader coverage remain outside this verification.
+
 ## Published
 
 Authorized and published: the front end is committed to `main`, so GitHub Pages serves pallettai.org. Preserve the production checkout IDs, Formspree action and existing download aliases on future changes. A controlled live service smoke test and Safari/Firefox check remain sensible release checks. Removed as orphaned: `legacy.css`, `terminal.css` (no page links them) and the superseded `website-design-demo.html` concept page. The previous unrelated Studio packaging edits remain outside this website redesign.

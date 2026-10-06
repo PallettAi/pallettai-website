@@ -91,13 +91,35 @@
 
   <section class="sec packages-section" id="pricing" aria-labelledby="packages-title">
     <div class="wrap-l">
-      <div class="head"><div><p class="eyebrow">02 / Make your next move</p><h2 class="big" id="packages-title">Great design.<br /><span class="ed">Clear investment.</span></h2></div><div><p class="lede">Choose your starting point. We agree the scope and final price before work begins; you approve the preview before launch.</p><a class="text-link" href="pricing.html">Full pricing &amp; aftercare <span aria-hidden="true">↗</span></a></div></div>
+      <div class="head"><div><p class="eyebrow">02 / Make your next move</p><h2 class="big" id="packages-title">Great design.<br /><span class="ed">Clear investment.</span></h2></div><div><p class="lede">Choose your starting point. We agree the scope and final price before work begins; you approve the preview before launch.</p><a class="text-link" href="#planner">Not sure? Plan your project ↘</a><br /><a class="text-link" href="pricing.html">Full pricing &amp; aftercare <span aria-hidden="true">↗</span></a></div></div>
       <div class="build-grid">
         <article class="build-card"><p class="package-number">01 / A FRESH START</p><h3>Website redesign</h3><p class="package-description">Keep what makes you, you. Rethink everything holding your website back.</p><p class="build-price"><span>From</span> £149</p><ul><li>Cleaner design &amp; sharper copy</li><li>Speed and mobile improvements</li><li>Before &amp; after health score</li><li>30 days of included aftercare</li></ul><a class="btn line" data-pay="depositRefresh" href="support.html">Start with £49 deposit <span aria-hidden="true">↗</span></a><p class="deposit-note">£100 base balance, due before launch.</p></article>
         <article class="build-card build-featured"><p class="package-number">02 / YOUR OWN CORNER OF THE WEB</p><span class="package-tag">Built around you</span><h3>A new website</h3><p class="package-description">A distinctive first impression. A simple way to turn interest into enquiries.</p><p class="build-price"><span>From</span> £249</p><ul><li>Custom one-page website</li><li>Responsive design &amp; contact form</li><li>Local SEO basics &amp; two revision rounds</li><li>30 days of included aftercare</li></ul><a class="btn ice" data-pay="depositCreate" href="support.html">Start with £99 deposit <span aria-hidden="true">↗</span></a><p class="deposit-note">£150 base balance, due before launch.</p></article>
         <article class="build-card"><p class="package-number">03 / THINK BIGGER</p><h3>Something custom</h3><p class="package-description">More pages. A booking flow. A useful tool. A bot that takes work off your hands.</p><p class="build-price"><span>From</span> £349</p><ul><li>Multi-page sites, tools &amp; Telegram bots</li><li>Booking flows &amp; API integrations</li><li>Agreed scope &amp; a fixed quote</li><li>Previews as the project takes shape</li></ul><a class="btn line" data-pay="depositCustom" href="support.html">Start with £149 deposit <span aria-hidden="true">↗</span></a><p class="deposit-note">£200 base balance; final quote may vary.</p></article>
       </div>
       <p class="purchase-note">Already agreed your project? Start with a secure card deposit via Dodo Payments. Still exploring? <a href="#contact">Tell us what you have in mind</a> before you pay. Prices are starting points; additional scope is quoted separately.</p>
+    </div>
+  </section>
+
+  <section class="sec planner-section" id="planner" aria-labelledby="planner-title">
+    <div class="wrap-l">
+      <div class="head"><div><p class="eyebrow">A direction, before a decision</p><h2 class="big" id="planner-title">Your next chapter.<br /><span class="ed">Mapped out.</span></h2></div><p class="lede">Three choices to find a sensible starting point. Explore freely, then bring your outline into a conversation. No sign-up, no commitment.</p></div>
+      <noscript><p class="panel">Explore our <a href="pricing.html">website packages and starting prices</a>, or <a href="#contact">tell us about your project</a>. The interactive planner needs JavaScript.</p></noscript>
+      <div class="project-planner" id="project-planner" hidden>
+        <div class="planner-inputs">
+          <p class="eyebrow">01 / Shape the brief</p>
+          <div class="f"><label for="plan-start">Where are you starting?</label><select id="plan-start"><option value="new">A new website</option><option value="refresh">An existing website needs a rethink</option><option value="custom">A custom tool or integration</option></select></div>
+          <div class="f"><label for="plan-scope">What does it need to do?</label><select id="plan-scope"><option value="one">One clear page, with an enquiry form</option><option value="pages">Several pages for services or content</option><option value="booking">Booking or a connected workflow</option></select></div>
+          <div class="f"><label for="plan-goal">What matters most?</label><select id="plan-goal"><option value="enquiries">Make it easier to enquire</option><option value="brand">Give the brand a distinctive presence</option><option value="clarity">Make the offer clearer on mobile</option></select></div>
+          <p class="planner-private">Your choices stay on this page. Nothing is sent until you submit an enquiry.</p>
+        </div>
+        <div class="planner-result">
+          <div class="planner-map" aria-hidden="true"><span class="planner-map-label">A POSSIBLE SHAPE / NOT A FIXED SCOPE</span><div class="planner-map-root">Your next website</div><div class="planner-map-nodes" id="plan-map"><span>Introduction</span><span>Your offer</span><span>Enquiry</span></div></div>
+          <div id="plan-result" role="status" aria-live="polite" aria-atomic="true"><p class="eyebrow">02 / Your starting point</p><h3 id="plan-package">A new website</h3><p id="plan-reason">A focused first home for your business, with a clear route to an enquiry.</p><p class="planner-price">From <b id="plan-price">£249</b><span id="plan-deposit">£99 deposit · £150 base balance before launch</span></p><p class="planner-goal" id="plan-focus">Design focus: make it easier to enquire.</p></div>
+          <div class="btns"><button class="btn ice" type="button" id="plan-handoff">Bring this brief to us <span aria-hidden="true">↗</span></button><a class="text-link" id="plan-pricing" href="pricing.html#builds">Review package details ↗</a></div>
+          <p class="planner-disclaimer">A guide, not a quote. We agree the scope and final price before work begins. Extra pages, booking systems and integrations are quoted separately.</p>
+        </div>
+      </div>
     </div>
   </section>
 
