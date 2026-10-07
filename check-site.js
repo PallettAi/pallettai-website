@@ -49,6 +49,9 @@ if (!process.versions.electron) {
           win.setContentSize(width, 1000);
           await win.loadURL(BASE + '/' + page);
           await win.webContents.executeJavaScript('document.fonts.ready.then(() => new Promise(r => setTimeout(r, 100)))');
+          console.log('Checking artwork: ' + page + ' at ' + width + 'px');
+          const artwork = await win.webContents.executeJavaScript(`Promise.race([Promise.all([...document.querySelectorAll('img[src^="artwork/"]')].map(async img=>{try{img.loading='eager';await img.decode();return {src:img.getAttribute('src'),ok:img.naturalWidth>0,width:img.getAttribute('width'),height:img.getAttribute('height'),alt:img.hasAttribute('alt')}}catch{return {src:img.getAttribute('src'),ok:false}}})),new Promise((_,reject)=>setTimeout(()=>reject(new Error('Artwork loading timed out: '+JSON.stringify([...document.querySelectorAll('img[src^="artwork/"]')].map(i=>({src:i.getAttribute('src'),loading:i.loading,complete:i.complete,top:i.getBoundingClientRect().top}))))),5000))])`);
+          check(page + ' original artwork decodes with dimensions and alt at ' + width + 'px', artwork.length>0&&artwork.every(a=>a.ok&&a.width==='640'&&a.height==='480'&&a.alt), artwork);
           const geometry = await win.webContents.executeJavaScript(`(() => {
             const nodes = [...document.querySelectorAll('main *')].filter(el => !el.closest('[hidden], .sr, .sprite, .cmp-wrap, .tbl-wrap') && !(el instanceof SVGElement && el.tagName.toLowerCase() !== 'svg') && getComputedStyle(el).display !== 'none');
             const outside = nodes.filter(el => { const r = el.getBoundingClientRect(); return r.width > 0 && (r.right > innerWidth + 2 || r.left < -2); }).map(el => ({tag:el.tagName, cls:el.className, text:el.textContent.slice(0,45)})).slice(0,6);
@@ -69,6 +72,11 @@ if (!process.versions.electron) {
       const menu = await win.webContents.executeJavaScript(`(() => { const b=document.querySelector('#burger');b.click();const opened=b.getAttribute('aria-expanded')==='true'&&getComputedStyle(document.querySelector('#navlinks')).display!=='none';document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));return {opened,closed:b.getAttribute('aria-expanded')==='false',focus:document.activeElement===b};})()`);
       check('Mobile menu opens, Escape closes and restores focus', menu.opened && menu.closed && menu.focus, menu);
       await win.loadURL(BASE + '/pricing.html');
+      const guide = await win.webContents.executeJavaScript(`(() => {
+        const links=[...document.querySelectorAll('.package-guide a[href^="#build-"]')];
+        return links.map(a=>{a.click();const target=document.querySelector(a.getAttribute('href'));return {label:a.textContent,valid:!!target&&!!target.querySelector('[data-pay]')&&!!target.querySelector('.deposit-note'),price:target?.querySelector('.build-price')?.textContent}});
+      })()`);
+      check('Package-selection guide leads to all three priced build options with deposit terms', guide.length===3&&guide.every(g=>g.valid)&&guide.map(g=>g.price.replace(/\s+/g,' ').trim()).join('|')==='From £149|From £249|From £349', guide);
       const billing = await win.webContents.executeJavaScript(`(() => {const sw=document.querySelector('#billing-switch'), buttons=[...document.querySelectorAll('.tier .btn[data-monthly]')], before=buttons.map(b=>b.href);sw.click();const annual=buttons.map(b=>({href:b.href,label:b.textContent})),amounts=[...document.querySelectorAll('.tier .amt')].map(x=>x.textContent),notes=[...document.querySelectorAll('.annual-note')].map(x=>x.textContent),checked=sw.getAttribute('aria-checked');sw.click();return {before,annual,amounts,notes,checked,restored:buttons.every((b,i)=>b.href===before[i]),state:[...document.querySelectorAll('[data-pay]')].every(a=>a.dataset.payState==='ready')};})()`);
       check('All deposit, balance and care links resolve', billing.state, billing);
       check('Annual billing changes product, amount and one-time label', billing.checked === 'true' && billing.amounts.join('|') === '£15|£39|£79' && billing.annual.every((b,i) => b.href !== billing.before[i] && !/Subscribe/.test(b.label)) && billing.notes.join('|').includes('£948'), billing);
@@ -146,6 +154,8 @@ if (!process.versions.electron) {
         }
         check(file + ' retains valid structured data', [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].every(m=>{try{JSON.parse(m[1]);return true}catch{return false}}));
       }
+      const artworkFiles = fs.readdirSync(path.join(ROOT,'artwork')).filter(f=>f.endsWith('.svg'));
+      check('Original artwork collection stays below 20KB without external dependencies', artworkFiles.length===4&&artworkFiles.reduce((n,f)=>n+fs.statSync(path.join(ROOT,'artwork',f)).size,0)<20000&&artworkFiles.every(f=>!/<script|<foreignObject|<image|https?:\/\//i.test(fs.readFileSync(path.join(ROOT,'artwork',f),'utf8').replace('http://www.w3.org/2000/svg',''))), artworkFiles);
       check('Production page assets and cross-page anchors exist', staticAssets.length === 0, staticAssets);
       check('No unexpected JavaScript errors', errors.length === 0, errors);
       fs.mkdirSync(path.join(ROOT, 'test-results'), { recursive: true });

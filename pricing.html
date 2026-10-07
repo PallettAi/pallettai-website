@@ -44,7 +44,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3" />
   <link rel="preload" href="fonts/inter-tight-var-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="theme.css" />
-  <link rel="stylesheet" href="motion.css" />
+  <link rel="stylesheet" href="motion.css?v=atelier-2" />
   <link rel="stylesheet" href="controls.css" />
   <script src="payments.js" defer></script>
   <script src="theme.js" defer></script>
@@ -62,12 +62,13 @@
 
   <!-- ============ PAGE HERO ============ -->
   <section class="phero">
-    <div class="wrap-l">
+    <div class="wrap-l art-hero"><div class="art-hero-copy">
       <p class="eyebrow">Your next chapter / Website packages</p>
       <h1>A clear next step.<br /><span class="ed">Not a leap of faith.</span></h1>
       <p class="lede">A distinctive website, a price agreed before work begins, and a preview you approve before launch. Choose the right starting point for your business.</p>
       <div class="btns"><a class="btn ice" href="#builds">Choose your website <span aria-hidden="true">↓</span></a><a class="btn line" href="index.html#contact">Talk it through first <span aria-hidden="true">↗</span></a></div>
       <p class="meta">One-time builds. Optional aftercare. No platform lock-in. <a href="downloads.html#studio-plans">Looking for Studio plans?</a></p>
+      </div><figure class="edition-art"><span class="art-overline">FORM STUDIES / 01</span><img src="artwork/folio.svg?v=atelier-2" width="640" height="480" alt="A paper folio and copper ribbon arranged on a warm drafting surface." /><figcaption>A considered investment. <span>Original illustration</span></figcaption></figure>
     </div>
   </section>
 
@@ -83,10 +84,16 @@
         <p class="lede rv" data-d="1">The first 30 days of aftercare come with the build. We don't launch you and disappear, and the code, content and domain stay yours.</p>
       </div>
 
+      <nav class="package-guide" aria-label="Find your website package">
+        <div><p class="eyebrow">Start with what you need</p><p>No need to know the technical details.</p></div>
+        <a href="#build-refresh"><span>Improve an existing site</span><small>Website redesign · from £149</small><i aria-hidden="true">↓</i></a>
+        <a href="#build-create"><span>Give my business a home</span><small>A new website · from £249</small><i aria-hidden="true">↓</i></a>
+        <a href="#build-custom"><span>Connect a bigger idea</span><small>Custom builds &amp; bots · from £349</small><i aria-hidden="true">↓</i></a>
+      </nav>
       <div class="build-grid">
-        <article class="build-card"><p class="package-number">01 / A FRESH START</p><h3>Website redesign</h3><p class="package-description">A tired website, made useful again. A fixed-scope refresh for your next chapter.</p><p class="build-price"><span>From</span> £149</p><ul><li>Cleaner design &amp; sharper copy</li><li>Speed and mobile improvements</li><li>Before &amp; after health score</li><li>Preview &amp; written handover</li><li>30 days of included aftercare</li></ul><a class="btn line" data-pay="depositRefresh" href="support.html">Start with £49 deposit <span aria-hidden="true">↗</span></a><p class="deposit-note">£100 base balance, due before launch.</p></article>
-        <article class="build-card build-featured"><p class="package-number">02 / BUILT AROUND YOU</p><span class="package-tag">A distinctive first impression</span><h3>A new website</h3><p class="package-description">Create Website: a custom one-page home for your business, not a recycled template.</p><p class="build-price"><span>From</span> £249</p><ul><li>Custom responsive one-page website</li><li>Working contact form</li><li>Local SEO basics</li><li>Preview &amp; two rounds of changes</li><li>30 days of included aftercare</li></ul><a class="btn ice" data-pay="depositCreate" href="support.html">Start with £99 deposit <span aria-hidden="true">↗</span></a><p class="deposit-note">£150 base balance, due before launch.</p></article>
-        <article class="build-card"><p class="package-number">03 / THINK BIGGER</p><h3>Custom builds &amp; bots</h3><p class="package-description">A bigger idea deserves its own plan. We agree the scope and quote a fixed price.</p><p class="build-price"><span>From</span> £349</p><ul><li>Multi-page websites</li><li>Booking flows &amp; digital tools</li><li>Telegram bots &amp; API integrations</li><li>Previews as we build</li><li>Written handover &amp; 30 days of care</li></ul><a class="btn line" data-pay="depositCustom" href="support.html">Start with £149 deposit <span aria-hidden="true">↗</span></a><p class="deposit-note">£200 base balance; final quote may vary.</p></article>
+        <article class="build-card" id="build-refresh"><p class="package-number">EXISTING WEBSITE</p><h3>Website redesign</h3><p class="package-description">A tired website, made useful again. A fixed-scope refresh for your next chapter.</p><p class="build-price"><span>From</span> £149</p><ul><li>Cleaner design &amp; sharper copy</li><li>Speed and mobile improvements</li><li>Before &amp; after health score</li><li>Preview &amp; written handover</li><li>30 days of included aftercare</li></ul><a class="btn line" data-pay="depositRefresh" href="support.html">Start with £49 deposit <span aria-hidden="true">↗</span></a><p class="deposit-note">£100 base balance, due before launch.</p></article>
+        <article class="build-card build-featured" id="build-create"><p class="package-number">NEW WEBSITE</p><span class="package-tag">A distinctive first impression</span><h3>A new website</h3><p class="package-description">Create Website: a custom one-page home for your business, not a recycled template.</p><p class="build-price"><span>From</span> £249</p><ul><li>Custom responsive one-page website</li><li>Working contact form</li><li>Local SEO basics</li><li>Preview &amp; two rounds of changes</li><li>30 days of included aftercare</li></ul><a class="btn ice" data-pay="depositCreate" href="support.html">Start with £99 deposit <span aria-hidden="true">↗</span></a><p class="deposit-note">£150 base balance, due before launch.</p></article>
+        <article class="build-card" id="build-custom"><p class="package-number">CUSTOM PROJECT</p><h3>Custom builds &amp; bots</h3><p class="package-description">A bigger idea deserves its own plan. We agree the scope and quote a fixed price.</p><p class="build-price"><span>From</span> £349</p><ul><li>Multi-page websites</li><li>Booking flows &amp; digital tools</li><li>Telegram bots &amp; API integrations</li><li>Previews as we build</li><li>Written handover &amp; 30 days of care</li></ul><a class="btn line" data-pay="depositCustom" href="support.html">Start with £149 deposit <span aria-hidden="true">↗</span></a><p class="deposit-note">£200 base balance; final quote may vary.</p></article>
       </div>
       <p class="purchase-note">Prices are starting points, not a promise of unlimited scope. Agree your project with us before paying a deposit. The deposit starts the work; the balance follows preview approval, before launch. Secure card checkout is provided by Dodo Payments. <a href="index.html#contact">Not sure which package? Ask us first.</a></p>
 
